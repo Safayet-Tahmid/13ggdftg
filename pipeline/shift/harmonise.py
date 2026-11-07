@@ -166,12 +166,27 @@ def day_basis(settings: Settings) -> str:
     return json.loads(p.read_text()).get("basis", "utc") if p.exists() else "utc"
 
 
+def d29_guard(z: pd.DataFrame, settings: Settings) -> pd.DataFrame:
+    """D29 (decided 7 Nov 2026): from Feb 2023 Aqua flies past its 13:45 science limit, so the D19
+    MODIS fill (Aqua alone from 2020) no longer stands in for S-NPP. Zone-days that would be filled
+    from it become "no data" (never zero fire). The 7 Nov record has 0 rows from this fill, so this
+    is a guard for future data and changes no number in the current record."""
+    off = (settings.raw.get("harmonise") or {}).get("d19_fill_off_from")
+    if not off or "status" not in z or not len(z):
+        return z
+    hit = (z["status"] == "filled: D19") & (pd.to_datetime(z["date"]) >= pd.Timestamp(off))
+    if hit.any():
+        z = z.copy()
+        z.loc[hit, "status"] = "no data"
+    return z
+
+
 def status_arrays(settings: Settings, start: pd.Timestamp, nd: int, zone_deg: float):
     """Per day: the record's target satellite; per day and zone: the status code."""
     p = settings.processed_dir / "nodata" / "zone_day_status.parquet"
     if not p.exists():
         return None, None
-    z = pd.read_parquet(p)
+    z = d29_guard(pd.read_parquet(p), settings)
     day = (pd.to_datetime(z["date"]) - start).dt.days.to_numpy()
     lat0 = z["zone"].str[1:3].astype(int) * np.where(z["zone"].str[0] == "N", 1, -1)
     lon0 = z["zone"].str[4:7].astype(int) * np.where(z["zone"].str[3] == "E", 1, -1)

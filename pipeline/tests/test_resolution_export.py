@@ -110,3 +110,6 @@ def test_fine_factors_fix_regional_steps_and_export_reads_back(tmp_path):
     zones = np.frombuffer(gzip.open(out / "zones.bin.gz").read(), "u1").reshape(72, meta["days"])
     assert (zones[zones != 255] <= 5).all()
     assert (out / "monthly" / "2013-06.bin.gz").exists() and (s.processed_dir / "site_data.zip").exists()
+    assert meta["last_data_day"] < meta["end"] and "D35" in meta["decisions"]                # Phase 3 additions
+    assert json.loads((out / "cloud.json").read_text())["flags"] == {}                      # no cloud rule in this world
+    assert "basis" in json.loads((out / "uncertainty.json").read_text())

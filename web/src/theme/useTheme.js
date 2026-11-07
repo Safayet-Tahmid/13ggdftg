@@ -1,0 +1,47 @@
+// Reads the colours in tokens.css so the map (MapLibre) and the canvas/SVG charts draw with
+// exactly the same values as the rest of the page. Edit colours in tokens.css, not here.
+import { useEffect, useState } from 'react';
+
+const KEY = 'shift-theme';
+
+function read() {
+  const cs = getComputedStyle(document.documentElement);
+  const v = (name) => cs.getPropertyValue(name).trim();
+  return {
+    name: document.documentElement.dataset.theme || 'light',
+    font: v('--font-body'),
+    surface: v('--surface'), ink: v('--ink'), muted: v('--muted'), rule: v('--rule'), accent: v('--accent'),
+    sea: v('--map-sea'), land: v('--map-land'), border: v('--map-border'), area: v('--map-area'),
+    zero: v('--chart-zero'),
+    ramp: [1, 2, 3, 4, 5, 6].map((i) => v(`--ramp-${i}`)),
+    cls: { low: v('--class-low'), normal: v('--class-normal'), unusual: v('--class-unusual'), critical: v('--class-critical') },
+    line: v('--chart-line'), band: v('--chart-band'), highlight: v('--chart-highlight'),
+    nodataBg: v('--nodata-bg'), nodataLine: v('--nodata-line'), cloud: v('--cloud-mark'),
+    volcano: v('--notfire-volcano'), industry: v('--notfire-industry'), offshore: v('--notfire-offshore'),
+  };
+}
+
+function stored() {
+  try { return localStorage.getItem(KEY) || 'system'; } catch { return 'system'; }
+}
+
+// mode: 'system' | 'light' | 'dark'. Returns [theme, mode, setMode].
+export default function useTheme() {
+  const q = window.matchMedia('(prefers-color-scheme: dark)');
+  const [mode, setMode] = useState(stored);
+  const [sys, setSys] = useState(q.matches ? 'dark' : 'light');
+  const resolved = mode === 'system' ? sys : mode;
+  useEffect(() => {
+    const f = (e) => setSys(e.matches ? 'dark' : 'light');
+    q.addEventListener('change', f);
+    return () => q.removeEventListener('change', f);
+  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
+  // set the attribute before reading the colours, so the read sees the right theme
+  document.documentElement.dataset.theme = resolved;
+  const [theme, setTheme] = useState(read);
+  useEffect(() => {
+    setTheme(read());
+    try { localStorage.setItem(KEY, mode); } catch { /* private mode: not remembered */ }
+  }, [resolved, mode]);
+  return [theme.name === resolved ? theme : read(), mode, setMode];
+}

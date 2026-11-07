@@ -14,9 +14,13 @@ browser that a judge could not trace back to a pipeline report.
                        uint32 n | uint32 cell25[n] | float32 cells[n] | float32 frp[n]
   zones.bin.gz         availability per 30-degree zone and day: uint8 [zones x days], codes in
                        meta.zone_status
-  uncertainty.json     95% range (%) of the MODIS-era factor per factor cell and month
+  uncertainty.json     95% range (%) of the MODIS-era factor per factor cell and month: the calibrated
+                       month range of stage checks (must-fix 5) when present, else the raw factor range
+  cloud.json           months that were cloudier than 90% of years per factor cell (package option C),
+                       so the website can warn that low fire may be hidden by cloud
   notfire.json         the "Not a fire" layer (D9): every masked non-fire cell, its type and years
-  validation/          the pipeline reports and tables the validation page shows
+  validation/          the pipeline reports and tables the validation page shows, including the
+                       Phase 2 checks (2026 test, ranges, simple methods, events, burned area, cloud)
 
     python -m shift.run --dataset global --stage export     (after harmonise; ~10-20 min)
 """
@@ -34,7 +38,7 @@ import pandas as pd
 from .provenance import stamp
 from .config import Settings
 from .factors import final_mask
-from .harmonise import SOURCES
+from .harmonise import SOURCES, d29_guard
 from .scan import NON_FIRE_TYPES
 from .static_mask import masked_cells
 from .tiles import tile_name
@@ -47,7 +51,12 @@ VALIDATION_FILES = ["report_counts.json", "report_continuity.json", "report_sele
                     "nodata/fill_test_scores.csv", "nodata/fill_test_by_gap_length.csv",
                     "places/borrowed_factor_test.csv", "places/bangladesh_calendar.csv",
                     "counts/resolution_variants.csv", "counts/resolution_region_steps.csv",
-                    "counts/factors_variant_steps.csv", "qc/gaps.csv"]
+                    "counts/factors_variant_steps.csv", "qc/gaps.csv",
+                    # Phase 2 checks (16-26 Oct, repeated 7 Nov on the final record)
+                    "report_checks.json", "report_daily.json", "report_external.json",
+                    "checks/phase2_summary.json", "checks/simple_methods.csv", "checks/critical_periods.csv",
+                    "checks/critical_days_by_era.csv", "checks/month_range_calibration.csv",
+                    "daily/skill_by_scale.csv", "external/gfed_monthly_regions.csv"]
 
 
 def _gz(path, data: bytes):
@@ -95,6 +104,32 @@ def notfire_layer(settings: Settings, mask: np.ndarray | None) -> list:
             for a, b, t, n in zip(lat, lon, per["type"], per["n_years"])]
 
 
+def cloud_flags(settings: Settings, deg: float) -> dict:
+    """checks/cloud_flags.parquet (written only when the cloud rule adopted the flag) as
+    {cell name: ["YYYY-MM", ...]} on the factor grid. MERRA-2 reaches 2026-08, so later months
+    carry no flag; `until` says so."""
+    p = settings.processed_dir / "checks" / "cloud_flags.parquet"
+    out = {"deg": deg, "until": None, "flags": {}}
+    if not p.exists():
+        return out
+    c = pd.read_parquet(p)
+    if not len(c):
+        return out
+    names = [tile_name(a, b, deg) for a, b in zip(c["lat0"], c["lon0"])]
+    ym = [f"{int(y):04d}-{int(m):02d}" for y, m in zip(c["year"], c["month"])]
+    for n, k in zip(names, ym):
+        out["flags"].setdefault(n, []).append(k)
+    out["flags"] = {n: sorted(set(v)) for n, v in out["flags"].items()}
+    out["until"] = max(ym)
+    full = settings.processed_dir / "external" / "cloud_monthly_fine.parquet"
+    if full.exists():                     # the last month with cloud data, flagged or not
+        t = pd.read_parquet(full, columns=["year", "month"])
+        if len(t):
+            y, m = t.sort_values(["year", "month"]).iloc[-1]
+            out["until"] = f"{int(y):04d}-{int(m):02d}"
+    return out
+
+
 def run_export(settings: Settings) -> dict:
     cfg = settings.raw.get("export") or {}
     l3 = settings.processed_dir / (settings.raw.get("harmonise") or {}).get("out_subdir", "l3")
@@ -106,7 +141,7 @@ def run_export(settings: Settings) -> dict:
         shutil.rmtree(out)
     out.mkdir(parents=True)
     zp = settings.processed_dir / "nodata" / "zone_day_status.parquet"
-    z = pd.read_parquet(zp)
+    z = d29_guard(pd.read_parquet(zp), settings)
     zd = pd.to_datetime(z["date"])
     start, end = zd.min().normalize(), zd.max().normalize()
     nd = (end - start).days + 1
@@ -158,13 +193,20 @@ def run_export(settings: Settings) -> dict:
     if up.exists():
         u = pd.read_parquet(up)
         u = u[u["segment"].astype(str).str.startswith("MODIS")]
+        rcol = "month_range_pct" if "month_range_pct" in u.columns and u["month_range_pct"].notna().any() else "range_pct"
         for var, g in u.groupby("variable"):
-            piv = g.pivot_table(index="tile", columns="month", values="range_pct", aggfunc="first").reindex(columns=range(1, 13))
+            piv = g.pivot_table(index="tile", columns="month", values=rcol, aggfunc="first").reindex(columns=range(1, 13))
             unc[var] = {t: [None if not np.isfinite(v) else round(float(v), 1) for v in row] for t, row in piv.iterrows()}
     rep_h = settings.processed_dir / "report_harmonise.json"
     hrep = json.loads(rep_h.read_text()) if rep_h.exists() else {}
     fdeg = hrep.get("factor_resolution_deg", float((settings.raw.get("factors") or {}).get("tile_deg", 10)))
-    (out / "uncertainty.json").write_text(json.dumps({"factor_deg": fdeg, "range_pct": unc}, separators=(",", ":")))
+    basis = ("calibrated month range (checks, must-fix 5)" if up.exists() and rcol == "month_range_pct"
+             else "factor range") if up.exists() else None
+    (out / "uncertainty.json").write_text(json.dumps({"factor_deg": fdeg, "basis": basis, "range_pct": unc}, separators=(",", ":")))
+
+    # cloud flag (package option C): months cloudier than 90% of years, per factor cell
+    cloud = cloud_flags(settings, fdeg)
+    (out / "cloud.json").write_text(json.dumps(cloud, separators=(",", ":")))
 
     mask = final_mask(settings, masked_cells(settings), float((settings.raw.get("factors") or {}).get("tile_deg", 10)))
     nf = notfire_layer(settings, mask)
@@ -182,17 +224,26 @@ def run_export(settings: Settings) -> dict:
             copied.append(f)
 
     rec = settings.raw.get("record") or {}
+    drop = int((settings.raw.get("nodata") or {}).get("drop_last_days", 1))
+    last_data = (end - pd.Timedelta(days=drop)).date()
     meta = {"generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "start": str(start.date()), "end": str(end.date()), "days": int(nd),
+            "last_data_day": str(last_data),
             "comparable_start": rec.get("comparable_start", "2003-01-01"),
             "terra_only_until": rec.get("terra_only_until", "2002-07-03"),
             "daily_grid_deg": 1.0, "tile_deg": 10, "map_grid_deg": 0.25, "zone_deg": 30,
             "sources": {str(k): v for k, v in SOURCES.items()}, "zone_status": {str(v): k for k, v in ZONE_STATUS.items()},
-            "variables": {"cells": "burning 0.05-degree cells, S-NPP equivalent", "frp": "fire radiative power, MW, S-NPP equivalent"},
+            "variables": {"cells": "hotspots: 0.05-degree cells with fire per day, S-NPP equivalent (D31)",
+                          "frp": "fire radiative power, MW, S-NPP equivalent"},
             "notes": ["Jan-Jun 2002: Terra only, not comparable with later years (D20).",
-                      f"The newest day ({end.date()}) is cut off at download time and shown as no data.",
+                      f"Data to {last_data}. The newest day ({end.date()}) is cut off at download time and shown as no data. "
+                      "No near-real-time feed (D34).",
                       "The last year is partial.",
-                      "Values before 20 Jan 2012 are MODIS put on the S-NPP scale; ranges in uncertainty.json."],
+                      "Values before 20 Jan 2012 are MODIS put on the S-NPP scale; ranges in uncertainty.json.",
+                      "Dated critical periods and daily or weekly views before 20 Jan 2012 are indicative; months are tested (D30).",
+                      "NOAA-21 is not used: it was not tested (D35)."],
+            "decisions": {"D29": "D19 fill off from " + str((settings.raw.get("harmonise") or {}).get("d19_fill_off_from")),
+                          "D30": "indicative before 2012-01-20", "D31": "hotspots label", "D34": "no NRT", "D35": "no NOAA-21"},
             "tiles": tiles_meta, "validation_files": copied, "provenance": stamp(settings),
             "record_info": (json.loads((settings.processed_dir / "l3" / "record_info.json").read_text())
                             if (settings.processed_dir / "l3" / "record_info.json").exists() else None)}
@@ -208,6 +259,8 @@ def run_export(settings: Settings) -> dict:
               "size_mb": round(size / 1e6, 1), "zip_mb": round(zpath.stat().st_size / 1e6, 1),
               "largest_file": {"name": biggest.relative_to(out).as_posix(), "mb": round(biggest.stat().st_size / 1e6, 2)},
               "daily_tiles": len(tiles_meta), "monthly_layers": len(parts), "notfire_cells": len(nf),
+              "cloud_flagged_cell_months": int(sum(len(v) for v in cloud["flags"].values())),
+              "uncertainty_basis": basis, "last_data_day": str(last_data),
               "validation_files": len(copied), "zip_path": str(zpath)}
     limit = float(cfg.get("max_site_mb", 900))
     ok = report["size_mb"] <= limit and report["largest_file"]["mb"] <= 95

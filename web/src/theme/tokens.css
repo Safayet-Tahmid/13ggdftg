@@ -1,0 +1,121 @@
+/* =====================================================================================
+   SHIFT DESIGN TOKENS  (safe to edit)
+   Every colour, font and size on the site comes from this file, including the colours
+   the map and the charts draw with. Change a value here and the whole site follows.
+
+   Rules that keep the science honest (please keep them when you restyle):
+   - --ramp-1 .. --ramp-6 must go from light to dark in the light theme (and dark to light
+     in the dark theme), so "more fire" always reads as "stronger colour".
+   - --class-low / normal / unusual / critical must stay easy to tell apart for people with
+     colour vision deficiency. Check with https://www.color-blindness.com/coblis-color-blindness-simulator/
+   - Keep the hatched "no data" look different from "no fire" (--chart-zero).
+   - No NASA logos or the NASA "meatball". A NASA-like style is fine.
+   ===================================================================================== */
+
+:root {
+  /* ---------- type */
+  --font-body: 'Archivo Variable', 'Archivo', system-ui, sans-serif;  /* font files: src/theme/fonts.js */
+  --font-heading: var(--font-body);
+  --font-size-base: 15px;
+  --font-size-small: 13px;
+  --heading-weight: 760;
+  --heading-stretch: 112%;         /* Archivo is a variable-width font; set 100% for other fonts */
+  --brand-size: 34px;
+
+  /* ---------- shape */
+  --radius: 6px;
+  --gap: 16px;
+
+  /* ---------- page colours (light) */
+  --surface: #FCFCFB;              /* panels and cards */
+  --mist: #E9EEEC;                 /* page background, selected buttons */
+  --ink: #17283A;                  /* main text */
+  --muted: #5B6873;                /* secondary text */
+  --rule: #CCD5D3;                 /* lines and borders */
+  --accent: #B4461F;               /* the one strong colour: active tab, highlights */
+  --on-accent: #FFFFFF;            /* text on top of --accent */
+  --focus: #2F5DA8;                /* keyboard focus ring */
+  --header-bg: var(--surface);
+  --header-ink: var(--ink);
+
+  /* ---------- map */
+  --map-sea: #C3D3DA;
+  --map-land: #E4E9E5;
+  --map-border: #A9B6B9;
+  --map-area: #17283A;             /* outline of the selected area */
+
+  /* ---------- charts: fire amount, light to dark */
+  --chart-zero: #ECEFEC;           /* a day with no fire */
+  --ramp-1: #FBE6D2;
+  --ramp-2: #F6C49C;
+  --ramp-3: #EC9A64;
+  --ramp-4: #D96B3A;
+  --ramp-5: #B4461F;
+  --ramp-6: #7E2A12;
+
+  /* ---------- charts: month against its normal */
+  --class-low: #4F7FB8;
+  --class-normal: #D4D8D6;
+  --class-unusual: #E58A55;
+  --class-critical: #A63A18;
+
+  /* ---------- charts: lines, bands, gaps */
+  --chart-line: #17283A;
+  --chart-band: rgba(23, 40, 58, 0.14);   /* the 95% range */
+  --chart-highlight: #B4461F;             /* "this year" in comparisons */
+  --nodata-bg: #F1F2F1;
+  --nodata-line: #9AA4A8;
+  --cloud-mark: #2F5DA8;                  /* the cloud warning dot on months */
+
+  /* ---------- the "heat that isn't fire" layer */
+  --notfire-volcano: #6B3FA0;
+  --notfire-industry: #2E6E73;
+  --notfire-offshore: #2F5DA8;
+
+  color-scheme: light;
+}
+
+/* ---------- dark theme: same names, dark values */
+:root[data-theme='dark'] {
+  --surface: #121A22;
+  --mist: #0D141B;
+  --ink: #E6ECEF;
+  --muted: #97A3AC;
+  --rule: #2A3843;
+  --accent: #F7A26E;
+  --on-accent: #121A22;
+  --focus: #7EA6E6;
+  --header-bg: var(--surface);
+  --header-ink: var(--ink);
+
+  --map-sea: #0D1A24;
+  --map-land: #1D2933;
+  --map-border: #33424E;
+  --map-area: #E6ECEF;
+
+  --chart-zero: #1A242D;
+  --ramp-1: #4A2A1C;
+  --ramp-2: #7A3A1E;
+  --ramp-3: #B4532A;
+  --ramp-4: #DE7740;
+  --ramp-5: #F7A26E;
+  --ramp-6: #FFD3B0;
+
+  --class-low: #6F9BCB;
+  --class-normal: #3E4446;
+  --class-unusual: #B4532A;
+  --class-critical: #F7A26E;
+
+  --chart-line: #E6ECEF;
+  --chart-band: rgba(230, 236, 239, 0.16);
+  --chart-highlight: #F7A26E;
+  --nodata-bg: #1A242D;
+  --nodata-line: #55636E;
+  --cloud-mark: #7EA6E6;
+
+  --notfire-volcano: #B08AE0;
+  --notfire-industry: #5FB3B9;
+  --notfire-offshore: #7EA6E6;
+
+  color-scheme: dark;
+}

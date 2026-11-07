@@ -495,6 +495,10 @@ harmonise:
   use_fine_factors: auto     # auto = use stage resolution's fine table when its rule adopted it
   fill_method: auto          # auto = each link's method from stage nodata (D25): substitute, or hybrid
   day_basis: auto            # auto = stage daily's rule (UTC unless the local solar day wins); utc; local
+  # D29 (decided 7 Nov 2026): Aqua passed its 13:45 science limit in Feb 2023, so from this date the
+  # D19 MODIS fill (Aqua alone) is not used for S-NPP gaps; those zone-days are "no data".
+  # 0 rows of the 7 Nov record come from that fill, so no rerun is needed.
+  d19_fill_off_from: "2023-02-01"
   # GATE, fixed 15 Oct 2026 before the first run: the global 2012 step (mean 2013-2015 / mean
   # 2009-2011) of the harmonised record is within +-step_tolerance_pct of the step MODIS alone
   # shows, for burning cells and fire power.
