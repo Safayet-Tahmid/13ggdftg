@@ -69,7 +69,7 @@ const T = {
 
   // ---------------------------------------------------------------- compare (D32)
   compare: {
-    modes: { month: 'This month so far', last30: 'Last 30 days', custom: 'Your dates' },
+    modes: { month: 'Latest month so far', last30: 'Latest 30 days', custom: 'Your dates' },
     customHint: 'Pick dates below (up to one year) to compare them with the same dates in every other year.',
     tooLong: 'Choose at most one year of dates to compare with other years.',
     window: (a, b) => `${a} to ${b}`,
@@ -77,7 +77,7 @@ const T = {
       : ratio >= 1.15 ? `${ratio.toFixed(1)}× the normal` : ratio <= 0.87 ? `${Math.round(ratio * 100)}% of the normal` : 'About normal',
     rank: (r, n) => `Rank ${r} of ${n} years (1 = most fire)`,
     median: (v, b0, b1, n) => `Normal (median of ${n} years, ${b0} to ${b1}): ${v}`,
-    monthShare: (pct, month) => `So far this month has had ${pct}% of the fire a normal ${month} brings in the whole month.`,
+    monthShare: (pct, month) => `So far this month (to the last day with data) has had ${pct}% of the fire a normal ${month} brings in the whole month.`,
     left: (n) => `${n} year${n > 1 ? 's' : ''} left out because a satellite gap fell in these dates.`,
     targetGaps: (n) => `${n} day${n > 1 ? 's' : ''} in these dates had no satellite data, so this year may be undercounted.`,
     modisNote: 'Bars before 2012 are MODIS put on the VIIRS scale; the whisker is their calibrated 95% range.',
