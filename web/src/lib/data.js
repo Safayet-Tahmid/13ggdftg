@@ -22,10 +22,15 @@ async function bytes(path) {
   try { return await p; } catch (e) { cache.delete(path); throw e; }
 }
 
+// Python's json writes NaN and Infinity for missing numbers; browsers refuse those, so they are
+// read as null (the page then shows "not available" for that one value instead of losing the file).
 export async function json(path) {
   const res = await fetch(BASE + path);
   if (!res.ok) throw new Error(`${path}: ${res.status}`);
-  return res.json();
+  const text = await res.text();
+  try { return JSON.parse(text); } catch {
+    return JSON.parse(text.replace(/(?<=[:\[,]\s*)-?(NaN|Infinity)(?=\s*[,\]}])/g, 'null'));
+  }
 }
 
 export async function csv(path) {

@@ -39,6 +39,7 @@ export default function Explore({ meta, theme, params }) {
   const [unc, setUnc] = useState(null);
   const [harm, setHarm] = useState(null);
   const [cloud, setCloud] = useState(null);
+  const [checks, setChecks] = useState(null);
   const [cmpMode, setCmpMode] = useState(params.from ? 'custom' : 'month');
   const [dates, setDates] = useState(() => ({
     from: params.from || `${lastIso.slice(0, 4)}-01-01`, to: params.to || lastIso }));
@@ -47,6 +48,7 @@ export default function Explore({ meta, theme, params }) {
     json('uncertainty.json').then(setUnc).catch(() => {});
     json('validation/report_harmonise.json').then(setHarm).catch(() => {});
     json('cloud.json').then(setCloud).catch(() => {});
+    json('validation/report_checks.json').then(setChecks).catch(() => {});
   }, []);
   useEffect(() => { monthLayer(month).then(setFires).catch(() => setFires(null)); }, [month]);
   useEffect(() => {
@@ -96,7 +98,7 @@ export default function Explore({ meta, theme, params }) {
 
   const onBox = (b) => { setError(null); setArea(boxArea(b)); };
   const pickArea = (a) => { setError(null); setArea(a); };
-  const falseAlarm = harm?.anomaly_rule?.plain?.false_alarm_pct ?? 27;
+  const falseAlarm = checks?.anomaly_rule?.regions?.plain?.false_alarm_pct ?? harm?.anomaly_rule?.plain?.false_alarm_pct ?? 27;
   const totals = mon && summary(mon.rows);
   const file = (what) => `shift_${slug(area.name)}_${what}`;
   const mLabel = T.measures[variable];

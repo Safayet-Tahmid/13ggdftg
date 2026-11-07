@@ -12,6 +12,7 @@ const PLACES = [
   { id: 'kalimantan_peat', name: 'Kalimantan peatlands', box: [109, -4, 118, 2], tested: true },
   { id: 'java_volcanic', name: 'Java', box: [105, -9, 115, -6], tested: true },
   { id: 'florida', name: 'Florida', box: [-87.6, 24.5, -80, 31], tested: true },
+  { id: 'se_australia', name: 'Southeast Australia (Black Summer 2019-20)', box: [145, -38.5, 154, -28] },
   { id: 'california', name: 'California', box: [-124.5, 32.5, -114, 42] },
   { id: 'chittagong_hills', name: 'Chittagong Hill Tracts', box: [91.5, 21.5, 92.7, 23.7] },
 ];

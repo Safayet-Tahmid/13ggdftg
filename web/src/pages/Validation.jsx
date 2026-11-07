@@ -14,6 +14,9 @@ const pct = (v) => (v == null ? '' : `${v > 0 ? '+' : ''}${(+v).toFixed(1)}%`);
 const yes = (v) => (v == null ? '' : v ? 'PASS' : 'FAIL');
 const LINKS = { 'S-NPP <- NOAA-20': 'VIIRS S-NPP ← NOAA-20', 'S-NPP <- D19': 'VIIRS S-NPP ← MODIS', 'MODIS <- Aqua': 'MODIS ← Aqua alone', 'MODIS <- Terra': 'MODIS ← Terra alone' };
 const LEVELS = { 'own month': 'Its own data, that month', 'own all-year': 'Its own data, whole year', 'zone (without the tile)': 'Its 30° neighbourhood', 'world (without the tile)': 'The whole world' };
+const EVENTS = { russia_2010: 'Russia 2010 heatwave fires', greece_2007: 'Greece 2007', indonesia_2006: 'Indonesia 2006 peat fires',
+  indonesia_2015: 'Indonesia 2015 peat fires', amazon_2019: 'Amazon 2019', australia_2019_20: 'Australia Black Summer 2019-20',
+  pantanal_2020: 'Pantanal 2020', canada_2023: 'Canada 2023' };
 const METHODS = { 'no harmonisation': 'Nothing (join the records)', 'one global ratio': 'One ratio for the world',
   'one ratio per 10-degree region, all months': 'One ratio per 10° region', 'v1 Florida line': 'Our v1 Florida line', SHIFT: 'SHIFT' };
 
@@ -40,7 +43,7 @@ export default function Validation() {
   }, []);
   const g = get(d.harm, 'gate_2012_step', 'global');
   const ck = d.checks || {};
-  const anom = ck.anomaly_rule || get(d.harm, 'anomaly_rule');
+  const anom = get(ck, 'anomaly_rule', 'regions') || get(ck, 'anomaly_rule') || get(d.harm, 'anomaly_rule');
   const fillRows = useMemo(() => {
     const out = {};
     (d.fill || []).filter((r) => r.variable === 'frp').forEach((r) => { (out[r.link] ||= { link: r.link })[r.method] = r.abs_error_pct; });
@@ -70,7 +73,7 @@ export default function Validation() {
           <span>SHIFT's score against {Math.max(...simple.filter((r) => r.method !== 'SHIFT').map((r) => +r.score || 0)).toFixed(1)} for the best simple method (higher is better)</span></p>}
         {evSum && <p><b>{events.filter((e) => e['SHIFT frp hit']).length} of {events.length}</b><span>known fire disasters flagged as unusual or critical (chance: {evSum.base_rate_pct}%)</span></p>}
         {cover.length > 0 && <p><b>{one(coverOf('cells'))}</b><span>of held-out months fall inside the calibrated 95% range (hotspots; fire power {one(coverOf('frp'))})</span></p>}
-        {anom && <p><b>{get(anom, 'plain', 'caught_pct')}%</b><span>of truly unusual months that the MODIS years also flag (false alarms {get(anom, 'plain', 'false_alarm_pct')}%)</span></p>}
+        {get(anom, 'plain', 'caught_pct') != null && <p><b>{get(anom, 'plain', 'caught_pct')}%</b><span>of truly unusual months in the test regions that the MODIS years also flag (false alarms {get(anom, 'plain', 'false_alarm_pct')}%; for single 2.5° cells {get(ck, 'anomaly_rule', 'plain', 'caught_pct')}% and {get(ck, 'anomaly_rule', 'plain', 'false_alarm_pct')}%)</span></p>}
       </div>
 
       <h3>No jump at 2012, region by region</h3>
@@ -96,7 +99,7 @@ export default function Validation() {
       <p className="small">Months of well-known fire events, and whether SHIFT's fire power marks them as unusual or critical (z of 1 or more).</p>
       <Table rows={events} cols={['event', 'months', 'SHIFT frp max z', 'SHIFT frp hit']}
         labels={{ event: 'Event', months: 'Months', 'SHIFT frp max z': 'Highest z', 'SHIFT frp hit': 'Flagged' }}
-        fmt={{ 'SHIFT frp hit': (v) => (v ? 'yes' : 'no'), 'SHIFT frp max z': (v) => (v == null ? '' : (+v).toFixed(1)) }} />
+        fmt={{ event: (v) => EVENTS[v] || String(v).replace(/_/g, ' '), 'SHIFT frp hit': (v) => (v ? 'yes' : 'no'), 'SHIFT frp max z': (v) => (v == null ? '' : (+v).toFixed(1)) }} />
 
       <h3>Against burned area (GFED4)</h3>
       <p className="small">{ba ? `The 2012 step in SHIFT agrees with the burned-area record for the whole world: ${yes(ba.global_pass)}. Regions passing for both measures: ${ba.regions_passing_both ?? '–'} (the failures also fail for MODIS alone).` : 'Not available in this data release.'}</p>
@@ -115,7 +118,7 @@ export default function Validation() {
       {ratios.length > 0 && <>
         <h3>NOAA-20 carries the record on</h3>
         <p className="small">NASA stopped delivering Suomi NPP data on 1 November 2026. NOAA-20 sees the same fire as Suomi NPP every year (ratio near 1), so it can take over.</p>
-        <Table rows={ratios.map(([k, v]) => ({ k: k.replace(' per ', ' ÷ '), ...Object.fromEntries(Object.entries(v.by_year || {}).map(([y, x]) => [y, x])) }))}
+        <Table rows={ratios.map(([k, v]) => ({ k: k.replace(' per ', ' ÷ '), ...Object.fromEntries(Object.entries(v.by_year || {}).map(([y, x]) => [y, x == null ? '' : (+x).toFixed(2)])) }))}
           cols={['k', ...Object.keys(ratios[0][1].by_year || {})]} labels={{ k: 'Ratio' }} />
       </>}
 
