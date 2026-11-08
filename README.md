@@ -146,6 +146,13 @@ GitHub Actions. MODIS C6.1 and VIIRS 375 m active-fire user guides (NASA FIRMS).
   Environment, 143, 85-96.
 - SHIFT v1 Florida prototype (Team Squadron Zero): https://github.com/nasifnaser06-cyber/Project_S.H.I.F.T
 
+## Scientific audit (8 Nov 2026)
+
+A critical review of the method, the validation and the reproducibility, including what is not
+supported: `docs/audit/SCIENTIFIC_METHODOLOGY.md` (start here), with the equations, validation
+report, limitations, reproducibility guide, improvement plan and judging notes beside it.
+`validation/audit_site_data.py` reruns the independent checks on the published site data.
+
 ## Use of AI
 
 Code, tests and documentation were written with AI help (Claude), and the team used Gemini and

@@ -16,7 +16,9 @@ const T = {
   measures: { cells: 'Hotspots', frp: 'Fire power' },
   units: { cells: 'hotspots', frp: 'MW' },
   hotspotDefinition: 'A hotspot is a 0.05° grid cell (about 5 km) with fire on a day. Counting cells instead of raw '
-    + 'detections stops the finer VIIRS pixels from inflating the count. Fire power is the heat the fires give off, in megawatts.',
+    + 'detections stops the finer VIIRS pixels from inflating the count. Fire power is the fire radiative power (MW) of the '
+    + 'detections, added up per day. Monthly and yearly fire power add those daily sums together, so they are an index of how '
+    + 'much intense burning was seen, not an amount of energy. Neither number counts separate fires.',
   whatIsHotspot: 'What is a hotspot?',
 
   // ---------------------------------------------------------------- choosing the area

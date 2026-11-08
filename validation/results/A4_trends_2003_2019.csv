@@ -1,0 +1,23 @@
+region,variable,years,trend_modis_alone_pct_per_year,trend_harmonised_pct_per_year,trend_raw_joined_pct_per_year,harmonised_minus_modis_pp,raw_minus_modis_pp,ratio_trend_ci95
+africa_savanna,cells,2003-2019,-0.2,-0.24,7.27,-0.04,7.47,-0.25 to +0.27
+africa_savanna,frp,2003-2019,-1.55,-1.64,-2.63,-0.09,-1.09,-0.23 to +0.21
+amazon_arc,cells,2003-2019,-6.69,-7.15,-1.18,-0.46,5.51,-1.02 to -0.03
+amazon_arc,frp,2003-2019,-9.85,-9.85,-11.1,0.0,-1.26,-0.65 to +0.29
+australia_savanna,cells,2003-2019,0.51,0.65,5.66,0.14,5.16,-0.05 to +0.57
+australia_savanna,frp,2003-2019,-1.09,-0.47,-2.21,0.62,-1.13,-0.12 to +1.15
+bangladesh,cells,2003-2019,-2.17,-2.43,6.5,-0.26,8.67,-0.86 to +0.54
+bangladesh,frp,2003-2019,-6.47,-6.49,-6.76,-0.02,-0.29,-0.20 to +1.10
+florida,cells,2003-2019,-0.18,0.13,4.95,0.31,5.13,-0.53 to +0.56
+florida,frp,2003-2019,-0.07,0.05,-2.52,0.12,-2.45,-0.51 to +1.25
+global,cells,2003-2019,-1.1,-1.13,6.25,-0.02,7.35,-0.12 to +0.17
+global,frp,2003-2019,-1.27,-1.66,-2.44,-0.39,-1.17,-0.48 to +0.11
+iberia_med,cells,2003-2019,-4.22,-4.19,2.42,0.03,6.63,-0.94 to +0.97
+iberia_med,frp,2003-2019,-5.86,-5.8,-10.8,0.06,-4.94,-1.73 to +1.52
+java_volcanic,cells,2003-2019,-0.63,-0.04,14.97,0.58,15.6,+0.15 to +0.91
+java_volcanic,frp,2003-2019,0.65,0.44,4.99,-0.21,4.34,-1.47 to +1.14
+kalimantan_peat,cells,2003-2019,-4.06,-3.62,6.76,0.45,10.82,-0.64 to +1.43
+kalimantan_peat,frp,2003-2019,-5.17,-4.63,-2.91,0.54,2.26,-1.08 to +1.65
+punjab_crop,cells,2003-2019,0.37,0.28,10.82,-0.09,10.45,-0.79 to +0.21
+punjab_crop,frp,2003-2019,1.03,0.95,6.18,-0.08,5.15,-0.76 to +1.04
+siberia_boreal,cells,2003-2019,12.49,12.89,17.24,0.4,4.75,-0.58 to +0.25
+siberia_boreal,frp,2003-2019,14.02,14.15,11.51,0.13,-2.52,-1.99 to +0.36

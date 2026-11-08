@@ -1,0 +1,16 @@
+{
+  "site_generated_utc": "2026-11-07T17:15:19+00:00",
+  "record": [
+    "2002-01-01",
+    "2026-10-28"
+  ],
+  "daily_rows": 15636490,
+  "tables": {
+    "A1_export_integrity": "A1_export_integrity.csv (16 rows)",
+    "A2_ratio_stationarity": "A2_ratio_stationarity.csv (22 rows)",
+    "A3_steps_and_placebos": "A3_steps_and_placebos.csv (22 rows)",
+    "A4_trends_2003_2019": "A4_trends_2003_2019.csv (22 rows)",
+    "A5_gfed_reference": "A5_gfed_reference.csv (22 rows)",
+    "A6_low_days": "A6_low_days.csv (2 rows)"
+  }
+}

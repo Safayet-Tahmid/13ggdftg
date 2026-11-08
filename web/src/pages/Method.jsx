@@ -36,7 +36,9 @@ export default function Method({ meta }) {
         <li>Before 2012 values carry the calibrated 95% range of their factor, wider where fire is sparse.</li>
         <li>Day-level and week-level values and dated critical periods before 20 January 2012 are indicative; months are tested (D30).</li>
         <li>About one in four unusual months in the MODIS years would not be unusual to VIIRS; those months are marked.</li>
-        <li>Iberia is the one test region whose 2012 step differs from MODIS alone by more than 10% (about +12%).</li>
+        <li>Three test regions keep a 2012 step near 10% after harmonising, depending on how it is measured: Iberia +9 to +12%
+          (flagged, with extra uncertainty), Florida -7 to -9% and Siberia about -9%. Year-to-year wobble in the VIIRS to MODIS
+          ratio is about 3 to 10% in single regions, so gaps of this size are at the edge of what can be told apart from noise.</li>
         <li>NOAA-21 (VIIRS since 2023) is not used: it was not tested against the others in time (D35).</li>
         <li>From February 2023 Aqua flies past its 13:45 science limit, so it no longer fills Suomi NPP gaps (D29).</li>
       </ul>

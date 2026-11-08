@@ -1,0 +1,17 @@
+region,variable,years,max_abs_diff_pct,total_site,total_pipeline
+africa_savanna,cells,25,0.0,10567143.2,10567143.2
+africa_savanna,frp,25,0.0,269318071.1,269318071.1
+amazon_arc,cells,25,0.0,1499350.4,1499350.4
+amazon_arc,frp,25,0.0,77032341.1,77032341.1
+australia_savanna,cells,25,0.0,1172238.8,1172238.8
+australia_savanna,frp,25,0.0,60012421.9,60012421.9
+global,cells,25,0.0,155020043.1,155020043.1
+global,frp,25,0.0,4169742030.9,4169742031.1
+java_volcanic,cells,25,0.0,116199.4,116199.4
+java_volcanic,frp,25,0.0,750528.8,750528.8
+kalimantan_peat,cells,25,0.0,979300.3,979300.3
+kalimantan_peat,frp,25,0.0,25911642.8,25911642.8
+punjab_crop,cells,25,0.0,1209607.1,1209607.1
+punjab_crop,frp,25,0.0,14542230.2,14542230.2
+siberia_boreal,cells,25,0.0,499839.2,499839.2
+siberia_boreal,frp,25,0.0,46553922.3,46553922.3

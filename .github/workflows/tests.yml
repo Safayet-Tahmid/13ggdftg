@@ -31,3 +31,5 @@ jobs:
       - name: Run tests
         working-directory: pipeline
         run: python -m pytest -q
+      - name: Audit statistics tests (validation/)
+        run: python -m pytest -q validation
