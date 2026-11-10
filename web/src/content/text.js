@@ -45,7 +45,7 @@ const T = {
   // ---------------------------------------------------------------- recent detections (D38)
   recent: {
     layer: 'Map layer',
-    layers: { record: 'Harmonised record (monthly)', recent: 'Recent detections (NOAA-20, NOAA-21)' },
+    layers: { record: 'Harmonised record', recent: 'Recent detections' },
     period: 'Period',
     periods: { '24h': 'Last 24 hours', '7d': 'Last 7 days', all: 'Since 28 Oct' },
     fetched: (when, from, to) => `Fetched ${when}. Detections from ${from} to ${to}.`,
