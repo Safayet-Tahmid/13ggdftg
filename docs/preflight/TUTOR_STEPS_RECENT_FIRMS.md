@@ -1,6 +1,6 @@
 # SHIFT recent detections (D38): tutor instructions for Squadron Zero
 
-Paste this whole file into a NEW chat with the SHIFT Tutor Gem or ChatGPT. Version 2, 11 Nov 2026, 02:00 Asia/Dhaka. It replaces version 1.
+Paste this whole file into a NEW chat with the SHIFT Tutor Gem or ChatGPT. Version 3, 11 Nov 2026, 03:00 Asia/Dhaka. It replaces versions 1 and 2.
 
 ## For you, the tutor: read this first
 
@@ -35,11 +35,12 @@ Key facts:
 | E | D38 yes, push yes | DONE 11 Nov 01:45 |
 | First full fetch on GitHub | 28 Oct to 10 Nov, both satellites, every day, 1,505,013 detections, 0 rejected | PASSED 11 Nov (Claude checked the run log) |
 | F | Ask the organisers about work done before the event | TO DO |
-| G | Look at the fetch result yourself (optional, 5 minutes) | OPTIONAL |
-| H | Review the website preview when Claude says it is ready | LATER |
-| I | Merge, then pause refreshes during judging | LATER |
+| G | Look at the fetch result yourself | DONE 11 Nov 01:59 |
+| Website layer | Built and tested by Claude, draft pull request #2 | READY FOR REVIEW |
+| H | Review pull request #2 | NOW |
+| I | Merge, check the live site, pause refreshes during judging | AFTER H, before 12 Nov 12:00 |
 
-Start with TASK F, then G. Do H and I only when the main build chat says "ready for review".
+Do TASK H now, then TASK I. TASK F (organiser question) can be done any time today.
 
 ---
 
@@ -73,24 +74,31 @@ STOP RULE: if you ever see a long string of letters and numbers where `***` shou
 
 ---
 
-## TASK H. Review the website preview (only when Claude says "ready for review")
+## TASK H. Review pull request #2 (the recent detections layer)
 
-WHY: The team, not Claude, decides whether the recent layer is good enough for the demo. A teammate who did not build it sees problems a builder misses.
+WHY: The team, not Claude, decides whether the layer is good enough for the demo. A teammate who did not build it sees problems a builder misses. The layer is off by default (the map opens on the harmonised record as before), and merging can be undone with one click, so the review can be short.
 
-Claude will send a link to a pull request and say how to open the preview (GitHub Pages has no automatic preview, so Claude will give either a test link or a Codespace with exact steps). Then:
+Pull request: https://github.com/squadronzero/squadron-zero/pull/2
 
-STEP H1. Check that every check at the bottom has a green tick.
-STEP H2. Open the preview the way Claude describes. In the map, choose the recent detections layer.
-STEP H3. Check each point below and note any "no":
-- The map shows when the data was fetched (date and time, UTC).
-- Each satellite is named (NOAA-20, NOAA-21). NOAA-21 says "not tested against S-NPP by SHIFT".
-- Clicking a detection shows its date, time (UTC), satellite, confidence (low, nominal, high) and fire power in MW.
-- Gas flares and volcanoes are marked as likely non-fire heat.
-- The words never say "wildfire" for every point, never say "live alert", and never compare recent points with the historical numbers as a ratio or score.
-- Switching the recent layer off brings back the normal historical map exactly as before.
-- The Explore, 2012 switch, Validation and Method pages still work.
-
-STEP H4. Send the list of "no" items (or "all yes") to the main build chat.
+STEP H1. Open the pull request. Scroll to the bottom. Every check must have a green tick.
+STEP H2. Read the "What it adds" and "Evidence" sections, and look at the screenshots Claude sent in the build chat (overview over Central Africa, single detections on the globe, the detection panel).
+STEP H3 (optional, about 10 minutes, a laptop). To try it yourself before merging:
+  1. On the pull request page click **Code**, then the **Codespaces** tab, then **Create codespace on feature/recent-firms**. Wait until a browser tab with the website opens (it downloads the 135 MB record first, 3 to 5 minutes).
+  2. In the Codespace terminal at the bottom, paste:
+     `gh release download recent-firms-preview -p recent_preview.zip -D /tmp --repo squadronzero/squadron-zero && mkdir -p web/public/data/recent && unzip -o -q /tmp/recent_preview.zip -d web/public/data/recent && ls web/public/data/recent`
+     Expected last line: `overview.json.gz  status.json  tiles`
+  3. Reload the website tab.
+  STOP RULE for H3: if the `gh` line fails (for example "command not found" or "release not found"), skip H3 and judge from the screenshots. Do not install anything or change any file in the Codespace. When finished, close the tab and delete the Codespace (github.com/codespaces, "..." then Delete) so it does not use the free hours.
+STEP H4. Check each point (on the screenshots or in the Codespace) and note any "no":
+- The "Map layer" menu offers "Harmonised record (monthly)" and "Recent detections (NOAA-20, NOAA-21)". The map opens on the record.
+- In recent mode the bar under the map says when the data was fetched (UTC) and the date range from 2026-10-28.
+- The header shows "Record to 28 Oct 2026" and "Recent detections to ...".
+- Zoomed in, clicking a detection shows date and time (UTC), satellite, confidence (low, nominal, high) and fire power in MW. NOAA-21 says "not tested against S-NPP by SHIFT".
+- Grey points are likely gas flares, industry or volcanoes. Faint ringed points are low confidence.
+- No text calls every point a wildfire, a live alert, or compares recent points with the record as a ratio or score.
+- "Show the history of this area" changes the right panel to that area's calendar since 2002.
+- Switching back to "Harmonised record" shows the normal map, and the numbers on the right are the same as before.
+STEP H5. Send the list of "no" items (or "all yes") to the main build chat.
 
 STOP RULE: do not click "Merge" during this task.
 
@@ -100,10 +108,13 @@ STOP RULE: do not click "Merge" during this task.
 
 WHY: Merging puts the recent layer on the live site. Every refresh rebuilds the site, so refreshes must pause while judges are looking, so nothing changes mid-demo.
 
-STEP I1. On the pull request page click **Ready for review** (if shown), then **Merge pull request**, then **Confirm merge**.
+Only after the main build chat says "merge". Before 12 Nov 12:00 (Dhaka), or not at all.
+
+STEP I1. On https://github.com/squadronzero/squadron-zero/pull/2 click **Ready for review**, then **Merge pull request**, then **Confirm merge**. Keep the branch (do not click "Delete branch").
 STEP I2. Open https://github.com/squadronzero/squadron-zero/actions, click the newest **Website** run, wait for the green tick (2 to 4 minutes).
-STEP I3. Open https://squadronzero.github.io/squadron-zero/ and press Ctrl+Shift+R. Repeat the TASK H3 checks quickly.
-STEP I4. Before judging (Claude will give the exact time): in Actions, open the refresh workflow Claude names, click the "..." menu, then **Disable workflow**. After judging: same place, **Enable workflow**.
+STEP I2b. In that run, open the job **build** and the step **Recent detections (D38, raw FIRMS NRT)**. Expected near the end: `wrote ... detections, ... overview cells, ... tiles, ... MB, complete=True`. If it shows an error instead, the site still deploys without the layer. Send the step's last lines to the main build chat.
+STEP I3. Open https://squadronzero.github.io/squadron-zero/ and press Ctrl+Shift+R. Repeat the TASK H4 checks quickly on the live site.
+STEP I4. The live site now refreshes itself every 3 hours (the Website workflow). Before judging and before recording Video 2: open https://github.com/squadronzero/squadron-zero/actions, click **Website** on the left, the "..." menu at the top right, then **Disable workflow**. The site stays exactly as it is. After judging: same place, **Enable workflow**.
 
 Expected: the live site shows the recent layer with its fetch time, and it does not change during judging.
 
