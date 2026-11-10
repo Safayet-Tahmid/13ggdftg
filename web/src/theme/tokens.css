@@ -47,6 +47,13 @@
   --map-gap: #5B6873;              /* hatching of 30-degree zones with days of no satellite data */
   --globe-space: #0B1220;          /* behind the 3D globe */
   --globe-horizon: #A8C6DA;        /* thin atmosphere at the globe's edge */
+  /* recent detections (raw FIRMS NRT): a different scheme from the record's ramp on purpose */
+  --recent-1: #F6D743;
+  --recent-2: #F59E0B;
+  --recent-3: #E0452B;
+  --recent-4: #9D1C4A;
+  --recent-stroke: #1B1B1B;
+  --recent-nonfire: #8A94A0;       /* detections in SHIFT's persistent non-fire cells (flares, volcanoes) */
 
   /* ---------- charts: fire amount, light to dark */
   --chart-zero: #ECEFEC;           /* a day with no fire */
@@ -100,6 +107,12 @@
   --map-gap: #97A3AC;
   --globe-space: #05080D;
   --globe-horizon: #4E6E86;
+  --recent-1: #FBE36A;
+  --recent-2: #FBBF24;
+  --recent-3: #F2643F;
+  --recent-4: #E2457A;
+  --recent-stroke: #05080D;
+  --recent-nonfire: #7E8893;
 
   --chart-zero: #1A242D;
   --ramp-1: #4A2A1C;

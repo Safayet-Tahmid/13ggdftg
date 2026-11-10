@@ -8,6 +8,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import T from '../content/text.js';
 import { land } from '../lib/area.js';
 import { cellSquare, dragBox, imagery, squaresOf, stepExpression, zoneBox } from '../lib/geo.js';
+import { RECENT_COUNT_STEPS, RECENT_FRP_STEPS, recentStep } from '../lib/recent.js';
 
 // A basemap that ships with the site, so the map works with the wifi off.
 function style(theme) {
@@ -28,6 +29,20 @@ const areaFeature = (g) => (g ? fc([g]) : EMPTY);
 const boxGeom = (b) => ({ type: 'Polygon', coordinates: [[[b.w, b.s], [b.e, b.s], [b.e, b.n], [b.w, b.n], [b.w, b.s]]] });
 const HOME = { '2d': { center: [60, 15], zoom: 1.4 }, '3d': { center: [60, 15], zoom: 2.1 } };
 const DOTS_UNTIL = 4.5;   // zoomed out: dots; zoomed in: the true 0.25-degree squares
+export const RECENT_POINTS_FROM = 6;   // recent layer: cell overview below this zoom, single detections from it
+const RECORD_LAYERS = ['fires', 'firecells'];
+const RECENT_LAYERS = ['recent-cells', 'recent-pts'];
+
+// A popup built from text nodes only. FIRMS values never go through HTML (see docs/preflight).
+function textPopup(lines) {
+  const el = document.createElement('div');
+  lines.forEach((l, i) => {
+    const row = document.createElement(i === 0 ? 'b' : 'div');
+    row.textContent = l;
+    el.appendChild(row);
+  });
+  return el;
+}
 
 // Diagonal hatching for zones with days of no satellite data (a pattern, so it reads without colour).
 function hatch(colour) {
@@ -41,13 +56,15 @@ function hatch(colour) {
 
 export default function MapView({ theme, fires, notFire, showNotFire, area, drawing, onBox, onDrawEnd, onDateLine,
   variable = 'frp', view = '2d', basemap = 'standard', imageryDay = null, gaps = null, showGaps = false,
-  picked = null, onPick, resetKey = 0, reducedMotion = false, onImageryError, onStatus }) {
+  picked = null, onPick, resetKey = 0, reducedMotion = false, onImageryError, onStatus,
+  layerMode = 'record', recentCells = null, recentPts = null, recentTip, onRecentPick, onViewChange }) {
   const el = useRef(null);
   const map = useRef(null);
   const ready = useRef(false);
   const [failed, setFailed] = useState(false);
   const latest = useRef({});
-  latest.current = { onBox, onDrawEnd, drawing, onPick, onDateLine, onImageryError, onStatus, view, reducedMotion };
+  latest.current = { onBox, onDrawEnd, drawing, onPick, onDateLine, onImageryError, onStatus, view, reducedMotion,
+    recentTip, onRecentPick, onViewChange };
   const squares = useMemo(() => squaresOf(fires), [fires]);
 
   useEffect(() => {
@@ -85,6 +102,23 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
         'circle-radius': ['interpolate', ['linear'], ['zoom'], 1, 1.4, 5, 3, 8, 7],
         'circle-color': ['match', ['get', 'type'], 1, theme.volcano, 3, theme.offshore, theme.industry],
         'circle-stroke-color': theme.surface, 'circle-stroke-width': 0.6 } });
+      // recent detections (D38): their own sources and colours, hidden unless that layer is chosen
+      m.addSource('recent-cells', { type: 'geojson', data: EMPTY });
+      m.addSource('recent-pts', { type: 'geojson', data: EMPTY });
+      m.addLayer({ id: 'recent-cells', type: 'circle', source: 'recent-cells', maxzoom: RECENT_POINTS_FROM,
+        layout: { visibility: 'none' }, paint: {
+          'circle-radius': ['interpolate', ['linear'], ['zoom'], 1, 1.6, 3, 2.6, RECENT_POINTS_FROM, 4.5],
+          'circle-color': recentStep('n', RECENT_COUNT_STEPS, theme.recent),
+          'circle-stroke-color': theme.recentStroke, 'circle-stroke-width': 0.4 } });
+      m.addLayer({ id: 'recent-pts', type: 'circle', source: 'recent-pts', minzoom: RECENT_POINTS_FROM,
+        // the strongest detections are drawn on top, so a click lands on what stands out
+        layout: { visibility: 'none', 'circle-sort-key': ['get', 'frp'] }, paint: {
+          'circle-radius': ['interpolate', ['linear'], ['zoom'], RECENT_POINTS_FROM, 2.6, 10, 6, 13, 9],
+          'circle-color': ['case', ['==', ['get', 'nf'], 1], theme.recentNonfire, recentStep('frp', RECENT_FRP_STEPS, theme.recent)],
+          // low confidence: drawn faint with a ring, so it reads without colour
+          'circle-opacity': ['match', ['get', 'conf'], 'l', 0.35, 0.95],
+          'circle-stroke-color': theme.recentStroke,
+          'circle-stroke-width': ['match', ['get', 'conf'], 'l', 1.2, 0.5] } });
       m.addSource('area', { type: 'geojson', data: EMPTY });
       m.addLayer({ id: 'area-fill', type: 'fill', source: 'area', paint: { 'fill-color': theme.area, 'fill-opacity': 0.06 } });
       m.addLayer({ id: 'area-line', type: 'line', source: 'area', paint: { 'line-color': theme.area, 'line-width': 1.5 } });
@@ -121,6 +155,28 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
         latest.current.onPick?.({ lon: +p.lon, lat: +p.lat, cells: +p.cells, frp: +p.frp });
       });
     }
+    for (const id of RECENT_LAYERS) {
+      m.on('mousemove', id, (e) => {
+        const lines = latest.current.recentTip?.(id, e.features[0].properties);
+        if (lines) tip.setLngLat(e.lngLat).setDOMContent(textPopup(lines)).addTo(m);
+        m.getCanvas().style.cursor = latest.current.drawing ? 'crosshair' : 'pointer';
+      });
+      m.on('mouseleave', id, hideTip);
+    }
+    m.on('click', 'recent-pts', (e) => {
+      if (!latest.current.drawing) latest.current.onRecentPick?.(e.features[0].properties);
+    });
+    m.on('click', 'recent-cells', (e) => {   // a cell of the overview: zoom in to its single detections
+      if (latest.current.drawing) return;
+      const p = e.features[0].properties;
+      m.flyTo({ center: [+p.lon, +p.lat], zoom: RECENT_POINTS_FROM + 1.5, duration: latest.current.reducedMotion ? 0 : 800 });
+    });
+    const reportView = () => {
+      const b = m.getBounds();
+      latest.current.onViewChange?.({ bounds: [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()], zoom: m.getZoom() });
+    };
+    m.on('moveend', reportView);
+    m.once('shift-ready', reportView);
     m.on('mousemove', 'notfire', (e) => {
       const p = e.features[0].properties;
       tip.setLngLat(e.lngLat).setHTML(T.map.notFireTip(T.map.notFireKinds[p.type] || 'Static heat source', p.years)).addTo(m);
@@ -188,6 +244,15 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
   useEffect(() => whenReady((m) => {
     m.getSource('pick').setData(picked ? fc([cellSquare(picked.lon, picked.lat)]) : EMPTY);
   }), [picked]);
+
+  // ---- which layer: the harmonised record (monthly) or the recent detections (raw FIRMS NRT)
+  useEffect(() => whenReady((m) => {
+    const recent = layerMode === 'recent';
+    for (const id of RECORD_LAYERS) m.setLayoutProperty(id, 'visibility', recent ? 'none' : 'visible');
+    for (const id of RECENT_LAYERS) m.setLayoutProperty(id, 'visibility', recent ? 'visible' : 'none');
+  }), [layerMode]);
+  useEffect(() => whenReady((m) => { m.getSource('recent-cells').setData(recentCells || EMPTY); }), [recentCells]);
+  useEffect(() => whenReady((m) => { m.getSource('recent-pts').setData(recentPts || EMPTY); }), [recentPts]);
 
   // ---- satellite gaps of the month: hatched 30-degree zones
   useEffect(() => whenReady((m) => {

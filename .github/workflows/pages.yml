@@ -1,16 +1,20 @@
 # Builds the SHIFT website (web/) with the data from the release "site-data" (site_data.zip,
 # written by pipeline stage `export`) and publishes it on GitHub Pages.
-# Runs on every change to web/, whenever a release is published or edited (a new site_data.zip),
-# and by hand (Actions > Website > Run workflow).
+# Runs on every change to web/ or recent/, whenever a release is published or edited (a new
+# site_data.zip), every 3 hours to refresh the recent detections (D38), and by hand
+# (Actions > Website > Run workflow). To freeze the site during judging: Actions > Website >
+# "..." > Disable workflow (and Enable it again afterwards).
 name: Website
 
 on:
   push:
     branches: [main]
-    paths: ["web/**", ".github/workflows/pages.yml"]
+    paths: ["web/**", "recent/**", ".github/workflows/pages.yml"]
   release:
     types: [published, edited]
   workflow_dispatch:
+  schedule:
+    - cron: "17 */3 * * *"   # recent detections refresh (D38). GitHub may start it late
 
 permissions:
   contents: read
@@ -40,6 +44,11 @@ jobs:
           unzip -q "$RUNNER_TEMP/site_data.zip" -d web/public/data
           test -f web/public/data/meta.json
           du -sh web/public/data
+      - name: Recent detections (D38, raw FIRMS NRT). A failure never stops the deploy
+        continue-on-error: true
+        env:
+          NASA_FIRMS_MAP_KEY: ${{ secrets.NASA_FIRMS_MAP_KEY }}
+        run: python3 recent/fetch_firms.py --out web/public/data/recent --notfire web/public/data/notfire.json
       - name: Build
         working-directory: web
         run: |

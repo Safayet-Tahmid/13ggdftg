@@ -7,6 +7,8 @@ import MapView from '../components/MapView.jsx';
 import MapBoundary from '../components/MapBoundary.jsx';
 import MapLegend from '../components/MapLegend.jsx';
 import CellPanel from '../components/CellPanel.jsx';
+import RecentPanel from '../components/RecentPanel.jsx';
+import RecentLegend from '../components/RecentLegend.jsx';
 import AreaPicker from '../components/AreaPicker.jsx';
 import ChartCard from '../components/ChartCard.jsx';
 import Calendar, { calendarLegend } from '../components/Calendar.jsx';
@@ -17,7 +19,9 @@ import Season from '../components/Season.jsx';
 import Downloads from '../components/Downloads.jsx';
 import { MAX_TILES, areaSeries, dateOf, iso, json, lastDataDay, monthLayer, tilesOfCells, dayIndex, zoneMonth } from '../lib/data.js';
 import { IMAGERY_FIRST_DAY, cellInfo, days_in_month, imagery } from '../lib/geo.js';
-import { areaFromSpec, boxArea, presetArea } from '../lib/area.js';
+import { areaFromSpec, boxArea, pointArea, presetArea } from '../lib/area.js';
+import { detectionInfo, minuteToIso, recentOverview, recentPoints, recentStatus, tilesInView } from '../lib/recent.js';
+import { RECENT_POINTS_FROM } from '../components/MapView.jsx';
 import { areaRange, compareWindow, monthly, normalMonth, season, summary } from '../lib/analysis.js';
 import { slug } from '../lib/downloads.js';
 import { longDate } from '../lib/format.js';
@@ -61,6 +65,15 @@ export default function Explore({ meta, theme, params }) {
   const [mapNote, setMapNote] = useState(null);
   const [mapOk, setMapOk] = useState(true);
   const [legendOpen, setLegendOpen] = useState(() => window.matchMedia?.('(min-width: 900px)').matches ?? true);
+  // ---- recent detections (D38): a separate layer of raw FIRMS NRT points, never mixed into the record
+  const [layerMode, setLayerMode] = useState(params.l === 'recent' ? 'recent' : 'record');
+  const [period, setPeriod] = useState(['24h', '7d', 'all'].includes(params.rp) ? params.rp : '7d');
+  const [rStatus, setRStatus] = useState(undefined);         // undefined: not checked yet, null: not available
+  const [rCells, setRCells] = useState(null);
+  const [rPts, setRPts] = useState(null);
+  const [rView, setRView] = useState(null);
+  const [rPicked, setRPicked] = useState(null);
+  const [rNote, setRNote] = useState(null);
   const reducedMotion = useMemo(() => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false, []);
 
   useEffect(() => {
@@ -96,6 +109,30 @@ export default function Explore({ meta, theme, params }) {
     return () => clearInterval(t);
   }, [playing, speed]);  // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => { recentStatus().then(setRStatus); }, []);
+  useEffect(() => {
+    if (layerMode !== 'recent' || !rStatus) return undefined;
+    let live = true;
+    recentOverview(period).then((o) => { if (live) setRCells(o); }).catch(() => { if (live) setRCells(null); });
+    return () => { live = false; };
+  }, [layerMode, period, rStatus]);
+  // single detections only for the tiles in view, and only when zoomed in
+  const rTiles = useMemo(() => (layerMode === 'recent' && rStatus && rView && rView.zoom >= RECENT_POINTS_FROM - 0.5
+    ? tilesInView(rView.bounds, rStatus.tiles, 6) : []), [layerMode, rStatus, rView]);
+  const rTileKey = rTiles.join(',');
+  useEffect(() => {
+    if (!rTiles.length || !rCells) { setRPts(null); setRNote(null); return undefined; }
+    let live = true;
+    setRNote(T.recent.loading);
+    recentPoints(rTiles, period, rCells.latest).then((f) => { if (live) { setRPts(f); setRNote(null); } })
+      .catch(() => { if (live) setRNote(null); });
+    return () => { live = false; };
+  }, [rTileKey, period, rCells]);  // eslint-disable-line react-hooks/exhaustive-deps
+  const recentTip = (layer, p) => (layer === 'recent-cells'
+    ? T.recent.cellTip(+p.n, +p.fmax)
+    : rCells && T.recent.pointTip(detectionInfo({ ...p, lat: +p.lat, lon: +p.lon, frp: +p.frp, nf: +p.nf, minute: +p.minute }, rCells.from)));
+  const rInfo = rPicked && rCells ? detectionInfo(rPicked, rCells.from) : null;
+
   useEffect(() => {
     if (!showNotFire || notFire) return;
     json('notfire.json').then((d) => setNotFire({ type: 'FeatureCollection', features: d.cells.map(([lat, lon, type, years]) =>
@@ -105,8 +142,9 @@ export default function Explore({ meta, theme, params }) {
   // the share link follows every choice
   useEffect(() => {
     writeHash('explore', { area: area.spec, v: variable, m: month, ...(cmpMode === 'custom' ? { from: dates.from, to: dates.to } : {}),
-      ...(view === '3d' ? { p: '3d' } : {}), ...(basemap !== 'standard' ? { b: basemap === 'satellite' ? 'sat' : 'day' } : {}) });
-  }, [area, variable, month, dates, cmpMode, view, basemap]);
+      ...(view === '3d' ? { p: '3d' } : {}), ...(basemap !== 'standard' ? { b: basemap === 'satellite' ? 'sat' : 'day' } : {}),
+      ...(layerMode === 'recent' ? { l: 'recent', rp: period } : {}) });
+  }, [area, variable, month, dates, cmpMode, view, basemap, layerMode, period]);
 
   const tileCount = useMemo(() => tilesOfCells(area.cells).filter((t) => meta.tiles[t.name]).length, [area, meta]);
   useEffect(() => {
@@ -185,11 +223,19 @@ export default function Explore({ meta, theme, params }) {
             gaps={gaps} showGaps={showGaps} picked={picked} onPick={(c) => { setPlaying(false); setPicked(c); }}
             resetKey={resetKey} reducedMotion={reducedMotion}
             onImageryError={() => setMapNote(T.map.imageryOffline)}
-            onStatus={(st) => { if (st === 'failed') setMapOk(false); else setMapNote(st === 'lost' ? T.map.contextLost : null); }} />
+            onStatus={(st) => { if (st === 'failed') setMapOk(false); else setMapNote(st === 'lost' ? T.map.contextLost : null); }}
+            layerMode={layerMode} recentCells={layerMode === 'recent' ? rCells : null} recentPts={layerMode === 'recent' ? rPts : null}
+            recentTip={recentTip} onViewChange={setRView}
+            onRecentPick={(p) => { setPicked(null); setRPicked({ ...p, lat: +p.lat, lon: +p.lon, frp: +p.frp, nf: +p.nf, minute: +p.minute }); }} />
         </MapBoundary>
 
         {mapOk && <>
         <div className="maptools" role="toolbar" aria-label={T.map.view}>
+          <label>{T.recent.layer}
+            <select value={layerMode} onChange={(e) => { setPlaying(false); setPicked(null); setRPicked(null); setLayerMode(e.target.value); }}>
+              {Object.entries(T.recent.layers).map(([k, l]) => <option key={k} value={k} disabled={k === 'recent' && rStatus === null}>{l}</option>)}
+            </select>
+          </label>
           <div className="seg" role="group" aria-label={T.map.view}>
             {['2d', '3d'].map((v) => <button key={v} type="button" className={view === v ? 'on' : ''} aria-pressed={view === v}
               onClick={() => setView(v)}>{T.map.views[v]}</button>)}
@@ -207,17 +253,33 @@ export default function Explore({ meta, theme, params }) {
           <button type="button" className="action" onClick={() => setResetKey((k) => k + 1)}>{T.map.reset}</button>
         </div>
 
-        {mapNote && <p className="mapnote" role="status">{mapNote}</p>}
-        <CellPanel info={pickInfo} onClose={() => setPicked(null)} />
+        {(mapNote || (layerMode === 'recent' && (rNote || rStatus === null))) && <p className="mapnote" role="status">
+          {mapNote || rNote || T.recent.unavailable}</p>}
+        {layerMode === 'record' && <CellPanel info={pickInfo} onClose={() => setPicked(null)} />}
+        {layerMode === 'recent' && <RecentPanel info={rInfo} onClose={() => setRPicked(null)}
+          onHistory={() => { pickArea(pointArea(rPicked.lat, rPicked.lon, 50)); setRPicked(null); }} />}
         <details className="legendbox" open={legendOpen} onToggle={(e) => setLegendOpen(e.currentTarget.open)}>
           <summary>{T.map.legendToggle}</summary>
-          <MapLegend theme={theme} variable={variable} month={month} showGaps={showGaps} imageryLabel={img?.label} />
+          {layerMode === 'recent'
+            ? <RecentLegend theme={theme} zoomedIn={!!(rView && rView.zoom >= RECENT_POINTS_FROM)} status={rStatus} />
+            : <MapLegend theme={theme} variable={variable} month={month} showGaps={showGaps} imageryLabel={img?.label} />}
         </details>
         </>}
         </div>
         <p className="visually-hidden" aria-live="polite">{mapSummary}</p>
 
-        <div className="mapbar">
+        {layerMode === 'recent' ? <div className="mapbar">
+          <label>{T.recent.period}
+            <select value={period} onChange={(e) => setPeriod(e.target.value)}>
+              {Object.entries(T.recent.periods).map(([k, l]) => <option key={k} value={k}>{l}</option>)}
+            </select>
+          </label>
+          {rStatus && rCells && <span className="small">{T.recent.fetched(rStatus.fetched_utc.replace('T', ' ').replace('Z', ' UTC'),
+            rStatus.window.from, minuteToIso(rCells.from, rCells.latest))}</span>}
+          {rStatus && rView && rView.zoom < RECENT_POINTS_FROM && <span className="small muted">{T.recent.zoomHint}</span>}
+          <label className="check"><input type="checkbox" checked={showNotFire} onChange={(e) => setShowNotFire(e.target.checked)} />
+            {T.map.notFire}</label>
+        </div> : <div className="mapbar">
           <label>{T.map.month}
             <select value={month} onChange={(e) => pickMonth(e.target.value)}>
               {months.slice().reverse().map((m) => <option key={m} value={m}>{m}</option>)}
@@ -242,7 +304,7 @@ export default function Explore({ meta, theme, params }) {
             <span className="swatch round" style={{ background: theme.offshore }} /> {T.map.kinds.offshore}
           </span>}
           </>}
-        </div>
+        </div>}
       </section>
 
       <section className="story" aria-live="polite">

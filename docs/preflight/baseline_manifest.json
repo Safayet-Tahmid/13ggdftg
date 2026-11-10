@@ -1,0 +1,226 @@
+{
+  "schema": "shift-preflight-baseline/1",
+  "generated_utc": "2026-11-10T18:59:18Z",
+  "audit_local_date": "2026-11-11 (Asia/Dhaka)",
+  "repository": "https://github.com/squadronzero/squadron-zero",
+  "baseline_commit": "829ce0171b61c62c0509775bab7458057061122b",
+  "baseline_commit_time": "2026-11-10T12:24:27+06:00",
+  "baseline_commit_is_origin_main": true,
+  "branch": "feature/recent-firms",
+  "branch_pushed": false,
+  "working_tree_clean_at_start": true,
+  "tool_versions": {
+    "python": "3.13.18",
+    "node": "22.23.4",
+    "npm": "10.9.9",
+    "python_packages_local": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.5",
+      "pyarrow": "26.0.1",
+      "PyYAML": "6.0.3",
+      "shapely": "2.2.0",
+      "pytest": "9.1.1",
+      "h5py": "not installed"
+    },
+    "web_packages": {
+      "maplibre-gl": "5.24.0",
+      "react": "18.3.1",
+      "vite": "5.4.11"
+    }
+  },
+  "settings": {
+    "file_sha256": "1145c3610f07264099f49bdeca47c1369f696f785c3b51da30236426b19b48bb",
+    "pipeline_settings_sha256_global": "ab498fb5372f378aeabd45d0dfb67201755b613b60dff7e73545e95c890073bb",
+    "matches_published_data_provenance": true,
+    "note": "The pipeline hashes the parsed settings (provenance.settings_hash, sorted YAML dump), not the file bytes. Both values are recorded."
+  },
+  "source_sha256": {
+    "config/settings.yaml": "1145c3610f07264099f49bdeca47c1369f696f785c3b51da30236426b19b48bb",
+    "pipeline/requirements.txt": "2b1476ba872805d856a41b7b638f77625d8cb2bbc33c048a04a2e47af536ce9a",
+    "pipeline/shift/__init__.py": "5821e194cf9a11a99c29cd9649d9762f3cbc713b466aaf97e68a7e9bf785cb5e",
+    "pipeline/shift/aggregate.py": "d1e2adcb9bca4ef41f034f0e772a80f046ff157a588dc713b0f30c4a36cbbbe2",
+    "pipeline/shift/calibrate.py": "8c14b3df4c062ac3a1a4bb10693ee05bc36bcf482983fc8203dc02db253ae4c4",
+    "pipeline/shift/checks.py": "64b8083e13a4fb7f691e2f0216d22152cc77f50b2fdd58c459871fb175488749",
+    "pipeline/shift/confidence.py": "e9e6894f2cbc13e5996b72e90af16502376281eb9dc80ea239745a1d0042e173",
+    "pipeline/shift/config.py": "bf76138ef17f9bc48a83aedc856b2e043515ab2454ad5950e9a95d70e5b3f5c9",
+    "pipeline/shift/contract.py": "0a74f7a82422296952e666b3106f00247ad37b100131843ff267dee5058da27c",
+    "pipeline/shift/counts.py": "4347bcb4f07c043b61186c3f4e1f7ba2e63c9e0f5ccdf492a6cc15c2a1f54fb2",
+    "pipeline/shift/coverage.py": "e9b1a9aa24a64f19bb64fc05874dcca005a5d96368a60190f31b7c97e20ccf00",
+    "pipeline/shift/crosscheck.py": "ec9287884bf70f1e5677315debd7b43bb3f5a06bff067ef98a0de99e0ec6e39d",
+    "pipeline/shift/daily.py": "d67683b81d20761825dc240bcee5119f57e0bbf6b24321df06be0f872bae3217",
+    "pipeline/shift/export.py": "58cc748aedc7ce732b1ab9ecdc9939d0aedaded430f66a71e169045ad5085f25",
+    "pipeline/shift/external.py": "c7c1953e7ec3f88787c76d3899bebc75d59c9045f0640327a0b89e274c1886ec",
+    "pipeline/shift/factors.py": "23b2181edab2a3e037656416be4034137fd039b1ae695848ecef8d29366fd1a3",
+    "pipeline/shift/fetch.py": "58b2e0de0938ba3ba335d8d86347bc3ea7158b0d129aae645f4c12ee4e49242c",
+    "pipeline/shift/frp.py": "8ce26f0a5d5994a8f0005d238c62ed9da18726d9661e3985c23343d929398c8c",
+    "pipeline/shift/grid.py": "d4c195277f6494ba243585a6b5ec146119e488c5992c93e80bb08cb1cc2cfb1e",
+    "pipeline/shift/harmonise.py": "f06dbf00e4b9135e57c0a5bc49bed651df3a3e14c0ab03faefc90644c099dba8",
+    "pipeline/shift/ingest.py": "47a86878648e2064788561523c3e929eb77edf62f7f7b51919f0d49745dcedc6",
+    "pipeline/shift/nodata.py": "921a051aaf3e10fd0201b26be4510b134325b90a92bc2c4b5ef72c36d840b2fb",
+    "pipeline/shift/places.py": "f2679602f2bb61867cfee73790dd22e35a7e1d229a93fad646d7fd4487dc2f0d",
+    "pipeline/shift/provenance.py": "68963ed9d3b9c681072b221c0adc00d9076d0316ad2d6d0f2e21296ae1bc3cd8",
+    "pipeline/shift/qc.py": "009968db0db4154adc02ae44c47752fc5d355ba8c45a8ce118f1a015e6ba12a4",
+    "pipeline/shift/quickstart.py": "62a97a610641f56f1c5683d0a392c1ed70df350c87f5bd6ddc2f8e57d2f77b30",
+    "pipeline/shift/region.py": "a14fe78d2f8db4f605e5d69c63c3698ba9c439ad0827f007f56e298ef600a95f",
+    "pipeline/shift/resolution.py": "b08ec03f6f1856f2ae6972d70b08ff2f814fdc95f6e6e06affbbec068d47c3c4",
+    "pipeline/shift/run.py": "39db49b4ff8022efb80753b8ce7c7c3569d4ed4394d4503fb83fe6d7b62b0db5",
+    "pipeline/shift/scan.py": "054ac572d8a98ee378c436e38f70210da0a0d1643baa33b6b49e0a60d832a897",
+    "pipeline/shift/selection.py": "c610d2fe3af9f6eba7537b96088e5d1e21ce0af4f0f4dc5b53997d60cd74b7f9",
+    "pipeline/shift/solar.py": "53b8395e6a124a8154553c5a99b9eec3c1058720800795a45d5ed597b71e82b0",
+    "pipeline/shift/static_mask.py": "17fe289776b5081bcb5074a66660df2f2a654afb05811b7d3442a2b4e4deb04e",
+    "pipeline/shift/tiles.py": "2b2afed0b96b01fa385baef7157934e9f2282ed0edd7df9692a47429359f8aff",
+    "web/src/lib/analysis.js": "b5d47493751c64d01041d9ddc8af256449f4eabb80603c15a3d16cbb75bf5448",
+    "web/src/lib/area.js": "89bcf68a2028222e98ed3c575842d2456338da3e1ce3f5553737da53f90109e5",
+    "web/src/lib/data.js": "cd4acdebcdf460dbd6c9cb6be59a9b4ebc7ea0fcf7aa7786de82de6aed89560f",
+    "web/src/lib/downloads.js": "dcc286651926332ef446641746ae38566c83fa1688e07ef562bf254a11c8ad0d",
+    "web/src/lib/format.js": "7a0ffbe7ec3ff8a7b3823396761764f905ba01072730ddd6b76b40c742497c59",
+    "web/src/lib/geo.js": "7aab1ee7c90bc9e716c91a2513f7e97035aedd2c159acf0cc48ac464abaab754",
+    "web/src/lib/url.js": "bd87b2781a908a469497a702df73d4a5ca3807f4e021bb8285e9c90516a8e60a"
+  },
+  "published_data": {
+    "release_tag": "site-data",
+    "release_name": "SHIFT site data 15 Oct",
+    "release_published_utc": "2026-10-15T13:34:04Z",
+    "asset": "site_data.zip",
+    "asset_id": 721849447,
+    "asset_size_bytes": 134983567,
+    "asset_updated_utc": "2026-11-07T20:30:42Z",
+    "github_digest": "sha256:599a3bf4434e172325ba6bf1a0392f747e59d992c8c21a5f9d1bea2fc55b88ce",
+    "sha256_computed_locally": "599a3bf4434e172325ba6bf1a0392f747e59d992c8c21a5f9d1bea2fc55b88ce",
+    "digest_verified": true,
+    "files_in_archive": 745,
+    "meta": {
+      "start": "2002-01-01",
+      "end": "2026-10-29",
+      "last_data_day": "2026-10-28",
+      "days": 9068,
+      "generated_utc": "2026-11-07T17:15:19+00:00",
+      "map_grid_deg": 0.25,
+      "provenance_git_commit": "0f95990bba33ca93a2ac567dd9ef06b96c83c887",
+      "provenance_settings_sha256": "ab498fb5372f378aeabd45d0dfb67201755b613b60dff7e73545e95c890073bb",
+      "code_or_settings_changed_since_commit": false
+    },
+    "key_file_sha256": {
+      "meta.json": "ba00623380d202891ae02cc780da888b13998a58f90f402dd5364f5f7167e241",
+      "uncertainty.json": "a4fae1ea2329afa057b0ae671046136a36fb54cdb9e4a7e44ddf9048358ab2db",
+      "validation/report_checks.json": "92f68585465778fbb71316ec7c39dfb9dd5f9f36f316ba9b535de445ca7bd90a",
+      "validation/report_harmonise.json": "ffed935eec9eadf9cd3371e5d0d5e2784995b14ebc2a3a7fe1c11a0f5d531bf4",
+      "zones.bin.gz": "6844ca30a0eddcda7f203e9834f5265ff22b19547f3c86f16de6ad5f76aab14c"
+    }
+  },
+  "pipeline_code_changed_since_data_commit": {
+    "compared": "0f95990..829ce01",
+    "paths": [
+      "config",
+      "pipeline/shift"
+    ],
+    "changed_files": 0
+  },
+  "tests_local": [
+    {
+      "suite": "pipeline",
+      "command": "cd pipeline && python -m pytest -q -p no:cacheprovider",
+      "exit": 0,
+      "passed": 63,
+      "failed": 0,
+      "skipped": 1,
+      "skip_reason": "h5py not installed (tests/test_phase2_package.py:267)",
+      "seconds": 179
+    },
+    {
+      "suite": "validation",
+      "command": "python -m pytest -q -p no:cacheprovider validation",
+      "exit": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 2
+    },
+    {
+      "suite": "web npm ci",
+      "command": "cd web && npm ci",
+      "exit": 0
+    },
+    {
+      "suite": "web unit (no data)",
+      "command": "cd web && npm test",
+      "exit": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 3
+    },
+    {
+      "suite": "web unit with released data",
+      "command": "cd web && SHIFT_DATA_DIR=<unpacked site_data> npm test",
+      "exit": 0,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "web build",
+      "command": "cd web && npm run build",
+      "exit": 0
+    }
+  ],
+  "browser_checks": {
+    "status": "not rerun at 829ce01",
+    "last_run": "10 Nov 2026 on 7646107 (identical web/ tree, merge commit adds no web changes)"
+  },
+  "ci_at_baseline_commit": [
+    {
+      "workflow": "tests",
+      "run_id": 42768301685,
+      "conclusion": "success",
+      "jobs": [
+        "oldest allowed",
+        "newest allowed",
+        "colab (exact versions, 13 Oct 2026)"
+      ],
+      "pipeline_passed_skipped_per_job": "63/1",
+      "validation_passed_per_job": 5
+    },
+    {
+      "workflow": "Website",
+      "run_id": 42768301639,
+      "conclusion": "success",
+      "jobs": [
+        "build",
+        "deploy"
+      ]
+    }
+  ],
+  "npm_audit": {
+    "critical": 1,
+    "high": 1,
+    "moderate": 2,
+    "note": "critical = maplibre-gl <=6.4.0 GHSA-jrc7-96c5-q579 (DOM.sanitize XSS bypass), fix needs major upgrade to 6.x. Others are dev-server (vite, esbuild) or build-time (fflate) only."
+  },
+  "firms_api": {
+    "key_available_in_claude_environment": false,
+    "authenticated_request": "PASSED (reported by Squadron Zero, run on Colab, 2026-11-11 01:37 Asia/Dhaka; raw output not seen by Claude)",
+    "VIIRS_NOAA20_NRT": {
+      "http": 200,
+      "rows": 5,
+      "seconds": 0.5,
+      "satellite": "N20",
+      "inside_box": true,
+      "frp_mw_min": 2.06,
+      "frp_mw_max": 7.59
+    },
+    "VIIRS_NOAA21_NRT": {
+      "http": 200,
+      "rows": 25,
+      "seconds": 0.4,
+      "satellite": "N21",
+      "inside_box": true,
+      "frp_mw_min": 0.91,
+      "frp_mw_max": 9.72
+    },
+    "box": "88,20.5,92.75,26.75",
+    "day_range": 1,
+    "confidence_and_time_format": "not yet recorded"
+  },
+  "github_secret_NASA_FIRMS_MAP_KEY": "added by Squadron Zero 2026-11-11 01:41 Asia/Dhaka (reported, not visible to Claude)",
+  "eligibility": "NEEDS ORGANIZER CONFIRMATION"
+}

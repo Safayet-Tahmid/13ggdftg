@@ -39,6 +39,9 @@ recolours everything, in light and dark mode.
    S-NPP scale, "not a fire location") and the cell panel's source and range lines. Do not add
    flames, glows, pulsing dots or anything that suggests live fire. The satellite picture is a
    backdrop: keep its date and "not SHIFT data" note in the legend.
+10. **Recent detections keep their own look.** `--recent-1` to `--recent-4` must stay clearly different
+   from the record's `--ramp-*`, so nobody mistakes raw FIRMS points for harmonised values. Keep the
+   fetch time, the "raw, not harmonised" sentence and the NOAA-21 "not tested" line.
 
 ## 3. Running the site on your computer
 

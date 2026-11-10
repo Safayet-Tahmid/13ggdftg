@@ -6,7 +6,8 @@
 const T = {
   brand: 'SHIFT',
   tagline: 'One fire record from two generations of NASA satellites, 2002 to today',
-  dataTo: (d) => `Data to ${d}`,
+  dataTo: (d) => `Record to ${d}`,
+  recentTo: (t) => `Recent detections to ${t}`,
   notOfficial: 'Team Squadron Zero · NASA Space Apps Challenge 2026 · not an official NASA product',
 
   views: { explore: 'Explore', switch: 'The 2012 switch', validation: 'Validation', method: 'Method and data' },
@@ -39,6 +40,50 @@ const T = {
     tested: 'One of SHIFT\'s ten tested regions: its own checks are on the Validation page.',
     share: 'Copy share link',
     copied: 'Link copied',
+  },
+
+  // ---------------------------------------------------------------- recent detections (D38)
+  recent: {
+    layer: 'Map layer',
+    layers: { record: 'Harmonised record', recent: 'Recent detections' },
+    period: 'Period',
+    periods: { '24h': 'Last 24 hours', '7d': 'Last 7 days', all: 'Since 28 Oct' },
+    fetched: (when, from, to) => `Fetched ${when}. Detections from ${from} to ${to}.`,
+    unavailable: 'Recent detections are not available in this build (the last fetch failed or has not run). '
+      + 'The harmonised record is not affected.',
+    incomplete: 'Some recent data could not be fetched, so some days may be missing. Missing days are not "no fire".',
+    zoomHint: 'Zoom in to see single detections. Click a cell to zoom to it.',
+    tooMany: 'Showing the nearest areas only. Zoom in further to see every detection here.',
+    loading: 'Loading detections…',
+    cellTip: (n, fmax) => [`${n.toLocaleString()} detection${n === 1 ? '' : 's'}`, `strongest ${fmax.toLocaleString()} MW`, 'Click to zoom in'],
+    pointTip: (d) => [`${d.frp.toLocaleString()} MW`, `${d.satellite}, ${d.time}`, `confidence ${d.confidence}`,
+      ...(d.nonfire ? ['likely non-fire heat (gas flare, industry or volcano)'] : [])],
+    legendTitle: (zoomedIn) => (zoomedIn ? 'Recent detections: fire power of each detection' : 'Recent detections per 0.25° cell'),
+    legendUnitCells: 'detections of nominal or high confidence in the period',
+    legendUnitPoints: 'MW, as reported by FIRMS for each 375 m pixel',
+    legendRaw: 'Raw NASA FIRMS near-real-time detections. Not on the harmonised S-NPP scale and not added to any number '
+      + 'on this page. S-NPP, SHIFT\'s reference satellite, stopped on 2 Nov 2026, so these come from NOAA-20 and NOAA-21.',
+    legendLow: 'Faint ringed dots: low confidence. Grey: likely non-fire heat (SHIFT non-fire cells). Neither is counted in the overview.',
+    legendOverlap: '28 Oct is also the last day of the harmonised record (one day of overlap, on purpose).',
+    panel: {
+      title: 'This detection',
+      close: 'Close',
+      where: 'Pixel centre',
+      size: 'About 375 m across. A satellite pixel with a heat signal, not the outline of a fire.',
+      time: 'Time of the satellite pass',
+      satellite: 'Satellite',
+      untested: 'NOAA-21 has not been tested against S-NPP by SHIFT.',
+      tested: 'SHIFT measured NOAA-20 against S-NPP: 1.00 to 1.05 for hotspots.',
+      confidence: 'Confidence (FIRMS)',
+      frp: 'Fire radiative power (FIRMS)',
+      daynight: 'Day or night pass',
+      nonfire: 'Likely non-fire heat: this pixel is in a cell SHIFT marks as a persistent gas flare, industrial site or volcano.',
+      limits: 'Not every detection is a wildfire: farm, land-clearing and other burning count too. This is a raw detection, '
+        + 'not a harmonised value, and is never compared with the record as a number.',
+      history: 'Show the history of this area (50 km around)',
+      historyNote: 'The panel on the right then shows this area\'s burning calendar since 2002 and its usual fire season.',
+      firms: 'This place on the NASA FIRMS map',
+    },
   },
 
   // ---------------------------------------------------------------- the map

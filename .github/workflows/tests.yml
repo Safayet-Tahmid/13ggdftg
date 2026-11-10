@@ -33,3 +33,5 @@ jobs:
         run: python -m pytest -q
       - name: Audit statistics tests (validation/)
         run: python -m pytest -q validation
+      - name: Recent detections fetch tests (recent/, no network)
+        run: python -m pytest -q recent

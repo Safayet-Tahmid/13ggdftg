@@ -29,7 +29,12 @@ export default function Method({ meta }) {
       </ul>
       <h3>What to keep in mind</h3>
       <ul>
-        {last && <li>Data runs to {last}. There is no near-real-time feed in this version (D34).</li>}
+        {last && <li>The harmonised record runs to {last}. From 28 October 2026 the map also offers <b>recent detections</b> (D38):
+          raw NASA FIRMS near-real-time points from VIIRS on NOAA-20 and NOAA-21, fetched every few hours and labelled with the
+          fetch time. They are not on the harmonised scale, are never added to the record's numbers and are never given an
+          anomaly score. S-NPP, the record's reference satellite, stopped delivering new data on 2 November 2026. SHIFT measured
+          NOAA-20 against S-NPP (1.00 to 1.05). NOAA-21 has not been tested against S-NPP by SHIFT. Detections in SHIFT's
+          persistent non-fire cells are shown in grey, and low-confidence detections are drawn faint and not counted.</li>}
         <li>Cloud and smoke hide fires from every satellite. A cloudy day can look like a quiet one; months cloudier than 90% of years carry a flag.</li>
         <li>January to June 2002 has Terra only and is not compared with later years.</li>
         <li>Areas are summed on a 1° grid, so the edges of any area are accurate to about 100 km.</li>
@@ -47,6 +52,8 @@ export default function Method({ meta }) {
         <li>MODIS Collection 6.1 Active Fire Detections (MCD14ML, MCD14DL), NASA FIRMS. <a href="https://doi.org/10.5067/FIRMS/MODIS/MCD14ML">doi:10.5067/FIRMS/MODIS/MCD14ML</a></li>
         <li>VIIRS 375 m Active Fire, Suomi NPP (VNP14IMGT), NASA FIRMS. <a href="https://doi.org/10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002">doi:10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002</a></li>
         <li>VIIRS 375 m Active Fire, NOAA-20 (VJ114IMGT), NASA FIRMS. <a href="https://doi.org/10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002">doi:10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002</a></li>
+        <li>Recent detections only: VIIRS 375 m Active Fire NRT, NOAA-20 and NOAA-21 (VJ214IMGT), from the NASA FIRMS Area API
+          (VIIRS_NOAA20_NRT, VIIRS_NOAA21_NRT).</li>
         <li>GFED4 monthly burned area (check only). Giglio, Randerson and van der Werf (2013), Journal of Geophysical Research: Biogeosciences 118.</li>
         <li>MERRA-2 monthly total cloud fraction, M2TMNXRAD (cloud flag only), NASA GMAO via GES DISC.</li>
         <li>Giglio, Schroeder and Justice (2016), The collection 6 MODIS active fire detection algorithm and fire products. Remote Sensing of Environment 178.</li>

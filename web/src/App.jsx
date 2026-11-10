@@ -9,6 +9,7 @@ import Method from './pages/Method.jsx';
 import { dateOf, json, lastDataDay } from './lib/data.js';
 import { longDate } from './lib/format.js';
 import { readHash, writeHash } from './lib/url.js';
+import { recentStatus } from './lib/recent.js';
 
 const VIEWS = Object.keys(T.views);
 
@@ -17,6 +18,8 @@ export default function App() {
   const [{ view, params }] = useState(() => { const h = readHash(); return { view: VIEWS.includes(h.view) ? h.view : 'explore', params: h.params }; });
   const [current, setCurrent] = useState(view);
   const [meta, setMeta] = useState(null);
+  const [recent, setRecent] = useState(null);
+  useEffect(() => { recentStatus().then(setRecent); }, []);
   const [error, setError] = useState(null);
 
   useEffect(() => { json('meta.json').then(setMeta).catch(() => setError(T.loadError)); }, []);
@@ -31,6 +34,7 @@ export default function App() {
         </div>
         <div className="top-right">
           {meta && <span className="badge">{T.dataTo(longDate(dateOf(meta, lastDataDay(meta))))}</span>}
+          {recent?.latest_detection_utc && <span className="badge">{T.recentTo(recent.latest_detection_utc.replace('T', ' ').replace('Z', ' UTC'))}</span>}
           <label className="theme-pick">{T.theme.label}
             <select value={mode} onChange={(e) => setMode(e.target.value)}>
               {['system', 'light', 'dark'].map((m) => <option key={m} value={m}>{T.theme[m]}</option>)}
