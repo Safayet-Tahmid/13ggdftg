@@ -132,3 +132,9 @@ def test_no_key_means_nothing_is_fetched(monkeypatch, tmp_path):
 def test_historical_pipeline_is_never_imported():
     src = (Path(__file__).parent / "fetch_firms.py").read_text()
     assert "import shift" not in src and "from shift" not in src
+
+
+def test_total_failure_writes_nothing(tmp_path):
+    csvdir = tmp_path / "csv"; csvdir.mkdir()                                   # no CSV at all: every request fails
+    assert F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-02", "--from-csv", str(csvdir)]) == 1
+    assert not (tmp_path / "o" / "status.json").exists()

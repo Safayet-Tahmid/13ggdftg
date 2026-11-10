@@ -311,15 +311,15 @@ def main(argv=None) -> int:
         if not key:
             print("NASA_FIRMS_MAP_KEY is not set. Nothing fetched."); return 1
     data, status = build(first, last, key, Path(a.from_csv) if a.from_csv else None)
+    if not any(p["requests_ok"] for p in status["products"].values()):
+        # nothing usable: write nothing, so the site says "not available" instead of showing an empty map
+        print("no request succeeded, nothing written"); return 1
     nf_cells = load_notfire(Path(a.notfire)) if a.notfire else None
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     status.update(write_web(data, out, nf_cells))
     (out / "status.json").write_text(json.dumps(status, indent=1))
-    ok = sum(p["requests_ok"] for p in status["products"].values())
     print(f"wrote {status['rows']} detections, {status['overview_cells']} overview cells, {len(status['tiles'])} tiles, "
           f"{status['web_bytes'] / 1e6:.2f} MB, complete={status['complete']}")
-    if ok == 0:
-        return 1
     return 0 if status["complete"] else 2
 
 

@@ -12,3 +12,8 @@ column equal in both views, boxes drawn on the flat map and on the globe, the da
 keyboard control, month playback, the gap hatching, the legend toggle, the satellite note when
 pictures cannot load, the share link keeping the globe, a phone-size screen, and the no-WebGL note.
 They are not run by GitHub Actions (they need the 135 MB data release).
+
+`recent_check.py` tests the recent-detections layer (needs `dist/data/recent` from `recent/fetch_firms.py`):
+the record story unchanged by the layer switch, overview and period filter, single detections on the
+globe, plain-text popup, detection panel, the "history of this area" link, and (with `--no-recent`
+and no recent folder) a clean refusal.

@@ -93,7 +93,7 @@ with sync_playwright() as p:
     res["gap_zones"] = pg.evaluate("() => window.__shiftMap.querySourceFeatures('gaps').length")
 
     # satellite backdrop: tiles cannot load in this sandbox (no internet), the note must say so
-    pg.select_option(".maptools select >> nth=0", "satellite")
+    pg.select_option(".maptools select >> nth=1", "satellite")
     pg.wait_for_timeout(4000)
     res["imagery_note"] = pg.locator(".mapnote").all_inner_texts()
     res["legend"] = pg.inner_text(".maplegend")

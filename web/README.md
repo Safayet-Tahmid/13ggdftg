@@ -38,7 +38,18 @@ React + MapLibre (D6), static files only (D5). The data comes from the pipeline'
 The basemap (Natural Earth borders) and the font are bundled, so nothing is fetched from the
 internet at run time. Only the FIRMS link and the optional satellite backdrop (NASA GIBS) reach outside.
 
+## Recent detections (D38)
+
+The map's "Map layer" menu switches between the harmonised record and **recent detections**: raw NASA
+FIRMS near-real-time points from VIIRS on NOAA-20 and NOAA-21, from 28 Oct 2026 to the last fetch.
+`recent/fetch_firms.py` writes them to `public/data/recent/` (status, an overview per 0.25° cell, and
+one detail file per 10° tile, loaded only when zoomed in). The Website workflow runs it every 3 hours
+with the repository secret `NASA_FIRMS_MAP_KEY`. If it fails, the site deploys without the layer and
+says so. The layer never changes a historical number. Code: `src/lib/recent.js`,
+`src/components/RecentPanel.jsx`, `RecentLegend.jsx`, wording in `T.recent` (`src/content/text.js`).
+
 ## Tests
 
     npm test                                          # map helpers (no data needed)
     SHIFT_DATA_DIR=public/data npm test               # also: map values equal the daily files behind the charts
+    python -m pytest -q ../recent                     # the recent-detections fetch (no network)
