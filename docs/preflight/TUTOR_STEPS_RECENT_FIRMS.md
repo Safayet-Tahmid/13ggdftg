@@ -88,6 +88,7 @@ STEP H3 (optional, about 10 minutes, a laptop). To try it yourself before mergin
      `gh release download recent-firms-preview -p recent_preview.zip -D /tmp --repo squadronzero/squadron-zero && mkdir -p web/public/data/recent && unzip -o -q /tmp/recent_preview.zip -d web/public/data/recent && ls web/public/data/recent`
      Expected last line: `overview.json.gz  status.json  tiles`
   3. Reload the website tab.
+  (Codespaces created before 11 Nov 02:45 lack `gh`. Delete the old Codespace and create a new one.)
   STOP RULE for H3: if the `gh` line fails (for example "command not found" or "release not found"), skip H3 and judge from the screenshots. Do not install anything or change any file in the Codespace. When finished, close the tab and delete the Codespace (github.com/codespaces, "..." then Delete) so it does not use the free hours.
 STEP H4. Check each point (on the screenshots or in the Codespace) and note any "no":
 - The "Map layer" menu offers "Harmonised record (monthly)" and "Recent detections (NOAA-20, NOAA-21)". The map opens on the record.

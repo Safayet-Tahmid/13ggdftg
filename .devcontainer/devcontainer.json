@@ -3,7 +3,25 @@
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
   "postCreateCommand": "cd web && npm ci && npm run get-data",
   "postAttachCommand": "cd web && npm run dev",
-  "forwardPorts": [5173],
-  "portsAttributes": { "5173": { "label": "SHIFT website", "onAutoForward": "openPreview" } },
-  "customizations": { "codespaces": { "openFiles": ["web/UI_GUIDE.md", "web/src/theme/tokens.css", "web/src/content/text.js"] } }
+  "forwardPorts": [
+    5173
+  ],
+  "portsAttributes": {
+    "5173": {
+      "label": "SHIFT website",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "web/UI_GUIDE.md",
+        "web/src/theme/tokens.css",
+        "web/src/content/text.js"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  }
 }
