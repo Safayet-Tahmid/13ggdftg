@@ -52,9 +52,12 @@ export default function Method({ meta }) {
         <li>Giglio, Schroeder and Justice (2016), The collection 6 MODIS active fire detection algorithm and fire products. Remote Sensing of Environment 178.</li>
         <li>Schroeder, Oliva, Giglio and Csiszar (2014), The new VIIRS 375 m active fire detection data product. Remote Sensing of Environment 143.</li>
         <li>Country borders: Natural Earth, via world-atlas.</li>
+        <li>Optional map backdrop (online only): NASA Blue Marble shaded relief and daily MODIS Terra or VIIRS S-NPP true colour
+          pictures from NASA GIBS. A picture only, never used in any number.</li>
       </ul>
       <p>We acknowledge the use of data and imagery from NASA's Fire Information for Resource Management System (FIRMS),
-        part of NASA's Earth Science Data and Information System (ESDIS).</p>
+        part of NASA's Earth Science Data and Information System (ESDIS). We acknowledge the use of imagery provided by
+        services from NASA's Global Imagery Browse Services (GIBS), part of NASA's Earth Science Data and Information System (ESDIS).</p>
       {meta && <p className="small">This release covers {meta.start} to {meta.end}, generated {meta.generated_utc.slice(0, 10)}.
         Code, every test and every decision: <a href="https://github.com/squadronzero/squadron-zero">github.com/squadronzero/squadron-zero</a>.
         To run offline, serve the site folder with any static server (for example <code>python -m http.server</code>) and open it in a browser.</p>}

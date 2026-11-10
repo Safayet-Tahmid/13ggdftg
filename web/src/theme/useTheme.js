@@ -12,6 +12,7 @@ function read() {
     font: v('--font-body'),
     surface: v('--surface'), ink: v('--ink'), muted: v('--muted'), rule: v('--rule'), accent: v('--accent'),
     sea: v('--map-sea'), land: v('--map-land'), border: v('--map-border'), area: v('--map-area'),
+    select: v('--map-select'), gap: v('--map-gap'), space: v('--globe-space'), horizon: v('--globe-horizon'),
     zero: v('--chart-zero'),
     ramp: [1, 2, 3, 4, 5, 6].map((i) => v(`--ramp-${i}`)),
     cls: { low: v('--class-low'), normal: v('--class-normal'), unusual: v('--class-unusual'), critical: v('--class-critical') },

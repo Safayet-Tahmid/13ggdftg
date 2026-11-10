@@ -10,7 +10,12 @@ React + MapLibre (D6), static files only (D5). The data comes from the pipeline'
 
 ## Views
 
-- **Explore**: map with the monthly fire layer and the "heat that isn't fire" layer. Area by preset,
+- **Explore**: one map with two views, a flat 2D map and a 3D globe (MapLibre 5 globe projection),
+  drawing the same monthly fire layer (0.25° cells, coloured by the chosen measure), the "heat that
+  isn't fire" layer and, on request, the 30° zones with days of no satellite data. Click a cell for
+  its values, source era, calibrated range, cloud flag and satellite days. Play months steps through
+  the published monthly files. Backdrop: plain (bundled), NASA Blue Marble, or the NASA true-colour
+  picture of one day (both from NASA GIBS, online only). Area by preset,
   country, typed box corners, point with a radius, or a drawn box; the address keeps the area and dates
   so a result can be shared. For the area: now against the past (this month so far, the last 30 days or
   any dates against the same dates in every year since 2003: median, rank, ratio; D32), the usual fire
@@ -31,4 +36,9 @@ React + MapLibre (D6), static files only (D5). The data comes from the pipeline'
     npm run build && cd dist && python -m http.server 8000      # the offline rehearsal build
 
 The basemap (Natural Earth borders) and the font are bundled, so nothing is fetched from the
-internet at run time. Only the FIRMS link opens an outside page.
+internet at run time. Only the FIRMS link and the optional satellite backdrop (NASA GIBS) reach outside.
+
+## Tests
+
+    npm test                                          # map helpers (no data needed)
+    SHIFT_DATA_DIR=public/data npm test               # also: map values equal the daily files behind the charts
