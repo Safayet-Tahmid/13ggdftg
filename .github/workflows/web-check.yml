@@ -27,3 +27,6 @@ jobs:
         run: |
           npm ci
           npm run build
+      - name: Map tests (2D map and 3D globe helpers)
+        working-directory: web
+        run: npm test

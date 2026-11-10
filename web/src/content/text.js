@@ -50,7 +50,70 @@ const T = {
     notFireTip: (kind, years) => `<b>${kind}</b><br>Labelled non-fire by NASA in ${years} year${years > 1 ? 's' : ''}. Left out of every year.`,
     notFireKinds: { 1: 'Volcano', 2: 'Gas flare or industry', 3: 'Offshore platform' },
     attribution: 'Fire data: NASA FIRMS (MODIS, VIIRS) · Borders: Natural Earth',
+    imageryAttribution: 'Imagery: NASA GIBS, part of NASA ESDIS',
     label: 'World map of harmonised fire activity',
+
+    // ---- view controls (2D map, 3D globe, backdrop, playback)
+    view: 'Map view',
+    views: { '2d': '2D map', '3d': '3D globe' },
+    basemap: 'Backdrop',
+    basemaps: { standard: 'Plain', satellite: 'Satellite (Blue Marble)', daily: 'Satellite picture of one day' },
+    imageryDay: 'Picture date',
+    reset: 'Reset view',
+    gaps: 'Show satellite gaps',
+    play: 'Play months', pause: 'Pause', speed: 'Speed',
+    speeds: { 2000: 'Slow', 1000: 'Normal', 500: 'Fast' },
+    mapFailed: 'The map could not start on this device (it needs WebGL, for the 2D map and the 3D globe alike). '
+      + 'Every chart, number and download beside it still works.',
+    contextLost: 'The graphics card reset the map. It is being redrawn.',
+    imageryOffline: 'The satellite picture could not be loaded (it needs the internet). The fire data on top is unaffected.',
+    imageryTooEarly: 'Daily satellite pictures start on 24 Feb 2000.',
+    imageryNote: 'The picture is a backdrop only. It is not SHIFT data, not live, and its date can differ from the fire month.',
+    dateLine: 'Boxes cannot cross the date line (180°). Draw one box on each side instead.',
+    keys: 'Keys: arrows move, + and − zoom, Shift with arrows tilts and turns (3D).',
+
+    // ---- legend
+    legendToggle: 'Legend',
+    legendTitle: (v, ym) => `${v === 'frp' ? 'Fire power' : 'Hotspots'}, ${ym}, per 0.25° cell (about 25 km)`,
+    legendUnit: { frp: 'MW summed over the days of the month (an index, not energy)', cells: 'hotspot cell-days in the month' },
+    legendScale: 'S-NPP (VIIRS) scale throughout. Before 20 Jan 2012: MODIS put on that scale (an estimate).',
+    legendSupport: 'Each square is a 0.25° grid cell, not a fire location. Zoomed out, cells are drawn as dots.',
+    legendGaps: 'Hatched zones: 30° zones with at least one day without satellite data this month (no data is not zero).',
+    summary: (ym, n, frp, cells, view) => `${view}, ${ym}: ${n.toLocaleString()} cells with fire, `
+      + `${cells.toLocaleString()} hotspots and ${frp.toLocaleString()} MW summed fire power.`,
+
+    // ---- the panel for one clicked cell
+    cell: {
+      title: 'This map cell',
+      close: 'Close',
+      where: 'Cell',
+      size: '0.25° × 0.25° (about 25 km across). A grid cell, not the place of a fire.',
+      month: 'Month',
+      cells: 'Hotspots (S-NPP scale)',
+      frp: 'Fire power (summed MW, an index)',
+      source: 'Source',
+      eras: {
+        terra_only: 'MODIS Terra only, put on the S-NPP scale. Jan-Jun 2002: not comparable with later years (D20).',
+        modis: 'MODIS (Terra and Aqua, Aqua alone from 2020) put on the S-NPP scale with a measured factor. An estimate, not a VIIRS observation.',
+        switch: 'Mixed month: MODIS put on the S-NPP scale up to 19 Jan 2012, S-NPP observed from 20 Jan 2012.',
+        viirs: 'VIIRS S-NPP observed (NOAA-20 fills days S-NPP missed).',
+      },
+      range: 'Calibrated 95% range of the factor',
+      rangeValue: (c, f, fc) => `hotspots ±${c}%, fire power ±${f}% (2.5° factor cell ${fc}, this calendar month). `
+        + 'Wide ranges mean few fires to measure the factor with. Area totals have much narrower ranges.',
+      rangeNone: 'Not needed: the month is observed by S-NPP.',
+      rangeMissing: 'No range for this factor cell and month.',
+      cloud: 'Cloud',
+      cloudYes: (t) => `Flagged: tile ${t} was cloudier than 90% of years this month, so some fire may have been hidden.`,
+      cloudNo: (t) => `Not flagged (tile ${t}).`,
+      cloudUnknown: 'No cloud data for this month.',
+      zeroWithGaps: (n) => `Zero on the days with data. ${n} day${n > 1 ? 's' : ''} had no satellite data in this zone, so fire on those days is unknown, not zero.`,
+      zone: 'Satellite days (30° zone)',
+      zoneValue: (p, f, n) => `${p} primary, ${f} filled from a partner satellite, ${n} with no data.`,
+      limits: 'Hotspots are not always wildfires: farm and land-clearing fires count too (known volcanoes, gas flares and '
+        + 'industry are removed). Values are monthly sums for the whole cell.',
+      firms: 'Original detections in this cell on NASA FIRMS',
+    },
   },
 
   // ---------------------------------------------------------------- the explore story

@@ -24,15 +24,21 @@ recolours everything, in light and dark mode.
 
 1. **No NASA logos**, no "meatball", no NASA wordmark. A NASA-like style (dark navy, clean type) is fine.
 2. **Works offline.** Never load anything from the internet: no Google Fonts links, no CDN
-   scripts, no remote images. Install fonts with npm (see `src/theme/fonts.js`).
+   scripts, no remote images. Install fonts with npm (see `src/theme/fonts.js`). The one
+   exception is the optional satellite backdrop (NASA GIBS pictures). It is off by default, the
+   plain backdrop ships with the site, and the map says so when the pictures cannot load.
 3. **Colour-blind safe.** The four month classes (`--class-low/normal/unusual/critical`) must
    stay distinguishable. Test a screenshot at https://www.color-blindness.com/coblis-color-blindness-simulator/
 4. **More fire = stronger colour.** `--ramp-1` to `--ramp-6` go light to dark (dark to light in dark mode).
 5. **"No data" is never "no fire".** Keep the hatched no-data pattern visibly different from `--chart-zero`.
 6. **Keep the words** "hotspots", "no data", "indicative", "95% range" with their meaning
    (definitions are in `text.js`). Do not round away or hide the uncertainty bands.
-7. **Keep the credits**: the FIRMS acknowledgement on the Method page and the map attribution.
+7. **Keep the credits**: the FIRMS and GIBS acknowledgements on the Method page and the map attribution.
 8. Both themes must work: check light and dark with the "Colour theme" menu.
+9. **The map shows cells, not fires.** Keep the 0.25° squares, the legend sentences (units,
+   S-NPP scale, "not a fire location") and the cell panel's source and range lines. Do not add
+   flames, glows, pulsing dots or anything that suggests live fire. The satellite picture is a
+   backdrop: keep its date and "not SHIFT data" note in the legend.
 
 ## 3. Running the site on your computer
 
@@ -72,6 +78,8 @@ If you are not a collaborator on the repo, fork it, push to your fork and open t
 - [ ] "Print or save a one-page brief" prints only the story column.
 - [ ] Narrow window (phone width): nothing overflows.
 - [ ] Turn the wifi off and reload `npm run preview` after `npm run build`: the site still works.
+- [ ] Map: switch 2D map and 3D globe, rotate and tilt the globe, press Reset view. Click a cell: the panel opens.
+- [ ] Map: Play months, Pause. Show satellite gaps on 2002-03. Satellite backdrop with and without wifi.
 - [ ] No NASA logos anywhere.
 
 ## 6. Where things are (map of the code)
@@ -88,8 +96,11 @@ web/
     content/             text.js (all wording), places.js (preset areas)
     styles/layout.css    layout and component styling
     pages/               Explore, Switch2012, Validation, Method
-    components/          MapView, AreaPicker, Compare, Season, Calendar, MonthGrid, Trend, Downloads, ChartCard
-    lib/                 ENGINE: data loading, areas, analysis, downloads, share links (do not edit)
+    components/          MapView (2D map and 3D globe), MapLegend, CellPanel, MapBoundary, AreaPicker,
+                         Compare, Season, Calendar, MonthGrid, Trend, Downloads, ChartCard
+    lib/                 ENGINE: data loading, areas, analysis, map geometry (geo.js), downloads,
+                         share links (do not edit)
+  tests/                 npm test (map helpers; with SHIFT_DATA_DIR also the map-equals-charts check)
 ```
 
 Stuck? Paste the exact error text to the SHIFT Tutor Gem first. If it looks like a code

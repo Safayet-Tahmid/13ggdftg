@@ -1,9 +1,12 @@
 // The Explore page: map on one side, the story of the chosen area on the other.
 // Layout and order of the sections can be changed freely; the numbers come from lib/.
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import T from '../content/text.js';
 import PLACES from '../content/places.js';
 import MapView from '../components/MapView.jsx';
+import MapBoundary from '../components/MapBoundary.jsx';
+import MapLegend from '../components/MapLegend.jsx';
+import CellPanel from '../components/CellPanel.jsx';
 import AreaPicker from '../components/AreaPicker.jsx';
 import ChartCard from '../components/ChartCard.jsx';
 import Calendar, { calendarLegend } from '../components/Calendar.jsx';
@@ -12,7 +15,8 @@ import Trend from '../components/Trend.jsx';
 import Compare from '../components/Compare.jsx';
 import Season from '../components/Season.jsx';
 import Downloads from '../components/Downloads.jsx';
-import { MAX_TILES, areaSeries, dateOf, iso, json, lastDataDay, monthLayer, tilesOfCells, dayIndex } from '../lib/data.js';
+import { MAX_TILES, areaSeries, dateOf, iso, json, lastDataDay, monthLayer, tilesOfCells, dayIndex, zoneMonth } from '../lib/data.js';
+import { IMAGERY_FIRST_DAY, cellInfo, days_in_month, imagery } from '../lib/geo.js';
 import { areaFromSpec, boxArea, presetArea } from '../lib/area.js';
 import { areaRange, compareWindow, monthly, normalMonth, season, summary } from '../lib/analysis.js';
 import { slug } from '../lib/downloads.js';
@@ -44,13 +48,54 @@ export default function Explore({ meta, theme, params }) {
   const [dates, setDates] = useState(() => ({
     from: params.from || `${lastIso.slice(0, 4)}-01-01`, to: params.to || lastIso }));
 
+  // ---- map view: 2D or 3D, backdrop, gaps, the clicked cell, playback (none of these change a value)
+  const [view, setView] = useState(params.p === '3d' ? '3d' : '2d');
+  const [basemap, setBasemap] = useState({ sat: 'satellite', day: 'daily' }[params.b] || 'standard');
+  const [dayOfMonth, setDayOfMonth] = useState(15);
+  const [showGaps, setShowGaps] = useState(false);
+  const [gaps, setGaps] = useState(null);
+  const [picked, setPicked] = useState(null);
+  const [resetKey, setResetKey] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [speed, setSpeed] = useState(1000);
+  const [mapNote, setMapNote] = useState(null);
+  const [mapOk, setMapOk] = useState(true);
+  const [legendOpen, setLegendOpen] = useState(() => window.matchMedia?.('(min-width: 900px)').matches ?? true);
+  const reducedMotion = useMemo(() => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false, []);
+
   useEffect(() => {
     json('uncertainty.json').then(setUnc).catch(() => {});
     json('validation/report_harmonise.json').then(setHarm).catch(() => {});
     json('cloud.json').then(setCloud).catch(() => {});
     json('validation/report_checks.json').then(setChecks).catch(() => {});
   }, []);
-  useEffect(() => { monthLayer(month).then(setFires).catch(() => setFires(null)); }, [month]);
+  useEffect(() => {
+    let live = true;
+    monthLayer(month).then((f) => { if (live) setFires(f); }).catch(() => { if (live) setFires(null); });
+    return () => { live = false; };
+  }, [month]);
+  // satellite availability per 30-degree zone for the map month (for the gap hatching and the cell panel)
+  useEffect(() => {
+    if (!showGaps && !picked) return undefined;
+    let live = true;
+    zoneMonth(meta, month).then((g) => { if (live) setGaps(g); }).catch(() => {});
+    return () => { live = false; };
+  }, [meta, month, showGaps, picked != null]);  // eslint-disable-line react-hooks/exhaustive-deps
+
+  // playback: one published month after another (no in-between frames), then stop at the last one
+  const monthRef = useRef(month);
+  monthRef.current = month;
+  useEffect(() => {
+    if (!playing) return undefined;
+    const t = setInterval(() => {
+      const i = months.indexOf(monthRef.current);
+      if (i < 0 || i >= months.length - 1) { setPlaying(false); return; }
+      if (i + 2 < months.length) monthLayer(months[i + 2]).catch(() => {});   // fetch the next file early
+      setMonth(months[i + 1]);
+    }, reducedMotion ? Math.max(speed, 2000) : speed);
+    return () => clearInterval(t);
+  }, [playing, speed]);  // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     if (!showNotFire || notFire) return;
     json('notfire.json').then((d) => setNotFire({ type: 'FeatureCollection', features: d.cells.map(([lat, lon, type, years]) =>
@@ -59,8 +104,9 @@ export default function Explore({ meta, theme, params }) {
 
   // the share link follows every choice
   useEffect(() => {
-    writeHash('explore', { area: area.spec, v: variable, m: month, ...(cmpMode === 'custom' ? { from: dates.from, to: dates.to } : {}) });
-  }, [area, variable, month, dates, cmpMode]);
+    writeHash('explore', { area: area.spec, v: variable, m: month, ...(cmpMode === 'custom' ? { from: dates.from, to: dates.to } : {}),
+      ...(view === '3d' ? { p: '3d' } : {}), ...(basemap !== 'standard' ? { b: basemap === 'satellite' ? 'sat' : 'day' } : {}) });
+  }, [area, variable, month, dates, cmpMode, view, basemap]);
 
   const tileCount = useMemo(() => tilesOfCells(area.cells).filter((t) => meta.tiles[t.name]).length, [area, meta]);
   useEffect(() => {
@@ -96,8 +142,32 @@ export default function Explore({ meta, theme, params }) {
     return out;
   }, [meta]);
 
-  const onBox = (b) => { setError(null); setArea(boxArea(b)); };
-  const pickArea = (a) => { setError(null); setArea(a); };
+  const onBox = (b) => { setError(null); setPlaying(false); setArea(boxArea(b)); };
+  const pickArea = (a) => { setError(null); setPlaying(false); setArea(a); };
+  const pickMonth = (m) => { setPlaying(false); setMonth(m); };
+
+  // the picture date follows the map month (clamped to the month and to the last data day)
+  const imageryDay = useMemo(() => {
+    const d = `${month}-${String(Math.min(dayOfMonth, days_in_month(month))).padStart(2, '0')}`;
+    return d > lastIso ? lastIso : d;
+  }, [month, dayOfMonth, lastIso]);
+  const img = basemap === 'standard' ? null : imagery(basemap, imageryDay);
+  useEffect(() => { setMapNote(basemap === 'daily' && !img ? T.map.imageryTooEarly : null); }, [basemap, img?.id]);  // eslint-disable-line react-hooks/exhaustive-deps
+
+  // the clicked cell, read again from the current month's file whenever the month changes
+  const pickInfo = useMemo(() => {
+    if (!picked) return null;
+    const f = fires?.features.find((x) => x.properties.lon === picked.lon && x.properties.lat === picked.lat);
+    return cellInfo({ lon: picked.lon, lat: picked.lat, cells: f ? f.properties.cells : 0, frp: f ? f.properties.frp : 0 },
+      month, { unc, cloud, zoneDays: gaps ? gaps[Math.floor((picked.lat + 90) / 30) * 12 + Math.floor((picked.lon + 180) / 30)] : null });
+  }, [picked, fires, month, unc, cloud, gaps]);
+
+  const mapSummary = useMemo(() => {
+    if (!fires) return '';
+    let frp = 0, cl = 0;
+    for (const f of fires.features) { frp += f.properties.frp; cl += f.properties.cells; }
+    return T.map.summary(month, fires.features.length, Math.round(frp), Math.round(cl), T.map.views[view]);
+  }, [fires, month, view]);
   const falseAlarm = checks?.anomaly_rule?.regions?.plain?.false_alarm_pct ?? harm?.anomaly_rule?.plain?.false_alarm_pct ?? 27;
   const totals = mon && summary(mon.rows);
   const file = (what) => `shift_${slug(area.name)}_${what}`;
@@ -106,14 +176,64 @@ export default function Explore({ meta, theme, params }) {
   return (
     <main className="explore">
       <section className="mapside">
-        <MapView key={theme.name} theme={theme} fires={fires} notFire={notFire} showNotFire={showNotFire}
-          area={area} drawing={drawing} onBox={onBox} onDrawEnd={() => setDrawing(false)} />
+        <div className="mapstage">
+        <MapBoundary onFail={() => setMapOk(false)}>
+          <MapView key={theme.name} theme={theme} fires={fires} notFire={notFire} showNotFire={showNotFire}
+            area={area} drawing={drawing} onBox={onBox} onDrawEnd={() => setDrawing(false)}
+            onDateLine={() => setError(T.map.dateLine)}
+            variable={variable} view={view} basemap={img ? basemap : 'standard'} imageryDay={imageryDay}
+            gaps={gaps} showGaps={showGaps} picked={picked} onPick={(c) => { setPlaying(false); setPicked(c); }}
+            resetKey={resetKey} reducedMotion={reducedMotion}
+            onImageryError={() => setMapNote(T.map.imageryOffline)}
+            onStatus={(st) => { if (st === 'failed') setMapOk(false); else setMapNote(st === 'lost' ? T.map.contextLost : null); }} />
+        </MapBoundary>
+
+        {mapOk && <>
+        <div className="maptools" role="toolbar" aria-label={T.map.view}>
+          <div className="seg" role="group" aria-label={T.map.view}>
+            {['2d', '3d'].map((v) => <button key={v} type="button" className={view === v ? 'on' : ''} aria-pressed={view === v}
+              onClick={() => setView(v)}>{T.map.views[v]}</button>)}
+          </div>
+          <label>{T.map.basemap}
+            <select value={basemap} onChange={(e) => setBasemap(e.target.value)}>
+              {Object.entries(T.map.basemaps).map(([k, l]) => <option key={k} value={k}>{l}</option>)}
+            </select>
+          </label>
+          {basemap === 'daily' && <label>{T.map.imageryDay}
+            <select value={Math.min(dayOfMonth, days_in_month(month))} onChange={(e) => setDayOfMonth(+e.target.value)}>
+              {Array.from({ length: days_in_month(month) }, (_, i) => i + 1).map((d) => <option key={d} value={d}>{month}-{String(d).padStart(2, '0')}</option>)}
+            </select>
+          </label>}
+          <button type="button" className="action" onClick={() => setResetKey((k) => k + 1)}>{T.map.reset}</button>
+        </div>
+
+        {mapNote && <p className="mapnote" role="status">{mapNote}</p>}
+        <CellPanel info={pickInfo} onClose={() => setPicked(null)} />
+        <details className="legendbox" open={legendOpen} onToggle={(e) => setLegendOpen(e.currentTarget.open)}>
+          <summary>{T.map.legendToggle}</summary>
+          <MapLegend theme={theme} variable={variable} month={month} showGaps={showGaps} imageryLabel={img?.label} />
+        </details>
+        </>}
+        </div>
+        <p className="visually-hidden" aria-live="polite">{mapSummary}</p>
+
         <div className="mapbar">
           <label>{T.map.month}
-            <select value={month} onChange={(e) => setMonth(e.target.value)}>
+            <select value={month} onChange={(e) => pickMonth(e.target.value)}>
               {months.slice().reverse().map((m) => <option key={m} value={m}>{m}</option>)}
             </select>
           </label>
+          {mapOk && <>
+          <button type="button" className="action" aria-pressed={playing}
+            onClick={() => { if (!playing && month === months[months.length - 1]) setMonth(months[0]); setPlaying(!playing); }}>
+            {playing ? `❚❚ ${T.map.pause}` : `▶ ${T.map.play}`}</button>
+          <label>{T.map.speed}
+            <select value={speed} onChange={(e) => setSpeed(+e.target.value)}>
+              {Object.entries(T.map.speeds).map(([k, l]) => <option key={k} value={k}>{l}</option>)}
+            </select>
+          </label>
+          <label className="check"><input type="checkbox" checked={showGaps} onChange={(e) => setShowGaps(e.target.checked)} />
+            {T.map.gaps}</label>
           <label className="check"><input type="checkbox" checked={showNotFire} onChange={(e) => setShowNotFire(e.target.checked)} />
             {T.map.notFire}</label>
           {showNotFire && <span className="kinds">
@@ -121,6 +241,7 @@ export default function Explore({ meta, theme, params }) {
             <span className="swatch round" style={{ background: theme.volcano }} /> {T.map.kinds.volcano}
             <span className="swatch round" style={{ background: theme.offshore }} /> {T.map.kinds.offshore}
           </span>}
+          </>}
         </div>
       </section>
 

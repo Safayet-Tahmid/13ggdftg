@@ -2,6 +2,8 @@
 // the pipeline's export stage (pipeline/shift/export.py). Every number on the site comes from
 // these files; the browser only sums them over the area the user picks.
 
+import { countStatus, days_in_month } from './geo.js';
+
 const BASE = 'data/';
 const cache = new Map();
 
@@ -99,11 +101,15 @@ export async function monthLayer(ym) {
   const features = new Array(n);
   for (let i = 0; i < n; i++) {
     const r = Math.floor(ids[i] / 1440), c = ids[i] % 1440;
-    features[i] = { type: 'Feature', geometry: { type: 'Point', coordinates: [-180 + (c + 0.5) * 0.25, -90 + (r + 0.5) * 0.25] },
-      properties: { cells: Math.round(cells[i] * 10) / 10, frp: Math.round(frp[i]) } };
+    const lon = -180 + (c + 0.5) * 0.25, lat = -90 + (r + 0.5) * 0.25;   // the 0.25-degree cell centre
+    features[i] = { type: 'Feature', geometry: { type: 'Point', coordinates: [lon, lat] },
+      properties: { lon, lat, cells: Math.round(cells[i] * 10) / 10, frp: Math.round(frp[i]) } };
   }
   return { type: 'FeatureCollection', features };
 }
+
+// The daily decoder, exported for the tests (the map-equals-charts check reads both files with it).
+export const decodeDaily = daily;
 
 let zonesP = null;
 function zones() {
@@ -171,6 +177,18 @@ export async function areaSeries(meta, area) {
     for (let k = 0; k < N; k++) if (row[k] === 5) nodata[k] = 1;
   }
   return { cells, frp, filled, nodata, fineW, fineAll, tiles: wanted.length };
+}
+
+// Satellite availability for one month in every 30-degree zone: days primary, filled, no data.
+// Counted up to the last day with data, so the cut-off day is not reported as a gap.
+export async function zoneMonth(meta, ym) {
+  const z = await zones();
+  const N = meta.days;
+  const k0 = dayIndex(meta, `${ym}-01`);
+  const k1 = Math.min(k0 + days_in_month(ym), lastDataDay(meta) + 1);
+  const out = [];
+  for (let zi = 0; zi < z.length / N; zi++) out.push(countStatus(z.subarray(zi * N, zi * N + N), k0, k1));
+  return out;
 }
 
 // One row per 1-degree cell and day with fire, inside the area and dates (the search CSV, D33).

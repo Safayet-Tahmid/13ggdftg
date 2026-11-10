@@ -43,6 +43,10 @@
   --map-land: #E4E9E5;
   --map-border: #A9B6B9;
   --map-area: #17283A;             /* outline of the selected area */
+  --map-select: #0B6E99;           /* outline of the map cell opened in the cell panel */
+  --map-gap: #5B6873;              /* hatching of 30-degree zones with days of no satellite data */
+  --globe-space: #0B1220;          /* behind the 3D globe */
+  --globe-horizon: #A8C6DA;        /* thin atmosphere at the globe's edge */
 
   /* ---------- charts: fire amount, light to dark */
   --chart-zero: #ECEFEC;           /* a day with no fire */
@@ -92,6 +96,10 @@
   --map-land: #1D2933;
   --map-border: #33424E;
   --map-area: #E6ECEF;
+  --map-select: #7FD1F2;
+  --map-gap: #97A3AC;
+  --globe-space: #05080D;
+  --globe-horizon: #4E6E86;
 
   --chart-zero: #1A242D;
   --ramp-1: #4A2A1C;

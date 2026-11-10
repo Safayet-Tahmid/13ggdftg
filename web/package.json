@@ -7,11 +7,12 @@
     "dev": "vite --host",
     "get-data": "node scripts/get-data.mjs",
     "build": "vite build",
-    "preview": "vite preview --host"
+    "preview": "vite preview --host",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "5.1.0",
-    "maplibre-gl": "4.7.1",
+    "maplibre-gl": "5.24.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "topojson-client": "3.1.0",
