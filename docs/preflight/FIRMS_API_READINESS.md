@@ -1,6 +1,6 @@
 # NASA FIRMS API readiness
 
-Checked 10 to 11 November 2026 from official NASA pages. Nothing in this document was obtained with a real key. No authenticated request has been made.
+Checked 10 to 11 November 2026 from official NASA pages. One authenticated test per product was run by Squadron Zero on 11 November 2026 (section 5). The key never left Colab Secrets.
 
 ## 1. Sources (retrieved 10 Nov 2026 UTC)
 
@@ -52,12 +52,23 @@ A small Bangladesh box, 1 day. In code the key is read from the environment vari
 
 ## 5. Authentication test
 
-NOT PERFORMED. No key exists in this environment and none was asked for in chat. The test is defined so that a teammate or the next phase can run it without exposing the key:
+PASSED for both products, run by Squadron Zero on Colab (account squadronzero10, key read from Colab Secrets, key masked in all output) and reported to the main build chat on 11 Nov 2026, 01:37 Asia/Dhaka. Claude did not run the request and did not see the raw output. The figures below are as reported.
 
-1. One request: the box above, `VIIRS_NOAA20_NRT`, DAY_RANGE 1.
-2. Pass when: HTTP 200, the first line is a CSV header containing `latitude,longitude,` and `frp`, every latitude is between 20.5 and 26.75 and every longitude between 88 and 92.75, every `confidence` is a VIIRS class (`l`, `n`, `h`, or the words low, nominal, high: the exact form is recorded at this first response), and every `satellite` is `N20`.
-3. Fail signs: a body that is not CSV (FIRMS answers a bad key with a short text message), HTTP 4xx or 5xx.
-4. Log only: status code, row count, header names, elapsed seconds, and the URL with the key replaced by `***`.
+| Product | HTTP | Rows | Time | Satellite | Inside box | FRP range (MW) |
+| --- | --- | --- | --- | --- | --- | --- |
+| `VIIRS_NOAA20_NRT` | 200 | 5 | 0.5 s | N20 | yes | 2.06 to 7.59 |
+| `VIIRS_NOAA21_NRT` | 200 | 25 | 0.4 s | N21 | yes | 0.91 to 9.72 |
+
+Request: box 88,20.5,92.75,26.75 (Bangladesh), DAY_RANGE 1, one request per product. The CSV header held the expected fields, including confidence, frp, acq_date and acq_time. No authentication error. The key did not appear in the output.
+
+Still to record from the same output: the exact `confidence` values and the `acq_date` and `acq_time` samples, to fix the parser formats.
+
+The test was defined as follows, so it can be repeated without exposing the key:
+
+1. One request: the box above, DAY_RANGE 1.
+2. Pass when: HTTP 200, the first line is a CSV header containing `latitude,longitude,` and `frp`, every latitude is between 20.5 and 26.75 and every longitude between 88 and 92.75, every `confidence` is a VIIRS class, and `satellite` is `N20` or `N21` as requested.
+3. Fail signs: a body that is not CSV, HTTP 4xx or 5xx.
+4. Log only: status code, row count, header names, elapsed seconds, and nothing that contains the key.
 
 Zero rows is a valid answer (no fire that day), not a failure.
 

@@ -197,9 +197,29 @@
     "note": "critical = maplibre-gl <=6.4.0 GHSA-jrc7-96c5-q579 (DOM.sanitize XSS bypass), fix needs major upgrade to 6.x. Others are dev-server (vite, esbuild) or build-time (fflate) only."
   },
   "firms_api": {
-    "key_available_in_environment": false,
-    "authenticated_request": "NOT PERFORMED",
-    "network_reach_from_build_sandbox": "not tested (shell egress is allowlisted)"
+    "key_available_in_claude_environment": false,
+    "authenticated_request": "PASSED (reported by Squadron Zero, run on Colab, 2026-11-11 01:37 Asia/Dhaka; raw output not seen by Claude)",
+    "VIIRS_NOAA20_NRT": {
+      "http": 200,
+      "rows": 5,
+      "seconds": 0.5,
+      "satellite": "N20",
+      "inside_box": true,
+      "frp_mw_min": 2.06,
+      "frp_mw_max": 7.59
+    },
+    "VIIRS_NOAA21_NRT": {
+      "http": 200,
+      "rows": 25,
+      "seconds": 0.4,
+      "satellite": "N21",
+      "inside_box": true,
+      "frp_mw_min": 0.91,
+      "frp_mw_max": 9.72
+    },
+    "box": "88,20.5,92.75,26.75",
+    "day_range": 1,
+    "confidence_and_time_format": "not yet recorded"
   },
   "github_secret_NASA_FIRMS_MAP_KEY": "NOT VERIFIED (secrets API not reachable from this environment)",
   "eligibility": "NEEDS ORGANIZER CONFIRMATION"
