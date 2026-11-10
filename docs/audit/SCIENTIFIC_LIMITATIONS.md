@@ -86,3 +86,9 @@ The pipeline downloads FIRMS yearly archives at run time and keeps raw data on a
 - The pipeline writes `NaN` into some JSON reports. Browsers reject it, which hid every Phase 2 check on the website until a reader-side fix on 8 November. The pipeline should write strict JSON.
 - The website's monthly totals do not apply the pipeline's gap-scaling multiplier. Measured effect under 0.01% on yearly totals before 2026.
 - The export keeps, for each 1° cell-day, the highest source code of the 0.25° rows it combines. A cell-day mixing native and filled values is shown as filled.
+
+## 15. Added 11 November 2026: the coverage check is not independent
+
+**What.** The 94.9% and 93.9% coverage of the calibrated 95% ranges was measured on 2012-2015 with predictions fitted on 2016-2019, but the range widths and the grouping of cells were set using fits that included 2012-2015, and the model was chosen partly on 2012-2015 performance (`checks.py` `coverage_check`, lines 258-358). The published ranges are also built slightly differently from the verified ones.
+
+**Consequence.** The figures are a useful sign that the calibration is roughly right, not an independent estimate of coverage. A clean experiment is proposed in `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md` section 3.

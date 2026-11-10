@@ -74,7 +74,7 @@ Finding: the release title still says "15 Oct" although the file was replaced on
 | Quantity | Value | Class |
 | --- | --- | --- |
 | 2012 gate (MODIS x k against S-NPP at the switch) | PASS, +0.8% cells, -0.2% fire power | Reported in existing artifacts (`report_checks.json`, gate true). Independently recomputed in the 8 Nov audit (`validation/audit_site_data.py`, A3) |
-| Calibrated 95% month ranges | coverage 94.9% (cells), 93.9% (fire power) | Reported in existing artifacts (`report_checks.json` coverage). Not recomputed today |
+| Calibrated 95% month ranges | coverage 94.9% (cells), 93.9% (fire power) | Reported in existing artifacts (`report_checks.json` coverage). Not recomputed. **Not independently verified**: 2012-2015 entered the calibration fits (see `docs/audit/SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md`, added 11 Nov) |
 | Geographic resolution | 2.5 deg factors pulled to the 10 deg parent (D28) | Reported (`report_resolution.json`). Code hash recorded |
 | Sensor selection | MODIS Terra+Aqua to 2019, Aqua from 2020 (D19), reference S-NPP | Reported (`report_selection.json`). Covered by pipeline tests |
 | Iberia flag | 11.8% step gap, flagged | Reported (`report_checks.json` summary) |

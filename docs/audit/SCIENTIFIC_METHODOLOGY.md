@@ -2,6 +2,8 @@
 
 Independent audit, 8 November 2026 · Team Squadron Zero · NASA Space Apps Challenge 2026, Challenge 9
 
+> **Erratum E1, 11 November 2026.** Statements in this document that the calibrated 95% ranges were "verified on 2012-2015" and hold "94-95% of held-out months" overstate how independent that check was. The verification predictions were fitted without 2012-2015, but the 2012-2015 years were also used in the fits that set the range widths and sorted cells into groups, and in choosing the model. The reported figures (94.9% hotspots, 93.9% fire power, on the 1,743 tested 2.5° cells) are kept as reported, but they are not an independent estimate of coverage, and they do not show that the published ranges contain the true value 95% of the time. Full trace: `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md`. The original text below is kept as it was written, marked [E1] where it applies.
+
 This audit was carried out by the same AI system (Claude) that wrote SHIFT's code, at the team's request, with the instruction to review it critically and not to defend it. The reader should weigh it with that in mind. Every claim about the implementation cites a file and line. Every number cites a report or an audit table. Statements are marked as **[fact]** (established science, with a reference), **[code]** (what the implementation does), **[measured]** (a result from a report or from this audit) or **[hypothesis]** (an interpretation not tested here).
 
 Companion documents in this folder: HARMONIZATION_EQUATIONS.md (the mathematics), VALIDATION_REPORT.md (all results), SCIENTIFIC_LIMITATIONS.md, REPRODUCIBILITY_GUIDE.md, NASA_JUDGING_EXPLANATION.md, SCIENTIFIC_IMPROVEMENT_PLAN.md.
@@ -16,7 +18,7 @@ What the evidence supports **[measured]**:
 - The 2012 artefact is removed at global scale: raw joined record 2.64× step, SHIFT 0.972×, MODIS alone 0.964×. The 0.8% gap is at the noise level of the ratio itself (1.0%).
 - On held-out VIIRS years SHIFT predicts S-NPP from MODIS with a typical 4% error per 2.5° cell (backward test), against 12% for the best simpler method and 63% for joining the records.
 - Long-term trends 2003-2019 match MODIS alone within 0.62 percentage points a year in all test regions. The raw joined record is off by up to 15.6.
-- The calibrated 95% ranges contain 94-95% of held-out months.
+- The calibrated 95% ranges contain 94-95% of held-out months. [E1: not independently verified]
 - The published website reproduces the pipeline's regional totals exactly.
 
 What it does not support:
@@ -121,7 +123,7 @@ Summary (detail and sources in VALIDATION_REPORT.md):
 | Backward test 2012-2015 from 2016-2019 | 4.0% / 4.2% typical cell error, best of five methods | Out of sample in time, VIIRS era |
 | Leave one year out | part of score 69.3 | Out of sample in time |
 | Untouched 2026 | NOAA-20 PASS (0.07% / 0.99%), Aqua FAIL on FRP (-19%) | Out of sample, after the fit |
-| Coverage of 95% ranges | 94.9% / 93.9% | Calibrated 2016-2019, verified 2012-2015 |
+| Coverage of 95% ranges | 94.9% / 93.9% | Calibrated 2016-2019, verified 2012-2015. [E1: partly, 2012-2015 also entered the calibration fits] |
 | 2012 gate | +0.8% / -0.2% | Partly in sample |
 | Placebo gaps (audit) | global 1.0% / 2.1%, regions about 3-10% | Noise reference |
 | Ratio stationarity (audit) | global stable, Florida and Amazon drift | Tests the core assumption within 2012-2019 |
@@ -218,7 +220,7 @@ Scores are the auditor's judgement on the evidence above (10 = no material weakn
 | Sensor bias management | 7 | Per-place, per-month factors; D19, D29 for orbit drift; NOAA-20 tied in | No detection-probability model; FRP overpass counts differ |
 | Statistical justification | 6 | Rules committed before each run; out-of-sample selection | Hand-set prior; bespoke score; adaptive sequence of tests |
 | Validation quality | 6 | Backward, leave-one-year-out, untouched 2026, coverage, GFED, placebo noise | Truth is VIIRS-era only; gate partly in sample; events test not discriminating; GFED is MODIS-derived |
-| Uncertainty assessment | 7 | Calibrated 95% ranges verified at 94-95%; flags for cloud, era, no data | Factor error only; bootstrap alone covered 40-47% |
+| Uncertainty assessment | 7 | Calibrated 95% ranges reported at 94-95% [E1: not independently verified]; flags for cloud, era, no data | Factor error only; bootstrap alone covered 40-47% |
 | Reproducibility | 7 | Code, settings, 64 tests, CI, provenance, public audit script | Needs FIRMS downloads, Colab and Drive; not byte-reproducible |
 | Suitability for the NASA challenge | 8 | Calendar, area selection, median comparison, downloads, accessible colours, offline | No live data; no fire counts or reported fires |
 
@@ -236,7 +238,7 @@ Details, files and validation steps: SCIENTIFIC_IMPROVEMENT_PLAN.md.
 1. Joining MODIS and VIIRS creates a 2.6× jump in global hotspots at 2012. SHIFT removes it: its 2012 step matches MODIS alone within 0.8%, inside the 1% year-to-year noise of the sensor ratio.
 2. On years it never saw, SHIFT predicts VIIRS from MODIS with a typical error of 4% per 2.5° cell, three times better than one ratio per region and fifteen times better than joining the records.
 3. SHIFT's long-term trends match MODIS alone, the one instrument that flew throughout, within 0.62 percentage points a year in all ten test regions and the world.
-4. Its 95% ranges contain 94-95% of held-out months, and missing satellite days are shown as gaps, never as quiet days.
+4. Its 95% ranges contain 94-95% of held-out months [E1: in a check that was not fully independent], and missing satellite days are shown as gaps, never as quiet days.
 5. It does this for any area on Earth, monthly from 2003 to October 2026, in a website that works offline.
 
 ### 2. Evidence needed before calling SHIFT a highly reliable, state-of-the-art harmonised record

@@ -38,7 +38,12 @@ export default function Method({ meta }) {
         <li>Cloud and smoke hide fires from every satellite. A cloudy day can look like a quiet one; months cloudier than 90% of years carry a flag.</li>
         <li>January to June 2002 has Terra only and is not compared with later years.</li>
         <li>Areas are summed on a 1° grid, so the edges of any area are accurate to about 100 km.</li>
-        <li>Before 2012 values carry the calibrated 95% range of their factor, wider where fire is sparse.</li>
+        <li>Before 2012 every value carries a calibrated 95% range for the MODIS-to-VIIRS conversion, wider where fire is sparse.
+          It covers only that conversion error, as measured in the years both sensors flew. It does not include fire hidden by cloud
+          or smoke, false detections, any change in the VIIRS to MODIS ratio before 2012 (which cannot be measured), or the larger
+          errors of single days and small areas. In a check on 2012 to 2015, about 94 to 95% of cell-months fell inside, but that
+          check was not fully independent of how the ranges were set (see the Validation page). Read the range as a guide to the
+          conversion error, not as a guaranteed 95% bound on the true value.</li>
         <li>Day-level and week-level values and dated critical periods before 20 January 2012 are indicative; months are tested (D30).</li>
         <li>About one in four unusual months in the MODIS years would not be unusual to VIIRS; those months are marked.</li>
         <li>Three test regions keep a 2012 step near 10% after harmonising, depending on how it is measured: Iberia +9 to +12%

@@ -63,34 +63,49 @@ export default function Validation() {
 
   return (
     <main className="page">
-      <h2>Every choice was tested on years the model never saw, under a rule written before the run.</h2>
-      <p className="lede">A harmonised record is only useful if the sensor of origin no longer matters. These are the tests
-        that show it, copied straight from the pipeline's reports.</p>
+      <h2>How SHIFT was tested, and what each test can and cannot show</h2>
+      <p className="lede">A harmonised record is only useful if the sensor of origin no longer matters. These are the tests,
+        copied straight from the pipeline's reports. Each test's rule was written into the settings before its run. The tests do
+        not all have the same independence: some years serve more than one step, and the note beside each result says where.
+        There is no VIIRS before 2012, so no test can check the MODIS-era values directly. The tests use the years when both
+        sensors flew.</p>
       <div className="facts">
-        {g && <p><b>{pct(g.cells_gap_pct)}</b><span>gap between SHIFT's 2012 step and the real change (MODIS alone), hotspots, whole world. Gate: within ±5%</span></p>}
+        {g && <p><b>{pct(g.cells_gap_pct)}</b><span>gap between SHIFT's 2012 step and the step MODIS alone shows over the same years (one sensor, so no switch), hotspots,
+          whole world. Gate: within ±5%. The factors were fitted on 2012 to 2019, which includes the 2013 to 2015 side of this
+          comparison, so this shows continuity at the switch, not that the factors are right before 2012.</span></p>}
         {g && <p><b>{pct(g.frp_gap_pct)}</b><span>the same for fire power</span></p>}
         {simple.length > 0 && <p><b>{simple.find((r) => r.method === 'SHIFT')?.score ?? '–'}</b>
-          <span>SHIFT's score against {Math.max(...simple.filter((r) => r.method !== 'SHIFT').map((r) => +r.score || 0)).toFixed(1)} for the best simple method (higher is better)</span></p>}
-        {evSum && <p><b>{events.filter((e) => e['SHIFT frp hit']).length} of {events.length}</b><span>known fire disasters flagged as unusual or critical (chance: {evSum.base_rate_pct}%)</span></p>}
-        {cover.length > 0 && <p><b>{one(coverOf('cells'))}</b><span>of held-out months fall inside the calibrated 95% range (hotspots; fire power {one(coverOf('frp'))})</span></p>}
-        {get(anom, 'plain', 'caught_pct') != null && <p><b>{get(anom, 'plain', 'caught_pct')}%</b><span>of truly unusual months in the test regions that the MODIS years also flag (false alarms {get(anom, 'plain', 'false_alarm_pct')}%; for single 2.5° cells {get(ck, 'anomaly_rule', 'plain', 'caught_pct')}% and {get(ck, 'anomaly_rule', 'plain', 'false_alarm_pct')}%)</span></p>}
+          <span>SHIFT's score against {Math.max(...simple.filter((r) => r.method !== 'SHIFT').map((r) => +r.score || 0)).toFixed(1)} for the best simple method (higher is better).
+            SHIFT's own settings were chosen on held-out tests of this kind, so its lead may be a little optimistic.</span></p>}
+        {evSum && <p><b>{events.filter((e) => e['SHIFT frp hit']).length} of {events.length}</b><span>known fire disasters flagged as unusual or critical (chance: {evSum.base_rate_pct}%). A small test: MODIS alone and the
+          raw joined record flag them about as often.</span></p>}
+        {cover.length > 0 && <p className="coverage"><b>{one(coverOf('cells'))}</b><span>of 2012 to 2015 cell-months fall inside the calibrated
+          95% range (hotspots; fire power {one(coverOf('frp'))}){ck.tested_cells ? `, on the ${(+ck.tested_cells).toLocaleString('en-GB')} tested 2.5° cells` : ''}.
+          <em className="qualifier"> Not a fully independent check. The 2012 to 2015 years were left out of the fit that made these
+          predictions, but they were also used in the fits that set the range widths and sorted the cells into groups. Coverage on
+          truly unseen data could be higher or lower, and it has not been measured.</em></span></p>}
+        {get(anom, 'plain', 'caught_pct') != null && <p><b>{get(anom, 'plain', 'caught_pct')}%</b><span>of the months S-NPP marks as unusual in the test regions that the MODIS-based prediction also marks (each year 2012 to
+          2019 predicted with that year left out). False alarms {get(anom, 'plain', 'false_alarm_pct')}% (for single 2.5° cells {get(ck, 'anomaly_rule', 'plain', 'caught_pct')}% and {get(ck, 'anomaly_rule', 'plain', 'false_alarm_pct')}%)</span></p>}
       </div>
 
-      <h3>No jump at 2012, region by region</h3>
+      <h3>The 2012 step, region by region</h3>
       <p className="small">The 2012 step (average of 2013 to 2015 against 2009 to 2011), SHIFT compared with MODIS alone. A gap near zero means the switch left no mark. Iberia is flagged: its gap is above 10%.</p>
       <Table rows={d.res} cols={['region', 'coarse', 'fine_shrunk']}
         labels={{ region: 'Region', coarse: 'Gap, 10° factors', fine_shrunk: 'Gap, final 2.5° factors' }}
         fmt={{ region: (v) => REGION_NAMES[v] || v, coarse: pct, fine_shrunk: pct }} />
 
       <h3>SHIFT against simpler methods</h3>
-      <p className="small">Each method predicts held-out MODIS-era months on the VIIRS scale (leave one year out, and a backward test on 2012 to 2015). Score out of 100.</p>
+      <p className="small">Each method predicts S-NPP months from MODIS in years when both flew and that the fit did not use (leave one
+        year out, and a backward test that fits on later years and predicts 2012 to 2015). Score out of 100. SHIFT's resolution and
+        settings were chosen on tests of this kind, so this table is not fully independent of that choice.</p>
       <Table rows={simple} cols={['method', 'score_cells', 'score_frp', 'score']}
         labels={{ method: 'Method', score_cells: 'Hotspots', score_frp: 'Fire power', score: 'Score' }}
         fmt={{ method: (v) => METHODS[v] || v }} />
 
       <h3>The untouched 2026 test</h3>
       <p className="small">2026 data was locked away until the model was final, then predicted once. The result is stored and never rerun.
-        Aqua fails on fire power because its orbit has drifted since 2022; no value in the record comes from Aqua alone after Feb 2023 (D29).</p>
+        Aqua fails on fire power because its orbit has drifted since 2022; no value in the record comes from Aqua alone after Feb 2023 (D29).
+        This tests the satellite links used from 2020 on. It does not test the MODIS factors used before 2012.</p>
       <Table rows={test26} cols={['name', 'cells', 'frp', 'pass']}
         labels={{ name: 'Satellite used to predict S-NPP', cells: 'Hotspots error', frp: 'Fire power error', pass: 'Result' }}
         fmt={{ cells: pct, frp: pct, pass: yes }} />
@@ -102,7 +117,7 @@ export default function Validation() {
         fmt={{ event: (v) => EVENTS[v] || String(v).replace(/_/g, ' '), 'SHIFT frp hit': (v) => (v ? 'yes' : 'no'), 'SHIFT frp max z': (v) => (v == null ? '' : (+v).toFixed(1)) }} />
 
       <h3>Against burned area (GFED4)</h3>
-      <p className="small">{ba ? `The 2012 step in SHIFT agrees with the burned-area record for the whole world: ${yes(ba.global_pass)}. Regions passing for both measures: ${ba.regions_passing_both ?? '–'} (the failures also fail for MODIS alone).` : 'Not available in this data release.'}</p>
+      <p className="small">{ba ? `The 2012 step in SHIFT agrees with the burned-area record for the whole world: ${yes(ba.global_pass)}. Regions passing for both measures: ${ba.regions_passing_both ?? '–'} (the failures also fail for MODIS alone). GFED4 is itself built from MODIS data, so this is a consistency check, not independent ground truth.` : 'Not available in this data release.'}</p>
 
       <h3>Cloud</h3>
       <p className="small">{cloud ? `Low-fire months are cloudy ${cloud.cloudy_share_low_months_pct}% of the time against ${cloud.cloudy_share_all_months_pct}% overall, so cloudy months carry a flag in the monthly view (${cloud.flag_shown ? 'shown' : 'not shown'}).` : 'Not available in this data release.'}</p>
@@ -117,7 +132,7 @@ export default function Validation() {
 
       {ratios.length > 0 && <>
         <h3>NOAA-20 carries the record on</h3>
-        <p className="small">NASA stopped delivering Suomi NPP data on 1 November 2026. NOAA-20 sees the same fire as Suomi NPP every year (ratio near 1), so it can take over.</p>
+        <p className="small">NASA FIRMS stopped producing new Suomi NPP data at 13:00 UTC on 2 November 2026. NOAA-20 sees the same fire as Suomi NPP every year (ratio near 1), so it can take over.</p>
         <Table rows={ratios.map(([k, v]) => ({ k: k.replace(' per ', ' ÷ '), ...Object.fromEntries(Object.entries(v.by_year || {}).map(([y, x]) => [y, x == null ? '' : (+x).toFixed(2)])) }))}
           cols={['k', ...Object.keys(ratios[0][1].by_year || {})]} labels={{ k: 'Ratio' }} />
       </>}

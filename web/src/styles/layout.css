@@ -183,6 +183,9 @@ select, input {
 .facts span { font-size: var(--font-size-small); color: var(--muted); }
 .facts.compact { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 14px 0 6px; }
 .facts.compact b { font-size: 22px; }
+/* the limitation beside a reported validation number (Validation page): visible where the number is */
+.facts .qualifier { display: block; margin-top: 4px; font-style: normal; font-size: 12px; color: var(--muted);
+  border-left: 3px solid var(--accent); padding-left: 6px; }
 .tablewrap { overflow-x: auto; }
 table { border-collapse: collapse; font-size: 13.5px; min-width: 420px; }
 th, td { text-align: left; padding: 6px 14px 6px 0; border-bottom: 1px solid var(--rule); }

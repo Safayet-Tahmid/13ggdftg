@@ -2,6 +2,8 @@
 
 Audit of 8 November 2026. Record: final L3 of 7 November 2026 (2002-01-01 to 2026-10-28), published site data generated 2026-11-07T17:15:19Z from code commit `0f95990`.
 
+> **Erratum E1, 11 November 2026.** Statements in this document that the calibrated 95% ranges were "verified on 2012-2015" and hold "94-95% of held-out months" overstate how independent that check was. The verification predictions were fitted without 2012-2015, but the 2012-2015 years were also used in the fits that set the range widths and sorted cells into groups, and in choosing the model. The reported figures (94.9% hotspots, 93.9% fire power, on the 1,743 tested 2.5° cells) are kept as reported, but they are not an independent estimate of coverage, and they do not show that the published ranges contain the true value 95% of the time. Full trace: `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md`. The original text below is kept as it was written, marked [E1] where it applies.
+
 ## 0. Where each number comes from
 
 Every result below carries one of three labels.
@@ -69,7 +71,7 @@ The Aqua failure is consistent with Aqua's orbit drift after 2022 (Aqua fire pow
 
 ### 2.5 Uncertainty ranges [R]
 
-Source: `report_checks.json` `coverage`. The raw bootstrap range of the factor covered only **40.2%** (hotspots) and **46.7%** (fire power) of held-out cell-months, far from 95%. The bootstrap therefore understated the real error. After recalibration by fallback level and fire amount (calibrated on 2016-2019, verified on 2012-2015), coverage was **94.9%** and **93.9%**, inside the 90-99% acceptance band. For areas (the ten test regions), the independent combination covered 92.9% and 94.2% and the fully correlated one 96.2% and 95.4%. The website uses the fully correlated form, the more cautious one.
+Source: `report_checks.json` `coverage`. The raw bootstrap range of the factor covered only **40.2%** (hotspots) and **46.7%** (fire power) of held-out cell-months, far from 95%. The bootstrap therefore understated the real error. After recalibration by fallback level and fire amount (calibrated on 2016-2019, verified on 2012-2015), coverage was **94.9%** and **93.9%**, inside the 90-99% acceptance band. [E1: not an independent check, because 2012-2015 entered the calibration fits and the grouping] For areas (the ten test regions), the independent combination covered 92.9% and 94.2% and the fully correlated one 96.2% and 95.4%. The website uses the fully correlated form, the more cautious one.
 
 ## 3. Continuity across the 2012 sensor switch
 
@@ -187,7 +189,7 @@ Daily critical periods are worse (median 5.8 critical days a year before 2012 ag
 Measured:
 - At month and region scale, MODIS-era values predicted from MODIS match held-out S-NPP months with a typical error of 4% per 2.5° cell (backward test), better than every simpler method tested.
 - The record has no 2012 artefact at global scale (gap +0.8%, within the 1.0% noise of the ratio itself), and long-term trends follow MODIS alone within 0.6 points a year in every test region, while the raw joined record is off by up to 15.6 points a year.
-- The calibrated 95% ranges hold 94-95% of held-out months.
+- The calibrated 95% ranges hold 94-95% of held-out months. [E1: reported coverage, not independently verified]
 
 Not supported:
 - That the factors are right before 2012 beyond the stability seen in 2012-2019. The core assumption cannot be tested directly.
