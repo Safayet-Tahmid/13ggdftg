@@ -35,13 +35,13 @@ recolours everything, in light and dark mode.
    (definitions are in `text.js`). Do not round away or hide the uncertainty bands.
 7. **Keep the credits**: the FIRMS and GIBS acknowledgements on the Method page and the map attribution.
 8. Both themes must work: check light and dark with the "Colour theme" menu.
-10. **Recent detections keep their own look.** `--recent-1` to `--recent-4` must stay clearly different
-   from the record's `--ramp-*`, so nobody mistakes raw FIRMS points for harmonised values. Keep the
-   fetch time, the "raw, not harmonised" sentence and the NOAA-21 "not tested" line.
 9. **The map shows cells, not fires.** Keep the 0.25° squares, the legend sentences (units,
    S-NPP scale, "not a fire location") and the cell panel's source and range lines. Do not add
    flames, glows, pulsing dots or anything that suggests live fire. The satellite picture is a
    backdrop: keep its date and "not SHIFT data" note in the legend.
+10. **Recent detections keep their own look.** `--recent-1` to `--recent-4` must stay clearly different
+   from the record's `--ramp-*`, so nobody mistakes raw FIRMS points for harmonised values. Keep the
+   fetch time, the "raw, not harmonised" sentence and the NOAA-21 "not tested" line.
 
 ## 3. Running the site on your computer
 
