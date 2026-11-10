@@ -14,7 +14,7 @@ Status labels used below: COMPLETED AND VERIFIED, COMPLETED BUT NOT FULLY VERIFI
 | Remote `main` | Same commit. The commit named in the brief is the current `main` |
 | Working tree at start | Clean. Nothing was stashed, reset or discarded |
 | Branch created | `feature/recent-firms`, from `origin/main` at `829ce01`, upstream unset so nothing is pushed by accident |
-| Pushed to GitHub | No. Waiting for Squadron Zero's authorisation |
+| Pushed to GitHub | Yes, 11 Nov 01:45, authorised by Squadron Zero |
 | Other branches | `feature/globe-3d` (merged as PR #1, still on GitHub) |
 | Tools | Python 3.13.18, Node 22.23.4, npm 10.9.9. CI uses Node 20 |
 | Local Python packages | numpy 2.5.3, pandas 3.0.5, pyarrow 26.0.1, PyYAML 6.0.3, shapely 2.2.0, pytest 9.1.1. h5py not installed |
