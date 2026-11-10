@@ -72,6 +72,19 @@ The test was defined as follows, so it can be repeated without exposing the key:
 
 Zero rows is a valid answer (no fire that day), not a failure.
 
+### 5b. First full fetch on GitHub Actions (verified from the run log by Claude)
+
+Run 42888811507, workflow "Recent detections (test fetch)", branch `feature/recent-firms`, commit be35027, 11 Nov 2026 (about 01:48 Asia/Dhaka). Key from the repository secret, shown as `***` in the log.
+
+| Product | Requests | Rows kept | Rejected | Duplicates removed | Days without data |
+| --- | --- | --- | --- | --- | --- |
+| `VIIRS_NOAA20_NRT` | 3 of 3 OK (world, 5+5+4 days, 2.1 to 3.0 s each) | 769,554 | 0 | 5 | none |
+| `VIIRS_NOAA21_NRT` | 3 of 3 OK (1.4 to 1.8 s each) | 735,459 | 0 | 2 | none |
+
+Window 2026-10-28 to 2026-11-10 (14 days), 1,505,013 detections, 10.4 MB gzipped. Detections per day: NOAA-20 44,372 to 67,369, NOAA-21 43,133 to 67,672. This settles three open points: (1) NRT data reaches back to at least 28 Oct, so the gap between the historical record and today can be filled completely. (2) With DATE, the API returns DATE to DATE + DAY_RANGE - 1 (every chunk's dates matched). (3) Every confidence, time and day/night value passed the checks, so the formats are ones the parser accepts.
+
+Consequence for the website: 1.5 million points are too many for a browser map. The site will show an overview per 0.25 deg cell and load the individual 375 m points only for the area being looked at.
+
 ## 6. Acquisition strategy
 
 | Option | Security | Fit | Verdict |

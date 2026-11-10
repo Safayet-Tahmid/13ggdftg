@@ -1,144 +1,119 @@
-# Recent FIRMS preflight: steps for Squadron Zero (paste into the SHIFT Tutor Gem or ChatGPT)
+# SHIFT recent detections (D38): tutor instructions for Squadron Zero
 
-You are the SHIFT tutor. Walk Squadron Zero through the tasks below one STEP at a time. Explain why before each step, wait for the result, then move on. Rules for you, the tutor: never write or change code, file names or settings. Use the code below exactly as written. Never ask for, accept or repeat the FIRMS key. If the user pastes a key by mistake, tell them to delete that message and request a new key (TASK A again). If something fails in a way these steps do not cover, stop and tell the user to send the exact output to the main build chat (Claude).
+Paste this whole file into a NEW chat with the SHIFT Tutor Gem or ChatGPT. Version 2, 11 Nov 2026, 02:00 Asia/Dhaka. It replaces version 1.
 
-Background: Claude (main build chat) has finished the preflight checks. The scientific code, settings and published data are fingerprinted and unchanged, every test passes, and the work sits on a branch `feature/recent-firms` that is not on GitHub yet. Four things need a human: a free NASA FIRMS key, storing it safely, testing it, and two team decisions.
+## For you, the tutor: read this first
 
-Important facts:
-- Suomi NPP (S-NPP), SHIFT's reference satellite, stopped sending new FIRMS data at 13:00 UTC on 2 Nov 2026. Recent detections will come from NOAA-20 (first choice, SHIFT measured it against S-NPP) and NOAA-21 (shown as "not tested by SHIFT").
-- Recent detections are a separate layer. They never change the historical record.
-- The key is a secret. It goes in exactly two places: Colab Secrets (squadronzero10 account) and a GitHub repository secret. Never in chat, code, screenshots, WhatsApp or documents.
+You are the SHIFT tutor. You explain, one step at a time, and wait for the result before moving on. Rules:
 
----
+1. Never write, change or "improve" code, file names, folders, settings or git commands. Use only what is written here, exactly.
+2. Never run or suggest git commands that create, delete, reset, clean, stash, commit or push anything. Claude (the main build chat) does all git work. Squadron Zero only runs the Colab setup cell and the cells given here.
+3. Never ask for, accept or repeat the NASA FIRMS key. If the user pastes a key by mistake, tell them to delete the message, request a new key at https://firms.modaps.eosdis.nasa.gov/api/map_key/ and replace both the Colab secret and the GitHub secret.
+4. If something fails in a way these steps do not cover, stop and tell the user to send the exact output to the main build chat.
+5. In Colab, `git status --short` always shows three deleted `.gitkeep` files and `?? data`. That is normal (the setup cell links `data` to Google Drive). Never "fix" it. Never run `rm -rf data/` with a trailing slash: it would delete the team's data on Drive.
 
-## TASK A. Get a free FIRMS MAP_KEY
+## What SHIFT is doing and why
 
-WHY: FIRMS only answers API requests that carry a key. It is free and arrives by email.
+SHIFT's historical record (2002 to 28 Oct 2026) puts MODIS and VIIRS fire detections on one scale. Decision D38 (agreed 11 Nov) adds a separate "Recent detections" layer: raw NASA FIRMS near-real-time detections from **28 Oct 2026 to today**, so the website has no gap between the record and now.
 
-STEP A1. Open https://firms.modaps.eosdis.nasa.gov/api/map_key/ and click "Get MAP_KEY".
-STEP A2. Enter the team email that squadronzero10 uses (so the key belongs to the team, not one person). Submit.
-STEP A3. Open that inbox and find the email from FIRMS.
+Key facts:
+- Suomi NPP (S-NPP), the satellite SHIFT's record is calibrated to, stopped sending new FIRMS data at 13:00 UTC on 2 Nov 2026. Recent detections come from its successors: **NOAA-20** (SHIFT measured it against S-NPP: 1.00 to 1.05) and **NOAA-21** (labelled "not tested against S-NPP by SHIFT").
+- **28 Oct is included on purpose.** It is the last full day of the historical record, so one day is covered by both. That overlap lets anyone check that the two sources agree on that day.
+- Recent detections are raw 375 m points. They are **not** on SHIFT's harmonised scale. The website never adds them to the historical numbers and never gives them an anomaly score. It only says, in words, whether the area is inside or outside its usual fire season.
+- A day with no detections anywhere on Earth means "no data that day", never "no fire".
+- The demo stays offline-safe: the website keeps the snapshot from its last build and shows when it was fetched.
+- Hard cut-off: if the recent layer is not passing every test by **12 Nov 12:00 (Dhaka)**, it stays switched off and the demo uses the current website, which already works. Video 2 never depends on it.
 
-Expected: an email with a 32-character key.
+## Progress so far
 
-STOP RULE: if the page says "Email is already registered", log in at https://firms.modaps.eosdis.nasa.gov/download/ to see or resend the existing key. Do not create a second account. If no email arrives within 30 minutes, check spam, then stop and report.
+| Task | What | Status |
+| --- | --- | --- |
+| A | Free FIRMS key requested | DONE 11 Nov |
+| B | Key stored in Colab Secrets as `NASA_FIRMS_MAP_KEY` (squadronzero10) | DONE |
+| C | Safe Colab test, NOAA-20 and NOAA-21 | PASSED 11 Nov 01:37 |
+| D | GitHub repository secret `NASA_FIRMS_MAP_KEY` | DONE 11 Nov 01:41 |
+| E | D38 yes, push yes | DONE 11 Nov 01:45 |
+| First full fetch on GitHub | 28 Oct to 10 Nov, both satellites, every day, 1,505,013 detections, 0 rejected | PASSED 11 Nov (Claude checked the run log) |
+| F | Ask the organisers about work done before the event | TO DO |
+| G | Look at the fetch result yourself (optional, 5 minutes) | OPTIONAL |
+| H | Review the website preview when Claude says it is ready | LATER |
+| I | Merge, then pause refreshes during judging | LATER |
 
-Do not paste the key anywhere yet.
-
----
-
-## TASK B. Store the key in Colab Secrets (for the test)
-
-WHY: Colab Secrets keep the key out of the notebook, so it never appears in code or output. The team already uses this for Earthdata.
-
-STEP B1. Sign in to Colab as squadronzero10 and open a new notebook.
-STEP B2. Click the key icon (Secrets) in the left bar. Click "Add new secret".
-STEP B3. Name: `NASA_FIRMS_MAP_KEY` (exactly, capitals and underscores). Value: paste the key from the email. Switch "Notebook access" on.
-
-Expected: the secret is listed with its value hidden as dots.
-
-STOP RULE: if the name differs by even one character, the test in TASK C fails with "secret not found". Fix the name, do not change the code.
-
----
-
-## TASK C. Test the key safely (one small request)
-
-WHY: This is the proof Claude could not produce: one small, real request for a Bangladesh box, one day, NOAA-20. The code never prints the key and replaces it with *** in anything it prints.
-
-STEP C1. In the same notebook, paste this into one cell and run it:
-
-```python
-# SHIFT preflight: FIRMS key test. Prints no secret. One small request per product.
-import csv, io, time, urllib.request, urllib.error
-from google.colab import userdata
-
-key = userdata.get('NASA_FIRMS_MAP_KEY').strip()
-BOX = (88.0, 20.5, 92.75, 26.75)          # west, south, east, north (Bangladesh box)
-SAT = {'VIIRS_NOAA20_NRT': 'N20', 'VIIRS_NOAA21_NRT': 'N21'}
-
-def safe(text):
-    return text.replace(key, '***')
-
-for product, sat in SAT.items():
-    url = 'https://firms.modaps.eosdis.nasa.gov/api/area/csv/' + key + '/' + product + '/' + ','.join(str(x) for x in BOX) + '/1'
-    t0 = time.time()
-    try:
-        with urllib.request.urlopen(url, timeout=90) as r:
-            status, body = r.status, r.read().decode('utf-8', 'replace')
-    except urllib.error.HTTPError as e:
-        status, body = e.code, ''
-    except Exception as e:
-        print(product, 'REQUEST FAILED:', type(e).__name__)
-        continue
-    secs = round(time.time() - t0, 1)
-    first = body.splitlines()[0] if body else ''
-    if status != 200 or 'latitude' not in first:
-        print(product, 'FAIL status', status, 'reply starts:', safe(body[:120]))
-        continue
-    rows = list(csv.DictReader(io.StringIO(body)))
-    lat_ok = all(BOX[1] <= float(r['latitude']) <= BOX[3] for r in rows)
-    lon_ok = all(BOX[0] <= float(r['longitude']) <= BOX[2] for r in rows)
-    print(product, 'OK status', status, '|', len(rows), 'rows |', secs, 's')
-    print('  columns:', first)
-    print('  inside box:', lat_ok and lon_ok)
-    print('  confidence values:', sorted({r.get('confidence') for r in rows}))
-    print('  satellite values:', sorted({r.get('satellite') for r in rows}), 'expected', sat)
-    print('  frp range MW:', (min(float(r['frp']) for r in rows), max(float(r['frp']) for r in rows)) if rows else 'no rows')
-    print('  sample acq_date, acq_time:', [(r['acq_date'], r['acq_time']) for r in rows[:3]])
-del key
-```
-
-Expected for each product: a line starting `VIIRS_NOAA20_NRT OK status 200` (and the same for NOAA21), a columns line containing latitude, longitude, acq_date, acq_time, confidence, frp, `inside box: True`, satellite values `['N20']` (and `['N21']`). Zero rows is a valid result (no fire in the box that day). It is not a failure.
-
-STEP C2. Copy the whole printed output and send it to the main build chat (Claude). It contains no key. Read it once before sending to be sure.
-
-STOP RULE:
-- "secret not found" or a NotebookAccess error: go back to STEP B3.
-- `FAIL status` with a reply about an invalid key: the key was mistyped. Copy it again from the email into the secret.
-- `FAIL status 429` or a reply about limits: wait 10 minutes, run once more, then stop and report.
-- `REQUEST FAILED`: check the internet connection, run once more, then stop and report.
-- Run the cell at most three times in total. Do not loop it.
-
----
-
-## TASK D. Store the key as a GitHub secret (for the website)
-
-WHY: The future website workflow fetches recent detections every few hours. It reads the key from a GitHub secret, which GitHub hides from logs and never gives to pull requests from forks. This needs someone with admin rights on github.com/squadronzero/squadron-zero.
-
-STEP D1. Open https://github.com/squadronzero/squadron-zero/settings/secrets/actions
-STEP D2. Click "New repository secret".
-STEP D3. Name: `NASA_FIRMS_MAP_KEY`. Secret: paste the key. Click "Add secret".
-
-Expected: `NASA_FIRMS_MAP_KEY` appears under "Repository secrets" with "Updated now". The value is never shown again, which is correct.
-
-STEP D4. Tell the main build chat only: "GitHub secret NASA_FIRMS_MAP_KEY added". Do not send the value.
-
-STOP RULE: if you cannot see the Settings tab, your account is not an admin. Ask the repository owner to do TASK D. Do not create a personal repository or put the key anywhere else.
-
----
-
-## TASK E. Two team decisions for the main build chat
-
-WHY: These change agreed decisions, so only Squadron Zero decides. The tutor explains, the team chooses.
-
-E1. Decision D34 said "No near-real-time data for the event". Adding recent FIRMS detections reverses it. Proposed D38: a separate "Recent detections" layer (NOAA-20, NOAA-21), refreshed every 3 hours by the website workflow, labelled with its fetch time, never mixed into the historical numbers, no anomaly score. The demo stays offline-safe because the site keeps the snapshot from its last build. Answer: "D38 yes" or "D38 no".
-
-E2. May Claude push the branch `feature/recent-firms` (it holds the preflight reports only, no product change) to GitHub? Answer: "push yes" or "push no".
-
-Send both answers in one message to the main build chat.
+Start with TASK F, then G. Do H and I only when the main build chat says "ready for review".
 
 ---
 
 ## TASK F. Ask the organisers about work done before the event
 
-WHY: NASA's 2026 FAQ does not say whether work prepared before the event is allowed. The 2024 FAQ said work should start on the first event day. The Bangladesh guide expects a working demo by 18:30 on day 1. Only the organisers can settle this, and a written answer protects the team.
+WHY: NASA's 2026 FAQ does not say whether work prepared before the event is allowed. The 2024 FAQ said work should start on the first event day. The Bangladesh guide expects a working demo by 18:30 on day 1. Only the organisers can settle this. A written answer protects the team, and the recent layer (built 11 to 14 Nov) is real event-time work worth mentioning.
 
-STEP F1. Open `docs/preflight/SPACE_APPS_ELIGIBILITY_NOTES.md` (section 4) after Claude pushes the branch, or ask Claude to paste the draft.
-STEP F2. Squadron Zero reads it, edits it if needed, and sends it to the Dhaka Local Lead or the Bangladesh Space Apps Slack.
-STEP F3. When an answer comes, paste the answer text (not personal contact details) to the main build chat.
+STEP F1. Open https://github.com/squadronzero/squadron-zero/blob/feature/recent-firms/docs/preflight/SPACE_APPS_ELIGIBILITY_NOTES.md and scroll to section 4, "Draft message to the organisers".
+STEP F2. Squadron Zero reads it and edits anything that is not accurate.
+STEP F3. Send it to the Dhaka Local Lead or on the Bangladesh Space Apps Slack (contacts are in the Participants Guide).
+STEP F4. When an answer comes, paste the answer text (not anyone's contact details) to the main build chat.
 
-STOP RULE: do not change the repository history or create a fresh repository, whatever the answer. Tell the main build chat first.
+Expected: a written reply from an organiser.
+
+STOP RULE: whatever the answer, do not change the repository, its history or its dates, and do not create a new repository. Tell the main build chat first.
 
 ---
 
-Order: A, B, C, D, then E and F. Report back after C, after D and after E.
+## TASK G. Look at the fetch result yourself (optional)
+
+WHY: Seeing the run log helps you explain the system in Video 2 and on the project page ("we fetch NOAA-20 and NOAA-21 from NASA FIRMS, check every row, and nothing was rejected").
+
+STEP G1. Open https://github.com/squadronzero/squadron-zero/actions and click the workflow **Recent detections (test fetch)** on the left.
+STEP G2. Click the newest run with a green tick, then the job **fetch**, then the step **Summary (no key in it)**.
+
+Expected: lines like
+`window {'from': '2026-10-28', 'to': ..., 'days': ...} | rows ... | complete True`
+then, for each product, `requests ok 3 of 3`, `rejected {}` and `days without data []`.
+
+STOP RULE: if you ever see a long string of letters and numbers where `***` should be, the key may be exposed. Do not share the page. Tell the main build chat at once, and replace the key (rule 3 above).
+
+---
+
+## TASK H. Review the website preview (only when Claude says "ready for review")
+
+WHY: The team, not Claude, decides whether the recent layer is good enough for the demo. A teammate who did not build it sees problems a builder misses.
+
+Claude will send a link to a pull request and say how to open the preview (GitHub Pages has no automatic preview, so Claude will give either a test link or a Codespace with exact steps). Then:
+
+STEP H1. Check that every check at the bottom has a green tick.
+STEP H2. Open the preview the way Claude describes. In the map, choose the recent detections layer.
+STEP H3. Check each point below and note any "no":
+- The map shows when the data was fetched (date and time, UTC).
+- Each satellite is named (NOAA-20, NOAA-21). NOAA-21 says "not tested against S-NPP by SHIFT".
+- Clicking a detection shows its date, time (UTC), satellite, confidence (low, nominal, high) and fire power in MW.
+- Gas flares and volcanoes are marked as likely non-fire heat.
+- The words never say "wildfire" for every point, never say "live alert", and never compare recent points with the historical numbers as a ratio or score.
+- Switching the recent layer off brings back the normal historical map exactly as before.
+- The Explore, 2012 switch, Validation and Method pages still work.
+
+STEP H4. Send the list of "no" items (or "all yes") to the main build chat.
+
+STOP RULE: do not click "Merge" during this task.
+
+---
+
+## TASK I. Merge, then pause refreshes during judging (only when Claude says so)
+
+WHY: Merging puts the recent layer on the live site. Every refresh rebuilds the site, so refreshes must pause while judges are looking, so nothing changes mid-demo.
+
+STEP I1. On the pull request page click **Ready for review** (if shown), then **Merge pull request**, then **Confirm merge**.
+STEP I2. Open https://github.com/squadronzero/squadron-zero/actions, click the newest **Website** run, wait for the green tick (2 to 4 minutes).
+STEP I3. Open https://squadronzero.github.io/squadron-zero/ and press Ctrl+Shift+R. Repeat the TASK H3 checks quickly.
+STEP I4. Before judging (Claude will give the exact time): in Actions, open the refresh workflow Claude names, click the "..." menu, then **Disable workflow**. After judging: same place, **Enable workflow**.
+
+Expected: the live site shows the recent layer with its fetch time, and it does not change during judging.
+
+STOP RULE: if the Website run fails or the site looks wrong, open the merged pull request and click **Revert**, then merge the revert pull request. That restores the previous site exactly. Then report to the main build chat.
+
+---
+
+## Dates that do not move
+
+- 12 Nov 12:00 (Dhaka): recent layer passes every check, or it stays off.
+- 12 Nov: offline dry run of the demo with the wifi off.
+- 13 Nov 18:30: Video 2 (working demo, NASA data named out loud: FIRMS MODIS and VIIRS archive, and NOAA-20 and NOAA-21 near-real-time).
+- 14 Nov 12:00: Video 3.

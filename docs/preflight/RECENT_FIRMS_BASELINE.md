@@ -127,6 +127,6 @@ How to check 1 to 5: `python docs/preflight/verify_baseline.py --zip <downloaded
 | FIRMS MAP_KEY | DONE 11 Nov: key held in Colab Secrets (squadronzero10) |
 | GitHub secret `NASA_FIRMS_MAP_KEY` | Added by Squadron Zero 11 Nov 01:41 (reported). Claude cannot list secrets. It is proven when the first scheduled fetch succeeds |
 | Authenticated FIRMS test request | PASSED 11 Nov for NOAA-20 and NOAA-21 (run on Colab by Squadron Zero, see `FIRMS_API_READINESS.md` section 5) |
-| Decision D34 ("no NRT for the event") | Open. The recent layer reverses D34. Squadron Zero decides (proposed D38) |
+| Decision D34 ("no NRT for the event") | Replaced by D38 (recent layer from 28 Oct 2026), decided by Squadron Zero 11 Nov 01:45 |
 | Eligibility | NEEDS ORGANIZER CONFIRMATION (see `SPACE_APPS_ELIGIBILITY_NOTES.md`) |
-| Branch on GitHub | Not pushed. Needs authorisation |
+| Branch on GitHub | Pushed 11 Nov 01:45 (authorised) |
