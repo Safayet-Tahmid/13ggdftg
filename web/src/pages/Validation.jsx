@@ -82,8 +82,10 @@ export default function Validation() {
         {cover.length > 0 && <p className="coverage"><b>{one(coverOf('cells'))}</b><span>of 2012 to 2015 cell-months fall inside the calibrated
           95% range (hotspots; fire power {one(coverOf('frp'))}){ck.tested_cells ? `, on the ${(+ck.tested_cells).toLocaleString('en-GB')} tested 2.5° cells` : ''}.
           <em className="qualifier"> Not a fully independent check. The 2012 to 2015 years were left out of the fit that made these
-          predictions, but they were also used in the fits that set the range widths and sorted the cells into groups. Coverage on
-          truly unseen data could be higher or lower, and it has not been measured.</em></span></p>}
+          predictions, but they were also used to choose and weight the tested cells, in the fits that set the range widths and sorted
+          the cells into groups, and in choosing the model. The ranges checked here are also built a little differently from the
+          published pre-2012 ranges, which have not been checked themselves. Coverage on truly unseen data could be higher or lower,
+          and it has not been measured.</em></span></p>}
         {get(anom, 'plain', 'caught_pct') != null && <p><b>{get(anom, 'plain', 'caught_pct')}%</b><span>of the months S-NPP marks as unusual in the test regions that the MODIS-based prediction also marks (each year 2012 to
           2019 predicted with that year left out). False alarms {get(anom, 'plain', 'false_alarm_pct')}% (for single 2.5° cells {get(ck, 'anomaly_rule', 'plain', 'caught_pct')}% and {get(ck, 'anomaly_rule', 'plain', 'false_alarm_pct')}%)</span></p>}
       </div>

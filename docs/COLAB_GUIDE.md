@@ -83,7 +83,7 @@ Then everything (MODIS 2002 to 2025, VIIRS 2012 to 2025):
 - A year with no file on the server is listed under `missing` in the report. That is expected for the current year.
 - Data after `fetch.last_year` (2025) comes from one FIRMS form request per sensor (1 Jan 2026 to today, whole world). Drop the ZIPs unchanged into `SHIFT/data/raw/global/` (no unzipping), then run `!python -m shift.run --dataset global`. The pipeline refuses form data that overlaps the yearly files, so nothing is counted twice.
 - Every download is fingerprinted (sha256, size, date) in its `_fetch_done` marker.
-- **VIIRS NOAA-20 (D8).** NASA stops delivering Suomi NPP data on 1 Nov 2026, so NOAA-20 is fetched as a third product, `VIIRS_NOAA20` (2018 onwards). It shares the VIIRS folders but writes its own file (`part-noaa20.parquet`), so S-NPP is never overwritten. Test one year, then the rest:
+- **VIIRS NOAA-20 (D8).** NASA FIRMS stopped producing Suomi NPP data at 13:00 UTC on 2 Nov 2026 (NASA FIRMS FAQ), so NOAA-20 is fetched as a third product, `VIIRS_NOAA20` (2018 onwards). It shares the VIIRS folders but writes its own file (`part-noaa20.parquet`), so S-NPP is never overwritten. Test one year, then the rest:
   ```python
   !python -m shift.run --dataset global --stage fetch --family VIIRS_NOAA20 --years 2020
   !python -m shift.run --dataset global --stage fetch --family VIIRS_NOAA20

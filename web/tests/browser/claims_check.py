@@ -42,6 +42,33 @@ with sync_playwright() as p:
             pg.goto(base + "#switch", wait_until="networkidle"); pg.wait_for_timeout(2500)
             pg.screenshot(path=f"{out}/switch_{label}.png", full_page=True)
             r["switch_facts"] = pg.locator(".facts").all_inner_texts()
+            # 95% range labels beside numbers in the explorer (a MODIS-era month, so ranges are shown)
+            pg.close(); pg = b.new_page(viewport=vp); pg.on("pageerror", lambda e: res["errors"].append(str(e)))
+            pg.goto(base + "#explore?area=preset:se_australia&v=frp&m=2009-12", wait_until="networkidle"); pg.wait_for_timeout(4000)
+            body = pg.inner_text("body")
+            r["explore_caveat_count"] = body.count("conversion error only")
+            r["explore_full_caveat_present"] = "not a guaranteed bound" in body
+            r["explore_bare_95_lines"] = [l.strip() for l in body.split("\n") if "95% range" in l and "conversion error" not in l][:6]
+            figs = pg.locator("figure.chart")
+            r["charts"] = figs.count()
+            for i in range(figs.count()):
+                if figs.nth(i).locator("svg").count() == 0:
+                    continue
+                svg = figs.nth(i).locator("svg").first
+                bb = svg.bounding_box(timeout=5000)
+                if not bb:
+                    continue
+                svg.scroll_into_view_if_needed()
+                bb = svg.bounding_box()
+                pg.mouse.move(bb["x"] + bb["width"] * 0.25, bb["y"] + bb["height"] * 0.5); pg.wait_for_timeout(400)
+                hv = figs.nth(i).locator(".hover")
+                r[f"chart{i}_hover"] = hv.inner_text() if hv.count() else None
+                if hv.count():
+                    hb = hv.bounding_box()
+                    r[f"chart{i}_hover_inside_viewport"] = bool(hb and hb["x"] >= 0 and hb["x"] + hb["width"] <= vp["width"] + 1)
+                figs.nth(i).screenshot(path=f"{out}/explore_chart{i}_{label}.png")
+            r["explore_no_horizontal_overflow"] = pg.evaluate("() => document.documentElement.scrollWidth <= window.innerWidth + 1")
+            pg.screenshot(path=f"{out}/explore_{label}.png", full_page=True)
         res[label] = r
         pg.close()
     b.close()

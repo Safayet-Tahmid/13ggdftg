@@ -2,7 +2,9 @@
 
 Audit of 8 November 2026. Record: final L3 of 7 November 2026 (2002-01-01 to 2026-10-28), published site data generated 2026-11-07T17:15:19Z from code commit `0f95990`.
 
-> **Erratum E1, 11 November 2026.** Statements in this document that the calibrated 95% ranges were "verified on 2012-2015" and hold "94-95% of held-out months" overstate how independent that check was. The verification predictions were fitted without 2012-2015, but the 2012-2015 years were also used in the fits that set the range widths and sorted cells into groups, and in choosing the model. The reported figures (94.9% hotspots, 93.9% fire power, on the 1,743 tested 2.5° cells) are kept as reported, but they are not an independent estimate of coverage, and they do not show that the published ranges contain the true value 95% of the time. Full trace: `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md`. The original text below is kept as it was written, marked [E1] where it applies.
+> **Erratum E1, 11 November 2026 (revised the same day).** Statements in this document that the calibrated 95% ranges were "verified on 2012-2015" and hold "94-95% of held-out months" overstate how independent that check was. The verification predictions were fitted without 2012-2015 (factor fitting was clean). But the 2012-2015 S-NPP data was also used to choose the 1,743 evaluated cells and their weights, to keep or drop cell-months (only those with fire predicted or observed), in the fits that set the range widths and sorted cells into groups, and in model selection (the 2.5° variant, the source pieces and the band method were chosen with 2012-2015 results in view). The evaluated bands are also not the published ones: the published pre-2012 ranges use the production bootstrap and each cell's typical 2003-2011 month, and cover cells that were never tested. The reported figures (94.9% hotspots, 93.9% fire power) are kept as reported, but they are not an independent estimate of coverage, and they do not show that the published ranges contain the true value 95% of the time. Full trace: `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md` section 1. The original text below is kept as it was written, marked [E1] where it applies.
+
+> **Erratum E2, 11 November 2026.** The "typical error of 4% per 2.5° cell" in this document is the backward test (factors fitted on 2016-2019, predicting 2012-2015) measured on each cell's total over all 48 months, then the fire-weighted median of the absolute error over the 1,743 tested cells (weights: S-NPP hotspots 2012-2025). 4.0% for hotspots, 4.2% for fire power. It is not a monthly error: the typical single cell-month error in the same test is 17.6% (hotspots) and 21.9% (fire power), from `daily__skill_by_scale.csv` (VALIDATION_REPORT.md section 2.3). Where the text below says "month" or "months" for this figure, it is marked [E2]. Definition: `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md` 2.1.
 
 ## 0. Where each number comes from
 
@@ -36,7 +38,7 @@ Source: `checks__simple_methods.csv` (`checks.py` `simple_methods`, line 363). L
 | v1 Florida line (fire power only) | 27.3 | 58.6 | 42.9 | 63.2% | 29.1% | -62.5% |
 | **SHIFT** (2.5° cell and month, shrunk) | **69.6** | **69.0** | **69.3** | **4.0%** | **4.2%** | **+2.9%** |
 
-"Score" is SHIFT's own metric: the share of held-out cell-months put in the same calendar class (low, normal, unusual, critical) as the real S-NPP month. SHIFT has the highest score and the lowest typical cell error of the methods tested. Its global total error (+2.9% hotspots, +6.1% fire power) is larger than that of the one-ratio methods, because a global ratio is fitted to make exactly that total right. Per-place accuracy and the global total pull in different directions here.
+"Backward error (fw median)" is the error of each 2.5° cell's predicted total over all 48 months of 2012-2015 against the S-NPP total, as an absolute percent, then the fire-weighted median over the 1,743 tested cells (weights: S-NPP hotspots 2012-2025) [E2]. "Score" is SHIFT's own metric: the share of held-out cell-months put in the same calendar class (low, normal, unusual, critical) as the real S-NPP month. SHIFT has the highest score and the lowest typical cell error of the methods tested. Its global total error (+2.9% hotspots, +6.1% fire power) is larger than that of the one-ratio methods, because a global ratio is fitted to make exactly that total right. Per-place accuracy and the global total pull in different directions here.
 
 ### 2.2 Factor resolution [R]
 
@@ -187,7 +189,7 @@ Daily critical periods are worse (median 5.8 critical days a year before 2012 ag
 ## 7. What the validation supports
 
 Measured:
-- At month and region scale, MODIS-era values predicted from MODIS match held-out S-NPP months with a typical error of 4% per 2.5° cell (backward test), better than every simpler method tested.
+- At month and region scale, MODIS-era values predicted from MODIS match held-out S-NPP months with a typical error of 4% per 2.5° cell (backward test), better than every simpler method tested. [E2: 4% is the error of each cell's four-year total. Single cell-months: 17.6% hotspots, 21.9% fire power]
 - The record has no 2012 artefact at global scale (gap +0.8%, within the 1.0% noise of the ratio itself), and long-term trends follow MODIS alone within 0.6 points a year in every test region, while the raw joined record is off by up to 15.6 points a year.
 - The calibrated 95% ranges hold 94-95% of held-out months. [E1: reported coverage, not independently verified]
 

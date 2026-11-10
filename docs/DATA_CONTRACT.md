@@ -107,7 +107,7 @@ Will add the calibrated MODIS-era values and the native VIIRS-era values on one 
 Fixed so far (Phase 2):
 - MODIS source (D19): Terra + Aqua merged per cell-day up to 2019, Aqua alone from 2020, each piece with its own factor.
 - Comparable record start (D20): 1 Jan 2003. Jan-Jun 2002 is Terra only and is kept with a flag, never used for baselines.
-- After 1 Nov 2026 VIIRS NOAA-20 x k stands in for S-NPP (D8, fix 2).
+- After the end of FIRMS Suomi NPP production (13:00 UTC, 2 Nov 2026, NASA FIRMS FAQ https://www.earthdata.nasa.gov/data/tools/firms/faq) VIIRS NOAA-20 x k stands in for S-NPP (D8, fix 2).
 
 ---
 

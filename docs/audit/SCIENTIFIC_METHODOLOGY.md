@@ -2,7 +2,9 @@
 
 Independent audit, 8 November 2026 · Team Squadron Zero · NASA Space Apps Challenge 2026, Challenge 9
 
-> **Erratum E1, 11 November 2026.** Statements in this document that the calibrated 95% ranges were "verified on 2012-2015" and hold "94-95% of held-out months" overstate how independent that check was. The verification predictions were fitted without 2012-2015, but the 2012-2015 years were also used in the fits that set the range widths and sorted cells into groups, and in choosing the model. The reported figures (94.9% hotspots, 93.9% fire power, on the 1,743 tested 2.5° cells) are kept as reported, but they are not an independent estimate of coverage, and they do not show that the published ranges contain the true value 95% of the time. Full trace: `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md`. The original text below is kept as it was written, marked [E1] where it applies.
+> **Erratum E1, 11 November 2026 (revised the same day).** Statements in this document that the calibrated 95% ranges were "verified on 2012-2015" and hold "94-95% of held-out months" overstate how independent that check was. The verification predictions were fitted without 2012-2015 (factor fitting was clean). But the 2012-2015 S-NPP data was also used to choose the 1,743 evaluated cells and their weights, to keep or drop cell-months (only those with fire predicted or observed), in the fits that set the range widths and sorted cells into groups, and in model selection (the 2.5° variant, the source pieces and the band method were chosen with 2012-2015 results in view). The evaluated bands are also not the published ones: the published pre-2012 ranges use the production bootstrap and each cell's typical 2003-2011 month, and cover cells that were never tested. The reported figures (94.9% hotspots, 93.9% fire power) are kept as reported, but they are not an independent estimate of coverage, and they do not show that the published ranges contain the true value 95% of the time. Full trace: `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md` section 1. The original text below is kept as it was written, marked [E1] where it applies.
+
+> **Erratum E2, 11 November 2026.** The "typical error of 4% per 2.5° cell" in this document is the backward test (factors fitted on 2016-2019, predicting 2012-2015) measured on each cell's total over all 48 months, then the fire-weighted median of the absolute error over the 1,743 tested cells (weights: S-NPP hotspots 2012-2025). 4.0% for hotspots, 4.2% for fire power. It is not a monthly error: the typical single cell-month error in the same test is 17.6% (hotspots) and 21.9% (fire power), from `daily__skill_by_scale.csv` (VALIDATION_REPORT.md section 2.3). Where the text below says "month" or "months" for this figure, it is marked [E2]. Definition: `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md` 2.1.
 
 This audit was carried out by the same AI system (Claude) that wrote SHIFT's code, at the team's request, with the instruction to review it critically and not to defend it. The reader should weigh it with that in mind. Every claim about the implementation cites a file and line. Every number cites a report or an audit table. Statements are marked as **[fact]** (established science, with a reference), **[code]** (what the implementation does), **[measured]** (a result from a report or from this audit) or **[hypothesis]** (an interpretation not tested here).
 
@@ -16,7 +18,7 @@ SHIFT is a calibrated overlap-period harmonisation, not a concatenation. It (1) 
 
 What the evidence supports **[measured]**:
 - The 2012 artefact is removed at global scale: raw joined record 2.64× step, SHIFT 0.972×, MODIS alone 0.964×. The 0.8% gap is at the noise level of the ratio itself (1.0%).
-- On held-out VIIRS years SHIFT predicts S-NPP from MODIS with a typical 4% error per 2.5° cell (backward test), against 12% for the best simpler method and 63% for joining the records.
+- On held-out VIIRS years SHIFT predicts S-NPP from MODIS with a typical 4% error per 2.5° cell (backward test, error of each cell's four-year total, fire-weighted median) [E2], against 12% for the best simpler method and 63% for joining the records.
 - Long-term trends 2003-2019 match MODIS alone within 0.62 percentage points a year in all test regions. The raw joined record is off by up to 15.6.
 - The calibrated 95% ranges contain 94-95% of held-out months. [E1: not independently verified]
 - The published website reproduces the pipeline's regional totals exactly.
@@ -120,7 +122,7 @@ Summary (detail and sources in VALIDATION_REPORT.md):
 
 | Experiment | Result | Independent? |
 | --- | --- | --- |
-| Backward test 2012-2015 from 2016-2019 | 4.0% / 4.2% typical cell error, best of five methods | Out of sample in time, VIIRS era |
+| Backward test 2012-2015 from 2016-2019 | 4.0% / 4.2% typical cell error (four-year total per cell, fire-weighted median, single cell-months 17.6% and 21.9%) [E2], best of five methods | Out of sample in time, VIIRS era |
 | Leave one year out | part of score 69.3 | Out of sample in time |
 | Untouched 2026 | NOAA-20 PASS (0.07% / 0.99%), Aqua FAIL on FRP (-19%) | Out of sample, after the fit |
 | Coverage of 95% ranges | 94.9% / 93.9% | Calibrated 2016-2019, verified 2012-2015. [E1: partly, 2012-2015 also entered the calibration fits] |
@@ -236,7 +238,7 @@ Details, files and validation steps: SCIENTIFIC_IMPROVEMENT_PLAN.md.
 ### 1. The strongest claims SHIFT can make now
 
 1. Joining MODIS and VIIRS creates a 2.6× jump in global hotspots at 2012. SHIFT removes it: its 2012 step matches MODIS alone within 0.8%, inside the 1% year-to-year noise of the sensor ratio.
-2. On years it never saw, SHIFT predicts VIIRS from MODIS with a typical error of 4% per 2.5° cell, three times better than one ratio per region and fifteen times better than joining the records.
+2. On years it never saw, SHIFT predicts VIIRS from MODIS with a typical error of 4% per 2.5° cell (four-year total per cell, single months about 18 to 22%) [E2], three times better than one ratio per region and fifteen times better than joining the records.
 3. SHIFT's long-term trends match MODIS alone, the one instrument that flew throughout, within 0.62 percentage points a year in all ten test regions and the world.
 4. Its 95% ranges contain 94-95% of held-out months [E1: in a check that was not fully independent], and missing satellite days are shown as gaps, never as quiet days.
 5. It does this for any area on Earth, monthly from 2003 to October 2026, in a website that works offline.

@@ -3,6 +3,10 @@
 // "hotspots", "no data" (never "no fire"), "indicative", "95% range" are defined terms.
 // Entries written as functions build a sentence from numbers: keep the ${...} parts.
 
+// Shown beside every 95% range figure (scientific claims correction, 11 Nov 2026). Labels only: no calculation uses this.
+export const RANGE_CAVEAT = 'The range covers only the MODIS-to-VIIRS conversion error. Its 95% coverage was not checked independently, so it is a guide, not a guaranteed bound (see Method).';
+export const rangeShort = (p) => `95% range ±${p}% (conversion error only, not a guaranteed bound)`;
+
 const T = {
   brand: 'SHIFT',
   tagline: 'One fire record from two generations of NASA satellites, 2002 to today',
@@ -62,7 +66,7 @@ const T = {
     legendUnitCells: 'detections of nominal or high confidence in the period',
     legendUnitPoints: 'MW, as reported by FIRMS for each 375 m pixel',
     legendRaw: 'Raw NASA FIRMS near-real-time detections. Not on the harmonised S-NPP scale and not added to any number '
-      + 'on this page. S-NPP, SHIFT\'s reference satellite, stopped on 2 Nov 2026, so these come from NOAA-20 and NOAA-21.',
+      + 'on this page. S-NPP, SHIFT\'s reference satellite, stopped in NASA FIRMS on 2 Nov 2026 (13:00 UTC), so these come from NOAA-20 and NOAA-21.',
     legendLow: 'Faint ringed dots: low confidence. Grey: likely non-fire heat (SHIFT non-fire cells). Neither is counted in the overview.',
     legendOverlap: '28 Oct is also the last day of the harmonised record (one day of overlap, on purpose).',
     panel: {
@@ -143,9 +147,10 @@ const T = {
         switch: 'Mixed month: MODIS put on the S-NPP scale up to 19 Jan 2012, S-NPP observed from 20 Jan 2012.',
         viirs: 'VIIRS S-NPP observed (NOAA-20 fills days S-NPP missed).',
       },
-      range: 'Calibrated 95% range of the factor',
+      range: 'Calibrated 95% range of the factor (conversion error only)',
       rangeValue: (c, f, fc) => `hotspots ±${c}%, fire power ±${f}% (2.5° factor cell ${fc}, this calendar month). `
-        + 'Wide ranges mean few fires to measure the factor with. Area totals have much narrower ranges.',
+        + 'Wide ranges mean few fires to measure the factor with. Area totals have much narrower ranges. '
+        + RANGE_CAVEAT,
       rangeNone: 'Not needed: the month is observed by S-NPP.',
       rangeMissing: 'No range for this factor cell and month.',
       cloud: 'Cloud',
@@ -190,7 +195,7 @@ const T = {
     monthShare: (pct, month) => `So far this month (to the last day with data) has had ${pct}% of the fire a normal ${month} brings in the whole month.`,
     left: (n) => `${n} year${n > 1 ? 's' : ''} left out because a satellite gap fell in these dates.`,
     targetGaps: (n) => `${n} day${n > 1 ? 's' : ''} in these dates had no satellite data, so this year may be undercounted.`,
-    modisNote: 'Bars before 2012 are MODIS put on the VIIRS scale; the whisker is their calibrated 95% range.',
+    modisNote: 'Bars before 2012 are MODIS put on the VIIRS scale. The whisker is their calibrated 95% range. ' + RANGE_CAVEAT,
     chartLabel: 'The same dates in every year',
   },
 
@@ -234,12 +239,13 @@ const T = {
     cloudUntil: (ym) => `Cloud data reaches ${ym}; later months carry no cloud flag.`,
   },
   trend: {
-    label: (m) => `Monthly ${m}, with the 95% range of the MODIS years`,
-    total: 'monthly total', range: '95% range of the scaling (MODIS years)', viirs: 'VIIRS',
-    rangeTip: (a, b) => `95% range ${a} to ${b}`,
+    label: (m) => `Monthly ${m}, with the 95% range of the MODIS years (conversion error only, not a guaranteed bound)`,
+    total: 'monthly total', range: '95% range of the scaling (MODIS years, conversion error only)', viirs: 'VIIRS',
+    rangeTip: (a, b) => `95% range ${a} to ${b} (conversion error only)`,
   },
   explainScale: 'Values are on the VIIRS (S-NPP) scale throughout. Before 20 January 2012 they are MODIS observations '
-    + 'put on that scale with a factor measured for this place and month; the shaded band is that factor\'s calibrated 95% range.',
+    + 'put on that scale with a factor measured for this place and month. The shaded band is that factor\'s calibrated 95% range. '
+    + RANGE_CAVEAT,
 
   // ---------------------------------------------------------------- downloads
   downloads: {
@@ -253,7 +259,8 @@ const T = {
     firms: 'Original detections on NASA FIRMS (online)',
     print: 'Print or save a one-page brief',
     png: 'PNG', svg: 'SVG',
-    note: 'Dates apply to the CSV files and to "Your dates" above. Raw satellite points are not stored here; the FIRMS link opens them.',
+    note: 'Dates apply to the CSV files and to "Your dates" above. Raw satellite points are not stored here. The FIRMS link opens them. '
+      + 'The range_95_pct column is the conversion-error range only, not a guaranteed 95% bound (see Method).',
   },
 };
 

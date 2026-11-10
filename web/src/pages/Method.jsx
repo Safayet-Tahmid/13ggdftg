@@ -19,7 +19,7 @@ export default function Method({ meta }) {
         <li>For each 2.5° area and calendar month, measure the ratio of VIIRS to MODIS fire over 2012 to 2025. Areas with little fire lean on their 10° neighbourhood.</li>
         <li>Use Terra and Aqua together until 2019 and Aqua alone after, when Terra's orbit drifts.</li>
         <li>Fill satellite outages from a partner satellite flying close in time, tested to within 3 to 6 percent. Where no partner saw the area, the day is shown as no data.</li>
-        <li>Carry the record past 1 November 2026, when Suomi NPP data delivery ends, with NOAA-20 tied to it.</li>
+        <li>Carry the record past 2 November 2026, 13:00 UTC, when NASA FIRMS stopped producing Suomi NPP data (NASA FIRMS FAQ), with NOAA-20 tied to it.</li>
       </ol>
       <h3>What the Explore page works out</h3>
       <ul>
@@ -32,7 +32,7 @@ export default function Method({ meta }) {
         {last && <li>The harmonised record runs to {last}. From 28 October 2026 the map also offers <b>recent detections</b> (D38):
           raw NASA FIRMS near-real-time points from VIIRS on NOAA-20 and NOAA-21, fetched every few hours and labelled with the
           fetch time. They are not on the harmonised scale, are never added to the record's numbers and are never given an
-          anomaly score. S-NPP, the record's reference satellite, stopped delivering new data on 2 November 2026. SHIFT measured
+          anomaly score. NASA FIRMS stopped producing new data from S-NPP, the record's reference satellite, at 13:00 UTC on 2 November 2026. SHIFT measured
           NOAA-20 against S-NPP (1.00 to 1.05). NOAA-21 has not been tested against S-NPP by SHIFT. Detections in SHIFT's
           persistent non-fire cells are shown in grey, and low-confidence detections are drawn faint and not counted.</li>}
         <li>Cloud and smoke hide fires from every satellite. A cloudy day can look like a quiet one; months cloudier than 90% of years carry a flag.</li>
@@ -42,8 +42,9 @@ export default function Method({ meta }) {
           It covers only that conversion error, as measured in the years both sensors flew. It does not include fire hidden by cloud
           or smoke, false detections, any change in the VIIRS to MODIS ratio before 2012 (which cannot be measured), or the larger
           errors of single days and small areas. In a check on 2012 to 2015, about 94 to 95% of cell-months fell inside, but that
-          check was not fully independent of how the ranges were set (see the Validation page). Read the range as a guide to the
-          conversion error, not as a guaranteed 95% bound on the true value.</li>
+          check was not fully independent of how the ranges were set, and the ranges it checked are built a little differently
+          from the published ones (see the Validation page). Read the range as a guide to the conversion error, not as a guaranteed
+          95% bound on the true value.</li>
         <li>Day-level and week-level values and dated critical periods before 20 January 2012 are indicative; months are tested (D30).</li>
         <li>About one in four unusual months in the MODIS years would not be unusual to VIIRS; those months are marked.</li>
         <li>Three test regions keep a 2012 step near 10% after harmonising, depending on how it is measured: Iberia +9 to +12%
