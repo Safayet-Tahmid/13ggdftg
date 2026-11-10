@@ -1,0 +1,57 @@
+# SHIFT recent detections (D38), TEST RUN on the feature branch only.
+# Fetches NOAA-20 and NOAA-21 FIRMS NRT detections from 28 Oct 2026 to today with the repository
+# secret NASA_FIRMS_MAP_KEY, checks every row and keeps the two output files as a run artifact.
+# It deploys nothing and touches no historical data. GitHub never gives secrets to pull requests
+# from forks, and this workflow does not run on pull requests at all.
+name: Recent detections (test fetch)
+
+on:
+  push:
+    branches: [feature/recent-firms]
+    paths: ["recent/**", ".github/workflows/recent-firms.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: recent-firms-test
+  cancel-in-progress: true
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Fetch and check (the key is never printed)
+        env:
+          NASA_FIRMS_MAP_KEY: ${{ secrets.NASA_FIRMS_MAP_KEY }}
+        run: python recent/fetch_firms.py --out "$RUNNER_TEMP/recent"
+      - name: Summary (no key in it)
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os, pathlib
+          p = pathlib.Path(os.environ["RUNNER_TEMP"]) / "recent" / "status.json"
+          if not p.exists():
+              print("no status.json written"); raise SystemExit(0)
+          s = json.loads(p.read_text())
+          print("window", s["window"], "| rows", s["rows"], "| file MB", round(s["file_bytes"] / 1e6, 2), "| complete", s["complete"])
+          for name, q in s["products"].items():
+              print(name, "rows", q["rows"], "| requests ok", q["requests_ok"], "of", len(q["requests"]),
+                    "| rejected", q["rejected"], "| duplicates", q["duplicates_removed"])
+              print("  per day", q["per_day"])
+              print("  days without data", q["days_without_data"])
+              for r in q["requests"]:
+                  print("  ", r)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recent-firms-test
+          path: ${{ runner.temp }}/recent/
+          retention-days: 7
