@@ -9,10 +9,14 @@ Usage (the key comes from the environment, never from the command line):
     NASA_FIRMS_MAP_KEY=... python recent/fetch_firms.py --out web/public/data/recent
     python recent/fetch_firms.py --out OUT --from-csv DIR      # offline: read saved FIRMS CSVs
 
-Outputs in OUT:
-    recent.json.gz   the detections, column by column (see FORMAT below)
-    status.json      when it ran, the window, per product: requests, rows kept and rejected,
-                     detections per day (a day with 0 worldwide means no data, not no fire)
+Outputs in OUT (all small static files, read by web/src/lib/recent.js):
+    status.json          when it ran, the window, per product: requests, rows kept and rejected,
+                         detections per day (a day with 0 worldwide means no data, not no fire)
+    overview.json.gz     one row per 0.25 deg cell with detections: counts in the last 24 hours,
+                         last 7 days and the whole window, strongest FRP, time of the latest one
+    tiles/<N20E090>.json.gz   every detection in one 10 deg tile, loaded only when zoomed in
+With --notfire (the site's notfire.json), detections in SHIFT's persistent non-fire cells (gas
+flares, industry, volcanoes) are flagged and kept out of the overview counts.
 
 Exit code: 0 all products fetched, 2 some product or chunk failed, 1 nothing usable.
 Standard library only.
@@ -24,6 +28,7 @@ import csv
 import gzip
 import io
 import json
+import math
 import os
 import sys
 import time
@@ -210,12 +215,91 @@ def build(first: date, last: date, key: str | None, csv_dir: Path | None, log=pr
     return data, status
 
 
+def load_notfire(path: Path) -> set:
+    """SHIFT's persistent non-fire cells (0.05 deg centres) as (row, col) keys on a 0.05 deg grid."""
+    d = json.loads(path.read_text())
+    return {cell(lat, lon, 20) for lat, lon, *_ in d["cells"]}
+
+
+def cell(lat: float, lon: float, per_deg: int) -> tuple[int, int]:
+    """(row, col) on a grid of 1/per_deg degrees. Multiplying (not dividing by 0.05) avoids float slips."""
+    return (min(math.floor((lat + 90) * per_deg + 1e-9), 180 * per_deg - 1),
+            min(math.floor((lon + 180) * per_deg + 1e-9), 360 * per_deg - 1))
+
+
+def tile_name(lat: float, lon: float, deg: int = 10) -> str:
+    """Same names as the site's daily tiles (web/src/lib/data.js tileName)."""
+    a, b = int((lat // deg) * deg), int((lon // deg) * deg)
+    return f"{'N' if a >= 0 else 'S'}{abs(a):02d}{'E' if b >= 0 else 'W'}{abs(b):03d}"
+
+
+def write_web(data: dict, out: Path, nf_cells: set | None) -> dict:
+    """Overview per 0.25 deg cell and one detail file per 10 deg tile. Values are copied, never rescaled."""
+    first = date.fromisoformat(data["from"])
+    n = len(data["s"])
+    mins = [data["d"][i] * 1440 + (data["t"][i] // 100) * 60 + data["t"][i] % 100 for i in range(n)]
+    latest = max(mins) if mins else 0
+    cells, tiles = {}, {}
+    nf_total = 0
+    for i in range(n):
+        lat, lon = data["la"][i] / 1e4, data["lo"][i] / 1e4
+        nf = 0
+        if nf_cells is not None and cell(lat, lon, 20) in nf_cells:
+            nf = 1
+            nf_total += 1
+        t = tiles.setdefault(tile_name(lat, lon), {k: [] for k in ("la", "lo", "d", "t", "s", "c", "f", "dn", "nf")})
+        for k in ("la", "lo", "d", "t", "s", "c", "f", "dn"):
+            t[k].append(data[k][i])
+        t["nf"].append(nf)
+        r, q = cell(lat, lon, 4)
+        cid = r * 1440 + q
+        c = cells.setdefault(cid, [0, 0, 0, 0, 0, -1])   # n_24h, n_7d, n_all, frp_max x10, nonfire, last minute
+        if nf:
+            c[4] += 1
+            continue
+        if data["c"][i] == 0:                              # low confidence: shown as a point, not counted
+            continue
+        age = latest - mins[i]
+        c[2] += 1
+        if age < 7 * 1440:
+            c[1] += 1
+        if age < 1440:
+            c[0] += 1
+        c[3] = max(c[3], data["f"][i])
+        c[5] = max(c[5], mins[i])
+    ids = sorted(k for k, v in cells.items() if v[2] or v[4])
+    ov = {"format": FORMAT, "from": data["from"], "grid_deg": 0.25, "latest_minute": latest,
+          "note": "counts: nominal and high confidence, outside SHIFT non-fire cells; frp in 0.1 MW",
+          "id": ids, **{k: [cells[i][j] for i in ids] for j, k in enumerate(("n24", "n7", "n", "fmax", "nf", "last"))}}
+    total = 0
+    with gzip.open(out / "overview.json.gz", "wb", compresslevel=9) as fh:
+        fh.write(json.dumps(ov, separators=(",", ":")).encode())
+    total += (out / "overview.json.gz").stat().st_size
+    (out / "tiles").mkdir(exist_ok=True)
+    for old in (out / "tiles").glob("*.json.gz"):
+        old.unlink()
+    index = {}
+    for name, t in sorted(tiles.items()):
+        p = out / "tiles" / f"{name}.json.gz"
+        with gzip.open(p, "wb", compresslevel=9) as fh:
+            fh.write(json.dumps({"format": FORMAT, "from": data["from"], "satellites": data["satellites"],
+                                 "confidence": data["confidence"], "scale": data["scale"], **t},
+                                separators=(",", ":")).encode())
+        index[name] = len(t["la"])
+        total += p.stat().st_size
+    latest_utc = (datetime(first.year, first.month, first.day, tzinfo=timezone.utc) + timedelta(minutes=latest)) if n else None
+    return {"overview_cells": len(ids), "tiles": index, "nonfire_flagged": nf_total if nf_cells is not None else None,
+            "latest_detection_utc": latest_utc.strftime("%Y-%m-%dT%H:%MZ") if latest_utc else None,
+            "web_bytes": total}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--out", required=True)
     ap.add_argument("--from", dest="first", default=DEFAULT_FROM, help="first day, YYYY-MM-DD (UTC)")
     ap.add_argument("--to", dest="last", default=None, help="last day, default today (UTC)")
     ap.add_argument("--from-csv", default=None, help="read saved CSVs instead of calling FIRMS (tests)")
+    ap.add_argument("--notfire", default=None, help="the site's notfire.json, to flag non-fire heat")
     a = ap.parse_args(argv)
     first = date.fromisoformat(a.first)
     last = date.fromisoformat(a.last) if a.last else datetime.now(timezone.utc).date()
@@ -227,14 +311,13 @@ def main(argv=None) -> int:
         if not key:
             print("NASA_FIRMS_MAP_KEY is not set. Nothing fetched."); return 1
     data, status = build(first, last, key, Path(a.from_csv) if a.from_csv else None)
+    nf_cells = load_notfire(Path(a.notfire)) if a.notfire else None
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
-    raw = json.dumps(data, separators=(",", ":")).encode()
-    with gzip.open(out / "recent.json.gz", "wb", compresslevel=9) as fh:
-        fh.write(raw)
-    status["file_bytes"] = (out / "recent.json.gz").stat().st_size
+    status.update(write_web(data, out, nf_cells))
     (out / "status.json").write_text(json.dumps(status, indent=1))
     ok = sum(p["requests_ok"] for p in status["products"].values())
-    print(f"wrote {status['rows']} detections, {status['file_bytes'] / 1e6:.2f} MB, complete={status['complete']}")
+    print(f"wrote {status['rows']} detections, {status['overview_cells']} overview cells, {len(status['tiles'])} tiles, "
+          f"{status['web_bytes'] / 1e6:.2f} MB, complete={status['complete']}")
     if ok == 0:
         return 1
     return 0 if status["complete"] else 2
