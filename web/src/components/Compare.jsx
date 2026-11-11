@@ -1,7 +1,7 @@
 // "Now against the past" (D32): a window of dates (this month so far, the last 30 days or the
 // user's dates) against the same dates in every other year: median, rank and ratio.
 import { useEffect, useRef, useState } from 'react';
-import T, { MONTHS_LONG } from '../content/text.js';
+import T, { MONTHS_LONG, rangeShort } from '../content/text.js';
 import { compact, fmt, longDate } from '../lib/format.js';
 import { dateOf } from '../lib/data.js';
 
@@ -74,7 +74,7 @@ export default function Compare({ meta, cmp, variable, theme, mode, setMode, mon
         {hv && (
           <div className="hover" style={{ left: Math.min(l + hover * bw + 10, width - 220), top: 6 }}>
             <b>{hv.year}</b>: {fmt(hv.value, variable)}
-            {hv.rangePct != null && <><br />95% range ±{Math.round(hv.rangePct)}%</>}
+            {hv.rangePct != null && <><br />{rangeShort(Math.round(hv.rangePct))}</>}
             {!hv.usable && !hv.target && <><br />{hv.gaps ? `${hv.gaps} day(s) without data: left out` : 'not comparable'}</>}
           </div>
         )}

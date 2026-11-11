@@ -60,7 +60,7 @@ export default function Switch2012({ theme }) {
         <div className="facts">
           <p><b>{step.cells_step_raw_switch?.toFixed(2)}×</b><span>jump at the switch in the raw record (VIIRS 2013 to 2015 against MODIS 2009 to 2011)</span></p>
           <p><b>{step.cells_step_harmonised?.toFixed(2)}×</b><span>the same comparison after SHIFT</span></p>
-          <p><b>{step.cells_step_modis_only?.toFixed(2)}×</b><span>the real change, seen by MODIS alone over the same years</span></p>
+          <p><b>{step.cells_step_modis_only?.toFixed(2)}×</b><span>the change MODIS alone shows over the same years (one sensor, so no switch: the reference SHIFT aims to match, not a ground truth)</span></p>
         </div>
       )}
     </main>

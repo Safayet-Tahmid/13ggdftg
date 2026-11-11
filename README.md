@@ -4,7 +4,7 @@
 
 SHIFT turns MODIS (2000 onwards) and VIIRS (2012 onwards) active-fire detections into one consistent, uncertainty-aware burning-activity calendar for any area on Earth.
 
-Why now: NASA stops delivering Suomi NPP data on 1 November 2026, and the Terra and Aqua MODIS
+Why now: NASA FIRMS stopped producing Suomi NPP data at 13:00 UTC on 2 November 2026 ([NASA FIRMS FAQ](https://www.earthdata.nasa.gov/data/tools/firms/faq)), and the Terra and Aqua MODIS
 missions are near their end. A fire record that runs from 2000 to today only stays usable if the
 sensors are tied together.
 
@@ -115,7 +115,7 @@ Each stage writes `data/processed/<dataset>/report_<stage>.json` with row counts
 | --- | --- | --- |
 | NASA FIRMS MODIS Collection 6.1 active fires (Terra and Aqua, 1 km), https://firms.modaps.eosdis.nasa.gov/ | The long record, 2000 onwards | Yearly world archive files 2002-2025 plus a form download for 2026; cleaned, gridded to 0.05 deg cell-days |
 | NASA FIRMS VIIRS 375 m active fires (Suomi NPP), https://firms.modaps.eosdis.nasa.gov/ | The reference sensor the MODIS record is calibrated to, 2012 onwards | Same route as MODIS; paired with MODIS on the same cell and day to fit and test the calibration |
-| NASA FIRMS VIIRS 375 m active fires (NOAA-20), https://firms.modaps.eosdis.nasa.gov/ | Continuity: NASA stops delivering Suomi NPP data on 1 Nov 2026; NOAA-20 carries the same instrument (2018 onwards) | Same route; compared with S-NPP over 2018-2026 (yearly detection ratio 0.97-1.07) |
+| NASA FIRMS VIIRS 375 m active fires (NOAA-20), https://firms.modaps.eosdis.nasa.gov/ | Continuity: NASA FIRMS stopped producing Suomi NPP data at 13:00 UTC on 2 Nov 2026 (NASA FIRMS FAQ). NOAA-20 carries the same instrument (2018 onwards) | Same route; compared with S-NPP over 2018-2026 (yearly detection ratio 0.97-1.07) |
 
 Dataset citations (as requested by NASA FIRMS):
 

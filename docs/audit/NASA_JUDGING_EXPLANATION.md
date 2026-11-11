@@ -1,6 +1,6 @@
 # SHIFT for the judges: what we can claim and how we back it
 
-Prepared from the scientific audit of 8 November 2026. Every number is in VALIDATION_REPORT.md with its source. Each answer has a plain version, a technical version, the evidence, and the limit that stops it from overclaiming.
+Prepared from the scientific audit of 8 November 2026, corrected 11 November 2026 (coverage wording, the 4% definition and the Suomi NPP date, see SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md). Every number is in VALIDATION_REPORT.md with its source. Each answer has a plain version, a technical version, the evidence, and the limit that stops it from overclaiming.
 
 ## Q1. What exact scientific problem does SHIFT solve?
 
@@ -42,12 +42,12 @@ Prepared from the scientific audit of 8 November 2026. Every number is in VALIDA
 
 ## Q5. What quantitative evidence shows it works?
 
-**Plain.** We hid years from the model and asked it to predict them. It did better than every simpler method, and its error bands held the truth 95% of the time.
+**Plain.** We hid four years from the fit and asked the model to predict them. For a typical 2.5° square, its total over those four years came within about 4% of what VIIRS saw. Single months are rougher, typically within about 18% (hotspots) to 22% (fire power). It did better than every simpler method we tried. Its error bands held about 94 to 95% of the hidden months, but that check was not fully independent of how the bands were set, so we present it as a rough calibration, not a proven 95%.
 
 **Technical and evidence.**
-- Backward test (fit 2016-2019, predict 2012-2015): typical error per 2.5° cell 4.0% for hotspots and 4.2% for fire power, against 11.8% and 12.4% for the best simple method (one ratio per 10° region) and 63% for joining the records.
+- Backward test (fit 2016-2019, predict 2012-2015): typical error per 2.5° cell 4.0% for hotspots and 4.2% for fire power (error of each cell's four-year total, fire-weighted median over 1,743 cells, single cell-months 17.6% and 21.9%), against 11.8% and 12.4% for the best simple method (one ratio per 10° region) and 63% for joining the records.
 - Calendar classes of held-out months: 69.3% agreement against 57.6% for the best simple method.
-- Calibrated 95% ranges contained 94.9% (hotspots) and 93.9% (fire power) of held-out months.
+- Calibrated 95% ranges contained 94.9% (hotspots) and 93.9% (fire power) of 2012-2015 cell-months. Not independent: 2012-2015 also chose and weighted the tested cells, entered the fits that set the band widths and groups, and informed the choice of model. The published pre-2012 ranges are built a little differently and were not checked themselves (corrected 11 Nov, see SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md).
 - Untouched 2026 test: NOAA-20 predicted S-NPP within 0.07% and 0.99%.
 - Region-month error 12.7% (hotspots), world-month 1.7%.
 
@@ -65,7 +65,7 @@ Prepared from the scientific audit of 8 November 2026. Every number is in VALIDA
 
 **Plain.** Merging just puts the records end to end, and you get the 2012 cliff. SHIFT measures the difference between the cameras place by place and season by season, corrects for it, tests the correction on years it never saw, and shows you the leftover uncertainty.
 
-**Evidence.** Raw joined: 2.64× step, 63% backward error, trends off by up to 15.6 points a year. SHIFT: 0.97× step (MODIS alone 0.96×), 4% backward error, trends within 0.62 points.
+**Evidence.** Raw joined: 2.64× step, 63% backward error, trends off by up to 15.6 points a year. SHIFT: 0.97× step (MODIS alone 0.96×), 4% backward error (four-year total per cell), trends within 0.62 points.
 
 **Limit.** None needed beyond those in Q4 and Q5.
 
@@ -104,7 +104,7 @@ Full list: SCIENTIFIC_IMPROVEMENT_PLAN.md.
 >
 > SHIFT fixes it in two steps. First we count burning five-kilometre squares instead of raw detections, so a sharper camera can't inflate the count. Second, using the eight years both cameras flew together, we measure for every square about 280 kilometres across and every month how much fire VIIRS sees for each unit MODIS sees, and put the MODIS years on the VIIRS scale.
 >
-> We tested it on years the model never saw. It predicted them with a typical error of four percent, three times better than one ratio per region and fifteen times better than simply joining the records. The 2012 jump disappears. Long-term trends match MODIS alone, the one camera that flew the whole time.
+> We tested it on four years held out of the fit. For a typical square, its four-year total came within four percent of what VIIRS saw, three times better than one ratio per region and fifteen times better than simply joining the records. Month by month the error is larger, about twenty percent, and we say so. The 2012 jump disappears. Long-term trends match MODIS alone, the one camera that flew the whole time.
 >
 > And we tell you where we are unsure: every value before 2012 carries a calibrated range, days with no satellite are shown as gaps, not as quiet days, and day-by-day values before 2012 are marked indicative.
 >

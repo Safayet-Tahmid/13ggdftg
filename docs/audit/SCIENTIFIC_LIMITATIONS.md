@@ -86,3 +86,11 @@ The pipeline downloads FIRMS yearly archives at run time and keeps raw data on a
 - The pipeline writes `NaN` into some JSON reports. Browsers reject it, which hid every Phase 2 check on the website until a reader-side fix on 8 November. The pipeline should write strict JSON.
 - The website's monthly totals do not apply the pipeline's gap-scaling multiplier. Measured effect under 0.01% on yearly totals before 2026.
 - The export keeps, for each 1° cell-day, the highest source code of the 0.25° rows it combines. A cell-day mixing native and filled values is shown as filled.
+
+## 15. Added 11 November 2026: the coverage check is not independent
+
+**What.** The 94.9% and 93.9% coverage of the calibrated 95% ranges was measured on 2012-2015 with predictions from factors fitted on 2016-2019. Factor fitting for those predictions was clean. Everything else around it used 2012-2015: the 1,743 evaluated cells and their weights were chosen from S-NPP fire over 2012-2025, cell-months were kept only if fire was predicted or observed, the range widths and groups came from fits that included 2012-2015, and the model (2.5° variant, source pieces, band method) was selected with 2012-2015 results in view (`checks.py` `run_checks` lines 844-848, `coverage_check` lines 258-358).
+
+**Evaluated is not published.** The bands that were checked use the 2016-2019 bootstrap and each verification month's own fire bin. The published pre-2012 ranges use the production bootstrap and each cell's typical 2003-2011 month, and they also cover sparse cells that were never tested. The two share a calibration table but are not identical. No test has measured the coverage of the published ranges.
+
+**Consequence.** The figures are a useful sign that the calibration is roughly right, not an independent estimate of coverage. Every 95% label on the website now says it covers conversion error only and is not a guaranteed bound. A clean refit on 2012-2019 would only be a sensitivity analysis, because the model was chosen with those years in view. The only genuine outer holdout is S-NPP data no part of SHIFT has used. Both are described in `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md` section 3. The bands will not be recalibrated on a test set and then reported as validated on it.

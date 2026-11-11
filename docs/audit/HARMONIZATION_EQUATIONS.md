@@ -2,6 +2,8 @@
 
 Audit of 8 November 2026, code at commit `a720e72` plus the audit commit. Every equation below is read from the source code at the cited lines. Where the method is a heuristic rather than a derived statistical model, it is labelled as such. Nothing here was added to make the method look more formal than it is.
 
+> **Erratum E1, 11 November 2026 (revised the same day).** Statements in this document that the calibrated 95% ranges were "verified on 2012-2015" and hold "94-95% of held-out months" overstate how independent that check was. The verification predictions were fitted without 2012-2015 (factor fitting was clean). But the 2012-2015 S-NPP data was also used to choose the 1,743 evaluated cells and their weights, to keep or drop cell-months (only those with fire predicted or observed), in the fits that set the range widths and sorted cells into groups, and in model selection (the 2.5° variant, the source pieces and the band method were chosen with 2012-2015 results in view). The evaluated bands are also not the published ones: the published pre-2012 ranges use the production bootstrap and each cell's typical 2003-2011 month, and cover cells that were never tested. The reported figures (94.9% hotspots, 93.9% fire power) are kept as reported, but they are not an independent estimate of coverage, and they do not show that the published ranges contain the true value 95% of the time. Full trace: `SCIENTIFIC_CLAIMS_CORRECTION_2026-11-11.md` section 1. The original text below is kept as it was written, marked [E1] where it applies.
+
 Notation used throughout:
 
 | Symbol | Meaning | Unit |
@@ -133,7 +135,7 @@ $$
 h(C,m) = \max\big(h_0(C,m),\ q_{95}(\ell,b)\big), \qquad \text{range}_{95}(C,m) = 100\,(e^{h}-1)\ \%
 $$
 
-This was verified on 2012-2015 (backward fit from 2016-2019): 94.9% of held-out cell-months for hotspots and 93.9% for fire power fell inside (target 90-99%). Status: an empirical, calibrated interval. It covers the error of the factor only, not detection omission, cloud or commission errors.
+This was verified on 2012-2015 (backward fit from 2016-2019): 94.9% of held-out cell-months for hotspots and 93.9% for fire power fell inside (target 90-99%). [E1: the verification predictions exclude 2012-2015, but the residuals behind $q_{95}$ come from leave-one-year-out fits on 2012-2019 and the level and bin come from the production fit, so this is not an independent coverage estimate.] Status: an empirical, calibrated interval. It covers the error of the factor only, not detection omission, cloud or commission errors.
 
 The website combines cells into an area range as a fire-weighted mean of cell ranges (`web/src/lib/analysis.js` `areaRange`, line 69):
 
