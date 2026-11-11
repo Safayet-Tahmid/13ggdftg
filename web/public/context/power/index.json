@@ -1,0 +1,140 @@
+{
+ "decision": "D39",
+ "fetched_utc": "2026-11-11T15:58:14Z",
+ "rules_sha256": "58fd651f9fb12c2f5fa3dfbc10ab89c50c5374fbcfc594568e5bb3844db94151",
+ "source": {
+  "name": "NASA POWER (Prediction Of Worldwide Energy Resources), Daily API",
+  "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+  "community": "AG",
+  "time_standard": "UTC",
+  "note": "Meteorology from GMAO MERRA-2, extended towards near real time by GEOS-IT (the POWER answer header lists MERRA2, GEOSIT and POWER), on a 0.5 x 0.625 degree grid. No key is needed."
+ },
+ "parameters": {
+  "PRECTOTCORR": {
+   "label": "rain",
+   "unit": "mm/day",
+   "window": "sum",
+   "rank_1": "lowest",
+   "decimals": 2
+  },
+  "RH2M": {
+   "label": "relative humidity at 2 m",
+   "unit": "%",
+   "window": "mean",
+   "rank_1": "lowest",
+   "decimals": 1
+  },
+  "T2M_MAX": {
+   "label": "daily maximum temperature at 2 m",
+   "unit": "C",
+   "window": "mean",
+   "rank_1": "highest",
+   "decimals": 1
+  },
+  "WS2M": {
+   "label": "wind speed at 2 m",
+   "unit": "m/s",
+   "window": "mean",
+   "rank_1": "highest",
+   "decimals": 2
+  },
+  "GWETROOT": {
+   "label": "root-zone soil wetness",
+   "unit": "0 to 1",
+   "window": "mean",
+   "rank_1": "lowest",
+   "decimals": 3
+  }
+ },
+ "comparison": {
+  "dates": "the same dates as 'Now against the past': the chosen window, and the same calendar dates in every other year",
+  "window_value": "rain: total over the window in mm (sum of the daily mm/day values). Other parameters: mean of the daily values",
+  "complete": "a year is used only if every day of its window has a value",
+  "rain_before": "rain total over the 60 days that end the day before the window starts, compared the same way",
+  "normal": "median over the same baseline years the fire comparison uses, the chosen year left out, only if at least 10 years are usable",
+  "rank": "rank of the chosen year among all usable years including itself. 1 = the driest (rain, humidity, soil wetness) or the hottest or windiest (maximum temperature, wind)",
+  "shown_as": "rain, rain before, wind and soil wetness as percent of the normal. Humidity as a difference in percentage points. Maximum temperature as a difference in degrees C",
+  "provisional": "a window that includes any day in the 120 days before the fetch is labelled provisional, because near-real-time values can be revised"
+ },
+ "start": "2003-01-01",
+ "files": {
+  "bangladesh": {
+   "file": "bangladesh.json",
+   "bytes": 224677,
+   "sha256": "69a1bb6695aded81725004b00e5119bac5389c0d7e4cedb6fd124320d2be413d",
+   "end": "2026-11-08"
+  },
+  "africa_savanna": {
+   "file": "africa_savanna.json",
+   "bytes": 223564,
+   "sha256": "72576265fad7f1f5aeab8c992d1b24e4a79b800f0e9f8d1f2eaefaeb275b2e66",
+   "end": "2026-11-08"
+  },
+  "australia_savanna": {
+   "file": "australia_savanna.json",
+   "bytes": 223780,
+   "sha256": "d065ee8accada30d2601574c65ac64e0f0f313f459e430d5d035eab0a1369b1c",
+   "end": "2026-11-08"
+  },
+  "amazon_arc": {
+   "file": "amazon_arc.json",
+   "bytes": 224854,
+   "sha256": "324c35c2d528cb438ecc79c158f89a5efa2aabe7f189b66fa1ca667e68e10992",
+   "end": "2026-11-08"
+  },
+  "siberia_boreal": {
+   "file": "siberia_boreal.json",
+   "bytes": 226377,
+   "sha256": "8498f506f2288e5217e640858f72a69eb75c25cec76875d20187b2eb3825b221",
+   "end": "2026-11-08"
+  },
+  "iberia_med": {
+   "file": "iberia_med.json",
+   "bytes": 222739,
+   "sha256": "5b800848030f5f532ecd38afed142c85785ac9623c11c04b7a8170278669b08c",
+   "end": "2026-11-08"
+  },
+  "punjab_crop": {
+   "file": "punjab_crop.json",
+   "bytes": 221170,
+   "sha256": "5200f2f4883953e130770a46812de34caf91f806f999d4abca33111d710b6b53",
+   "end": "2026-11-08"
+  },
+  "kalimantan_peat": {
+   "file": "kalimantan_peat.json",
+   "bytes": 226887,
+   "sha256": "7736196af6bdc8267f60452cff043377808e7000562db6276d0c3b9fbe9474b2",
+   "end": "2026-11-08"
+  },
+  "java_volcanic": {
+   "file": "java_volcanic.json",
+   "bytes": 225913,
+   "sha256": "edf506422afc1cb0f25623fc97ecfa7e85e59270bad01dbe7f4aa7bc426846e5",
+   "end": "2026-11-08"
+  },
+  "florida": {
+   "file": "florida.json",
+   "bytes": 223701,
+   "sha256": "abbceb9b1b0afaa8329b43fb3bd16ac675a270f34a91d91c96d5568c94543401",
+   "end": "2026-11-08"
+  },
+  "se_australia": {
+   "file": "se_australia.json",
+   "bytes": 224102,
+   "sha256": "4d147114e15dc9ce544fee86d7dc913d40820c5650c439467e66023d550830a2",
+   "end": "2026-11-08"
+  },
+  "california": {
+   "file": "california.json",
+   "bytes": 221534,
+   "sha256": "dd6db12132963c4749170257ebfd60520ee1e2402e08bfbed39468e213f698fa",
+   "end": "2026-11-08"
+  },
+  "chittagong_hills": {
+   "file": "chittagong_hills.json",
+   "bytes": 223905,
+   "sha256": "3041bba1bf912bd9885e84e1ed6604b2e3067c36c688cd788652ac6b22088cbc",
+   "end": "2026-11-08"
+  }
+ }
+}
