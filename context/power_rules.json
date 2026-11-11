@@ -53,7 +53,8 @@
   "area": {
     "grid": "3 x 3 points per preset box: the centres of the nine equal parts of the box",
     "value": "the mean of the nine points for each day and parameter",
-    "missing": "if any of the nine points has no value for a day and parameter, that day is missing for that parameter. Missing stays missing and is never filled"
+    "missing": "if any of the nine points has no value for a day and parameter, that day is missing for that parameter. Missing stays missing and is never filled",
+    "water_points": "A point over water (POWER gives no root-zone soil wetness there on any day) is left out of the area mean for every parameter, so the area values describe the land part of the box. The points left out are listed in each output file. Added 11 Nov 2026 after the first run stopped on Iberia (one point in the Mediterranean), before any weather value was looked at."
   },
   "comparison": {
     "dates": "the same dates as 'Now against the past': the chosen window, and the same calendar dates in every other year",
