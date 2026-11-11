@@ -9,7 +9,10 @@ function read() {
   const v = (name) => cs.getPropertyValue(name).trim();
   return {
     name: document.documentElement.dataset.theme || 'light',
-    font: v('--font-body'),
+    // Browsers report the font list with double quotes ("Archivo Variable", ...). The chart image
+    // export writes it into an SVG attribute that is itself in double quotes, so double quotes there
+    // break the file (the SVG will not open and the PNG is never made). Single quotes mean the same font.
+    font: v('--font-body').replace(/"/g, "'"),
     surface: v('--surface'), ink: v('--ink'), muted: v('--muted'), rule: v('--rule'), accent: v('--accent'),
     sea: v('--map-sea'), land: v('--map-land'), border: v('--map-border'), area: v('--map-area'),
     select: v('--map-select'), gap: v('--map-gap'), space: v('--globe-space'), horizon: v('--globe-horizon'),
