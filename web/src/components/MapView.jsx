@@ -9,16 +9,23 @@ import T from '../content/text.js';
 import { land } from '../lib/area.js';
 import { cellSquare, dragBox, imagery, squaresOf, stepExpression, zoneBox } from '../lib/geo.js';
 import { RECENT_COUNT_STEPS, RECENT_FRP_STEPS, recentStep } from '../lib/recent.js';
+import { GeoLoader, MAX_ZOOM, geoLabelLayers, geoLineLayers, glyphsUrl } from '../geo/layers.js';
 
-// A basemap that ships with the site, so the map works with the wifi off.
+// A basemap that ships with the site, so the map works with the wifi off. The geography layers
+// (borders, provinces, districts, place names: src/geo/) ship with it too. 'borders' outlines every
+// country, so on its own it shows the coastlines; international land borders are drawn on top.
 function style(theme) {
+  const empty = { type: 'FeatureCollection', features: [] };
   return {
     version: 8,
-    sources: { land: { type: 'geojson', data: land } },
+    glyphs: glyphsUrl(),
+    sources: { land: { type: 'geojson', data: land }, 'geo-world': { type: 'geojson', data: empty },
+      'geo-adm1': { type: 'geojson', data: empty }, 'geo-adm2': { type: 'geojson', data: empty } },
     layers: [
       { id: 'sea', type: 'background', paint: { 'background-color': theme.sea } },
       { id: 'land', type: 'fill', source: 'land', paint: { 'fill-color': theme.land } },
       { id: 'borders', type: 'line', source: 'land', paint: { 'line-color': theme.border, 'line-width': 0.5 } },
+      ...geoLineLayers(theme),
     ],
   };
 }
@@ -70,7 +77,7 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
   useEffect(() => {
     let m;
     try {
-      m = new maplibregl.Map({ container: el.current, style: style(theme), ...HOME[view],
+      m = new maplibregl.Map({ container: el.current, style: style(theme), ...HOME[view], maxZoom: MAX_ZOOM,
         attributionControl: false, dragRotate: false, pitchWithRotate: false, maxPitch: 70,
         canvasContextAttributes: { antialias: true } });
     } catch (e) {
@@ -80,6 +87,8 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
       return undefined;
     }
     m.touchZoomRotate.disableRotation();
+    const geo = new GeoLoader(m);            // provinces and districts, loaded for the view when zoomed in
+    m.on('moveend', () => geo.update());
     m.addControl(new maplibregl.NavigationControl({ showCompass: true, visualizePitch: true }), 'top-right');
     m.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-right');
     m.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: T.map.attribution }));
@@ -124,6 +133,10 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
       m.addLayer({ id: 'area-line', type: 'line', source: 'area', paint: { 'line-color': theme.area, 'line-width': 1.5 } });
       m.addSource('pick', { type: 'geojson', data: EMPTY });
       m.addLayer({ id: 'pick', type: 'line', source: 'pick', paint: { 'line-color': theme.select, 'line-width': 2.5 } });
+      // place names on top (symbols never take clicks), fewer and smaller on a narrow screen
+      for (const l of geoLabelLayers(theme, (el.current?.clientWidth || 1000) < 600)) m.addLayer(l);
+      geo.showWorld();
+      geo.update();
       ready.current = true;
       m.fire('shift-ready');
     });
@@ -207,8 +220,8 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
     m.on('mousemove', move); m.on('touchmove', move);
     m.on('mouseup', up); m.on('touchend', up);
     map.current = m;
-    if (window.__SHIFT_TEST__) window.__shiftMap = m;   // browser tests only (set before the page loads)
-    return () => { ready.current = false; map.current = null; tip.remove(); m.remove(); };
+    if (window.__SHIFT_TEST__) { window.__shiftMap = m; window.__shiftGeo = geo; }   // browser tests only (set before the page loads)
+    return () => { ready.current = false; map.current = null; geo.stop(); tip.remove(); m.remove(); };
   }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
   const whenReady = (fn) => {

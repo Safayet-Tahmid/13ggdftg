@@ -108,7 +108,7 @@ const T = {
     fireTip: (frp, cells) => `<b>${frp} MW</b> fire power<br>${cells} hotspots (S-NPP scale)`,
     notFireTip: (kind, years) => `<b>${kind}</b><br>Labelled non-fire by NASA in ${years} year${years > 1 ? 's' : ''}. Left out of every year.`,
     notFireKinds: { 1: 'Volcano', 2: 'Gas flare or industry', 3: 'Offshore platform' },
-    attribution: 'Fire data: NASA FIRMS (MODIS, VIIRS) · Borders: Natural Earth',
+    attribution: 'Fire data: NASA FIRMS (MODIS, VIIRS) · Borders and names: Natural Earth, geoBoundaries',
     imageryAttribution: 'Imagery: NASA GIBS, part of NASA ESDIS',
     label: 'World map of harmonised fire activity',
 

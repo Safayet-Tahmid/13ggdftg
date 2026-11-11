@@ -47,6 +47,13 @@
   --map-gap: #5B6873;              /* hatching of 30-degree zones with days of no satellite data */
   --globe-space: #0B1220;          /* behind the 3D globe */
   --globe-horizon: #A8C6DA;        /* thin atmosphere at the globe's edge */
+  /* geography (12 Nov): boundaries and place names, context only, never louder than the fire */
+  --map-border-intl: #6F7E86;      /* international land borders (coastlines stay --map-border) */
+  --map-border-adm1: #8D9AA0;      /* states, provinces, divisions */
+  --map-border-adm2: #A9B5B8;      /* districts, counties */
+  --map-label: #3B4A55;            /* continents, countries, provinces, districts */
+  --map-label-water: #4F6F82;      /* oceans */
+  --map-label-halo: #F3F6F4;
   /* recent detections (raw FIRMS NRT): a different scheme from the record's ramp on purpose */
   --recent-1: #F6D743;
   --recent-2: #F59E0B;
@@ -107,6 +114,12 @@
   --map-gap: #97A3AC;
   --globe-space: #05080D;
   --globe-horizon: #4E6E86;
+  --map-border-intl: #6C7D89;
+  --map-border-adm1: #4C5C68;
+  --map-border-adm2: #3A4853;
+  --map-label: #C3CDD3;
+  --map-label-water: #7F9DB0;
+  --map-label-halo: #0D141B;
   --recent-1: #FBE36A;
   --recent-2: #FBBF24;
   --recent-3: #F2643F;

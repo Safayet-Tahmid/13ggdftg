@@ -77,6 +77,14 @@ export default function Method({ meta }) {
         <li>Weather context only: NASA POWER Daily API (v2.10.3, community AG, UTC), parameters PRECTOTCORR, RH2M, T2M_MAX, WS2M and
           GWETROOT, from GMAO MERRA-2 and GEOS-IT. Fetched for the preset areas on the date shown in the weather notes. <a href="https://power.larc.nasa.gov">power.larc.nasa.gov</a></li>
         <li>Country borders: Natural Earth, via world-atlas.</li>
+        <li>Map place names and boundaries (context only, never used in any number): Natural Earth (public domain) for continents,
+          oceans, country names and international borders. geoBoundaries gbOpen for states, provinces and districts, each country
+          under its own licence (public domain, CC0, CC BY, government open licences, or ODbL 1.0 in separate files). Countries
+          whose district licence is share-alike or unclear, or whose units are very small, show provinces instead. Runfola, D. et
+          al. (2020), geoBoundaries: A global database of political administrative boundaries, PLoS ONE 15(4): e0231866. Label
+          font: Noto Sans (SIL Open Font License). Country names and international borders follow Natural Earth's de facto view,
+          and lower-level boundaries come from national or humanitarian sources, so lines can differ where countries disagree.
+          SHIFT takes no position on any boundary. Details per country: <code>web/public/geo/index.json</code> and <code>geo/README.md</code>.</li>
         <li>Optional map backdrop (online only): NASA Blue Marble shaded relief and daily MODIS Terra or VIIRS S-NPP true colour
           pictures from NASA GIBS. A picture only, never used in any number.</li>
       </ul>

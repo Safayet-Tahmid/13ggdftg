@@ -1,0 +1,6222 @@
+{
+ "generated_by": "geo/prepare_geo.py",
+ "files": {
+  "world.json": {
+   "bytes": 256326,
+   "sha256": "c492590e9bd1a3385c507ed55972cbe4b72c7559c1a6c28fa79a908c4bc05d69"
+  },
+  "adm1/N00W090.json": {
+   "bytes": 135632,
+   "sha256": "1bee87ba8f583505dd35478899fd6385e946a59df89626b4ddfbf42b596f8583"
+  },
+  "adm1/N00E060.json": {
+   "bytes": 78497,
+   "sha256": "360ff7bd4c4f3f71789a6aaa51acd984e1643cb818714a6d89090f06e604e4e9"
+  },
+  "adm1/N30E060.json": {
+   "bytes": 72522,
+   "sha256": "802d494f243850e71b641cd2e69323e6516def47f194d64e98f69b6b00672bd6"
+  },
+  "adm1/S30E000.json": {
+   "bytes": 66930,
+   "sha256": "991ef35734b09cab43896b1ae4233ba2935aa354328b7c5e77bf54e512a597b2"
+  },
+  "adm1/N30E000.json": {
+   "bytes": 315061,
+   "sha256": "6c811bcfa84109830ab34de180501490a77ee3ff5902ddfc136d06a5342b2988"
+  },
+  "adm1/N60E000.json": {
+   "bytes": 102490,
+   "sha256": "6423567dbdb8173996a44f4b8507bf69496d74ab0d4ec5fa38350d4f8aa66612"
+  },
+  "adm1/N00E030.json": {
+   "bytes": 85662,
+   "sha256": "744e5233a5be7f9a462f23c1223168994fcf1e47dbbe891a1772854c35916da4"
+  },
+  "adm1/S60W090.json": {
+   "bytes": 173929,
+   "sha256": "ff5115e5b226d03885ec218f51fbf4d303b8e77e06815af2cf64f0e5b5011def"
+  },
+  "adm1/S60W060.json": {
+   "bytes": 11101,
+   "sha256": "ae768f0236415758914e34349a6eee100c8b31b9b193bcd9c1f97763fdd9ba57"
+  },
+  "adm1/S30W090.json": {
+   "bytes": 54885,
+   "sha256": "3da9bb071e9a3f027df332515559652878ed7c2f8855bd1cc92519a982f7f7e1"
+  },
+  "adm1/S30W060.json": {
+   "bytes": 36444,
+   "sha256": "2a244d005b3d6932a5e3ae93465cc3686752f503b55d082184a495bdeae69727"
+  },
+  "adm1/N30E030.json": {
+   "bytes": 139217,
+   "sha256": "f74d463c2bfb01babca9cd968444114fd439ac644dcaae7af58db6e3c1cce763"
+  },
+  "adm1/S30W180.json": {
+   "bytes": 7833,
+   "sha256": "67806c68e6a0cfdf544d6ab42690acef1797c572db4b1430e108c8b2fd448700"
+  },
+  "adm1/S90W180.json": {
+   "bytes": 4579,
+   "sha256": "06e90328f0b394a948d88abf7df28d7f454a875c74d7960b7f9c3d65531de740"
+  },
+  "adm1/S90W150.json": {
+   "bytes": 5510,
+   "sha256": "6f672ddba75489bffddf995628b8de6a2a079f1432d9d3a833d759d23a3a9328"
+  },
+  "adm1/S90W120.json": {
+   "bytes": 5167,
+   "sha256": "8a6eaf2bd7068f942edf16abe1aaf53284820d21a5bc546a9adaeb1eaf0612fa"
+  },
+  "adm1/S90W090.json": {
+   "bytes": 23084,
+   "sha256": "99a8b51836cadc940fcfc3cfac05cb09975b75758f72e62fa05e06a0ca86f499"
+  },
+  "adm1/S90W060.json": {
+   "bytes": 7742,
+   "sha256": "fb8af18f462aacc421ae9cf8e8b4378927266ba16c3872a403acdf39efd79ad7"
+  },
+  "adm1/S90W030.json": {
+   "bytes": 3925,
+   "sha256": "3f1eb1bf0ecc22c17da7343cecb492dcd3ce0af66d12affe58d33c1124fb74f3"
+  },
+  "adm1/S90E000.json": {
+   "bytes": 3121,
+   "sha256": "4c4c8668abf0479ce85eeaea375509cbea741d8c2690cf4e291bbee60b0a79a0"
+  },
+  "adm1/S90E030.json": {
+   "bytes": 3770,
+   "sha256": "b2e9983845171586f62d6d317bc39d1b3662e2f3c8085c660acd9a89c606862b"
+  },
+  "adm1/S90E060.json": {
+   "bytes": 4181,
+   "sha256": "c2740315152866a8c2bce38464993fa245c74ca858b7fd540811f4450f652648"
+  },
+  "adm1/S90E090.json": {
+   "bytes": 3193,
+   "sha256": "d292093597b6d4f90b560363cb409b8d2594207aa7fa066b18753f0ad0100243"
+  },
+  "adm1/S90E120.json": {
+   "bytes": 3071,
+   "sha256": "d7f50e8fab4617995516d0f897f8097b4c552e8cbfa07304b05c5ff71e037170"
+  },
+  "adm1/S90E150.json": {
+   "bytes": 10314,
+   "sha256": "de4fffb27c8c54a855a8551bbf1945fd8e020ba0d0faa25e4e01a8c40b568352"
+  },
+  "adm1/S30E120.json": {
+   "bytes": 100275,
+   "sha256": "c3a48338650e327f40bf11d83faf20d6cfbe3fc2f427cc8ba479257c32644b05"
+  },
+  "adm1/S60E030.json": {
+   "bytes": 394,
+   "sha256": "8602ff5da14c5d37ac95e080df33ac97af8364e644ad2da9b095135311d47093"
+  },
+  "adm1/S60E060.json": {
+   "bytes": 2160,
+   "sha256": "1c960f9d80651512b0de2fa0daa0bdafdfd4b7a66da8213d34421d9ae4dcd10f"
+  },
+  "adm1/S30E030.json": {
+   "bytes": 68076,
+   "sha256": "7643151b8687aead13736dc2a433a3c55775ee6cac0298fcaffe0a195dffacf1"
+  },
+  "adm1/S60E090.json": {
+   "bytes": 2391,
+   "sha256": "e8d3e15518edbfd1aa975484399b7d849f77ba42b6ab79460bdee7f880d4c0ef"
+  },
+  "adm1/S60E120.json": {
+   "bytes": 25279,
+   "sha256": "f6b55d4611b1aa6b39360e55de648f28a0913be6389ad910f0751c06689339b1"
+  },
+  "adm1/S60E150.json": {
+   "bytes": 33560,
+   "sha256": "d4b67bde8ba29bdf5f237541bc707e97ae9a3a1eb5791d7fbb0991025a6b5e81"
+  },
+  "adm1/S30E090.json": {
+   "bytes": 28081,
+   "sha256": "68dd5fed48d2a645c53f78b216293b055a6672dece14a92da92d7183c19cde2b"
+  },
+  "adm1/S30E150.json": {
+   "bytes": 37163,
+   "sha256": "12f7e2de214b5efd62aa1283f2fd921e1525538c2bf38ec935044ec7c6b513d3"
+  },
+  "adm1/N00E000.json": {
+   "bytes": 73645,
+   "sha256": "7e903d3e525f38545cbc522fcf998bcb11c54ffd522d636010948bf01cf97b3a"
+  },
+  "adm1/N00W030.json": {
+   "bytes": 70221,
+   "sha256": "289125d40ef037fb8ed7efcf16e566d2a6b5a9854690a88bc30b75a1b03ccae7"
+  },
+  "adm1/N00E090.json": {
+   "bytes": 166876,
+   "sha256": "14b140ebad438adda522872d6e4263522789f8e77829f4dcc5fe62260980c0f5"
+  },
+  "adm1/N30W090.json": {
+   "bytes": 183039,
+   "sha256": "c55920aa1a62f1f052d76cba9d5fe98cac94550c0d2fdbca9a80e1dde8be3ce2"
+  },
+  "adm1/N00W060.json": {
+   "bytes": 10531,
+   "sha256": "a84da58e4d9c64f86e3181ec357330a03a77a33f1f11fabda7512cd2949c06c9"
+  },
+  "adm1/N30W150.json": {
+   "bytes": 80262,
+   "sha256": "51f8d1132ab98f2ed0f761caf0a0de17e874dc8590b8d1d13ccdbb6404b922e6"
+  },
+  "adm1/N30W120.json": {
+   "bytes": 44768,
+   "sha256": "9ad175df0b12bffa6aa770e42506b75e9e9f7f1237a9ff710f34b38e808546c5"
+  },
+  "adm1/N30W060.json": {
+   "bytes": 50964,
+   "sha256": "e5da4d6b869b8fd08cb7057e79c534dfc0f82b7798ce4dbb601500983928951e"
+  },
+  "adm1/N60W150.json": {
+   "bytes": 46240,
+   "sha256": "3b1ad302618050df3d61c0f4a3299e97a8639e6ae88333ae628a4ae16494116f"
+  },
+  "adm1/N60W120.json": {
+   "bytes": 201539,
+   "sha256": "11c7e151b13443f01c552de7c6d420b27e56b822d8d9fa6f66b655207fe5dd22"
+  },
+  "adm1/N60W090.json": {
+   "bytes": 215548,
+   "sha256": "94ba6b2e1aa7178aa5994d57502eb0e0bc0f334c2d51e509f2608acfb5d064c1"
+  },
+  "adm1/S30W120.json": {
+   "bytes": 874,
+   "sha256": "3493eecee2b9eccab24c7ff8e8919c58750bfc28a36327becdaa4051bae04daa"
+  },
+  "adm1/N00E120.json": {
+   "bytes": 58906,
+   "sha256": "f5123f05f265eea9c42339a51e5f2566d9aa2f4110cf0aa16f4a1d25946cc3a8"
+  },
+  "adm1/N30E090.json": {
+   "bytes": 32973,
+   "sha256": "ce1b7f9c28939470eb4da3c7b8233f7c6c83770767a5a29ca57c99217a6ed35b"
+  },
+  "adm1/N30E120.json": {
+   "bytes": 69094,
+   "sha256": "f6fc876ce54eebd336a2cbd3a8c74f8d9e8b880dc6c18bb283989dfbd46e7921"
+  },
+  "adm1/N00W120.json": {
+   "bytes": 91100,
+   "sha256": "37b0c2bacf61a45a6bfc0f4342573e1915fbfc6178cfbf5645f0233b191413f7"
+  },
+  "adm1/N30W030.json": {
+   "bytes": 68487,
+   "sha256": "2cd33de52724559d9239f553be7104ece0e6206309b07ab0c6c1e683cc90d203"
+  },
+  "adm1/N60E030.json": {
+   "bytes": 27283,
+   "sha256": "e7f80e2511759859fc1890e67fd91ccf5a0ace7033942c5d8ad1f0fc28d58798"
+  },
+  "adm1/N60W030.json": {
+   "bytes": 29195,
+   "sha256": "6d4174bca39d5da4f3b60ed0321806e51bfe4e694c1faa3973eed0783e234fff"
+  },
+  "adm1/N00E150.json": {
+   "bytes": 3336,
+   "sha256": "9e12768e08de03710510a32a340608d093e31b3001a6ac2023c6f005a95eaa9f"
+  },
+  "adm1/N60W060.json": {
+   "bytes": 38826,
+   "sha256": "d4618597f32cc38eaa01ac29d5165a24a80ff5b860c21932553d1df7ab02404b"
+  },
+  "adm1/S30E060.json": {
+   "bytes": 674,
+   "sha256": "1c480a5ee4a423499b6bb9e50713c672d27f038065c8249145a89402f22b9e4c"
+  },
+  "adm1/N00W180.json": {
+   "bytes": 2448,
+   "sha256": "248f7fea99c8e762f52cf4b6bca555228e177b51823ee531c2e0fc81dee73b36"
+  },
+  "adm1/S60E000.json": {
+   "bytes": 6825,
+   "sha256": "1fb11251faffadf2ac1eb6df7db2f89c3238a56d43b1a641c1b810ce6f4962ac"
+  },
+  "adm1/S60W180.json": {
+   "bytes": 725,
+   "sha256": "d47056ca2b15072066076897cbf30f92fa9ee91c2bedf5b69f3d096035757159"
+  },
+  "adm1/S30W150.json": {
+   "bytes": 4195,
+   "sha256": "7c80ad2d3b111aa379a33de87bc39e27f6242cb6fca6fadcf8d8bf78b2229e60"
+  },
+  "adm1/N30E150.json": {
+   "bytes": 7786,
+   "sha256": "e9943dc317fa1dbca7ef5a80fbd8d80bd6b638cb8df010e66772dfdfc830c120"
+  },
+  "adm1/N60W180.json": {
+   "bytes": 13164,
+   "sha256": "1f41b6684d0b1a9c9d6a56aa323c919eb9b9c8eb3806c069a3d0f5707eb0317c"
+  },
+  "adm1/N60E060.json": {
+   "bytes": 21520,
+   "sha256": "67df29b359f22c86a958414e14dee41936831f60f870db6d7a015c87341f98da"
+  },
+  "adm1/N60E090.json": {
+   "bytes": 16306,
+   "sha256": "4efe0bb3d1b99cdbf455b3c96cfc31cad1a4baed54e5af81b924e112f9ef1d4b"
+  },
+  "adm1/N60E120.json": {
+   "bytes": 10817,
+   "sha256": "632b409447eee8365aa9889890ffd0ad40ca57e9311d33f70e129508bb4cc105"
+  },
+  "adm1/N60E150.json": {
+   "bytes": 14245,
+   "sha256": "7d236667231a747b7c416504209055701e80758fc61d753de2ae668dec2d09b1"
+  },
+  "adm1/S60W030.json": {
+   "bytes": 623,
+   "sha256": "9f092c23458dc7ffe57f415234bdbdd54eb8fa51c0cbcbb85e8a65d500cdf144"
+  },
+  "adm1/S30W030.json": {
+   "bytes": 233,
+   "sha256": "f27550bb085d19c8c8dd35c052f8c0fbe6703742a298e047cbd233d81cff7ba0"
+  },
+  "adm1/N30W180.json": {
+   "bytes": 25058,
+   "sha256": "762e2c838f1387c4e1430ea6705ef25333c097f1f7436fbe3b97b2882d49ae8e"
+  },
+  "adm2/attrib/N20E060.json": {
+   "bytes": 15239,
+   "sha256": "056a219546b69e00616a065a1c69cc97c90411e8d223fdde9a8174d09f1bafe7"
+  },
+  "adm2/attrib/N30E060.json": {
+   "bytes": 90715,
+   "sha256": "fce4a61030ce7649fff47cc263ddb99ce816d45348c1fc0f2e485e8965bac66e"
+  },
+  "adm2/attrib/N30E070.json": {
+   "bytes": 47614,
+   "sha256": "2f0028514d3767d282aa337ec8b89c8e9d88ffd46ff1678540b20aa1fde55f59"
+  },
+  "adm2/attrib/S20E010.json": {
+   "bytes": 65963,
+   "sha256": "a9f81db066e68e23231e701cf94a858fa43557c7cfa99a3290c482b893e04eea"
+  },
+  "adm2/attrib/S20E020.json": {
+   "bytes": 57037,
+   "sha256": "1f2f9f14c72f5de3b75857775272b5202d3f0c2a7ec37b4e2fd416933286d66a"
+  },
+  "adm2/attrib/S10E010.json": {
+   "bytes": 61528,
+   "sha256": "2e7f825f7f523585b5c0dfa8fc91f5acb14da24562ab92166d384f8a36bf0dec"
+  },
+  "adm2/attrib/S10E020.json": {
+   "bytes": 48936,
+   "sha256": "0fadc2f9a87927533db3735377fb4862d864fb25d375f81f2585974da18717d6"
+  },
+  "adm2/attrib/N30E010.json": {
+   "bytes": 4682,
+   "sha256": "1b9f4f8e2290f5758edd797fc05ac9d010567a7142d401588aaa1fecb49b6fa5"
+  },
+  "adm2/attrib/N30E020.json": {
+   "bytes": 26992,
+   "sha256": "3eeee9403edfe6e3fc3088f68c6e4b833eaa2a787cab48db55e8a285686bdee4"
+  },
+  "adm2/attrib/N40E010.json": {
+   "bytes": 49207,
+   "sha256": "281f2c107b120258a98894ce6378d0a903ff508d177fff0515c89d306d4d515a"
+  },
+  "adm2/attrib/N40E020.json": {
+   "bytes": 66820,
+   "sha256": "a69bd1a7c189a40bab8d7bbb3ae0cdc4f55b5d41f660126b0145ca9fe45ade8b"
+  },
+  "adm2/attrib/S60W080.json": {
+   "bytes": 1197,
+   "sha256": "19d68b3f3d47bacc152e69e54e96995baad1db0f3776c6ac6871e16c898a5f43"
+  },
+  "adm2/attrib/S60W070.json": {
+   "bytes": 4230,
+   "sha256": "0830fa3b4628df981d43a93c4aa25c286db7d8744750cef18eb412a0863481bf"
+  },
+  "adm2/attrib/S50W080.json": {
+   "bytes": 7365,
+   "sha256": "33fab7906daa0271bb074ad520ee02e760877468f942ee5fa653201a726e8a05"
+  },
+  "adm2/attrib/S50W070.json": {
+   "bytes": 8818,
+   "sha256": "e2a578ce2c72a6426246b1903535d5861efeac7db3df1c8e4a9a34c80d511a4e"
+  },
+  "adm2/attrib/S40W080.json": {
+   "bytes": 5960,
+   "sha256": "f4e7e19eb82ed71642d39929a701af1b58e92984b6d7d095406ee295c28f379e"
+  },
+  "adm2/attrib/S40W070.json": {
+   "bytes": 47663,
+   "sha256": "13976c463e992fbb14388709f5fd81e729ec8e1e653d9f2035157716939b3262"
+  },
+  "adm2/attrib/S40W060.json": {
+   "bytes": 46789,
+   "sha256": "cbf2c19a512cbddd9e00f62186ced265f84fda722c9c4243fcc286437ba13aed"
+  },
+  "adm2/attrib/S30W080.json": {
+   "bytes": 92,
+   "sha256": "c615be2f637df186e1ce242dbbbe8af5323f05d9394e95a71ae1c23fc7246d98"
+  },
+  "adm2/attrib/S30W070.json": {
+   "bytes": 50618,
+   "sha256": "ef36c06c1b685c5141fd9abc5917aece5bed768c37f5645f57262b938204941c"
+  },
+  "adm2/attrib/S30W060.json": {
+   "bytes": 311731,
+   "sha256": "1e84ea69753836ab38cae4a275dc08667d360af192b9b1061096027bb224abd8"
+  },
+  "adm2/attrib/N30E040.json": {
+   "bytes": 27442,
+   "sha256": "16cf07cffe212873ae9e789861f9dcc87821a6fd4363f06dcd00ec5f0fb64bd0"
+  },
+  "adm2/attrib/N40E040.json": {
+   "bytes": 25628,
+   "sha256": "7af955adb6f067efc9f2520b8c608f5c103e4fc6a5cffbfae71b5a6cda32601f"
+  },
+  "adm2/attrib/S50E140.json": {
+   "bytes": 23483,
+   "sha256": "27eab90e545bce803a4cfccf52941d141435346cf412c1d90b4b99de62821301"
+  },
+  "adm2/attrib/S40E110.json": {
+   "bytes": 25208,
+   "sha256": "fdd46dbc73fb2b05d16146ab6297f4fda90919b1d0cf5713c03b0f035aadf719"
+  },
+  "adm2/attrib/S40E120.json": {
+   "bytes": 4413,
+   "sha256": "eb698cb4b70668d20ee8a4ccc82eaf20e6fe23c03cbe7d853cb72c62d8448635"
+  },
+  "adm2/attrib/S40E130.json": {
+   "bytes": 18051,
+   "sha256": "904f0bd551a9fd8b66e51064e69baa9613bfab73f2c82470a771a6101afe0103"
+  },
+  "adm2/attrib/S40E140.json": {
+   "bytes": 60114,
+   "sha256": "1a7cdefd3b1be956c9de8f0b50220312d741949058303c2edd2ada32ba7d4758"
+  },
+  "adm2/attrib/S40E150.json": {
+   "bytes": 23488,
+   "sha256": "e01353b4121d83d50384d0f3eda736c7e4e8b7c4dd1f0ed0fac651f797559de6"
+  },
+  "adm2/attrib/S30E110.json": {
+   "bytes": 24016,
+   "sha256": "2baf82dea79384e3021c3d1a22c8105cbc8f3c38ca5f6b38ba0c9ed77a4383bb"
+  },
+  "adm2/attrib/S30E120.json": {
+   "bytes": 1746,
+   "sha256": "c4f28daa0c0f5afa04101ab39ff4c5ea5eca5e3c46928828ae2331f5fc96526c"
+  },
+  "adm2/attrib/S30E130.json": {
+   "bytes": 2546,
+   "sha256": "8042ef16311e5178a77919fe821eb451ddb47484d79f324357a77b8f467d685b"
+  },
+  "adm2/attrib/S30E140.json": {
+   "bytes": 23105,
+   "sha256": "375d9a706effff5a0f4a6109652d00e167c3cfdef65b14dc5e1a8b603a6d775c"
+  },
+  "adm2/attrib/S30E150.json": {
+   "bytes": 28591,
+   "sha256": "57998e89870e31e9fcf67e5c08b45522bf72a927de9d05807bce8226498046c5"
+  },
+  "adm2/attrib/S30E160.json": {
+   "bytes": 124,
+   "sha256": "b4c83419a6b46968b611d0a324e255828f36467e21a70351bf9fcc87a3bd32b6"
+  },
+  "adm2/attrib/S20E090.json": {
+   "bytes": 564,
+   "sha256": "f96173c0bb54159e980e48940994814eaeeee11c68d64b46f6905403b7168f87"
+  },
+  "adm2/attrib/S20E100.json": {
+   "bytes": 184,
+   "sha256": "e6e660551e1f591650a5e3f618620cdc701270fdb6a0b9312631dafd541417f9"
+  },
+  "adm2/attrib/S20E110.json": {
+   "bytes": 392,
+   "sha256": "0d2b8c92b740a057332d61672c38f642dd301f7095c60ba1f7035fff7b6140bc"
+  },
+  "adm2/attrib/S20E120.json": {
+   "bytes": 35878,
+   "sha256": "e7f36216cfffc2317dd3993ccb232cc23a4889149b15d58da0a106b92281429d"
+  },
+  "adm2/attrib/S20E130.json": {
+   "bytes": 27412,
+   "sha256": "203f38a822ee2a2bcbad330da134250fecadb0ca731cd03530b01a980e483cd4"
+  },
+  "adm2/attrib/S20E140.json": {
+   "bytes": 23597,
+   "sha256": "90fe3af95943e071365bb46782763df7482d863f862f603246757b8fe972ab38"
+  },
+  "adm2/attrib/S10E140.json": {
+   "bytes": 51503,
+   "sha256": "8eeab66676d16cb09252249f3d16307d35676795ad96a5b08ae168d5f6d7af41"
+  },
+  "adm2/attrib/N00E000.json": {
+   "bytes": 105208,
+   "sha256": "d1352f0a39c2eadc64edb5012630486a95d3023f27c6bd79326b47b52eb7710b"
+  },
+  "adm2/attrib/N10E000.json": {
+   "bytes": 65505,
+   "sha256": "e627197565a21a3eb2127b27a5960dd5deb4bc7c71e8313466780d93d3ea5633"
+  },
+  "adm2/attrib/N00W010.json": {
+   "bytes": 81196,
+   "sha256": "2bda4a4b67a262bb5df5cad374d0a1f968ee33aef77ff98cc1f19dd893ad8360"
+  },
+  "adm2/attrib/N10W010.json": {
+   "bytes": 45124,
+   "sha256": "7e6f3995fdb73f751bf253d74ed89375cc0452a8f11772c4b2e59a65cb51ac69"
+  },
+  "adm2/attrib/N20E080.json": {
+   "bytes": 49668,
+   "sha256": "683d08dfd7c637f40bac4fe836b53ea9a8008d3cb3276b2413ea78b25dc8bfc3"
+  },
+  "adm2/attrib/N20E090.json": {
+   "bytes": 76901,
+   "sha256": "9dabc541071520443fc654ff9ae43b8077d567c0da142078534a8d23cb51093f"
+  },
+  "adm2/attrib/N50E020.json": {
+   "bytes": 41602,
+   "sha256": "3a956a5ac78ea1dfd65306802232a1dcec0b8674179b85f8f5c3d5d56b9ac1a4"
+  },
+  "adm2/attrib/N50E030.json": {
+   "bytes": 21190,
+   "sha256": "ad41296e39c4c1144f7d8dc761c4a9f302c376198f5d3994122aede84693762b"
+  },
+  "adm2/attrib/N10W090.json": {
+   "bytes": 89126,
+   "sha256": "c5145015c9ae7d39aa0bcdd43cfd7844cee25c27452dcef5904076c243d69fd2"
+  },
+  "adm2/attrib/S20W070.json": {
+   "bytes": 78296,
+   "sha256": "3ffebcd5bf216a1c060cf4de7beeee6330e88d38c1623c375b70a071d408dc08"
+  },
+  "adm2/attrib/S20W060.json": {
+   "bytes": 94537,
+   "sha256": "c0ddf050f97dae07b9a0a4e94173e90f233d72d00b308305f85327d7b49459ee"
+  },
+  "adm2/attrib/S10W070.json": {
+   "bytes": 41955,
+   "sha256": "a507287f102018af5662964275c71e4af26a7cdc1d5d3b7a8ef6d21df8b62ef0"
+  },
+  "adm2/attrib/S30W050.json": {
+   "bytes": 216998,
+   "sha256": "3605899881826182e408d0188ec10db2a315a3e00a3da7e6e6bb976e38e3f99d"
+  },
+  "adm2/attrib/S30W030.json": {
+   "bytes": 86,
+   "sha256": "62150df2ca7e8cc8197faa387476196dbb16e8c2a62039561fbc143f4cc52a66"
+  },
+  "adm2/attrib/S20W080.json": {
+   "bytes": 43073,
+   "sha256": "9aba973e0ad266300cae2d38ab13a7953b4e105a0520f8b3aacde6a42db436fb"
+  },
+  "adm2/attrib/S20W050.json": {
+   "bytes": 216905,
+   "sha256": "5e22706c85b85c435a630deafe8b9a1d1b14a3eb5235a5f7294901aad8cff365"
+  },
+  "adm2/attrib/S20W040.json": {
+   "bytes": 50198,
+   "sha256": "dc8fca4a1196a2dcdd874f53345276c063333eb2e50e4ff82a7b90db132f0485"
+  },
+  "adm2/attrib/S10W080.json": {
+   "bytes": 103728,
+   "sha256": "bb447c760efac07cc2fb81d9d2805b098323c429f8358c1c9e231f29284ea692"
+  },
+  "adm2/attrib/S10W060.json": {
+   "bytes": 45725,
+   "sha256": "79c696d973bfd9790682d4de309b1edfb42b1ad65ed2f5c7adb289199fd9f3e0"
+  },
+  "adm2/attrib/S10W050.json": {
+   "bytes": 146448,
+   "sha256": "8c9912444e1a44e0871e0fdbd4e381233cf46501b853c7b0708368ad8dc73423"
+  },
+  "adm2/attrib/S10W040.json": {
+   "bytes": 114754,
+   "sha256": "b8a7aa7efde90505e62d806aec1099b831d6f434ac24008695e5e7910b639a94"
+  },
+  "adm2/attrib/N00W080.json": {
+   "bytes": 235932,
+   "sha256": "e6e82b449e11b499a2baa9d341c7b93b871804cca4643d2746f53b2569d80bbc"
+  },
+  "adm2/attrib/N00W070.json": {
+   "bytes": 21739,
+   "sha256": "b1623e79e1db0107ab771955183f5ce494d585c472f536d92d0e2253965f24e0"
+  },
+  "adm2/attrib/N00W060.json": {
+   "bytes": 36204,
+   "sha256": "80ff65442c67feaf0198c450beab243704ea5315ff6f85cc049fc5b69d96a332"
+  },
+  "adm2/attrib/N00W050.json": {
+   "bytes": 586,
+   "sha256": "f19252db4e42c09109f60565fa25a90e19d1e039c60eaa61a10cc70b73c324f7"
+  },
+  "adm2/attrib/S30E010.json": {
+   "bytes": 15195,
+   "sha256": "559e50063f8d45cbe56574d8db3a19e64c76282a4e35932bd9bc86c10aff37f5"
+  },
+  "adm2/attrib/S30E020.json": {
+   "bytes": 47086,
+   "sha256": "7a1b9773602e17b5329b0ea48550fb875b843b5b688c0ca20dc4d7e27a2b8cf4"
+  },
+  "adm2/attrib/N00E010.json": {
+   "bytes": 56067,
+   "sha256": "4c7b9242bf319f62e783e3c06d3c23aacc950801a332643265e74649624e2685"
+  },
+  "adm2/attrib/N00E020.json": {
+   "bytes": 45560,
+   "sha256": "6be5acc5d898abe02144cfda1bc38fbd3a748bf23f6d3242aa4b2ac216aefc67"
+  },
+  "adm2/attrib/N10E020.json": {
+   "bytes": 23735,
+   "sha256": "83daf497f3a02db3fa83324386f881a6598b5f590617e85d4e4243e825348522"
+  },
+  "adm2/attrib/N40W130.json": {
+   "bytes": 32175,
+   "sha256": "d03a809e78b0db1912128df79d5a08908ee67a549fff1c2ff51912a686a9ebe4"
+  },
+  "adm2/attrib/N40W120.json": {
+   "bytes": 31221,
+   "sha256": "0b945cee7c85b343ef4180e055a6859b592939123f83c29b6444347f1887cc6c"
+  },
+  "adm2/attrib/N40W110.json": {
+   "bytes": 24914,
+   "sha256": "e213c8e745ca2a7a7fdb1e17139a56bc7f75cb956f26397be30530461035fd5c"
+  },
+  "adm2/attrib/N40W100.json": {
+   "bytes": 67294,
+   "sha256": "0d2f5bab757e7644d928968e3642dfb18afcc3b1ef35310b1370aeb82a9ace12"
+  },
+  "adm2/attrib/N40W090.json": {
+   "bytes": 59519,
+   "sha256": "9c665f17c261c1ca6e21cee36b7e5fb7b47a6bab0ecc9dc46e1cca1ee9f647ce"
+  },
+  "adm2/attrib/N40W080.json": {
+   "bytes": 57425,
+   "sha256": "9d12e28cda0ae70c4355fcebd086023dad3a5dd74e9b1015225215ba9983de37"
+  },
+  "adm2/attrib/N40W070.json": {
+   "bytes": 38922,
+   "sha256": "70e612c3312271c69077e1146c9d5efe60d12e5daa8ef84e462ec4ce4c6df354"
+  },
+  "adm2/attrib/N40W060.json": {
+   "bytes": 32579,
+   "sha256": "3365c65cb4457cff64e10b819d2476706fe1798b8e293e3594b02b9d339a4047"
+  },
+  "adm2/attrib/N50W140.json": {
+   "bytes": 29948,
+   "sha256": "a04080f19bf7a4a671b98a1df1c2bc7975293736b8dce413c719fdede9049f43"
+  },
+  "adm2/attrib/N50W130.json": {
+   "bytes": 48190,
+   "sha256": "6f8937ff77b021f9ae2b9e6298ba0ee92ec560f3e5f6b522e29e0b3fa2d52a76"
+  },
+  "adm2/attrib/N50W120.json": {
+   "bytes": 9238,
+   "sha256": "04ebc414541f667dc18571b9de5d23ae4a6d6f7269dc8be849216ea188c47113"
+  },
+  "adm2/attrib/N50W110.json": {
+   "bytes": 2625,
+   "sha256": "e27fdc9b0a82a7599b22463bab2dd727618d7547a6a25214e797d8fe8be3de56"
+  },
+  "adm2/attrib/N50W100.json": {
+   "bytes": 4955,
+   "sha256": "8761ce8f68e0759427b53ea2c8ba7ae2dff7e01e97af5c1de138a8a5a7df92b9"
+  },
+  "adm2/attrib/N50W090.json": {
+   "bytes": 5658,
+   "sha256": "a1c9445cc4a35cb3d0b31f5e37b97092b975cfc8514f40c6803d0494c2da30ba"
+  },
+  "adm2/attrib/N50W080.json": {
+   "bytes": 38287,
+   "sha256": "694ce95185146467efad52682706cbd89b139d329842ebc99d55af5c4f41510f"
+  },
+  "adm2/attrib/N50W070.json": {
+   "bytes": 47209,
+   "sha256": "b55a282739ef45461a1d7b6f3ddbcc6620b17b62d405939dfd2bf41220ce8e3b"
+  },
+  "adm2/attrib/N50W060.json": {
+   "bytes": 26202,
+   "sha256": "f93778c070ab7c1611ff413ae574f305ed12ac8935ee1e67c2302d6a43238c36"
+  },
+  "adm2/attrib/N60W150.json": {
+   "bytes": 6741,
+   "sha256": "339c82f8386534606aa512a497ebcf1555c5f03c5274a1af6adf9452966241c9"
+  },
+  "adm2/attrib/N60W140.json": {
+   "bytes": 19163,
+   "sha256": "c1bd10904086300d8348fa2f6fa15e3c85ed66bd7d71838ab94fa1e373571354"
+  },
+  "adm2/attrib/N60W130.json": {
+   "bytes": 7043,
+   "sha256": "8e69077f71a06f26ef815ebd0e791f64427ac0bcb9349fcce2b05cf618a55f3b"
+  },
+  "adm2/attrib/N60W120.json": {
+   "bytes": 15231,
+   "sha256": "81f55b032cdd07bed83bd8874af1a391a61a5ef345342cd16f9887f89c39d4b0"
+  },
+  "adm2/attrib/N60W110.json": {
+   "bytes": 44302,
+   "sha256": "237377138edeeb7c95b723f48d301b1c9b555420d22b8992d7e095228cf88cfd"
+  },
+  "adm2/attrib/N60W100.json": {
+   "bytes": 78535,
+   "sha256": "d6b695dbf843c0c11d3e92966b68a924e970fbae7163d19d7ca535eddc8e94e7"
+  },
+  "adm2/attrib/N60W090.json": {
+   "bytes": 54849,
+   "sha256": "e055ade164fff96d89ee02dc6242cca8f63bb34fdb0717e46f2e0661a8780a7f"
+  },
+  "adm2/attrib/N60W080.json": {
+   "bytes": 69824,
+   "sha256": "299949313f7bb876efb0c1ffbcee066c39381bc340701f6262246de86488724b"
+  },
+  "adm2/attrib/N60W070.json": {
+   "bytes": 89448,
+   "sha256": "97c97b4a4cb3667d8a828862b15e9c1128aefb5744109c2976975dc63ec79972"
+  },
+  "adm2/attrib/N70W140.json": {
+   "bytes": 1834,
+   "sha256": "c9b0185b11688ce5759f66adede385091cde0090efadb4696ec639fce0c2fb99"
+  },
+  "adm2/attrib/N70W130.json": {
+   "bytes": 12863,
+   "sha256": "43f0ea74573f580a8adb9a1897e2e4c92b056879a06ebb43a2584ffb0b3dd43a"
+  },
+  "adm2/attrib/N70W120.json": {
+   "bytes": 26330,
+   "sha256": "b6c03138564f12308310f2493173092daf305ffd8597c5502da777c23004139b"
+  },
+  "adm2/attrib/N70W110.json": {
+   "bytes": 36656,
+   "sha256": "86c4e32ff089ace520e8fd35947fa0dcd9135a8f4838f06ace865b2d9476d306"
+  },
+  "adm2/attrib/N70W100.json": {
+   "bytes": 43242,
+   "sha256": "2141bf72420a2b3afcbe152b2ab0d280978c381250e0b3f24b7d50506a54510b"
+  },
+  "adm2/attrib/N70W090.json": {
+   "bytes": 33328,
+   "sha256": "f38ac5d70ce95552bb519ec88c09b60cb1bcff55d0471e0940e1a3146b73116e"
+  },
+  "adm2/attrib/N70W080.json": {
+   "bytes": 23064,
+   "sha256": "441238fd1399d72b2e3fe38a85a7903c2f2e218ab6affbb0cc1d2086cd2c7043"
+  },
+  "adm2/attrib/N70W070.json": {
+   "bytes": 2347,
+   "sha256": "bab88c8a5c0fb450ff0173de0c30eb029b746fa0c619e10f03b1c693c26be0e7"
+  },
+  "adm2/attrib/N80W110.json": {
+   "bytes": 137,
+   "sha256": "a7d5172bbb651816048f8ffef40ac1f839800f2d9031a807b59f95f38620d195"
+  },
+  "adm2/attrib/N80W100.json": {
+   "bytes": 5030,
+   "sha256": "52db9b7b516b5d6bf49a38c3510e180adaff349d9f2dac6256db64bdb80d5bd2"
+  },
+  "adm2/attrib/N80W090.json": {
+   "bytes": 7189,
+   "sha256": "71259e0716fd3bf6cfb80c666c6e864857bde6f82b0a93490d1881bceadfc266"
+  },
+  "adm2/attrib/N80W080.json": {
+   "bytes": 4003,
+   "sha256": "341039c15fbbf3f91ac8b9f1033297ced802101a7502111a6e050c5b0eb80136"
+  },
+  "adm2/attrib/N80W070.json": {
+   "bytes": 3428,
+   "sha256": "8d25f6fda35bbd05a392084f236ab94ddc52b7033a67dbec45d3a0098ce6346f"
+  },
+  "adm2/attrib/N10E100.json": {
+   "bytes": 260696,
+   "sha256": "0021831c65e15b532ada9805e3a8d28b474a559c2541c59ba98f39eea863168c"
+  },
+  "adm2/attrib/N10E110.json": {
+   "bytes": 16076,
+   "sha256": "f7f39aacdb5affae97471faaf32911536e54dc7007a81a46e6f35b806039271b"
+  },
+  "adm2/attrib/N20E100.json": {
+   "bytes": 149725,
+   "sha256": "7412d8bff0b64c70d6cb48a638c6ebda0eb4fbc50eff9e208c60bb605f29b340"
+  },
+  "adm2/attrib/N20E110.json": {
+   "bytes": 87559,
+   "sha256": "aadd56e4fd70f80314ef025e02b68cc7aed77485a018f0f7823b9f6eec6b03e3"
+  },
+  "adm2/attrib/N20E120.json": {
+   "bytes": 12051,
+   "sha256": "8f6cd0388399d98a9cafb6fe9964ff1158de206f564820bc7b4e292676b7cd9c"
+  },
+  "adm2/attrib/N30E080.json": {
+   "bytes": 11796,
+   "sha256": "9de8a353ca124f8c2463c38b52a65ae8dd81e120c916296c36eb069d6c3d4461"
+  },
+  "adm2/attrib/N30E090.json": {
+   "bytes": 20866,
+   "sha256": "8da5c2ca34a474bc8c13c0bd7dbebc1d54f26f4c3ac94872b3ffcf7d2018ba38"
+  },
+  "adm2/attrib/N30E100.json": {
+   "bytes": 65048,
+   "sha256": "5e2d593ddb3f1827c54418ee9b966cc16f8f32ff6ca147bf68781976c86974da"
+  },
+  "adm2/attrib/N30E110.json": {
+   "bytes": 113187,
+   "sha256": "0357568ab0bc342e744c78386a44849e18f4e7ca4c9db66d167307af1f226974"
+  },
+  "adm2/attrib/N30E120.json": {
+   "bytes": 90551,
+   "sha256": "854bab23b8d557e1f217399b76b0a596b15576f236f8f2d031869012d38f3998"
+  },
+  "adm2/attrib/N40E070.json": {
+   "bytes": 12002,
+   "sha256": "03e4c3db4f5f12d1fdaa0ca37885f8048a85ebde674396f5137974c5de320528"
+  },
+  "adm2/attrib/N40E080.json": {
+   "bytes": 18685,
+   "sha256": "8ceb9704fb15583ad4f08760ed5e29485ddb602173814d615be3d227b2ac0941"
+  },
+  "adm2/attrib/N40E090.json": {
+   "bytes": 29991,
+   "sha256": "b810cc1e7c6fb0da20366d5331e43f33cc1e760d444c097f90c3506fc94e5f39"
+  },
+  "adm2/attrib/N40E100.json": {
+   "bytes": 39452,
+   "sha256": "3b6a49e4e30e3bac71baecba4567a6131190d1bf49e814a5ef2758e733e6823d"
+  },
+  "adm2/attrib/N40E110.json": {
+   "bytes": 33741,
+   "sha256": "c699d2a9a71a7a83df25e694ac11c292c7b83913dea66185d9e2497282f80545"
+  },
+  "adm2/attrib/N40E120.json": {
+   "bytes": 57850,
+   "sha256": "03bc3b952d29ecb58c0659e7152caa14df9ef32db160976426a179b7ed595f98"
+  },
+  "adm2/attrib/N40E130.json": {
+   "bytes": 8454,
+   "sha256": "ea4feb58c5005a9c660b0655fd18c97f0faeb468f1ad22ccd0694c8f8c4bd737"
+  },
+  "adm2/attrib/N50E110.json": {
+   "bytes": 703,
+   "sha256": "81bc71e77faf1b70397723a5b76ba52dc05e64f0d86f2216aa387d77ff4f9726"
+  },
+  "adm2/attrib/N50E120.json": {
+   "bytes": 4158,
+   "sha256": "54ec190a02fe885429d073a862c0873198159f9f95befee16adc46d1b520bec7"
+  },
+  "adm2/attrib/N10E010.json": {
+   "bytes": 31818,
+   "sha256": "13cfc1fd8bb3d02b8e341cf3337d36ceb3c593e85001387f4445e2fd197fe7c2"
+  },
+  "adm2/attrib/S10E030.json": {
+   "bytes": 110696,
+   "sha256": "0d03d24ae7fb3c11503e6ce280ab1974c04a32c6fdd2a695279242edf82816f4"
+  },
+  "adm2/attrib/N00E030.json": {
+   "bytes": 59833,
+   "sha256": "ff6fdbdc24fef109bf4125138e6d63481ef9dcf1a311b9c2d22c18153a69669e"
+  },
+  "adm2/attrib/N10W080.json": {
+   "bytes": 37032,
+   "sha256": "ed1d055f104fa655fd4c76c79745da902f7a98974f0fe32748638aefaa27e79c"
+  },
+  "adm2/attrib/N00W090.json": {
+   "bytes": 40974,
+   "sha256": "76182f8af0c39361b115b1672a52d5a6657e758929597135e4577325d4f3a62e"
+  },
+  "adm2/attrib/N50E010.json": {
+   "bytes": 92387,
+   "sha256": "838f1a04ff56beaafcaaf02e547e9559ca14a4d090df002f6f4315339ee87710"
+  },
+  "adm2/attrib/N40E000.json": {
+   "bytes": 72104,
+   "sha256": "86bfc34b7881f4ffd86e0a741c0890f0c29c3765dc85d49742417e86ac45fe48"
+  },
+  "adm2/attrib/N50E000.json": {
+   "bytes": 66829,
+   "sha256": "664bb71765b151c61b7d9d3ab3f53ec5076e5f4b44bd3eb5433a660f2d921248"
+  },
+  "adm2/attrib/N10E040.json": {
+   "bytes": 64373,
+   "sha256": "28a4233ddc691cb6cf4fc6468ca736d8a97e21d8c1c48260d11de0ab950c9eb4"
+  },
+  "adm2/attrib/N10W070.json": {
+   "bytes": 17267,
+   "sha256": "649f1fd42f3713cfe20304456ea22c50aacc0ffe9b4dcc8b193f882fe3e62637"
+  },
+  "adm2/attrib/N20W010.json": {
+   "bytes": 1431,
+   "sha256": "022f416955d328528edbf838db157eadb1cf1cfeeae1ecd9027ec5233ea780dd"
+  },
+  "adm2/attrib/N20E000.json": {
+   "bytes": 2052,
+   "sha256": "7cab507616b881f5e6d912fdf02c984adcf673f1c6a97177654a83abf5e6384c"
+  },
+  "adm2/attrib/N20E010.json": {
+   "bytes": 884,
+   "sha256": "b23285ce55d128ad3570b92dd751d6744b8fe530e33678f2b4ba4322c9104b05"
+  },
+  "adm2/attrib/N30W010.json": {
+   "bytes": 1406,
+   "sha256": "7b73487d0802135ac8a94609a33a3748611c7a50e3e72dd7521fe67e87939ed4"
+  },
+  "adm2/attrib/N30E000.json": {
+   "bytes": 7995,
+   "sha256": "3510c0811d775ab0990cd6120afeca2c59734bc524b709232979affc445a66e1"
+  },
+  "adm2/attrib/S10W100.json": {
+   "bytes": 1890,
+   "sha256": "4ff2880494a45fd6ff56c9670f6c4351f084cea43e1dfc06b512eee973b91d17"
+  },
+  "adm2/attrib/S10W090.json": {
+   "bytes": 17639,
+   "sha256": "7073b45bb9416cb7d2d5edd2c385099c877f0d796481744591addaca5a815373"
+  },
+  "adm2/attrib/N00W100.json": {
+   "bytes": 339,
+   "sha256": "efb8de1cf749dd3b4d9c779adc5af47131760421df509245295423cd0e79578b"
+  },
+  "adm2/attrib/N20E020.json": {
+   "bytes": 1991,
+   "sha256": "c50ff2aeb02c8ad2977aa2ab6e4d50e00700838eb4188546b7f5d736497ce588"
+  },
+  "adm2/attrib/N20E030.json": {
+   "bytes": 38304,
+   "sha256": "998ddf1f47248a060bd398ac3da168d3364f57f964f0db94813dc0b36d0e652a"
+  },
+  "adm2/attrib/N30E030.json": {
+   "bytes": 69210,
+   "sha256": "72cffdd6a81580307acb2bc411a74fd05bc2f39a9e77f4bc3c5cd5be7c22be46"
+  },
+  "adm2/attrib/N10E030.json": {
+   "bytes": 36247,
+   "sha256": "2546eb3d4cac8b1a6abbfe8b38161fe54cd469557f23aada986a73867587101e"
+  },
+  "adm2/attrib/S30W180.json": {
+   "bytes": 125,
+   "sha256": "1457a81e3a90078020819209d22737ea3e70ae515f038fea88d9a98c5c1d0114"
+  },
+  "adm2/attrib/S20W180.json": {
+   "bytes": 3105,
+   "sha256": "1c4af266e634633adbc874caa1861c0c8e8e7fc128f416bf1cda222ecbe7402c"
+  },
+  "adm2/attrib/S20E170.json": {
+   "bytes": 8806,
+   "sha256": "06509ea17abbd92e394c8dff45e06541caa92e04402c9160c2eb7fb48bd00a26"
+  },
+  "adm2/attrib/N40W010.json": {
+   "bytes": 22020,
+   "sha256": "281b3352c2b6465af9ad395560a2a3f839640d593d5515ae7549c7ddc0e483f2"
+  },
+  "adm2/attrib/S10E000.json": {
+   "bytes": 2396,
+   "sha256": "73b9aaa4acfff403e9d7c5241074ed823c4661c08335f1467fd0c4b237c62d50"
+  },
+  "adm2/attrib/N50W010.json": {
+   "bytes": 131687,
+   "sha256": "79d3e78f0f74ea8527dcc304ceb51f87415a90c3409026f04585444cd1ee2df7"
+  },
+  "adm2/attrib/N60W010.json": {
+   "bytes": 3851,
+   "sha256": "6bf41971c87e5d58276102e12bfa97847158592cf811e5c10fe2ed9f096a465c"
+  },
+  "adm2/attrib/N40E030.json": {
+   "bytes": 37891,
+   "sha256": "1b5329c4582bdfdd06677f451a09e027d78b3bbd22da45bc788fcbd91561bbbc"
+  },
+  "adm2/attrib/N00W020.json": {
+   "bytes": 19232,
+   "sha256": "ca9f86cc737e5b9d682436801c6f9dc6671420fd891f79ec60ab4b60c025f436"
+  },
+  "adm2/attrib/N10W020.json": {
+   "bytes": 34943,
+   "sha256": "0abf9744689abea526c1827009ac4366ebbfbdf5f1f2d81144dda97247a2f261"
+  },
+  "adm2/attrib/N10W100.json": {
+   "bytes": 267412,
+   "sha256": "45e4a8162d34593fe3e158ecf87c9455ce6381f1a07fddfd0c57d6c6a05a383c"
+  },
+  "adm2/attrib/S10E090.json": {
+   "bytes": 3649,
+   "sha256": "527ee5464d4910d2835e3824492a77520c593c53458c93bd9088192f845f9b32"
+  },
+  "adm2/attrib/S10E100.json": {
+   "bytes": 58509,
+   "sha256": "b2ca6e865314c0653f6e8092bf13cb09bc6dd74eb7bd0c19088999b1e4d8959c"
+  },
+  "adm2/attrib/S10E110.json": {
+   "bytes": 78943,
+   "sha256": "263eaaf715d854e7de3cd913475c27f5bfd64b0b38e78f41a4b4d72db751b917"
+  },
+  "adm2/attrib/S10E120.json": {
+   "bytes": 53504,
+   "sha256": "6eb009cd086b90bbfd346b812592f573715d143b6fdb74e602dfaffaa189d81b"
+  },
+  "adm2/attrib/S10E130.json": {
+   "bytes": 56750,
+   "sha256": "ffefea62125e3f9d8016685f40b806aac61484bcac9cafc77155c30071ad06f1"
+  },
+  "adm2/attrib/N00E090.json": {
+   "bytes": 44922,
+   "sha256": "adb46622cfd57260bb4f2b6c27f2826478413faec199fef88ef58933cc165cf7"
+  },
+  "adm2/attrib/N00E100.json": {
+   "bytes": 72234,
+   "sha256": "542f85785a4dad43cc8ec98d49030eef37aedbb48d45b34c3873f7e1f4e19998"
+  },
+  "adm2/attrib/N00E110.json": {
+   "bytes": 58615,
+   "sha256": "16941526a85efcf23059d3d59119cfe6fc3113eea2397eee177aca4aa8dac068"
+  },
+  "adm2/attrib/N00E120.json": {
+   "bytes": 48710,
+   "sha256": "8f7ada7f54b71db287b4c9d60ebd80aac05780faef41a71c4d78bbc9fdd10b8e"
+  },
+  "adm2/attrib/N00E130.json": {
+   "bytes": 402,
+   "sha256": "8ff41ccae1a4c7c6409b60fee172421b9d22e2867a70e4b8f96f0498f300a499"
+  },
+  "adm2/attrib/N50W020.json": {
+   "bytes": 3356,
+   "sha256": "f840159335602e31cf6a8e8691a9f777cda231458e4c63f0d95957baf0857487"
+  },
+  "adm2/attrib/N20E040.json": {
+   "bytes": 321,
+   "sha256": "ecdf51b472712b9adba515f6629ddd3b449cd565febc5c2387f032ccb6ee3cc5"
+  },
+  "adm2/attrib/N60W030.json": {
+   "bytes": 22121,
+   "sha256": "882bb5c122120b6800a6018e0a5a3405a5a6f281d51077d63edbb18ba4e13b65"
+  },
+  "adm2/attrib/N60W020.json": {
+   "bytes": 12741,
+   "sha256": "bd23c7020c1438095909158d3b1da110f35e1ed8ffe1d271e0b5d7d0ec9e8c76"
+  },
+  "adm2/attrib/S10E040.json": {
+   "bytes": 3344,
+   "sha256": "7f288e6e42b67078795fe7f81a6fc9a774125c88e0e669ed41b3c4bb80b77e11"
+  },
+  "adm2/attrib/N00E040.json": {
+   "bytes": 14512,
+   "sha256": "971bbcdab10f3db3364232a91d1e796b90258b61e316a6fcba5014d1710edeb0"
+  },
+  "adm2/attrib/N30E130.json": {
+   "bytes": 120,
+   "sha256": "f08b7c1cbab03de0a360bc28edf15e1e249a8e9ee4d12fa34c9217f6f1929166"
+  },
+  "adm2/attrib/S40E020.json": {
+   "bytes": 18766,
+   "sha256": "da8c4baa47e348204cbbea653e78ae75d555ce61d1a2d88af4c6ae1e5ef0ef72"
+  },
+  "adm2/attrib/S30E040.json": {
+   "bytes": 21302,
+   "sha256": "5467935fa5a69f9a507514c05ef615cbad33df9a83605d666d81fee25cc26e4e"
+  },
+  "adm2/attrib/S20E040.json": {
+   "bytes": 46443,
+   "sha256": "62f55ae5e99d86645b7ea41e8b1e92b2fc167f2452be14f9a9de28645a4bc04d"
+  },
+  "adm2/attrib/S20E050.json": {
+   "bytes": 1071,
+   "sha256": "80e373c3a2f228d34dd01294ef50557c512c20f0d21dc239e879b9dce43da93f"
+  },
+  "adm2/attrib/S10E070.json": {
+   "bytes": 227,
+   "sha256": "f5b2efba2c2ec0b50efa9128915889436799c8e6183fe68eff07ddf6b1454a29"
+  },
+  "adm2/attrib/N00E070.json": {
+   "bytes": 3913,
+   "sha256": "9f809ba58c93cfe0d2b491ccb4ce546506352f3d32a0913fa6c0ba7f8cbf9e25"
+  },
+  "adm2/attrib/N10W120.json": {
+   "bytes": 265,
+   "sha256": "abfd87b2d474db772decefede67b98a0620f3200b724bac33994484758419eca"
+  },
+  "adm2/attrib/N10W110.json": {
+   "bytes": 39572,
+   "sha256": "6dbd36902a58abfe88b05e5e5ccc0ccce4da28945e61295bd19554b06315397d"
+  },
+  "adm2/attrib/N20W120.json": {
+   "bytes": 13750,
+   "sha256": "0e0f883372525902153ac9f667f81cdfb14d6da8a263a49f762fbf82b51c913c"
+  },
+  "adm2/attrib/N20W110.json": {
+   "bytes": 142281,
+   "sha256": "16fcca156d6e662cc196a4870f9770b648af7ac97c9757944b0e4ea85dd0894c"
+  },
+  "adm2/attrib/N20W100.json": {
+   "bytes": 74493,
+   "sha256": "dde22404f8bc6bfcf079504bba4463e20966a6dc97d0a9c28e9d394a3d38b1e5"
+  },
+  "adm2/attrib/N20W090.json": {
+   "bytes": 35780,
+   "sha256": "3185f941410385fc4273283410699bfebda1f1b2c6305e5eeb787a1c14c3a6ec"
+  },
+  "adm2/attrib/N30W120.json": {
+   "bytes": 23589,
+   "sha256": "7e26fde5202bf4140338b469d26d0bc0c9d0b9cf580b8b7d4f47330c8d0f33d7"
+  },
+  "adm2/attrib/N30W110.json": {
+   "bytes": 34052,
+   "sha256": "ee515edc80cb8140b5382ab795501caf8695ccaba731bdded55ac16532c3d01f"
+  },
+  "adm2/attrib/N10E090.json": {
+   "bytes": 86945,
+   "sha256": "554d6b059a258b7ef5799b3ceccf00d40116a87c09ac2966175369f622057be2"
+  },
+  "adm2/attrib/N50E090.json": {
+   "bytes": 5031,
+   "sha256": "c3caf4883f58d32b48c936354f513eea6f8fd57b6a59c61cf4fff60b8d8632c5"
+  },
+  "adm2/attrib/N50E100.json": {
+   "bytes": 4271,
+   "sha256": "6959ebaa5e7ef38f5763fbf2fbbb61b804388c89821f2e374ea3841407f9ea80"
+  },
+  "adm2/attrib/S30E030.json": {
+   "bytes": 26464,
+   "sha256": "0cdb13004b48504165e07f38033247a7bcf67310cfc2e50f47890583258bfde2"
+  },
+  "adm2/attrib/S20E030.json": {
+   "bytes": 85397,
+   "sha256": "f1caecff338fa1ec96ecbe9448b5ab4885e91a0db84267373838dd2c06a27a45"
+  },
+  "adm2/attrib/N20W020.json": {
+   "bytes": 1635,
+   "sha256": "fc3b08ca619d80974d71a70eed97b2dcde09871339b8c0471090f7af26e6afed"
+  },
+  "adm2/attrib/N60E000.json": {
+   "bytes": 57337,
+   "sha256": "da15d903a1b00a45e8008a6cc82f023584f8542baaa685a890444d58a114ebe2"
+  },
+  "adm2/attrib/N60E010.json": {
+   "bytes": 93124,
+   "sha256": "dc99affbc61062fb7a6cd0031db94e5c874924b50d4ed3ee45f8e2c80693076a"
+  },
+  "adm2/attrib/N60E020.json": {
+   "bytes": 10898,
+   "sha256": "c6bfd8eee3fd328f1a9bb6d1551218176e2682871d586730008829fe56a8f121"
+  },
+  "adm2/attrib/N60E030.json": {
+   "bytes": 1047,
+   "sha256": "86faf86af6f2ba5beb7cbe436d564cc33a578bbc02f9d5014c9c2f4925415d5e"
+  },
+  "adm2/attrib/N70E010.json": {
+   "bytes": 2081,
+   "sha256": "4ee54d77ef0e2d5f93ca36ad5f142dfb1653e9420b2752f9aaeac857244a9f06"
+  },
+  "adm2/attrib/N70E020.json": {
+   "bytes": 17255,
+   "sha256": "63666d019f3e02d621c4b5dc90f523f40f0ec229ad2e79964e975fcf34765684"
+  },
+  "adm2/attrib/N70E030.json": {
+   "bytes": 837,
+   "sha256": "e4eb294439ae2807612abf517273a2c3f2ee5f376c243d6f41b7940a9aaf9c62"
+  },
+  "adm2/attrib/S50W180.json": {
+   "bytes": 955,
+   "sha256": "54a1c874bbe3694fe4bd611e7d3d0305db9e7aeda419cc21ee14897fc6754c85"
+  },
+  "adm2/attrib/S50E160.json": {
+   "bytes": 10649,
+   "sha256": "31e7b56ee9539099ed3d14445f2235062a64481b7e4dea884a4e3d28b2b0eadf"
+  },
+  "adm2/attrib/S50E170.json": {
+   "bytes": 19654,
+   "sha256": "a67ee7d8984b60cd2ff40142b15744f9a12137151f2d3cff497d239987ba6557"
+  },
+  "adm2/attrib/S40E170.json": {
+   "bytes": 32565,
+   "sha256": "5a4cbc59667b2e778ad9ea6cb29f2a3923d4efe04c9cf6194126ccd9bb21d94f"
+  },
+  "adm2/attrib/N20E070.json": {
+   "bytes": 3511,
+   "sha256": "212597b4b8fcbf038a97174b5db65dd0ec4a41f09ab179b500bdf5fd5e66fd8f"
+  },
+  "adm2/attrib/N10E120.json": {
+   "bytes": 50823,
+   "sha256": "99406d46268cf16cb0a0c9d0189c832b712abcc100bc3f43121c9d7ff04714da"
+  },
+  "adm2/attrib/S20E150.json": {
+   "bytes": 6244,
+   "sha256": "70e2e9a9dd6a1cb92dd756f65527b30d544313127dfefade8da8bb3973d257e3"
+  },
+  "adm2/attrib/S10E150.json": {
+   "bytes": 37013,
+   "sha256": "3434c95214d20b2693a2aaa2047d4e18452fa778cf08ee3c4c7c0b5df98d2467"
+  },
+  "adm2/attrib/S20E160.json": {
+   "bytes": 3438,
+   "sha256": "a17a4e71acd955214a1d36b62a529aa618a477914f482c7d7caaaf2e647a41cb"
+  },
+  "adm2/attrib/S10E160.json": {
+   "bytes": 7144,
+   "sha256": "7f5b1f2d9d4261c9d870b7a1214aa3dcb1028e9cb66fac40154fbcf8bb001411"
+  },
+  "adm2/attrib/N00E050.json": {
+   "bytes": 460,
+   "sha256": "3fa4fc0612720cc6b7415a5de53c1119bd213c00f17df3f45769664196448b2a"
+  },
+  "adm2/attrib/N10E050.json": {
+   "bytes": 4311,
+   "sha256": "ad5cf88f825b0544bbb5394b594aa3e3cd5fc152e335d652051fc4702599cbd8"
+  },
+  "adm2/attrib/S20W170.json": {
+   "bytes": 258,
+   "sha256": "7ea92bab7e3a410525ddcdb01028f0bacf77e8ac06afc3349711a789a69d93db"
+  },
+  "adm2/attrib/N10W160.json": {
+   "bytes": 461,
+   "sha256": "a3bce0e467fe92955e7e49ac54c8636806e26b737bff0c31d2f31ce570b40b91"
+  },
+  "adm2/attrib/N10E140.json": {
+   "bytes": 1167,
+   "sha256": "e11ac295d0a8df8906f4c3b8934d2f56a0bf324d1483e076877228e6c39b400d"
+  },
+  "adm2/attrib/N20W170.json": {
+   "bytes": 143,
+   "sha256": "1c4a2fafebb2d0bc03824ae5cced6ed81026df4be73dbeaa25557d468d1dfd73"
+  },
+  "adm2/attrib/N20W160.json": {
+   "bytes": 1545,
+   "sha256": "fa45c9933f266e10ee7cc1afae5ab7a1c0c22fef477913a18a18cf6c2d2ddcd1"
+  },
+  "adm2/attrib/N20E140.json": {
+   "bytes": 112,
+   "sha256": "6a004e9b5a428c9118a7d0cfa5caf8518d4b03eabdb0eee2b3854e0b28d0621e"
+  },
+  "adm2/attrib/N30W130.json": {
+   "bytes": 11000,
+   "sha256": "706974354ef0e06f6870bdd2ac37a3bca86a2764ea573c0cfb091ddde03c128d"
+  },
+  "adm2/attrib/N30W100.json": {
+   "bytes": 82876,
+   "sha256": "4679ab74dd71fa2a950dd0f8fcb8d4bedd8ad391d9dab283356a6b8e8e0ae249"
+  },
+  "adm2/attrib/N30W090.json": {
+   "bytes": 136732,
+   "sha256": "2c05e17e28d4a7e17b6eaf95c60b3983f890c2d606b04075e0dd3ec15a906f62"
+  },
+  "adm2/attrib/N30W080.json": {
+   "bytes": 45217,
+   "sha256": "2a161d6ec542e7f8fb5d4373bf745ee7afadd84e0f63dde162a9eb5576e30b37"
+  },
+  "adm2/attrib/N50W180.json": {
+   "bytes": 3189,
+   "sha256": "777bcdca19a0234bcc7aa02628cff9ff61d3723cdfc18d71bab9cf9c361c86c0"
+  },
+  "adm2/attrib/N50W170.json": {
+   "bytes": 6719,
+   "sha256": "cb6a885471a2abc64785ffef70dff9d2cc5dbb10f4e51ea0c534d162a455c0b1"
+  },
+  "adm2/attrib/N50W160.json": {
+   "bytes": 9577,
+   "sha256": "04dc51f19b1621b69a27b345b5e9b025f2aee1bbaf5b5da0a9468c1c090efb97"
+  },
+  "adm2/attrib/N50W150.json": {
+   "bytes": 1179,
+   "sha256": "26f70c285d558922f243fafa6f6baf3f2192ec068f67444b9fdf571f494103b9"
+  },
+  "adm2/attrib/N50E170.json": {
+   "bytes": 1200,
+   "sha256": "51892ccf4be6701cad1e3bbdabe22a7c615b7028a0c525850afb42e9f40ee959"
+  },
+  "adm2/attrib/N60W180.json": {
+   "bytes": 663,
+   "sha256": "465cf515040a8710abd4a4a3158f93c2e3538b91b4b9f8784d1b5becc3ce18e3"
+  },
+  "adm2/attrib/N60W170.json": {
+   "bytes": 5724,
+   "sha256": "8d3159c1e9ddecd997b77e2fdc48d160f2cc88c5935b3b2b54bfa546eea75728"
+  },
+  "adm2/attrib/N60W160.json": {
+   "bytes": 2287,
+   "sha256": "ce1bbeecee36eda72cb4f3cb2f27342dcb06b8429757be1a46ae3aea98a6d1c3"
+  },
+  "adm2/attrib/N70W170.json": {
+   "bytes": 154,
+   "sha256": "0dd1bdb323fd22ed7c82279a5730b73f602347c116c8a2aad462ee9b92c0b7ac"
+  },
+  "adm2/attrib/N70W160.json": {
+   "bytes": 1086,
+   "sha256": "1fbebfb42ef450ed5c679f21557622c7f0cadf2b1b6127a0c33e714d70df0765"
+  },
+  "adm2/attrib/N70W150.json": {
+   "bytes": 583,
+   "sha256": "d813f6ac784ffa7d3c57e724d333e3c2659ffaaf92dc4c1eb2f0bc7cd16b9a56"
+  },
+  "adm2/attrib/N40E050.json": {
+   "bytes": 3142,
+   "sha256": "9beef389e620d437ad556949b904c730b92c8043dff98e9bd1193fae78fb10e3"
+  },
+  "adm2/attrib/N40E060.json": {
+   "bytes": 17914,
+   "sha256": "3780127e7ac06de358f70a4f7e54c02321c29a96b795e45e7190175e1829be05"
+  },
+  "adm2/attrib/S40E010.json": {
+   "bytes": 4024,
+   "sha256": "bc637e591748e6b24f560b2e0dc809a58241f97124eef41ffde57f123f775730"
+  },
+  "adm2/attrib/S40E030.json": {
+   "bytes": 1070,
+   "sha256": "6a9ce038c6231406f171d737d89e466f2cf0692d16856db9169f3c69692d8eeb"
+  },
+  "adm2/odbl/N40E000.json": {
+   "bytes": 870,
+   "sha256": "900d83edaf25e33246c3fe400c291785520bd639cf25f7177c23c3698604ec6d"
+  },
+  "adm2/odbl/N50E000.json": {
+   "bytes": 7833,
+   "sha256": "2a016657bc81bd0c8f3e9e522e4ac019c30184793d9fae60ada80a52911193d3"
+  },
+  "adm2/odbl/N20W090.json": {
+   "bytes": 22139,
+   "sha256": "b65921d4612d01d81cc555d7f253fd8ca158bd5fd0df7b53ff4270c9b2af35e7"
+  },
+  "adm2/odbl/N20W080.json": {
+   "bytes": 71305,
+   "sha256": "7d40a02c530c5f938bbb6edaae5561649efc0e7391ddc9b7c1c9c896ce6cb13a"
+  },
+  "adm2/odbl/S60W080.json": {
+   "bytes": 92071,
+   "sha256": "e6cdfa891717fc27b2c26c11c7d31555b3abef7c6377f1f3872c3361a52088f0"
+  },
+  "adm2/odbl/S60W070.json": {
+   "bytes": 14896,
+   "sha256": "509fc544aa3a69edbf443bed73a968428d7af15f4f44001ad974eee3cc438536"
+  },
+  "adm2/odbl/S50W080.json": {
+   "bytes": 79539,
+   "sha256": "5a6e6685f7c27f1271dc15f868133876e43115cee7b5df9eb3c1280e91f71d0f"
+  },
+  "adm2/odbl/S40W090.json": {
+   "bytes": 109,
+   "sha256": "8138aa04675594b76e8839426ad5f842d0209f279c5b966c979d1f535ac32c31"
+  },
+  "adm2/odbl/S40W080.json": {
+   "bytes": 19692,
+   "sha256": "af963c886359507d0e2574c12baa534aae2c4d7a30daf383df03bcfe67ab689f"
+  },
+  "adm2/odbl/S40W070.json": {
+   "bytes": 583,
+   "sha256": "72f9149a86b6f85b51fce5e356f48d633ad3ed864c0edb4df5b2ecf5769b80d5"
+  },
+  "adm2/odbl/S30W110.json": {
+   "bytes": 214,
+   "sha256": "99e448ad48375ed64096b65b20aaf5a4a5a4b2ddd7dcedd7429be0360445b90f"
+  },
+  "adm2/odbl/S30W090.json": {
+   "bytes": 68,
+   "sha256": "22187e2014ed6f7245593211b3956de3d4443c8328a37fa5a661f061708ff30e"
+  },
+  "adm2/odbl/S30W080.json": {
+   "bytes": 4792,
+   "sha256": "a447ff2debb3bcc826b413f38c6d24043b3a475b361e8c3d69bb41c0d0fa74b1"
+  },
+  "adm2/odbl/S30W070.json": {
+   "bytes": 4027,
+   "sha256": "c375e531339b497b7a3e2a054ce259503e07fba5fb7d262913669619e3b94ea5"
+  },
+  "adm2/odbl/S20W080.json": {
+   "bytes": 548,
+   "sha256": "eb3743487a04d427cb2b63de4868e1ffd1a6413c03cd93ad0acd06abca5730f9"
+  },
+  "adm2/odbl/S20W070.json": {
+   "bytes": 1251,
+   "sha256": "17bc9df5ce926ccc7100e156d682374a2c893dd26a0cf75e4f471972269841c2"
+  },
+  "adm2/odbl/N10W080.json": {
+   "bytes": 19417,
+   "sha256": "2041e9791dc08c950a59ce4eaaecd1dc5e4f43697c76c730e62e5346bc5e549d"
+  },
+  "adm2/odbl/N00E030.json": {
+   "bytes": 15406,
+   "sha256": "b263877bbdab669b6edd999514962a97f71ac35f608314e02b0dd713616a55a1"
+  },
+  "adm2/odbl/N00E040.json": {
+   "bytes": 5316,
+   "sha256": "1ce1259f7b69c992db86141e4f7985e7fcaabb21f656aaf63e71843307372c77"
+  },
+  "adm2/odbl/N10E030.json": {
+   "bytes": 11659,
+   "sha256": "12f47b866653c4b6dc10f3574ec0035e7889c9c7014330d908d72e9c6de0cf78"
+  },
+  "adm2/odbl/N10E040.json": {
+   "bytes": 1788,
+   "sha256": "b9bd5ac3ee49e970655dcbb36951d550760c9a66cb95248ca9ff4fc0d4364450"
+  },
+  "adm2/odbl/N50E020.json": {
+   "bytes": 89584,
+   "sha256": "6382cccfb0ab6b63da22bc4e81c42f4387406f74109932fa5308224b3d1bf65b"
+  },
+  "adm2/odbl/N60E010.json": {
+   "bytes": 2684,
+   "sha256": "bf7e34e4fcf2d1e97e1b8c5bacb045b1b1299995a1e25fdb9d5580181e7c46e9"
+  },
+  "adm2/odbl/N60E020.json": {
+   "bytes": 78247,
+   "sha256": "53636b28b41d71a56996d5eadb0c611c28497cdd66603d855351cf45ec5de2fb"
+  },
+  "adm2/odbl/N60E030.json": {
+   "bytes": 47479,
+   "sha256": "8fbe99106582151eaa96c8ca1d7d92394c5f0bf1ed069a9b8adb5432d2224980"
+  },
+  "adm2/odbl/N70E020.json": {
+   "bytes": 123,
+   "sha256": "1f9d3bc2facc973da04f9eedaecad7fbe90fcdc9f5bf37391ff5fc0859ed7c96"
+  },
+  "adm2/odbl/N10W020.json": {
+   "bytes": 11557,
+   "sha256": "75204419342b60cb0441319b2109c5cd648e4bed6ca0d5ea755d22bfa4b816e7"
+  },
+  "adm2/odbl/N40E010.json": {
+   "bytes": 54065,
+   "sha256": "81b082bfc0d4a7b4377cc51881d3770d0732a914b3671a879467d875806bc161"
+  },
+  "adm2/odbl/N40E020.json": {
+   "bytes": 75159,
+   "sha256": "39d85636ee9ac545b4dd340f768f21dcbcacf59310f034131f7cbd4e906db775"
+  },
+  "adm2/odbl/N00E070.json": {
+   "bytes": 8954,
+   "sha256": "a2a5ed4e9eb3b5a837383de67be06e4ff197634c902adf078f69409e94525d4c"
+  },
+  "adm2/odbl/N00E090.json": {
+   "bytes": 1914,
+   "sha256": "0749119e0c6dd4e17f511687e176fd33e15c42e7e1f87bc6833b29d4021ee985"
+  },
+  "adm2/odbl/N10E070.json": {
+   "bytes": 66174,
+   "sha256": "267dbe6451c982bdcf91d850a17a5fcc23dbb46276081818b4a549c2e91302e9"
+  },
+  "adm2/odbl/N10E080.json": {
+   "bytes": 15318,
+   "sha256": "069d7ac3ffdbb4fd708277d62eddb835fd19621f662344a2e3a778681b31bf9e"
+  },
+  "adm2/odbl/N10E090.json": {
+   "bytes": 6943,
+   "sha256": "c03928e785671ff1abb6c45d4f3c77471f7b091be30c3b5e68c5e6b6e9bf1dcd"
+  },
+  "adm2/odbl/N20E060.json": {
+   "bytes": 8388,
+   "sha256": "f0d1aed169427b4ac800e8e569eb2e1d5b01bdc0b865b95658eb9a1f36e7a361"
+  },
+  "adm2/odbl/N20E070.json": {
+   "bytes": 99392,
+   "sha256": "dce146c23822cb86a3b6c94ccb6c21c17b59d7dab8342bdd2f263e184bdceec4"
+  },
+  "adm2/odbl/N20E080.json": {
+   "bytes": 90922,
+   "sha256": "c5a55a4b99749b4b97f9b3a2bddb580537862860b3e5e727baabea1c4c89a6c1"
+  },
+  "adm2/odbl/N20E090.json": {
+   "bytes": 41599,
+   "sha256": "423382827dfc732db21ff52e610d7047ad4a7e8902391f87f3da319b48f0a1c9"
+  },
+  "adm2/odbl/N30E070.json": {
+   "bytes": 37277,
+   "sha256": "69e40c1bc9be8e060c98b76def7dcfdbe98e16f4840278dd8cbe6aa30ad619aa"
+  },
+  "adm2/odbl/N30E080.json": {
+   "bytes": 922,
+   "sha256": "92aaf6d4303565a351c5cc040396a5fa5388af03125de47455fe61bd118e326d"
+  },
+  "adm2/odbl/N20E040.json": {
+   "bytes": 124,
+   "sha256": "2e3837d5424c3c6c1534a54d07b2eb5beddd8a3bca68a486c64a2914de451ce5"
+  },
+  "adm2/odbl/N20E050.json": {
+   "bytes": 21949,
+   "sha256": "3930f84092ab016780beb9d54903c871f2bbd02615968afc682164d49f66578d"
+  },
+  "adm2/odbl/N30E040.json": {
+   "bytes": 66346,
+   "sha256": "54a821f14ffef76851d9a2f92dcc2c115d7e93f12321863d77938bb676d64fcf"
+  },
+  "adm2/odbl/N30E050.json": {
+   "bytes": 40143,
+   "sha256": "5f0af881503260c90469a6e6f2a7e878d62e94b9411ee93bc31c399eaca838fa"
+  },
+  "adm2/odbl/N30E060.json": {
+   "bytes": 12561,
+   "sha256": "47dabbaad0745a7ef4df749b7ccc42257b15f8c5e9eb5585ef245535b213dcd7"
+  },
+  "adm2/odbl/N40E040.json": {
+   "bytes": 96197,
+   "sha256": "8019f9e2aca6f704818d30507a0dfbe17d15da7cd8324d179757d4d4ee6ce1ba"
+  },
+  "adm2/odbl/N40E050.json": {
+   "bytes": 10892,
+   "sha256": "f2b1de1caf68d323177dc0d2a2e3e0838a97310060677dfe5d80994ad4d6824e"
+  },
+  "adm2/odbl/N40E060.json": {
+   "bytes": 10591,
+   "sha256": "171f94089dfefa4789437ac21b278c3683da76ba375b22918e9665813c21c12b"
+  },
+  "adm2/odbl/N40E070.json": {
+   "bytes": 15340,
+   "sha256": "bc9a053dfad6875e0649df5505277357b249e6dd474338f3e535b297b1e63b46"
+  },
+  "adm2/odbl/N40E080.json": {
+   "bytes": 8054,
+   "sha256": "0dfbb0d800639bca7b786179f020a8df71ceac1058210ecdfd68e7adfdf6c2ef"
+  },
+  "adm2/odbl/N50E040.json": {
+   "bytes": 167687,
+   "sha256": "f7c1012b0158ed3cabff7bebd8f7a03ccf5a5ed5335a98d48053fd31aaae6c08"
+  },
+  "adm2/odbl/N50E050.json": {
+   "bytes": 129665,
+   "sha256": "4e7b7ac4ff907959a11f7e2878620c6d1d7b6515158df69b0f6c1fa3f385895f"
+  },
+  "adm2/odbl/N50E060.json": {
+   "bytes": 63490,
+   "sha256": "21f996ac0b4ca091123f78332d2151f9a0a8903a5df57a82f8e4be8829acb4a3"
+  },
+  "adm2/odbl/N50E070.json": {
+   "bytes": 40461,
+   "sha256": "afa6f6c2540b0c6a25b5da7f2ba38992e43018ebe319442c4f1c90febd11ebb7"
+  },
+  "adm2/odbl/N50E080.json": {
+   "bytes": 66241,
+   "sha256": "b24c3e11e86006f5a58c963c7fc744754a349943b4d3bdee868b84a7d741e933"
+  },
+  "adm2/odbl/N00E080.json": {
+   "bytes": 8206,
+   "sha256": "5b3fe4d46de28e269de4c1fa03cf9ec2d7cd7a15ff20830a1a8f30f3d5cd67e6"
+  },
+  "adm2/odbl/N20W020.json": {
+   "bytes": 8531,
+   "sha256": "3718aad7b45061757599a954a3725b731180a7a458e84412f2994471edfbdb60"
+  },
+  "adm2/odbl/N20W010.json": {
+   "bytes": 2475,
+   "sha256": "ab63e6e5043a2e49485e351ea177fe9078d7381e72ecdf95fb92f1403c871658"
+  },
+  "adm2/odbl/N30W010.json": {
+   "bytes": 23101,
+   "sha256": "97dafdc94d5a7726702ea1099a0a97609a2af77721112891dba9ace88f574bca"
+  },
+  "adm2/odbl/N10W090.json": {
+   "bytes": 30256,
+   "sha256": "93f875ad2ac881c74be54886051c63ea4a89819a140c7c2644d32c167069e9ef"
+  },
+  "adm2/odbl/N50E010.json": {
+   "bytes": 68114,
+   "sha256": "8781ce5078874a69a973bcf4d66484fd2b4eac89d3197ccc8736c726f6f1a151"
+  },
+  "adm2/odbl/N40E030.json": {
+   "bytes": 61315,
+   "sha256": "3f5930931f2ab79a98234623a753f459700a8e5851d2eecaf77a5c625101d282"
+  },
+  "adm2/odbl/N40E090.json": {
+   "bytes": 641,
+   "sha256": "aedebf9c9d2dba9d36c6e72f3dbac374d7ad157d4635409e3015dddbcf3c955c"
+  },
+  "adm2/odbl/N40E100.json": {
+   "bytes": 926,
+   "sha256": "ca3f3924788dd111d08b09f49d8f3e43cc7f2d3820964cad3476a1efd5650037"
+  },
+  "adm2/odbl/N40E110.json": {
+   "bytes": 1940,
+   "sha256": "4320d07b117c3d0ec1abbc9273f419bfd6531b6e6d81c4444e9806db28cb53f3"
+  },
+  "adm2/odbl/N40E120.json": {
+   "bytes": 2091,
+   "sha256": "10f8054dc9e3035faf31b757114b95b38cc9fd0f8757f00859e3569ef582aa8b"
+  },
+  "adm2/odbl/N40E130.json": {
+   "bytes": 34954,
+   "sha256": "fde23250a5d5a3f07b2f850b1a231ca7ca0883be737efd2df20f2f5c8dc29aca"
+  },
+  "adm2/odbl/N40E140.json": {
+   "bytes": 9109,
+   "sha256": "5e515c58e37728b609c24b0c7b9179994ac6722ff4a6d97cf51ccdf63051f59c"
+  },
+  "adm2/odbl/N40E150.json": {
+   "bytes": 1846,
+   "sha256": "7ee5a5623933e4bf04392daf0c8c8fc55cb6764e1b55d37fe446193885e51126"
+  },
+  "adm2/odbl/N50E030.json": {
+   "bytes": 165181,
+   "sha256": "85dd1f2024de49d44a43e4c95c172bfb692655daea76896bd673de5b44975b44"
+  },
+  "adm2/odbl/N50E090.json": {
+   "bytes": 47558,
+   "sha256": "460f04d677d19508927ca97ac2d1741b387802fe7523f802de29374fe1f86c8a"
+  },
+  "adm2/odbl/N50E100.json": {
+   "bytes": 42002,
+   "sha256": "1ce1be432487d22333698d514438ea93355b9b358cb8c824bc228d430f4d09a5"
+  },
+  "adm2/odbl/N50E110.json": {
+   "bytes": 35623,
+   "sha256": "3f95776c87a3656e946c5aa3db52a95fcf441501365c85b6796ee3a149026639"
+  },
+  "adm2/odbl/N50E120.json": {
+   "bytes": 19004,
+   "sha256": "a7367b31e165a54fba1547b84da785cb7dc246f43075b46441060004cfd2691f"
+  },
+  "adm2/odbl/N50E130.json": {
+   "bytes": 22730,
+   "sha256": "e366296158178537891506ee168c8de010f4919e044ac5685de1bc214acc7c15"
+  },
+  "adm2/odbl/N50E140.json": {
+   "bytes": 11598,
+   "sha256": "bd0372c64b8e926c903da3fddc4655b21ab96b25ba85b0dd4910161e2e13c065"
+  },
+  "adm2/odbl/N50E150.json": {
+   "bytes": 10790,
+   "sha256": "c1167a2a5e6f5e71381ed3fb000a91ee9abe9322e4f6f3a960d605f77dd683b1"
+  },
+  "adm2/odbl/N50E160.json": {
+   "bytes": 7651,
+   "sha256": "1f8cac82f055b0e4d5b7b2c28cb3309b060dc348d8e0800113028f6177dddf37"
+  },
+  "adm2/odbl/N50E170.json": {
+   "bytes": 92,
+   "sha256": "be736c2086a04e2b73ef199465de87a5e81e29a2d36574bc9c2445c22a591566"
+  },
+  "adm2/odbl/N60W180.json": {
+   "bytes": 9220,
+   "sha256": "d21c0d2bdacf7519c9f0386343059d1afea51520e876f261e0df91b51b27e6cf"
+  },
+  "adm2/odbl/N60W170.json": {
+   "bytes": 163,
+   "sha256": "7acecc78ada943592e24a67eb78878ccc94accfbdd5aa227905cd34bded28621"
+  },
+  "adm2/odbl/N60E040.json": {
+   "bytes": 22834,
+   "sha256": "60bbd6d11efd159004fafa22d9947fb5844d90059418e6f3842697d680154915"
+  },
+  "adm2/odbl/N60E050.json": {
+   "bytes": 15384,
+   "sha256": "bb376d61f03512957223af67e4ef0dc3081af3d93d1ec38bf63fc2ade6db7062"
+  },
+  "adm2/odbl/N60E060.json": {
+   "bytes": 21334,
+   "sha256": "8362fb259588d19037ccc401fd410bca40945c4f45e3f2bd4370c42a39c03ed0"
+  },
+  "adm2/odbl/N60E070.json": {
+   "bytes": 22478,
+   "sha256": "af11049d06e6e65b6f3ea28e273c56d204bda8eebfbc1664dc0214a1ba8d2703"
+  },
+  "adm2/odbl/N60E080.json": {
+   "bytes": 10618,
+   "sha256": "7aba32cfe443a93d1f93b4bdc6831b6de8a88a468c2f99178c81f9cfa37fdcb2"
+  },
+  "adm2/odbl/N60E090.json": {
+   "bytes": 4825,
+   "sha256": "b40c1fff8e22b04bd53ca5b543a20a02fc34fec3488b613dc1f89952633e875a"
+  },
+  "adm2/odbl/N60E100.json": {
+   "bytes": 8793,
+   "sha256": "ae194d7093ceaaefe5d1296a91453790225db6d0631da95d350bb782ddca7f84"
+  },
+  "adm2/odbl/N60E110.json": {
+   "bytes": 8942,
+   "sha256": "8be45dcdce39819feebd2b43a4ecfee94d88c94af1679e2f68364e09b095301a"
+  },
+  "adm2/odbl/N60E120.json": {
+   "bytes": 11045,
+   "sha256": "c2b15e34a2681bb2931b5b9de7c61a84fb9cdd53891cd43036097367b3b8ac89"
+  },
+  "adm2/odbl/N60E130.json": {
+   "bytes": 9012,
+   "sha256": "24544e6747e7a236799d5d135f9381c8597304283fa9e4fdc39a9ec4bd0dc551"
+  },
+  "adm2/odbl/N60E140.json": {
+   "bytes": 13421,
+   "sha256": "8a704d8adcceb68b8ebe401279a89061d95cae184ef07bd3c12eae5c6da465e2"
+  },
+  "adm2/odbl/N60E150.json": {
+   "bytes": 16563,
+   "sha256": "a26120a153fb49cabbbe2f209b4e209fac768ae5f27506dcbf3e8a91ce923564"
+  },
+  "adm2/odbl/N60E160.json": {
+   "bytes": 21381,
+   "sha256": "c9ed098cb2925b8b8677fa52d7859e84185ddbdb460964a5abc446ec1f989ea0"
+  },
+  "adm2/odbl/N60E170.json": {
+   "bytes": 9795,
+   "sha256": "7290711cbead0bfa386f8a7c682ffaee15110b68db2898723c4a147adba9909a"
+  },
+  "adm2/odbl/N70W180.json": {
+   "bytes": 2005,
+   "sha256": "c439ce88a4b98e8a8525d1bd75706daf09760e8ec385466a6c0e8d0dcee7b563"
+  },
+  "adm2/odbl/N70E040.json": {
+   "bytes": 70,
+   "sha256": "968a570d3d263e7346e3fcede229edbc8a843178ddab4375aabb60d7c3f3e8e8"
+  },
+  "adm2/odbl/N70E050.json": {
+   "bytes": 19640,
+   "sha256": "2da307d5eb188a4e5e46131a149dc025a7f3ba620049cf5b907b8c951b3cc8fe"
+  },
+  "adm2/odbl/N70E060.json": {
+   "bytes": 5962,
+   "sha256": "c0d06d334caebd7d2445cb17bf5251afe87b14c09b38efc6c5a6f019b591a419"
+  },
+  "adm2/odbl/N70E070.json": {
+   "bytes": 11917,
+   "sha256": "58d1fabdaec65746ff0bf83b75fe127959801878b241c604510d7c925ecb5c78"
+  },
+  "adm2/odbl/N70E080.json": {
+   "bytes": 13337,
+   "sha256": "36dfa65f97200d01f8c855d724aec9fac6714cd5f9e97a06e46b76f25d779673"
+  },
+  "adm2/odbl/N70E090.json": {
+   "bytes": 15706,
+   "sha256": "b7ce8e63928e6d388673e706673552b6fb1d2e2fb1079b2efde8448c6ad6c23d"
+  },
+  "adm2/odbl/N70E100.json": {
+   "bytes": 12278,
+   "sha256": "cdb1b1c1d4f4053675225e2f53146b3ec694e12dca4c5336490f5c1b8866465d"
+  },
+  "adm2/odbl/N70E110.json": {
+   "bytes": 13572,
+   "sha256": "5b40383eaff5cd39815387defc91cbccceca74759201ac7b8bbb9b1637c120b1"
+  },
+  "adm2/odbl/N70E120.json": {
+   "bytes": 43442,
+   "sha256": "17449fcd9171ad5161d69f845052316048daf27be209def1ab986998c535d6c5"
+  },
+  "adm2/odbl/N70E130.json": {
+   "bytes": 11209,
+   "sha256": "227fb68f04c3c4fa93c8089ad6f6a5cb0d137ffeb8be1f41d585f7db6aab6474"
+  },
+  "adm2/odbl/N70E140.json": {
+   "bytes": 10646,
+   "sha256": "c03de9d0816d5966a2ae60853f8f37db912512549fb92746260d364fe8ce60ff"
+  },
+  "adm2/odbl/N70E150.json": {
+   "bytes": 6126,
+   "sha256": "40f402d24fdc32b8c9d2227e7f18cedd87ed1a7c71a48f810a1d34b12ed11e23"
+  },
+  "adm2/odbl/N70E160.json": {
+   "bytes": 604,
+   "sha256": "b53280db57ef616e2c7d9435ea6fd4ed0c07acb475c29a0cf7f4543321db05ec"
+  },
+  "adm2/odbl/N70E170.json": {
+   "bytes": 929,
+   "sha256": "a68676c68112e17485f0707cb932118b1b3451d7a60f9aa37bb23fdbfbb60a7c"
+  },
+  "adm2/odbl/N80E030.json": {
+   "bytes": 83,
+   "sha256": "2930f0a5945682ecd029388273fa847e57cb8777ad96866ff257d077d81ec33b"
+  },
+  "adm2/odbl/N80E040.json": {
+   "bytes": 2951,
+   "sha256": "522139175beae0197514b6d7b7067b9f713b7adbc74d49cf2321b028e50b9269"
+  },
+  "adm2/odbl/N80E050.json": {
+   "bytes": 8562,
+   "sha256": "99b492fc3ff2e62abf9d33ddd623866b35c6c3140e0f50c9c0b0fb810ee68e2e"
+  },
+  "adm2/odbl/N80E060.json": {
+   "bytes": 1656,
+   "sha256": "183e314172059ca8a0a8dd2a30bfeb06f892e2b7e8c0f27e5c8b41c78d55d5bc"
+  },
+  "adm2/odbl/N80E070.json": {
+   "bytes": 175,
+   "sha256": "85922b5ad436acf7f031f86ad8c8fd5e4047033d84c9d84e1788197155e1d944"
+  },
+  "adm2/odbl/N80E080.json": {
+   "bytes": 74,
+   "sha256": "e8a84907afaf2f16f970a0e2a1fdfbc4597584b240525887407a5586ebf24816"
+  },
+  "adm2/odbl/N80E090.json": {
+   "bytes": 4395,
+   "sha256": "edf399d9b8c941f35a2ba37e8394102a7ebcd54c1e2573de1e5c45304786caa0"
+  },
+  "adm2/odbl/S30E030.json": {
+   "bytes": 9129,
+   "sha256": "47ee865f84c94185faee94cf5a1961039be613b5ed703be1fdd3715fbcfa7498"
+  },
+  "adm2/odbl/N30E000.json": {
+   "bytes": 19194,
+   "sha256": "4ec1dcf7f675acfbbc425ea89230362723b8413f51bde210170c9f250703e520"
+  },
+  "adm2/odbl/N30E010.json": {
+   "bytes": 18660,
+   "sha256": "6baefa383cbfa26e5535d13db51240a3aa8f170a6abd69f3d1be7d82b675ab38"
+  },
+  "adm2/odbl/N30E020.json": {
+   "bytes": 34224,
+   "sha256": "7b4dcbf153d5f642147b6f1cf1bdc4bd33fd544e17daa71e0dfbd604b690d77b"
+  },
+  "adm2/odbl/N30E030.json": {
+   "bytes": 68458,
+   "sha256": "02d964061fb81785c3db5b3af7588749b1849d72d5dbc3ef5c569845e3785baa"
+  },
+  "adm2/odbl/N00W080.json": {
+   "bytes": 18734,
+   "sha256": "891a3450b709a2a7b7979d1505efe79f9d8fa4623a12c965288a1310c0c45d05"
+  },
+  "adm2/odbl/N00W070.json": {
+   "bytes": 37423,
+   "sha256": "31c64a7cd0329f23bbb976d464f98dbe3b8ef0a5c05feb8e15659b10e26ac835"
+  },
+  "adm2/odbl/N00W060.json": {
+   "bytes": 2542,
+   "sha256": "286bb066ff2a0dda37d6e629a835a3be168c86d045a25ef75e58358d3e4a888e"
+  },
+  "adm2/odbl/N10W070.json": {
+   "bytes": 22257,
+   "sha256": "f9e42d24f66e1f5a7d19b0df19205ba5eb41c3d4060e20ca1c5ea768b5aba9b0"
+  },
+  "fonts/Noto Sans Regular/0-255.pbf": {
+   "bytes": 76580,
+   "sha256": "ef1f38a3f1978591e846e9eaddf8a54f7047f546fc6aaed7872cc53151a5de78"
+  },
+  "fonts/Noto Sans Regular/256-511.pbf": {
+   "bytes": 127219,
+   "sha256": "992557f9e2574cfb9a75e16c7b52832578849772b7c9a6e480d6213fb008fe5d"
+  },
+  "fonts/Noto Sans Regular/512-767.pbf": {
+   "bytes": 95728,
+   "sha256": "a4c5cdf9623cb0bf7e9c6b0e8be4bf38b524bc29819dd2276c8ca63d5e43dd21"
+  },
+  "fonts/Noto Sans Regular/768-1023.pbf": {
+   "bytes": 74752,
+   "sha256": "6e27cdd6edce5b11c469a24b333ecefc0d4b082491b71d6924ce0be6eeba71c3"
+  },
+  "fonts/Noto Sans Regular/1024-1279.pbf": {
+   "bytes": 125222,
+   "sha256": "834adb7f3ea9944ea530214841ee098e5482e85180f14df85036939261e0ffbb"
+  },
+  "fonts/Noto Sans Regular/7680-7935.pbf": {
+   "bytes": 130591,
+   "sha256": "21672116227dc22128cb43a58ae19d4bc5ebb5d7d321600317d2df828dced514"
+  },
+  "fonts/Noto Sans Regular/8192-8447.pbf": {
+   "bytes": 34070,
+   "sha256": "f061e5b4e42e5925228534d8822b423a029569263db09f5ce44573600d45295f"
+  },
+  "fonts/Noto Sans Italic/0-255.pbf": {
+   "bytes": 79907,
+   "sha256": "ae9c8894b4d2b6297da76a2e875685046f1f037f1a571ae006160a5540406086"
+  },
+  "fonts/Noto Sans Italic/256-511.pbf": {
+   "bytes": 132406,
+   "sha256": "82be737a8568cc3ef2beaa3f137d8698740ffef1b880076f21c2796c9e0c8c00"
+  },
+  "fonts/Noto Sans Italic/512-767.pbf": {
+   "bytes": 97447,
+   "sha256": "a7faf853b1a74e21a91cf895e104fc63b53ae5a0ae7bcf1e552b95d48c664310"
+  },
+  "fonts/Noto Sans Italic/768-1023.pbf": {
+   "bytes": 75983,
+   "sha256": "1d818e823729580b3f6185748b79ae50e73da5eb5bc753e82eb22acca17d817c"
+  },
+  "fonts/Noto Sans Italic/1024-1279.pbf": {
+   "bytes": 127434,
+   "sha256": "de4d66d14fc94ea09e2c4f7f61a8b63a88beb0ed9a493136aa1c7e770a85bd6b"
+  },
+  "fonts/Noto Sans Italic/7680-7935.pbf": {
+   "bytes": 135515,
+   "sha256": "200d1c91ac1cf3201331b31bc498588ba0d5ee35e5ec5513d6dd23eaa3a1d5aa"
+  },
+  "fonts/Noto Sans Italic/8192-8447.pbf": {
+   "bytes": 34787,
+   "sha256": "da51f9be11f7bddc1c5ea052c1305eb9440790ad7cb79bf27e57f7a04c952427"
+  },
+  "fonts/Noto Sans Bold/0-255.pbf": {
+   "bytes": 81170,
+   "sha256": "f60ce4cb899455c2203bd8293b550394ade53ffce8032bf9cc7f59255e49259c"
+  },
+  "fonts/Noto Sans Bold/256-511.pbf": {
+   "bytes": 134545,
+   "sha256": "77c830f114b84a58f8829ca1eac4627a6a688bbce4bdb6a04de00f98fa74bb52"
+  },
+  "fonts/Noto Sans Bold/512-767.pbf": {
+   "bytes": 101458,
+   "sha256": "c0f1fee1a46851224f1c962c6f3d35bd450122125ed18870f39e82d0b962a545"
+  },
+  "fonts/Noto Sans Bold/768-1023.pbf": {
+   "bytes": 78937,
+   "sha256": "3c7ea7f7b52a97c75bfc123a303badd4fd7c5eaa1bfe66ebaba38cf3fce16ee7"
+  },
+  "fonts/Noto Sans Bold/1024-1279.pbf": {
+   "bytes": 135287,
+   "sha256": "f0ab5cecbf1b1d04e8d38c7d64451a20b5707ab1fc8aa8dbbc1b660905cd4142"
+  },
+  "fonts/Noto Sans Bold/7680-7935.pbf": {
+   "bytes": 139322,
+   "sha256": "abe63a2773dd655bfbcd400b431add586e3da5e6e4801b74774e4a089a56dc29"
+  },
+  "fonts/Noto Sans Bold/8192-8447.pbf": {
+   "bytes": 35678,
+   "sha256": "f31c3c9dcacbd7f9760462c0af5017d9c9f2a9543ab4938476f7a13ffabf0acf"
+  },
+  "tiles.json": {
+   "bytes": 21297,
+   "sha256": "bee0bb6d10aa7297d1e3522e5e0d27118f267169bab8c11481cc76872840b67c"
+  }
+ },
+ "countries": {
+  "ABW": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "AFG": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Wikimedia, geoBoundaries",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2007",
+    "type": "Wilayat",
+    "units": 34
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Afghanistan Information Management Services, Esri Disaster Response Program",
+    "licence": "Public Domain",
+    "licence_source": "hub.arcgis.com/datasets/2b63527870ef416bacf83bcaf388685f_0?geometry=53.805%2C30.812%2C81.556%2C37.181",
+    "year": "2014",
+    "type": "wuleswali",
+    "units": 398,
+    "labelled": 398
+   }
+  },
+  "AGO": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "U.S. Census Bureau",
+    "licence": "Public Domain",
+    "licence_source": "www.census.gov/geographies/mapping-files/time-series/demo/international-programs/subnationalpopulation.html",
+    "year": "2021",
+    "type": "Province",
+    "units": 18
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "Municipality",
+    "units": 158,
+    "labelled": 158
+   }
+  },
+  "AIA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 15
+   }
+  },
+  "ALB": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikipedia",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2021",
+    "type": "Qarqet",
+    "units": 12
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Albania districts blank 2.svg",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2021",
+    "type": "rrethe",
+    "units": 37,
+    "labelled": 37
+   }
+  },
+  "ALD": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 11
+   }
+  },
+  "AND": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2007",
+    "type": "Parish",
+    "units": 7
+   }
+  },
+  "ARE": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 9
+   }
+  },
+  "ARG": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "Province",
+    "units": 23
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Instituto Geografico Nacional and UNHCR, OCHA ROLAC",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/argentina-administrative-level-0-boundaries",
+    "year": "2020",
+    "type": "departments",
+    "units": 525,
+    "labelled": 525
+   }
+  },
+  "ARM": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2005",
+    "type": "Province and City",
+    "units": 11
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Government of Armenia, OCHA ROCCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/armenia-administrative-boundaries",
+    "year": "2020",
+    "type": "Municipal Communities",
+    "units": 39,
+    "labelled": 39
+   }
+  },
+  "ASM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 5
+   }
+  },
+  "ATA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 2
+   }
+  },
+  "ATC": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "ATF": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 4
+   }
+  },
+  "ATG": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2009",
+    "type": "Parish and Dependency",
+    "units": 8
+   }
+  },
+  "AUS": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Australian Bureau of Statistics",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "www.abs.gov.au/website-privacy-copyright-and-disclaimer#copyright-and-creative-commons",
+    "year": "2021",
+    "type": "States and Territories",
+    "units": 9
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Australian Bureau of Statistics",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "www.abs.gov.au/website-privacy-copyright-and-disclaimer#copyright-and-creative-commons",
+    "year": "2022",
+    "type": "Local Government Areas",
+    "units": 547,
+    "labelled": 547
+   }
+  },
+  "AUT": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 9
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 2.0",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "AZE": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 78
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "BDI": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2014",
+    "type": "Province",
+    "units": 18
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Public Domain",
+    "mean_km2": 210.9,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "BEL": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Eurostat- European Commission",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "ec.europa.eu/info/legal-notice_en",
+    "year": "2022",
+    "type": "Region",
+    "units": 3
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "Statistics Belgium",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "statbel.fgov.be/en/open-data",
+    "year": "2015",
+    "type": "Unknown",
+    "units": 11,
+    "labelled": 11
+   }
+  },
+  "BEN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2012",
+    "type": "Departments",
+    "units": 12
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Map Maker Ltd., Stanford earthworks",
+    "licence": "Public Domain",
+    "licence_source": "earthworks.stanford.edu/catalog/stanford-rq343zx0554",
+    "year": "2007",
+    "type": "Commune",
+    "units": 77,
+    "labelled": 77
+   }
+  },
+  "BFA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "World Bank",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "datacatalog.worldbank.org/public-licenses#cc-by",
+    "year": "2017",
+    "type": "Region",
+    "units": 13
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "World Bank",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "datacatalog.worldbank.org/public-licenses#cc-by",
+    "year": "2017",
+    "type": "Province",
+    "units": 45,
+    "labelled": 45
+   }
+  },
+  "BGD": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2015",
+    "type": "Division",
+    "units": 8
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Bangladesh Bureau of Statistics (BBS), OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015",
+    "year": "2020",
+    "type": "district",
+    "units": 64,
+    "labelled": 64
+   }
+  },
+  "BGR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2019",
+    "type": "Province",
+    "units": 28
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2019",
+    "type": "Municipality",
+    "units": 265,
+    "labelled": 265
+   }
+  },
+  "BHR": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 5
+   }
+  },
+  "BHS": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Haiti GeoPortal",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "httpshttps",
+    "year": "09-09-2017 to 24-08-2020",
+    "type": "Districts",
+    "units": 32
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Second Schedule Districts & Third Schedule Districts",
+    "units": 33,
+    "labelled": 33
+   }
+  },
+  "BIH": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2013",
+    "type": "gbOpen",
+    "units": 3
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2013",
+    "type": "gbOpen",
+    "units": 12,
+    "labelled": 12
+   }
+  },
+  "BLM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "BLR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, CIESIN",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "creativecommons.org/licenses/by/3.0/",
+    "year": "2005",
+    "type": "Oblast",
+    "units": 7
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, CIESIN",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "creativecommons.org/licenses/by/3.0/",
+    "year": "2005",
+    "type": "Raion",
+    "units": 118,
+    "labelled": 118
+   }
+  },
+  "BLZ": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "Districts",
+    "units": 6
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikipedia",
+    "licence": "Public Domain",
+    "licence_source": "en.wikipedia.org/wiki/Public_domain",
+    "year": "2008",
+    "type": "Constituencies",
+    "units": 31,
+    "labelled": 31
+   }
+  },
+  "BMU": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 11
+   }
+  },
+  "BOL": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "GeoBolivia, Derived from ADM3 layer",
+    "licence": "Public Domain",
+    "licence_source": "geo.gob.bo/geonetwork/srv/spa/catalog.search#/metadata/aeeb85a9-23df-48d4-a4e5-dd19e8b206db",
+    "year": "2015",
+    "type": "Unknown",
+    "units": 9
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "GeoBolivia, Derived from ADM3 layer",
+    "licence": "Public Domain",
+    "licence_source": "geo.gob.bo/geonetwork/srv/spa/catalog.search#/metadata/aeeb85a9-23df-48d4-a4e5-dd19e8b206db",
+    "year": "2015",
+    "type": "Unknown",
+    "units": 110,
+    "labelled": 110
+   }
+  },
+  "BRA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "State",
+    "units": 27
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Instituto Brasileiro de Geografia e Estatística (IBGE), OCHA ROLAC",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/brazil-administrative-level-0-boundaries",
+    "year": "2020",
+    "type": "municipality",
+    "units": 5570,
+    "labelled": 5570
+   }
+  },
+  "BRB": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2005",
+    "type": "Parish",
+    "units": 11
+   }
+  },
+  "BRN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons; credit to user 'Tachymetre'",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2011",
+    "type": "Districts",
+    "units": 4
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Public Domain",
+    "mean_km2": 155.7,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "BTN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons; credit to author 'Babbage'",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2010",
+    "type": "Dzongdeys",
+    "units": 20
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "mean_km2": 189.1,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "BWA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 15
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "RCMRD",
+    "licence": "Public Domain",
+    "licence_source": "geoportal.rcmrd.org/layers/servir%3Abotswana_adm2#license-more-above",
+    "year": "2015",
+    "type": "Unknown",
+    "units": 25,
+    "labelled": 25
+   }
+  },
+  "CAF": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "Prefecture and Commune",
+    "units": 17
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, UNHCR",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "data2.unhcr.org/en/documents/details/32968",
+    "year": "2015",
+    "type": "Sub-Prefectures",
+    "units": 72,
+    "labelled": 72
+   }
+  },
+  "CAN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Statistics Canada (StatCan)",
+    "licence": "Open Government Canada 2.0",
+    "licence_source": "www.statcan.gc.ca/eng/reference/licence",
+    "year": "2023",
+    "type": "Province",
+    "units": 13
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Statistics Canada (StatCan)",
+    "licence": "Open Government Canada 2.0",
+    "licence_source": "www.statcan.gc.ca/en/reference/licence",
+    "year": "2022",
+    "type": "Divisions",
+    "units": 76,
+    "labelled": 76
+   }
+  },
+  "CHE": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 26
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Federal Office of Topography swisstopo License",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "CHL": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "La Biblioteca del Congreso Nacional de Chile (BCN), OCHA ROLAC",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/chile-administrative-level-0-country-1-region-region",
+    "year": "2020",
+    "type": "Regions",
+    "units": 16
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 56,
+    "labelled": 56
+   }
+  },
+  "CHN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2019",
+    "type": "People’s Republic of China",
+    "units": 34
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "National Administration of Surveying, Mapping and Geoinformation of China, Revolutionary GIS",
+    "licence": "Open Data Commons Public Domain Dedication and License (PDDL) v1.0",
+    "licence_source": "revolutionarygis.wordpress.com/2014/01/18/china-prefecture-shapefile-and-china-province-shapefile/",
+    "year": "2017",
+    "type": "County Level",
+    "units": 2391,
+    "labelled": 2389
+   }
+  },
+  "CIV": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "World Bank Group, OCHA Côte d’Ivoire",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "datacatalog.worldbank.org/public-licenses#cc-by",
+    "year": "2016",
+    "type": "districts de Côte d’Ivoire",
+    "units": 14
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "World Bank",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "datacatalog.worldbank.org/public-licenses#cc-by",
+    "year": "2016",
+    "type": "régions de Côte d'Ivoire",
+    "units": 33,
+    "labelled": 33
+   }
+  },
+  "CLP": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "CMR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2016",
+    "type": "Region",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Open Africa",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "africaopendata.org/dataset/cameroon-maps",
+    "year": "2016",
+    "type": "department",
+    "units": 60,
+    "labelled": 60
+   }
+  },
+  "COD": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 11
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Referenciel Géographique Commun, OCHA DR Congo",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/drc-administrative-boundaries-levels-0-2",
+    "year": "2019",
+    "type": "territory, city",
+    "units": 189,
+    "labelled": 189
+   }
+  },
+  "COG": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 12
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "New York University Spatial Data Repository, Stanford University, Map Maker Limited",
+    "licence": "Public Domain",
+    "licence_source": "geo.nyu.edu/catalog/stanford-hz799nq4536",
+    "year": "2007",
+    "type": "Unknown",
+    "units": 46,
+    "labelled": 46
+   }
+  },
+  "COK": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 11
+   }
+  },
+  "COL": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 34
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Departamento Administrativo Nacional de Estadistica",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "geoportal.dane.gov.co/?descarga-marco-geoestadistico-nacional",
+    "year": "2020",
+    "type": "Unknown",
+    "units": 1122,
+    "labelled": 1122
+   }
+  },
+  "COM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 3
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "mean_km2": 97.3,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "CPV": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 22
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "mean_km2": 126.9,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "CRI": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 7
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2020",
+    "type": "Cantons",
+    "units": 83,
+    "labelled": 83
+   }
+  },
+  "CSI": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "CUB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 16
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 168,
+    "labelled": 168
+   }
+  },
+  "CUW": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "CYM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "CYN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "CYP": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 5
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "CZE": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Czech Office for Surveying",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "creativecommons.org/licenses/by/4.0/",
+    "year": "2021",
+    "type": "regions",
+    "units": 14
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "creativecommons.org/share-your-work/public-domain",
+    "year": "2010",
+    "type": "District",
+    "units": 77,
+    "labelled": 77
+   }
+  },
+  "DEU": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Federal Agency for Cartography and Geodesy",
+    "licence": "Data license Germany - Attribution - Version 2.0",
+    "licence_source": "www.govdata.de/dl-de/by-2-0",
+    "year": "2021",
+    "type": "Länder",
+    "units": 16
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Federal Agency for Cartography and Geodesy",
+    "licence": "Data license Germany - Attribution - Version 2.0",
+    "licence_source": "www.govdata.de/dl-de/by-2-0",
+    "year": "2021",
+    "type": "Government District",
+    "units": 38,
+    "labelled": 38
+   }
+  },
+  "DJI": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Natural Earth",
+    "licence": "Public Domain",
+    "licence_source": "www.naturalearthdata.com/about/terms-of-use/",
+    "year": "2021",
+    "type": "Regions",
+    "units": 6
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "FEWS, OCHA FISS",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/djibouti-administrative-levels-0-2-boundaries",
+    "year": "2020",
+    "type": "Districts",
+    "units": 11,
+    "labelled": 11
+   }
+  },
+  "DMA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2005",
+    "type": "Parish",
+    "units": 10
+   }
+  },
+  "DNK": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Web Vectors Map",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "webvectormaps.com/administrative-map-of-denmark-by-regions/",
+    "year": "2021",
+    "type": "Unknown",
+    "units": 5
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2018",
+    "type": "kommune",
+    "units": 98,
+    "labelled": 98
+   }
+  },
+  "DOM": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Natural Earth",
+    "licence": "Public Domain",
+    "licence_source": "www.naturalearthdata.com/about/terms-of-use/",
+    "year": "2022",
+    "type": "Province",
+    "units": 32
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Caribbean GeoPortal, N/A",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "creativecommons.org/licenses/by/4.0/",
+    "year": "2020",
+    "type": "Municipalities",
+    "units": 155,
+    "labelled": 155
+   }
+  },
+  "DZA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 48
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2012",
+    "type": "the People's Democratic Republic of Algeria",
+    "units": 48,
+    "labelled": 48
+   }
+  },
+  "ECU": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2011",
+    "type": "Province",
+    "units": 24
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "INEC - Instituto Nacional de Estadística y Censos, OCHA ROLAC",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/ecuador-admin-level-2-boundaries",
+    "year": "2019",
+    "type": "Cantons",
+    "units": 224,
+    "labelled": 224
+   }
+  },
+  "EGY": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 27
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "OCHA ROMENA/HDX, Central Agency for Public Mobilization and Statistics (CAPMAS)",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/egypt-administrative-boundaries-levels-0-3",
+    "year": "2020",
+    "type": "marakiz and aqsam",
+    "units": 365,
+    "labelled": 365
+   }
+  },
+  "ERI": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 6
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "OCHA ROSEA, OCHA ROSEA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/eritrea-admin-level-1-boundaries",
+    "year": "2020",
+    "type": "districts",
+    "units": 58,
+    "labelled": 58
+   }
+  },
+  "ESB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "ESP": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Instituto de Geografico Nacional",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "centrodedescargas.cnig.es/CentroDescargas/index.jsp#",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 19
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "National Institute of Statistics (INE) Data License",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "EST": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 15
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Open Data Commons Open Database License 1.0",
+    "mean_km2": 202.4,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "ETH": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Open Africa, Code for Ethiopia",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "africaopendata.org/dataset/ethiopia-shapefiles",
+    "year": "2016",
+    "type": "kilil and astedader",
+    "units": 11
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "Open Africa, Code for Ethiopia",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "africaopendata.org/dataset/ethiopia-shapefiles",
+    "year": "2016",
+    "type": "Unknown",
+    "units": 74,
+    "labelled": 74
+   }
+  },
+  "FIN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 18
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2016",
+    "type": "Unknown",
+    "units": 70,
+    "labelled": 70
+   }
+  },
+  "FJI": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "en.wikipedia.org/wiki/File",
+    "year": "2006",
+    "type": "Divisions",
+    "units": 4
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "pacificdata.org",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "pacificdata.org/data/geographic_data/2007_fji_phc_admin_boundaries/resource/5880cadb-2287-4eac-9f3d-8b321730e6cd",
+    "year": "2020",
+    "type": "Provinces",
+    "units": 15,
+    "labelled": 15
+   }
+  },
+  "FLK": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "FRA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Institut national de l'information géographique et forestière (IGN-F)",
+    "licence": "Etalab Open License 2.0",
+    "licence_source": "geoservices.ign.fr/sites/default/files/2021-11/IGNF_ADMIN_EXPRESS_3-1.html",
+    "year": "2022",
+    "type": "Region",
+    "units": 13
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Institut national de l'information géographique et forestière (IGN-F)",
+    "licence": "Etalab Open License 2.0",
+    "licence_source": "geoservices.ign.fr/sites/default/files/2021-11/IGNF_ADMIN_EXPRESS_3-1.html",
+    "year": "2022",
+    "type": "Department",
+    "units": 96,
+    "labelled": 96
+   }
+  },
+  "FRO": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "FSM": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "OCHA ROP, Federated States of Micronesia Division of Statistics, 2010 Census of Population and Housing and Secretariat of the Pacific Community, Statistics for Development Division",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "Data https",
+    "year": "2019",
+    "type": "State",
+    "units": 4
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "mean_km2": 9.2,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "GAB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 9
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2018",
+    "type": "Department",
+    "units": 49,
+    "labelled": 49
+   }
+  },
+  "GBR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Eurostat- European Commission",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "ec.europa.eu/info/legal-notice_en",
+    "year": "2021",
+    "type": "Country",
+    "units": 4
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Office for National Statistics Open Geography Portal",
+    "licence": "Open Government Licence v3.0",
+    "licence_source": "geoportal.statistics.gov.uk/datasets/b216b4c8a4e74f6fb692a1785255d777_0?geometry=-19.125%2C53.451%2C14.252%2C57.788",
+    "year": "2019",
+    "type": "Counties and Unitary Authorities",
+    "units": 216,
+    "labelled": 216
+   }
+  },
+  "GEO": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2015",
+    "type": "Autonomous Republic, Region, City",
+    "units": 12
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2007",
+    "type": "Municipality",
+    "units": 68,
+    "labelled": 68
+   }
+  },
+  "GGY": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "GHA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "USAID Ghana HPNO, Ghana Statistical Service",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "creativecommons.org/licenses/by/4.0/",
+    "year": "2019",
+    "type": "Districts",
+    "units": 260,
+    "labelled": 260
+   }
+  },
+  "GIB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "GIN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "World Food Programme, OCHA ROWCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/guinea-geodatabase",
+    "year": "2017",
+    "type": "Administrative regions and governate",
+    "units": 8
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "World Food Programme, OCHA ROWCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/guinea-geodatabase",
+    "year": "2017",
+    "type": "prefecture",
+    "units": 34,
+    "labelled": 34
+   }
+  },
+  "GMB": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Knippenberg, Erwin, & Moritz, Meyer. “The Hidden Potential of Mobile Phone Data Insights on COVID-19 in the Gambia.” Data Blog, The World Bank Data Catalog",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "datacatalog.worldbank.org/search/dataset/0038034",
+    "year": "2020",
+    "type": "Local Government Areas",
+    "units": 8
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "mean_km2": 220.2,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "GNB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 9
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 39,
+    "labelled": 39
+   }
+  },
+  "GNQ": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 7
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "World Resources Institute, Congo Forest Basin Atlas",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "gnq-data.forest-atlas.org/datasets/equatorial-guinea-gis-data-2013",
+    "year": "2013",
+    "type": "Unknown",
+    "units": 28,
+    "labelled": 28
+   }
+  },
+  "GRC": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "EuroGeoGraphics, Regional IM Working Group - Europe",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "data.humdata.org/dataset/gree",
+    "year": "2016",
+    "type": "Decentralized administration",
+    "units": 8
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "EuroGeoGraphics, Regional IM Working Group - Europe",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "data.humdata.org/dataset/gree",
+    "year": "2016",
+    "type": "Unknown",
+    "units": 14,
+    "labelled": 14
+   }
+  },
+  "GRD": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 7
+   }
+  },
+  "GRL": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 6
+   }
+  },
+  "GTM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 22
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Coordinadora Nacional Para La Reducción De Desastres, OCHA FISS",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/guatemala-administrative-level-0-national-1-departments-and-2-municipalities",
+    "year": "2021",
+    "type": "Municipio",
+    "units": 342,
+    "labelled": 342
+   }
+  },
+  "GUM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Public Domain",
+    "mean_km2": 29.4,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "GUY": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "DEVInfo LAC project, OCHA FISS",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/guyana-administrative-level-0-1-and-2-boundaries",
+    "year": "2019",
+    "type": "Neighbourhood Councils",
+    "units": 27,
+    "labelled": 27
+   }
+  },
+  "HKG": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 18
+   }
+  },
+  "HMD": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "HND": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 18
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "ICF - Instituto Nacional de Conservación y Desarrollo Forestal, Áreas Protegidas y Vida Silvestre, Gobierno de la República de Honduras",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "creativecommons.org/licenses/by/4.0/",
+    "year": "2019",
+    "type": "Municipalities",
+    "units": 298,
+    "labelled": 298
+   }
+  },
+  "HRV": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 21
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 2.0",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "HTI": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 42,
+    "labelled": 42
+   }
+  },
+  "HUN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "commons.wikimedia.org/w/index.php?search=Maps+of+Hungary&title=Special",
+    "year": "2011",
+    "type": "County",
+    "units": 19
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 198,
+    "labelled": 198
+   }
+  },
+  "IDN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 33
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Badan Pusat Statistik (BPS - Statistics Indonesia), World Food Programme, OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/indonesia-administrative-boundary-polygons-lines-and-places-levels-0-4b",
+    "year": "2020",
+    "type": "regency, city",
+    "units": 519,
+    "labelled": 519
+   }
+  },
+  "IMN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "IND": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "DataMeet India community, Election Commission of India",
+    "licence": "Creative Commons Attribution 2.5 India (CC BY 2.5 IN)",
+    "licence_source": "github.com/datameet/maps",
+    "year": "2011",
+    "type": "State / Union Territory",
+    "units": 36
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "Pathways Data Pvt. Ltd., lgdirectory.gov.in",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "geonode.pathwaysdata.com/layers/geonode",
+    "year": "2021",
+    "type": "District",
+    "units": 735,
+    "labelled": 735
+   }
+  },
+  "IOA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 2
+   }
+  },
+  "IOT": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "IRL": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Ordce Survey Ireland",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "www.arcgis.com/sharing/rest/content/items/cac5ddcbbe934edc881d1611c6b910c7/info/metadata/metadata.xml?format=default&output=html",
+    "year": "2022",
+    "type": "Province",
+    "units": 4
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Ordce Survey Ireland",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "data-osi.opendata.arcgis.com/datasets/OSi",
+    "year": "2015",
+    "type": "Local Electoral Areas",
+    "units": 166,
+    "labelled": 166
+   }
+  },
+  "IRN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 31
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Shahrestan",
+    "units": 432,
+    "labelled": 432
+   }
+  },
+  "IRQ": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "year": "2022",
+    "type": "Governorates (muḥāfaẓāt)",
+    "units": 18
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Iraq Central Statistics Office, OCHA Iraq",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/iraq-admin-level-1-boundaries",
+    "year": "2021",
+    "type": "Districts",
+    "units": 101,
+    "labelled": 101
+   }
+  },
+  "ISL": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 9
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "National Land Survey of Iceland",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "gatt.lmi.is/geonetwork/srv/eng/catalog.search#/metadata/%7B7CF6A33E-2588-42A8-A483-0B6F729B528A%7D",
+    "year": "2016",
+    "type": "Municipalities",
+    "units": 74,
+    "labelled": 74
+   }
+  },
+  "ISR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "Districts",
+    "units": 6
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "year": "2021",
+    "type": "Subdistrict",
+    "units": 15,
+    "labelled": 15
+   }
+  },
+  "ITA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "ISTAT, National Institute of Statistics",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "www.istat.it/it/note-legali",
+    "year": "2023",
+    "type": "Unknown",
+    "units": 5
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "ISTAT, National Institute of Statistics",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "www.istat.it/it/note-legali",
+    "year": "2023",
+    "type": "Unknown",
+    "units": 20,
+    "labelled": 20
+   }
+  },
+  "JAM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 14
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Open Data Commons Open Database License 1.0",
+    "mean_km2": 13.2,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "JEY": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "JOR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Creative Commons Attribution 2.5 Generic",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "Governorate",
+    "units": 12
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "Nahias",
+    "units": 52,
+    "labelled": 52
+   }
+  },
+  "JPN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 47
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 2.0",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "KAB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "KAS": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "KAZ": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 16
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "District",
+    "units": 174,
+    "labelled": 174
+   }
+  },
+  "KEN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "RCMRD GeoPortal, Africa GeoPortal",
+    "licence": "Public Domain",
+    "licence_source": "rcmrd.africageoportal.com/datasets/africageoportal",
+    "year": "2020",
+    "type": "Counties",
+    "units": 47
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "IEBC, OCHA ROSEA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/ken-administrative-boundaries",
+    "year": "2020",
+    "type": "Sub-Counties",
+    "units": 290,
+    "labelled": 290
+   }
+  },
+  "KGZ": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 8
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "KHM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 24
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Open Development Mekong, Open Development Cambodia",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "opendevelopmentcambodia.net/dataset/?id=administrative-boundaries-of-cambodia-2014",
+    "year": "2014",
+    "type": "Unknown",
+    "units": 197,
+    "labelled": 197
+   }
+  },
+  "KIR": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 2
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Open Data Commons Open Database License 1.0",
+    "mean_km2": 37.0,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "KNA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 14
+   }
+  },
+  "KOR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Natural Earth",
+    "licence": "Public Domain",
+    "licence_source": "www.naturalearthdata.com/about/terms-of-use/",
+    "year": "2021",
+    "type": "Province",
+    "units": 17
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, citypopulation.de",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "www.citypopulation.de/en/help/termsofuse/",
+    "year": "2020",
+    "type": "Si, Kun (districts and city districts)",
+    "units": 228,
+    "labelled": 228
+   }
+  },
+  "KOS": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 30
+   }
+  },
+  "KWT": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 6
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Open Data Commons Open Database License 1.0",
+    "mean_km2": 118.2,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "LAO": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 17
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "National Geographic Department, OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/lao-admin-boundaries",
+    "year": "2019",
+    "type": "Districts",
+    "units": 148,
+    "labelled": 148
+   }
+  },
+  "LBN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2017",
+    "type": "Governorates / Muhafazah",
+    "units": 9
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikipedia",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2021",
+    "type": "Districts (Aqdya)",
+    "units": 26,
+    "labelled": 26
+   }
+  },
+  "LBR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "UNMIL, OCHA ROWCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/liberia-admin-level-2-boundaries",
+    "year": "2021",
+    "type": "Counties",
+    "units": 15
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "UNMIL, OCHA ROWCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/liberia-admin-level-2-boundaries",
+    "year": "2021",
+    "type": "Districts",
+    "units": 136,
+    "labelled": 136
+   }
+  },
+  "LBY": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Natural Earth",
+    "licence": "Public Domain",
+    "licence_source": "www.naturalearthdata.com/about/terms-of-use/",
+    "year": "2021",
+    "type": "Districts",
+    "units": 22
+   }
+  },
+  "LCA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Wikimedia Commons, Wikimedia Commons",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2015",
+    "type": "District",
+    "units": 10
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "mean_km2": 1.1,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "LIE": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 11
+   }
+  },
+  "LKA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 25
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 25,
+    "labelled": 25
+   }
+  },
+  "LSO": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "FAO and the Ministry of Local Government, OCHA ROSEA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/lesotho-administrative-level-0-2-boundaries",
+    "year": "2020",
+    "type": "constituencies",
+    "units": 78,
+    "labelled": 78
+   }
+  },
+  "LTU": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 60,
+    "labelled": 60
+   }
+  },
+  "LUX": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 3
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Open Data Commons Open Database License 1.0",
+    "mean_km2": 24.7,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "LVA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Geoportal of Latvia",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "geolatvija.lv/geo/p/658",
+    "year": "2021",
+    "type": "Administratīvās teritorijas",
+    "units": 43
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "mean_km2": 109.7,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "MAC": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "MAF": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "MAR": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 16
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 75,
+    "labelled": 34
+   }
+  },
+  "MCO": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Open Data Commons Open Database License 1.0",
+    "mean_km2": 0.3,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "MDA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "UNHCR, OCHA FISS",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/moldova-administrative-level-0-1-boundaries",
+    "year": "2020",
+    "type": "Districts",
+    "units": 37
+   }
+  },
+  "MDG": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 22
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Madagascar National Disaster Management Office (BNGRC), OCHA ROSA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/madagascar-administrative-level-0-4-boundaries",
+    "year": "2020",
+    "type": "districts",
+    "units": 119,
+    "labelled": 119
+   }
+  },
+  "MDV": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 21
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Government of the Republic of Maldives, OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/maldives-administrative-boundaries-polygon-polyline",
+    "year": "2017",
+    "type": "Administrative Atolls",
+    "units": 21,
+    "labelled": 21
+   }
+  },
+  "MEX": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Instituto Nacional de Estadística y Geografía (INEGI)",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/mexican-administrative-level-0-country-1-estado-and-2-municipio-boundary-polygons",
+    "year": "2020",
+    "type": "gbOpen",
+    "units": 32
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "World Bank",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "datacatalog.worldbank.org/public-licenses#cc-by",
+    "year": "2012",
+    "type": "municipios",
+    "units": 2457,
+    "labelled": 2457
+   }
+  },
+  "MHL": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 2
+   }
+  },
+  "MKD": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "EuroGeographics and NTES (Nomenclature of Territorial Units for Statistics - Republic of Macedonia State Statistical Office), Regional IM Working Group - Europe",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "data.humdata.org/dataset/fyrom-administrative-levels-1-4-from-eurogeographics-and-ntes",
+    "year": "2016",
+    "type": "Statistical Region",
+    "units": 8
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "mean_km2": 297.1,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "MLI": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "DNCT - Direction Nationale des Collectivités Territoriales, United Nations Office for the Coordination of Humanitarian Affairs, Mali",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "data.humdata.org/dataset/administrative-boundaries-cod-mli",
+    "year": "2021",
+    "type": "Region or Capital District",
+    "units": 9
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "DNCT - Direction Nationale des Colelctivités Territorielles, DNP - Direction Nationale de la Population, United Nations Office for the Coordination of Humanitarian Affairs, Mali",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "data.humdata.org/dataset/mali-admin-boundaries-level-1-2-and-3-including-2017-population-desagregated-by-sexe",
+    "year": "2017",
+    "type": "Cercle",
+    "units": 50,
+    "labelled": 50
+   }
+  },
+  "MLT": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, d-maps.com",
+    "licence": "Public Domain",
+    "licence_source": "d-maps.com/conditions.php?lang=en",
+    "year": "2022",
+    "type": "Local Council",
+    "units": 68
+   }
+  },
+  "MMR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Myanmar Analytics Project, geoBoundaries",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "data.mmanalytics.org/dataset/border-shapefiles",
+    "year": "2019",
+    "type": "State",
+    "units": 14
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Myanmar Analytics Project, USAID/Burma",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "data.mmanalytics.org/dataset/border-shapefiles",
+    "year": "2019",
+    "type": "District",
+    "units": 74,
+    "labelled": 74
+   }
+  },
+  "MNE": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 21
+   }
+  },
+  "MNG": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 22
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "National Statistical Office of Mongolia, OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/mongolia-administrative-boundaries-polygon-polyline",
+    "year": "2021",
+    "type": "soum, düüregs",
+    "units": 339,
+    "labelled": 339
+   }
+  },
+  "MNP": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 4
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Public Domain",
+    "mean_km2": 118.5,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "MOZ": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 11
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Mozambique INE (Instituto Nacional de Estatistica), OCHA ROSEA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/mozambique-administrative-levels-0-3",
+    "year": "2019",
+    "type": "districts",
+    "units": 159,
+    "labelled": 159
+   }
+  },
+  "MRT": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 13
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "World Food Programme, OCHA ROWCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/mauritania-administrative-boundaries",
+    "year": "2020",
+    "type": "Mauritania",
+    "units": 57,
+    "labelled": 57
+   }
+  },
+  "MSR": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 3
+   }
+  },
+  "MUS": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 16
+   }
+  },
+  "MWI": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 28
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "National Statistics Office of Malawi, OCHA ROSEA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/malawi-administrative-level-0-3-boundaries",
+    "year": "2020",
+    "type": "district",
+    "units": 28,
+    "labelled": 28
+   }
+  },
+  "MYS": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 16
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, citypopulation.de",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "www.citypopulation.de/en/help/termsofuse/",
+    "year": "2020",
+    "type": "Districts",
+    "units": 159,
+    "labelled": 159
+   }
+  },
+  "NAM": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Natural Earth",
+    "licence": "Public Domain",
+    "licence_source": "www.naturalearthdata.com/about/terms-of-use/",
+    "year": "2022",
+    "type": "Administrative Division",
+    "units": 14
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Stanford Digital Repository, Namibia Statistics Agency",
+    "licence": "Public Domain",
+    "licence_source": "purl.stanford.edu/cs051py0596",
+    "year": "2007",
+    "type": "Unknown",
+    "units": 109,
+    "labelled": 109
+   }
+  },
+  "NCL": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 3
+   }
+  },
+  "NER": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 8
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, City Population",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "www.citypopulation.de/termsofuse.html",
+    "year": "2018",
+    "type": "Department",
+    "units": 67,
+    "labelled": 67
+   }
+  },
+  "NFK": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "NGA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "GRID3",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "data.grid3.org/datasets/grid3-nigeria-state-boundaries/explore?location=8.992006%2C8.685290%2C6.82",
+    "year": "2022",
+    "type": "State",
+    "units": 37
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "GRID3",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "data.grid3.org/datasets/grid3-nigeria-local-government-area-boundaries-1/explore?location=8.959048%2C8.685290%2C6.61",
+    "year": "2022",
+    "type": "Local Government Areas",
+    "units": 774,
+    "labelled": 774
+   }
+  },
+  "NIC": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 17
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 153,
+    "labelled": 153
+   }
+  },
+  "NIU": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Pacific Data Hub",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "pacificdata.org/data/dataset/2011_niu_phc_admin_boundaries",
+    "year": "2020",
+    "type": "village",
+    "units": 14
+   }
+  },
+  "NLD": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "National Georegister",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "nationaalgeoregister.nl/geonetwork/srv/dut/catalog.search#/metadata/208bc283-7c66-4ce7-8ad3-1cf3e8933fb5?tab=general",
+    "year": "2022",
+    "type": "Province",
+    "units": 12
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "mean_km2": 120.8,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "NOR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Kartverket",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "kartkatalog.geonorge.no/metadata/administrative-enheter-fylker/6093c8a8-fa80-11e6-bc64-92361f002671",
+    "year": "2022",
+    "type": "Fylke",
+    "units": 11
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Geonorge, Mapping Authority of Norway",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "kartkatalog.geonorge.no/metadata/kartverket/administrative-enheter/041f1e6e-bdbc-4091-b48f-8a5990f3cc5b",
+    "year": "2013",
+    "type": "Unknown",
+    "units": 431,
+    "labelled": 431
+   }
+  },
+  "NPL": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Survey Department of Nepal, OCHA FISS",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/administrative-bounadries-of-nepal",
+    "year": "2020",
+    "type": "Provinces",
+    "units": 7
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "Districts",
+    "units": 75,
+    "labelled": 75
+   }
+  },
+  "NRU": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, FreeMapViewer",
+    "licence": "Public Domain",
+    "licence_source": "creativecommons.org/share-your-work/public-domain/",
+    "year": "2005",
+    "type": "District",
+    "units": 14
+   }
+  },
+  "NZL": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "NZ Stats",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "www.stats.govt.nz/about_us/about-this-site/copyright-terms-of-use.aspx",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 17
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Stats NZ",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "datafinder.stats.govt.nz/layer/105153-territorial-authority-2021-generalised/",
+    "year": "2021",
+    "type": "Territorial Authorities",
+    "units": 88,
+    "labelled": 88
+   }
+  },
+  "OMN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 11
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Other - Direct Permission",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "PAK": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikipedia",
+    "licence": "Public Domain",
+    "licence_source": "creativecommons.org/share-your-work/public-domain/",
+    "year": "2019",
+    "type": "Province",
+    "units": 7
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikipedia",
+    "licence": "Public Domain",
+    "licence_source": "creativecommons.org/share-your-work/public-domain/",
+    "year": "2019",
+    "type": "Districts",
+    "units": 126,
+    "labelled": 126
+   }
+  },
+  "PAN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 12
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Milton Solano, of the Smithsonian Tropical Research Institute, on ArcGIS online, GIS Laboratory. Smithsonian Tropical Research Institute, Panama, 2012",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "www.arcgis.com/home/item.html?id=8f1c5499d3a8423888454cfee5b45586",
+    "year": "2012",
+    "type": "Unknown",
+    "units": 76,
+    "labelled": 76
+   }
+  },
+  "PCN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "PER": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2008",
+    "type": "gbOpen",
+    "units": 26
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Instituto Geográfico Nacional - IGN, OCHA ROLAC",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/limites-de-peru",
+    "year": "2020",
+    "type": "Provinces",
+    "units": 196,
+    "labelled": 196
+   }
+  },
+  "PGA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "PHL": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "National Mapping and Resource Information Authority (NAMRIA), Philippines Statistics Authority (PSA), OCHA Philippines",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/philippines-administrative-levels-0-to-3",
+    "year": "2020",
+    "type": "Regions",
+    "units": 17
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "National Mapping and Resource Information Authority (NAMRIA), Philippines Statistics Authority (PSA), OCHA Philippines",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/about/license",
+    "year": "2020",
+    "type": "Provinces",
+    "units": 87,
+    "labelled": 87
+   }
+  },
+  "PLW": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 16
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "mean_km2": 5.9,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "PNG": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Papua New Guinea National Statistics Office, OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/papua-new-guinea-admin-level-0-international-boundaries",
+    "year": "2019",
+    "type": "Provinces",
+    "units": 22
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "OCHA ROAP, Papua New Guinea National Statistics Office",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/papua-new-guinea-admin-level-0-international-boundaries",
+    "year": "2019",
+    "type": "District",
+    "units": 87,
+    "labelled": 87
+   }
+  },
+  "POL": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 16
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "Geoboundaries, OpenStreetMap",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 380,
+    "labelled": 380
+   }
+  },
+  "PRI": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Public Domain",
+    "mean_km2": 115.5,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "PRK": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "World Food Programme, OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/dpr-korea-administrative-boundaries",
+    "year": "2018",
+    "type": "Provinces",
+    "units": 11
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "World Food Programme, OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/dpr-korea-administrative-boundaries",
+    "year": "2019",
+    "type": "county, city, special city",
+    "units": 179,
+    "labelled": 179
+   }
+  },
+  "PRT": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 20
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "mean_km2": 295.0,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "PRY": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Direcion General de Estadica, Encuestas y Censos",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "twitter.com/WMgeoLab/status/1179001467669078017/photo/2",
+    "year": "2012",
+    "type": "Unknown",
+    "units": 18
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Direcion General de Estadica, Encuestas y Censos",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "twitter.com/WMgeoLab/status/1179001467669078017/photo/3",
+    "year": "2012",
+    "type": "gbOpen",
+    "units": 247,
+    "labelled": 247
+   }
+  },
+  "PSE": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Open Data Watch",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "opendatawatch.com/publications/open-data-to-support-sustainable-development-goals/",
+    "year": "2021",
+    "type": "territory",
+    "units": 2
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Open Data Watch",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "opendatawatch.com/publications/open-data-to-support-sustainable-development-goals/",
+    "year": "2017",
+    "type": "governorate",
+    "units": 16,
+    "labelled": 16
+   }
+  },
+  "PSX": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 2
+   }
+  },
+  "PYF": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 5
+   }
+  },
+  "QAT": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Qatar Open Data Portal",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "www.data.gov.qa/pages/license/annexes",
+    "year": "2015",
+    "type": "Unknown",
+    "units": 8
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "mean_km2": 146.3,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "ROU": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "World Bank",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "data.worldbank.org/summary-terms-of-use",
+    "year": "2017",
+    "type": "Counties",
+    "units": 42
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "mean_km2": 73.7,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "RUS": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 86
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Raion",
+    "units": 2327,
+    "labelled": 2327
+   }
+  },
+  "RWA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "The Rwanda Geo Portal",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "rwanda.africageoportal.com/datasets/dac12729b2cd4f0db92fddaa6a80460d_0",
+    "year": "2020",
+    "type": "Province",
+    "units": 5
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Open Data Rwanda",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "www.statistics.gov.rw/terms-use",
+    "year": "2012",
+    "type": "Unknown",
+    "units": 30,
+    "labelled": 30
+   }
+  },
+  "SAH": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "SAU": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 13
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 2.0",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "SDN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Information Management Working Group (IMWG), OCHA ROSEA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/sudan-administrative-boundaries-levels-0-2",
+    "year": "2020",
+    "type": "Wilayat/State",
+    "units": 19
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "OCHA ROSEA, Information Management Working Group",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/sudan-administrative-boundaries-levels-0-2",
+    "year": "2020",
+    "type": "District",
+    "units": 189,
+    "labelled": 189
+   }
+  },
+  "SDS": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 10
+   }
+  },
+  "SEN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Government of Senegal, OCHA ROWCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/senegal-administrative-boundaries",
+    "year": "2019",
+    "type": "region",
+    "units": 14
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Government of Senegal, OCHA ROWCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/senegal-administrative-boundaries",
+    "year": "2019",
+    "type": "department",
+    "units": 45,
+    "labelled": 45
+   }
+  },
+  "SGP": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 5
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Singapore Open Data License Version 1.0",
+    "mean_km2": 14.2,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "SGS": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "SHN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 3
+   }
+  },
+  "SLB": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Natural Earth",
+    "licence": "Public Domain",
+    "licence_source": "www.naturalearthdata.com/about/terms-of-use/",
+    "year": "2021",
+    "type": "Province",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Solomon Islands National Statistics Office (SINSO), OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/solomon-islands-administrative-level-0-1-2-and-3-boundary-polygons",
+    "year": "2018",
+    "type": "Constituency",
+    "units": 50,
+    "labelled": 50
+   }
+  },
+  "SLE": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Government of Sierra Leone, OCHA ROWCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+    "year": "2014",
+    "type": "Province",
+    "units": 4
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Government of Sierra Leone, OCHA ROWCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+    "year": "2017",
+    "type": "Districts",
+    "units": 14,
+    "labelled": 14
+   }
+  },
+  "SLV": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 14
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Public Domain",
+    "mean_km2": 75.0,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "SMR": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 9
+   }
+  },
+  "SOL": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "SOM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 13
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Global Polio Eradication Initiative (GPEI), Frank Salet",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "polioeradication.org/",
+    "year": "2022",
+    "type": "Districts",
+    "units": 118,
+    "labelled": 118
+   }
+  },
+  "SPM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 2
+   }
+  },
+  "SRB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 25
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 145,
+    "labelled": 145
+   }
+  },
+  "SSD": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "South Sudan Information Management Working Group (IMWG), National Bureau of Statistics (NBS), and OCHA, OCHA South Sudan",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/south-sudan-administrative-boundaries",
+    "year": "2020",
+    "type": "states",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "South Sudan Information Management Working Group (IMWG), National Bureau of Statistics (NBS), and OCHA, OCHA South Sudan",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/south-sudan-administrative-boundaries",
+    "year": "2020",
+    "type": "counties",
+    "units": 78,
+    "labelled": 78
+   }
+  },
+  "STP": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 2
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Open Data Commons Open Database License 1.0",
+    "mean_km2": 141.4,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "SUR": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2021",
+    "type": "Ressorten",
+    "units": 59,
+    "labelled": 59
+   }
+  },
+  "SVK": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 8
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Okres",
+    "units": 79,
+    "labelled": 79
+   }
+  },
+  "SVN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Eurostat- European Commission",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "ec.europa.eu/info/legal-notice_en",
+    "year": "2021",
+    "type": "Macroregions",
+    "units": 2
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Open Data Commons Open Database License 1.0",
+    "mean_km2": 96.3,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "SWE": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Erik Frohne",
+    "licence": "Creative Commons Attribution 3.0 License",
+    "licence_source": "commons.wikimedia.org/w/index.php?curid=5675559",
+    "year": "2009",
+    "type": "County",
+    "units": 21
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2017",
+    "type": "Municipality",
+    "units": 290,
+    "labelled": 290
+   }
+  },
+  "SWZ": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 4
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 53,
+    "labelled": 53
+   }
+  },
+  "SXM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "SYC": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 26
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "mean_km2": 56.0,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "SYR": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "United Nations Cartographic Section (UNCS) and United Nations Office for the Coordination of Humanitarian Affairs (UNOCHA), OCHA ROSC",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/syrian-arab-republic-administrative-boundaries-populated-places",
+    "year": "2017",
+    "type": "Governorate",
+    "units": 14
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "United Nations Cartographic Section (UNCS) and United Nations Office for the Coordination of Humanitarian Affairs (UNOCHA), OCHA ROSC",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/syrian-arab-republic-administrative-boundaries-populated-places",
+    "year": "2017",
+    "type": "District",
+    "units": 61,
+    "labelled": 61
+   }
+  },
+  "TCA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 6
+   }
+  },
+  "TCD": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 22
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "OCHA Chad, OCHA Chad",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/chad-admin-boundaries-admin-1-and-admin-2",
+    "year": "2019",
+    "type": "Departments",
+    "units": 70,
+    "labelled": 70
+   }
+  },
+  "TGO": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 5
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 2.0",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "THA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 77
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Royal Thai Survey Department, OCHA ROAP",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/thailand-administrative-boundaries",
+    "year": "2019",
+    "type": "districts",
+    "units": 928,
+    "labelled": 928
+   }
+  },
+  "TJK": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 5
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 58,
+    "labelled": 58
+   }
+  },
+  "TKM": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikimedia",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2007",
+    "type": "Regions (Welayat)",
+    "units": 5
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "TLS": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 13
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "mean_km2": 229.1,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "TON": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 5
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "mean_km2": 22.8,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "TTO": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 16
+   }
+  },
+  "TUN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 23
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, Wambacher",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2017",
+    "type": "Unknown",
+    "units": 264,
+    "labelled": 8
+   }
+  },
+  "TUR": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 81
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "OpenStreetMap, OSM Boundaries",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "www.openstreetmap.org/copyright",
+    "year": "2021",
+    "type": "Districts",
+    "units": 973,
+    "labelled": 973
+   }
+  },
+  "TUV": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "mean_km2": 0.5,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "TWN": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 21
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 2.0",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "TZA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 30
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Tanzania National Bureau of Statistics / UN OCHA ROSA, OCHA ROSA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/tanzania-administrative-boundaries-level-1-to-3-regions-districts-and-wards-with-2012-population",
+    "year": "2021",
+    "type": "Districts",
+    "units": 170,
+    "labelled": 170
+   }
+  },
+  "UGA": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 112
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2006",
+    "type": "Counties",
+    "units": 151,
+    "labelled": 151
+   }
+  },
+  "UKR": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 25
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "geoBoundaries, Wikimedia Commons",
+    "licence": "Public Domain",
+    "licence_source": "en.wikipedia.org/wiki/File",
+    "year": "2006",
+    "type": "Raions",
+    "units": 495,
+    "labelled": 495
+   }
+  },
+  "UMI": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 8
+   }
+  },
+  "URY": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 19
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  },
+  "USA": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "United States Census Bureau, MAF/TIGER Database",
+    "licence": "Public Domain",
+    "licence_source": "www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+    "year": "2018",
+    "type": "States",
+    "units": 56
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "United States Census Bureau, MAF/TIGER Database",
+    "licence": "Public Domain",
+    "licence_source": "www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+    "year": "2018",
+    "type": "Counties",
+    "units": 3233,
+    "labelled": 3233
+   }
+  },
+  "USG": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "UZB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 14
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "OCHA ROCCA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/ubbekistan-update",
+    "year": "2020",
+    "type": "Tuman",
+    "units": 199,
+    "labelled": 199
+   }
+  },
+  "VAT": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "VCT": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 6
+   }
+  },
+  "VEN": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "OCHA Venezuela, Instituto Nacional de Estadística",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "Data https",
+    "year": "2020",
+    "type": "Estados",
+    "units": 25
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "odbl",
+    "source": "Efrain Porto Tapiquen Geografia, SIG y Estudios Ambientales",
+    "licence": "Open Data Commons Open Database License 1.0",
+    "licence_source": "twitter.com/WMgeoLab/status/1251983690709827590",
+    "year": "2015",
+    "type": "Municipios",
+    "units": 335,
+    "labelled": 335
+   }
+  },
+  "VGB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "VIR": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 3
+   }
+  },
+  "VNM": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "geoBoundaries, Wikipedia",
+    "licence": "Public Domain",
+    "licence_source": "commons.wikimedia.org/wiki/File",
+    "year": "2008",
+    "type": "Municipalities and Provinces",
+    "units": 64
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "OCHA ROAP, Government of Viet Nam",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/viet-nam-administrative-boundaries-polygon-polyline",
+    "year": "2020",
+    "type": "District",
+    "units": 708,
+    "labelled": 708
+   }
+  },
+  "VUT": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 6
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "mean_km2": 186.2,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "WLF": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 3
+   }
+  },
+  "WSB": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 1
+   }
+  },
+  "WSM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 11
+   },
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "mean_km2": 65.9,
+    "reason": "units smaller than 300 km2 on average (not district-like): district zoom shows ADM1"
+   }
+  },
+  "YEM": {
+   "adm1": {
+    "dataset": "Natural Earth 10m admin 1",
+    "licence": "Public domain",
+    "units": 21
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Central Statistical Organization (CSO), OCHA Yemen",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/yemen-admin-boundaries",
+    "year": "2021",
+    "type": "Districts",
+    "units": 335,
+    "labelled": 335
+   }
+  },
+  "ZAF": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "OCHA ROSEA, South African Municipal Demarcation Board",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/south-africa-admin-level-1-boundaries",
+    "year": "2020",
+    "type": "Province",
+    "units": 9
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "OCHA ROSEA, South African Municipal Demarcation Board",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/south-africa-admin-level-1-boundaries",
+    "year": "2020",
+    "type": "District municipality",
+    "units": 52,
+    "labelled": 52
+   }
+  },
+  "ZMB": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Zambia Data Hub",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "licence_source": "zambia-nsdi-mlnr.hub.arcgis.com/datasets/6fe71ff483ab491782c8524ec3d1a3b8_0/about",
+    "year": "2020",
+    "type": "Province",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "GRID3, Office of the Surveyor General",
+    "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+    "licence_source": "data.grid3.org/datasets/GRID3",
+    "year": "2020",
+    "type": "Districts",
+    "units": 116,
+    "labelled": 116
+   }
+  },
+  "ZWE": {
+   "adm1": {
+    "dataset": "geoBoundaries gbOpen ADM1",
+    "source": "Zimbabwe National Statistics Agency (ZIMSTAT www.zimstat.co.zw) Central Statistics Office, OCHA ROSEA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/zimbabwe-administrative-levels-0-3-boundaries",
+    "year": "2020",
+    "type": "Province",
+    "units": 10
+   },
+   "adm2": {
+    "dataset": "geoBoundaries gbOpen ADM2",
+    "group": "attrib",
+    "source": "Zimbabwe National Statistics Agency (ZIMSTAT www.zimstat.co.zw) Central Statistics Office, OCHA ROSEA",
+    "licence": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licence_source": "data.humdata.org/dataset/zimbabwe-administrative-levels-0-3-boundaries",
+    "year": "2020",
+    "type": "District",
+    "units": 91,
+    "labelled": 91
+   }
+  },
+  "XKX": {
+   "adm2": {
+    "excluded": true,
+    "licence": "Creative Commons Attribution-ShareAlike 2.0",
+    "reason": "licence is share-alike, unclear or permission-only: district zoom shows ADM1"
+   }
+  }
+ },
+ "corrections": [
+  {
+   "country": "BGD",
+   "level": "ADM1",
+   "source": "Rajshani",
+   "shown": "Rajshahi"
+  }
+ ],
+ "settings": {
+  "adm2_min_mean_km2": 300,
+  "simplify_deg": {
+   "borders": 0.004,
+   "adm1": 0.01,
+   "adm2": 0.006
+  },
+  "digits": 3,
+  "tile_deg": {
+   "adm1": 30,
+   "adm2": 10
+  },
+  "glyph_blocks": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   30,
+   32
+  ]
+ },
+ "tiles": {
+  "adm1": [
+   "N00E000",
+   "N00E030",
+   "N00E060",
+   "N00E090",
+   "N00E120",
+   "N00E150",
+   "N00W030",
+   "N00W060",
+   "N00W090",
+   "N00W120",
+   "N00W180",
+   "N30E000",
+   "N30E030",
+   "N30E060",
+   "N30E090",
+   "N30E120",
+   "N30E150",
+   "N30W030",
+   "N30W060",
+   "N30W090",
+   "N30W120",
+   "N30W150",
+   "N30W180",
+   "N60E000",
+   "N60E030",
+   "N60E060",
+   "N60E090",
+   "N60E120",
+   "N60E150",
+   "N60W030",
+   "N60W060",
+   "N60W090",
+   "N60W120",
+   "N60W150",
+   "N60W180",
+   "S30E000",
+   "S30E030",
+   "S30E060",
+   "S30E090",
+   "S30E120",
+   "S30E150",
+   "S30W030",
+   "S30W060",
+   "S30W090",
+   "S30W120",
+   "S30W150",
+   "S30W180",
+   "S60E000",
+   "S60E030",
+   "S60E060",
+   "S60E090",
+   "S60E120",
+   "S60E150",
+   "S60W030",
+   "S60W060",
+   "S60W090",
+   "S60W180",
+   "S90E000",
+   "S90E030",
+   "S90E060",
+   "S90E090",
+   "S90E120",
+   "S90E150",
+   "S90W030",
+   "S90W060",
+   "S90W090",
+   "S90W120",
+   "S90W150",
+   "S90W180"
+  ],
+  "adm2_attrib": [
+   "N00E000",
+   "N00E010",
+   "N00E020",
+   "N00E030",
+   "N00E040",
+   "N00E050",
+   "N00E070",
+   "N00E090",
+   "N00E100",
+   "N00E110",
+   "N00E120",
+   "N00E130",
+   "N00W010",
+   "N00W020",
+   "N00W050",
+   "N00W060",
+   "N00W070",
+   "N00W080",
+   "N00W090",
+   "N00W100",
+   "N10E000",
+   "N10E010",
+   "N10E020",
+   "N10E030",
+   "N10E040",
+   "N10E050",
+   "N10E090",
+   "N10E100",
+   "N10E110",
+   "N10E120",
+   "N10E140",
+   "N10W010",
+   "N10W020",
+   "N10W070",
+   "N10W080",
+   "N10W090",
+   "N10W100",
+   "N10W110",
+   "N10W120",
+   "N10W160",
+   "N20E000",
+   "N20E010",
+   "N20E020",
+   "N20E030",
+   "N20E040",
+   "N20E060",
+   "N20E070",
+   "N20E080",
+   "N20E090",
+   "N20E100",
+   "N20E110",
+   "N20E120",
+   "N20E140",
+   "N20W010",
+   "N20W020",
+   "N20W090",
+   "N20W100",
+   "N20W110",
+   "N20W120",
+   "N20W160",
+   "N20W170",
+   "N30E000",
+   "N30E010",
+   "N30E020",
+   "N30E030",
+   "N30E040",
+   "N30E060",
+   "N30E070",
+   "N30E080",
+   "N30E090",
+   "N30E100",
+   "N30E110",
+   "N30E120",
+   "N30E130",
+   "N30W010",
+   "N30W080",
+   "N30W090",
+   "N30W100",
+   "N30W110",
+   "N30W120",
+   "N30W130",
+   "N40E000",
+   "N40E010",
+   "N40E020",
+   "N40E030",
+   "N40E040",
+   "N40E050",
+   "N40E060",
+   "N40E070",
+   "N40E080",
+   "N40E090",
+   "N40E100",
+   "N40E110",
+   "N40E120",
+   "N40E130",
+   "N40W010",
+   "N40W060",
+   "N40W070",
+   "N40W080",
+   "N40W090",
+   "N40W100",
+   "N40W110",
+   "N40W120",
+   "N40W130",
+   "N50E000",
+   "N50E010",
+   "N50E020",
+   "N50E030",
+   "N50E090",
+   "N50E100",
+   "N50E110",
+   "N50E120",
+   "N50E170",
+   "N50W010",
+   "N50W020",
+   "N50W060",
+   "N50W070",
+   "N50W080",
+   "N50W090",
+   "N50W100",
+   "N50W110",
+   "N50W120",
+   "N50W130",
+   "N50W140",
+   "N50W150",
+   "N50W160",
+   "N50W170",
+   "N50W180",
+   "N60E000",
+   "N60E010",
+   "N60E020",
+   "N60E030",
+   "N60W010",
+   "N60W020",
+   "N60W030",
+   "N60W070",
+   "N60W080",
+   "N60W090",
+   "N60W100",
+   "N60W110",
+   "N60W120",
+   "N60W130",
+   "N60W140",
+   "N60W150",
+   "N60W160",
+   "N60W170",
+   "N60W180",
+   "N70E010",
+   "N70E020",
+   "N70E030",
+   "N70W070",
+   "N70W080",
+   "N70W090",
+   "N70W100",
+   "N70W110",
+   "N70W120",
+   "N70W130",
+   "N70W140",
+   "N70W150",
+   "N70W160",
+   "N70W170",
+   "N80W070",
+   "N80W080",
+   "N80W090",
+   "N80W100",
+   "N80W110",
+   "S10E000",
+   "S10E010",
+   "S10E020",
+   "S10E030",
+   "S10E040",
+   "S10E070",
+   "S10E090",
+   "S10E100",
+   "S10E110",
+   "S10E120",
+   "S10E130",
+   "S10E140",
+   "S10E150",
+   "S10E160",
+   "S10W040",
+   "S10W050",
+   "S10W060",
+   "S10W070",
+   "S10W080",
+   "S10W090",
+   "S10W100",
+   "S20E010",
+   "S20E020",
+   "S20E030",
+   "S20E040",
+   "S20E050",
+   "S20E090",
+   "S20E100",
+   "S20E110",
+   "S20E120",
+   "S20E130",
+   "S20E140",
+   "S20E150",
+   "S20E160",
+   "S20E170",
+   "S20W040",
+   "S20W050",
+   "S20W060",
+   "S20W070",
+   "S20W080",
+   "S20W170",
+   "S20W180",
+   "S30E010",
+   "S30E020",
+   "S30E030",
+   "S30E040",
+   "S30E110",
+   "S30E120",
+   "S30E130",
+   "S30E140",
+   "S30E150",
+   "S30E160",
+   "S30W030",
+   "S30W050",
+   "S30W060",
+   "S30W070",
+   "S30W080",
+   "S30W180",
+   "S40E010",
+   "S40E020",
+   "S40E030",
+   "S40E110",
+   "S40E120",
+   "S40E130",
+   "S40E140",
+   "S40E150",
+   "S40E170",
+   "S40W060",
+   "S40W070",
+   "S40W080",
+   "S50E140",
+   "S50E160",
+   "S50E170",
+   "S50W070",
+   "S50W080",
+   "S50W180",
+   "S60W070",
+   "S60W080"
+  ],
+  "adm2_odbl": [
+   "N00E030",
+   "N00E040",
+   "N00E070",
+   "N00E080",
+   "N00E090",
+   "N00W060",
+   "N00W070",
+   "N00W080",
+   "N10E030",
+   "N10E040",
+   "N10E070",
+   "N10E080",
+   "N10E090",
+   "N10W020",
+   "N10W070",
+   "N10W080",
+   "N10W090",
+   "N20E040",
+   "N20E050",
+   "N20E060",
+   "N20E070",
+   "N20E080",
+   "N20E090",
+   "N20W010",
+   "N20W020",
+   "N20W080",
+   "N20W090",
+   "N30E000",
+   "N30E010",
+   "N30E020",
+   "N30E030",
+   "N30E040",
+   "N30E050",
+   "N30E060",
+   "N30E070",
+   "N30E080",
+   "N30W010",
+   "N40E000",
+   "N40E010",
+   "N40E020",
+   "N40E030",
+   "N40E040",
+   "N40E050",
+   "N40E060",
+   "N40E070",
+   "N40E080",
+   "N40E090",
+   "N40E100",
+   "N40E110",
+   "N40E120",
+   "N40E130",
+   "N40E140",
+   "N40E150",
+   "N50E000",
+   "N50E010",
+   "N50E020",
+   "N50E030",
+   "N50E040",
+   "N50E050",
+   "N50E060",
+   "N50E070",
+   "N50E080",
+   "N50E090",
+   "N50E100",
+   "N50E110",
+   "N50E120",
+   "N50E130",
+   "N50E140",
+   "N50E150",
+   "N50E160",
+   "N50E170",
+   "N60E010",
+   "N60E020",
+   "N60E030",
+   "N60E040",
+   "N60E050",
+   "N60E060",
+   "N60E070",
+   "N60E080",
+   "N60E090",
+   "N60E100",
+   "N60E110",
+   "N60E120",
+   "N60E130",
+   "N60E140",
+   "N60E150",
+   "N60E160",
+   "N60E170",
+   "N60W170",
+   "N60W180",
+   "N70E020",
+   "N70E040",
+   "N70E050",
+   "N70E060",
+   "N70E070",
+   "N70E080",
+   "N70E090",
+   "N70E100",
+   "N70E110",
+   "N70E120",
+   "N70E130",
+   "N70E140",
+   "N70E150",
+   "N70E160",
+   "N70E170",
+   "N70W180",
+   "N80E030",
+   "N80E040",
+   "N80E050",
+   "N80E060",
+   "N80E070",
+   "N80E080",
+   "N80E090",
+   "S20W070",
+   "S20W080",
+   "S30E030",
+   "S30W070",
+   "S30W080",
+   "S30W090",
+   "S30W110",
+   "S40W070",
+   "S40W080",
+   "S40W090",
+   "S50W080",
+   "S60W070",
+   "S60W080"
+  ]
+ },
+ "total_bytes": 17802777
+}
