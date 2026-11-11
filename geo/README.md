@@ -32,14 +32,14 @@ MapLibre's own `maxZoom` enforces the limit for wheel, pinch, keyboard, the zoom
 | Country names, international land borders | Natural Earth 1:50m admin 0 countries, 1:10m admin 0 land boundary lines | Public domain |
 | ADM1 | geoBoundaries gbOpen ADM1 where the country's licence only asks for attribution, otherwise Natural Earth 1:10m admin 1 | per country, see `web/public/geo/index.json` |
 | ADM2 | geoBoundaries gbOpen ADM2 | per country, see `web/public/geo/index.json` |
-| Label fonts | Noto Sans (Regular, Italic, Bold) glyphs from openmaptiles/fonts v2.0 | SIL Open Font License 1.1 |
+| Label fonts | Noto Sans (Regular, Italic, Bold) glyphs from openmaptiles/fonts v2.0 | SIL Open Font License 1.1 (text in `web/public/geo/fonts/OFL.txt`) |
 | Coastlines (existing) | Natural Earth via world-atlas | Public domain |
 
 geoBoundaries: Runfola, D. et al. (2020) geoBoundaries: A global database of political administrative boundaries. PLoS ONE 15(4): e0231866. Each country's boundaries carry the source and licence that geoBoundaries lists, and `index.json` records them.
 
 **Licence rule** (in `prepare_geo.py`):
 - Public domain, CC0, PDDL, CC BY (any version) and government open licences that only ask for attribution: included.
-- Open Database License 1.0 (for example India and Russia ADM2): included in separate files (`adm2/odbl/`), which are offered under ODbL 1.0 with attribution to their sources.
+- Open Database License 1.0 (for example India and Russia ADM2): included in separate files (`adm2/odbl/`, with `LICENSE.txt`), which are offered under ODbL 1.0 with attribution to their sources.
 - Share-alike Creative Commons, "direct permission" and unclear national licences: left out. In 12 Nov 2026's data that is ADM2 for AUT, AZE, CHE, CYP, ESP, HRV, JPN, KGZ, OMN, SAU, TGO, TKM, TWN, URY and XKX. Those countries show ADM1 at district zoom.
 
 **Other ADM2 left out:** countries whose ADM2 units average under 300 km² (communes, villages) show ADM1 at district zoom (40 countries, listed in `index.json` with the reason). About 15 small countries have no ADM2 in geoBoundaries gbOpen at all.
