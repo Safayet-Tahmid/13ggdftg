@@ -5,7 +5,8 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { decodeTile, decodeWorld, tilesForView } from '../src/geo/decode.js';
-import { GEO_LABEL_IDS, MAX_ZOOM, ZOOM, geoLabelLayers, geoLineLayers, glyphsUrl } from '../src/geo/layers.js';
+import { GEO_LABEL_IDS, MAX_ZOOM, NAMES_BELOW_M, ZOOM, geoLabelLayers, geoLineLayers, glyphsUrl, labelsAllowed } from '../src/geo/layers.js';
+import { coastLines, landForMap } from '../src/geo/coast.js';
 
 const read = (p) => readFileSync(new URL(p, import.meta.url));
 const theme = { geo: { intl: '#111', adm1: '#222', adm2: '#333', label: '#444', water: '#555', halo: '#fff' } };
@@ -93,4 +94,55 @@ test('the shipped geography files match their index, every tile is listed, every
   const world = decodeWorld(JSON.parse(readFileSync(new URL('../public/geo/world.json', import.meta.url))));
   const names = new Set(world.filter((f) => f.properties.k !== 'border').map((f) => f.properties.n));
   for (const n of ['Asia', 'Africa', 'Europe', 'Indian Ocean', 'Bangladesh', 'India', 'China', 'Australia']) assert.ok(names.has(n), n);
+});
+
+test('no place names while the scale bar reads 3000 km or more', () => {
+  assert.equal(NAMES_BELOW_M, 3000e3);
+  // a fake map whose 100 px span a given ground distance, measured like the scale bar
+  const fake = (meters) => ({ getContainer: () => ({ clientHeight: 600, clientWidth: 800 }),
+    unproject: ([x]) => ({ x, distanceTo: (b) => (b.x - x) / 100 * meters }) });
+  assert.equal(labelsAllowed(fake(2999e3)), true);
+  assert.equal(labelsAllowed(fake(3000e3)), false);
+  assert.equal(labelsAllowed(fake(8000e3)), false);
+  assert.equal(labelsAllowed(fake(NaN)), false);            // globe smaller than the bar: no names
+  const mv = read('../src/components/MapView.jsx').toString();
+  assert.match(mv, /m\.on\('move', applyNames\)/);
+});
+
+test('coastlines are lines without the 180 degree cut or the South Pole edge (no polar rings on the globe)', () => {
+  const land = { type: 'FeatureCollection', features: [
+    { type: 'Feature', geometry: { type: 'Polygon', coordinates: [[[170, 60], [180, 60], [180, 70], [170, 70], [170, 60]]] } },
+    { type: 'Feature', geometry: { type: 'Polygon', coordinates: [[[179.87, 69.01], [-180, 68.98], [-175, 66], [179.8, 65.03], [179.87, 69.01]]] } },
+    { type: 'Feature', geometry: { type: 'Polygon', coordinates: [[[-180, -85], [0, -80], [180, -85], [180, -90], [-180, -90], [-180, -85]]] } }] };
+  const c = coastLines(land).features.map((f) => f.geometry.coordinates);
+  for (const line of c) for (let i = 1; i < line.length; i++) {
+    const [a, b] = [line[i - 1], line[i]];
+    assert.ok(!(Math.abs(a[0]) === 180 && Math.abs(b[0]) === 180 && a[0] === b[0]), 'no segment along 180 degrees');
+    assert.ok(!(a[1] === -90 && b[1] === -90), 'no segment along the South Pole');
+    assert.ok(Math.abs(a[0] - b[0]) <= 180, 'no edge jumping round the globe (the polar rings)');
+  }
+  assert.ok(c.length >= 2);
+  const mv = read('../src/components/MapView.jsx').toString();
+  assert.match(mv, /id: 'borders', type: 'line', source: 'coast'/);
+  assert.match(mv, /'fill-antialias': false/);
+});
+
+test('the real land data has no coastline edge that jumps round the globe', async () => {
+  const { feature } = await import('topojson-client');
+  const world = JSON.parse(readFileSync(new URL('../node_modules/world-atlas/countries-50m.json', import.meta.url)));
+  const raw = feature(world, world.objects.countries);
+  const fixed = landForMap(raw);
+  // the land fill copy has no ring jumping round the globe, and the engine's own copy is unchanged
+  let fillJumps = 0;
+  for (const f of fixed.features) for (const p of (f.geometry?.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry?.coordinates || []))
+    for (const r of p) for (let i = 1; i < r.length; i++) if (Math.abs(r[i][0] - r[i - 1][0]) > 180) fillJumps++;
+  assert.equal(fillJumps, 0);
+  assert.notEqual(fixed.features, raw.features);
+  const ru = raw.features.find((f) => f.properties.name === 'Russia');
+  assert.ok(ru.geometry.coordinates.some((p) => p.some((r) => r.some((c, i) => i && Math.abs(c[0] - r[i - 1][0]) > 180))), 'engine copy untouched');
+  const c = coastLines(fixed).features;
+  let jumps = 0;
+  for (const f of c) { const l = f.geometry.coordinates; for (let i = 1; i < l.length; i++) if (Math.abs(l[i][0] - l[i - 1][0]) > 180) jumps++; }
+  assert.equal(jumps, 0);
+  assert.ok(c.length > 1000);
 });
