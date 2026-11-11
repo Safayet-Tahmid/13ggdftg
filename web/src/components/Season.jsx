@@ -37,12 +37,12 @@ export default function Season({ meta, sea, theme }) {
           })}
           <line x1={x(sea.peak)} x2={x(sea.peak)} y1={t} y2={h - b} stroke={theme.ink} strokeWidth="1" strokeDasharray="2 2" />
           <line x1={x(sea.today)} x2={x(sea.today)} y1={t - 4} y2={h - b} stroke={theme.highlight} strokeWidth="2" />
-          <text x={Math.min(x(sea.today) + 4, width - 40)} y={t + 8} className="axis strong">today</text>
+          <text x={Math.min(x(sea.today) + 4, width - 64)} y={t + 8} className="axis strong">{T.season.marker}</text>
         </svg>
         <figcaption className="legend">
           <span><span className="swatch" style={{ background: theme.band }} /> usual season (10% to 90% of a year's fire)</span>
           <span><span className="legend-line dashed" /> peak</span>
-          <span><span className="legend-line accent" style={{ borderColor: theme.highlight }} /> {today}</span>
+          <span><span className="legend-line accent" style={{ borderColor: theme.highlight }} /> {T.season.marker}: {today}</span>
         </figcaption>
       </figure>
       <ul className="season-list">

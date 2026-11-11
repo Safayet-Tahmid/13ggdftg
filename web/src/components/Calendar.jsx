@@ -106,7 +106,7 @@ export default function Calendar({ meta, series, variable, theme }) {
 
   return (
     <figure className="chart" ref={wrap}>
-      <div className="calendar" onMouseMove={onMove} onMouseLeave={() => setTip(null)}>
+      <div className="calendar" onMouseMove={onMove} onClick={onMove} onMouseLeave={() => setTip(null)}>
         <canvas ref={ref} data-export="canvas" style={{ width, height }} aria-label={T.calendar.label} role="img" />
         {tip && <div className="hover" style={{ left: Math.min(tip.x + 12, width - 230), top: tip.y + 12 }}>{tipText}</div>}
       </div>

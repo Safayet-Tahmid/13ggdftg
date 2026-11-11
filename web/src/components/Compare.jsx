@@ -28,9 +28,12 @@ export default function Compare({ meta, cmp, variable, theme, mode, setMode, mon
   }
   const tgt = cmp.target;
   const ys = cmp.years.filter((r) => r.year >= +(meta.comparable_start || '2003').slice(0, 4) || r.target);
-  const h = 170, l = 44, r = 8, t = 10, b = 22;
+  const h = width < 500 ? 210 : 170, l = 44, r = 8, t = 14, b = 22;
   const hi = (row) => (row.rangePct != null ? row.value * (1 + row.rangePct / 100) : row.value);
-  const max = Math.max(1, ...ys.map(hi), cmp.median || 0);
+  // The axis is scaled to the bars and the normal, not to the whisker tops: one wide MODIS-era range used to squash
+  // every bar flat. A whisker that goes past the top is drawn to the edge with a ▲ and keeps its full range in the tip.
+  const max = Math.max(1, ...ys.map((row) => row.value), cmp.median || 0) * 1.12;
+  const clipped = ys.some((row) => row.rangePct != null && row.usable && hi(row) > max);
   const bw = (width - l - r) / Math.max(ys.length, 1);
   const y = (v) => t + (1 - v / max) * (h - t - b);
   const from = longDate(dateOf(meta, tgt?.from ?? 0)), to = longDate(dateOf(meta, tgt?.to ?? 0));
@@ -58,18 +61,20 @@ export default function Compare({ meta, cmp, variable, theme, mode, setMode, mon
             const x = l + i * bw;
             const fill = row.target ? theme.highlight : row.usable ? theme.cls.normal : theme.nodataBg;
             return (
-              <g key={row.year} onMouseEnter={() => setHover(i)}>
+              <g key={row.year} onMouseEnter={() => setHover(i)} onClick={() => setHover(i)}>
                 <rect x={x} y={t} width={bw} height={h - t - b} fill="transparent" />
                 <rect x={x + 1} y={y(row.value)} width={Math.max(1, bw - 2)} height={Math.max(0, y(0) - y(row.value))} rx={1.5} fill={fill}
                   stroke={row.usable || row.target ? 'none' : theme.nodataLine} strokeDasharray="2 2" />
-                {row.rangePct != null && row.usable && <line x1={x + bw / 2} x2={x + bw / 2} y1={y(hi(row))} y2={y(row.value / (1 + row.rangePct / 100))}
+                {row.rangePct != null && row.usable && <line x1={x + bw / 2} x2={x + bw / 2} y1={Math.max(t, y(hi(row)))} y2={y(row.value / (1 + row.rangePct / 100))}
                   stroke={theme.muted} strokeWidth="1" />}
-                {(row.year % 5 === 0 || row.target) && <text x={x + bw / 2} y={h - 6} className="axis" textAnchor="middle">{row.target ? row.year : `'${String(row.year).slice(2)}`}</text>}
+                {row.rangePct != null && row.usable && hi(row) > max && <path d={`M${x + bw / 2 - 3.5},${t + 1} L${x + bw / 2 + 3.5},${t + 1} L${x + bw / 2},${t - 5} Z`} fill={theme.muted} />}
+                {((row.year % 5 === 0 && (!tgt || Math.abs(row.year - tgt.year) > 2)) || row.target) && <text x={x + bw / 2} y={h - 6} className="axis" textAnchor="middle">{row.target ? row.year : `'${String(row.year).slice(2)}`}</text>}
               </g>
             );
           })}
           {cmp.median != null && <g><line x1={l} x2={width - r} y1={y(cmp.median)} y2={y(cmp.median)} stroke={theme.ink} strokeWidth="1.2" strokeDasharray="4 3" />
-            <text x={l + 4} y={y(cmp.median) - 4} className="axis">normal</text></g>}
+            <text x={l + 4} y={y(cmp.median) - 4} className="axis" paintOrder="stroke" stroke={theme.surface} strokeWidth="3">normal</text></g>}
+          {clipped && <text x={width - r} y={t - 4} className="axis" textAnchor="end">{T.compare.clippedSvg}</text>}
         </svg>
         {hv && (
           <div className="hover" style={{ left: Math.min(l + hover * bw + 10, width - 220), top: 6 }}>
@@ -86,6 +91,7 @@ export default function Compare({ meta, cmp, variable, theme, mode, setMode, mon
       </figure>
       {cmp.left > 0 && <p className="small">{T.compare.left(cmp.left)}</p>}
       {cmp.targetGaps > 0 && <p className="small">{T.compare.targetGaps(cmp.targetGaps)}</p>}
+      {clipped && <p className="small">{T.compare.clipped}</p>}
       {ys.some((r2) => r2.rangePct != null) && <p className="small">{T.compare.modisNote}</p>}
     </div>
   );

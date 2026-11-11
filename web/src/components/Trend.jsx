@@ -37,7 +37,7 @@ export default function Trend({ monthly, range, variable, theme }) {
   const hv = hover != null ? rows[hover] : null;
   return (
     <figure className="chart" ref={wrap}>
-      <svg data-export="svg" width={width} height={h} viewBox={`0 0 ${width} ${h}`} onMouseMove={onMove} onMouseLeave={() => setHover(null)} role="img"
+      <svg data-export="svg" width={width} height={h} viewBox={`0 0 ${width} ${h}`} onMouseMove={onMove} onClick={onMove} onMouseLeave={() => setHover(null)} role="img"
         aria-label={T.trend.label(T.measures[variable].toLowerCase())}>
         {ticks.map((v) => <g key={v}><line x1={l} x2={width - r} y1={y(v)} y2={y(v)} className="grid" />
           <text x={l - 6} y={y(v) + 4} className="axis" textAnchor="end">{compact(v)}</text></g>)}

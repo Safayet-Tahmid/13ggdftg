@@ -65,7 +65,7 @@ with sync_playwright() as p:
 
     # whole globe, gaps on, a MODIS-era month
     pg.get_by_role("button", name="3D globe").click()
-    pg.get_by_role("button", name="Reset view").click()
+    pg.get_by_role("button", name="Whole world").click()
     pg.select_option(".mapbar select >> nth=0", "2005-08")
     pg.get_by_label("Show satellite gaps").check()
     pg.wait_for_timeout(3000)
@@ -86,7 +86,7 @@ with sync_playwright() as p:
     pg.get_by_role("button", name="❚❚ Pause").click()
     res["play"] = seen
     # gaps: March 2002 had days without satellite data
-    pg.get_by_role("button", name="Reset view").click()
+    pg.get_by_role("button", name="Whole world").click()
     pg.select_option(".mapbar select >> nth=0", "2002-03")
     pg.wait_for_timeout(3000)
     pg.screenshot(path=f"{out}/5b_gaps_2002-03.png")

@@ -25,7 +25,7 @@ export default function MonthGrid({ monthly, variable, theme, falseAlarm }) {
             const x = left + r.month * (cell + gap), y = top + years.indexOf(r.year) * (cell + gap);
             const fill = r.cls ? theme.cls[r.cls] : r.incomplete || r.notComparable ? 'url(#hatch)' : theme.zero;
             return (
-              <g key={`${r.year}-${r.month}`} onMouseEnter={() => setTip({ r, x, y })} onMouseLeave={() => setTip(null)}>
+              <g key={`${r.year}-${r.month}`} onMouseEnter={() => setTip({ r, x, y })} onMouseLeave={() => setTip(null)} onClick={() => setTip({ r, x, y })}>
                 <rect x={x} y={y} width={cell} height={cell} rx={3} fill={fill} />
                 {r.modisEra && r.cls && r.cls !== 'normal' && r.cls !== 'low' &&
                   <circle cx={x + cell - 4} cy={y + 4} r={2} fill={theme.surface} />}

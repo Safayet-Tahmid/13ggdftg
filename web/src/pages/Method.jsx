@@ -27,7 +27,7 @@ export default function Method({ meta }) {
         <li><b>When the fire season comes:</b> the average year for the area, smoothed over a month. The season runs from the day 10% of a normal year's fire has burned to the day 90% has, counted from the quietest point of the year.</li>
         <li><b>Weather at the time</b> (preset areas, D39): NASA POWER daily rain, humidity, daily maximum temperature, wind and
           root-zone soil wetness over the same dates as "Now against the past", against the same dates in the baseline years
-          (median, difference and rank), plus rain in the 60 days before. UTC days, the mean of nine points spread across the area.
+          (median, difference and rank), plus rain in the 60 days before. UTC days, the mean of up to nine land points spread across the area (points over water are left out).
           The rules were written down before the data were fetched (context/power_rules.json). Weather is context only: it is
           never used in the harmonised record, the month classes or any score, and it does not show why fires burned.</li>
         <li><b>Each month against its normal:</b> the z score of log(1 + value) against the same month of the baseline years. Below -1 is low, up to 1 normal, up to 2 unusual, 2 and above critical.</li>

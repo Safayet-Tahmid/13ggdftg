@@ -1,7 +1,7 @@
 // The Explore page: map on one side, the story of the chosen area on the other.
 // Layout and order of the sections can be changed freely; the numbers come from lib/.
 import { useEffect, useMemo, useRef, useState } from 'react';
-import T from '../content/text.js';
+import T, { MONTHS_LONG } from '../content/text.js';
 import PLACES from '../content/places.js';
 import MapView from '../components/MapView.jsx';
 import MapBoundary from '../components/MapBoundary.jsx';
@@ -25,7 +25,7 @@ import { detectionInfo, minuteToIso, recentFreshness, recentOverview, recentPoin
 import { RECENT_POINTS_FROM } from '../components/MapView.jsx';
 import { areaRange, compareWindow, monthly, normalMonth, season, summary } from '../lib/analysis.js';
 import { slug } from '../lib/downloads.js';
-import { longDate } from '../lib/format.js';
+import { fmt, longDate } from '../lib/format.js';
 import { writeHash } from '../lib/url.js';
 
 export default function Explore({ meta, theme, params }) {
@@ -61,6 +61,14 @@ export default function Explore({ meta, theme, params }) {
   const [gaps, setGaps] = useState(null);
   const [picked, setPicked] = useState(null);
   const [resetKey, setResetKey] = useState(0);
+  const [focusKey, setFocusKey] = useState(0);
+  const [toolsOpen, setToolsOpen] = useState(false);   // map settings on phones: closed by default
+  useEffect(() => {                   // Escape closes the phone map settings and returns focus to their button
+    if (!toolsOpen) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape') { setToolsOpen(false); document.querySelector('.maptools-toggle')?.focus(); } };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [toolsOpen]);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(1000);
   const [mapNote, setMapNote] = useState(null);
@@ -221,6 +229,19 @@ export default function Explore({ meta, theme, params }) {
 
   return (
     <main className="explore">
+      {/* phones only (hidden by CSS above 900px): the result first. Same numbers as "Now against the past", not recomputed */}
+      <section className="mobile-summary" aria-label={T.summary.label}>
+        <h2>{area.name}</h2>
+        {cmp?.target && !loading ? (
+          <div className="facts compact">
+            <p><b>{fmt(cmp.target.value, variable)}</b><span>{T.compare.modes[cmpMode]}</span></p>
+            <p><b>{T.compare.vsMedian(cmp.ratio)}</b><span>{T.summary.sameDates}</span></p>
+            <p><b>{cmp.rank ? `#${cmp.rank}` : '–'}</b><span>{cmp.rank ? T.summary.rankOf(cmp.of) : ''}</span></p>
+          </div>
+        ) : <p className="small muted">{loading ? T.loading : ''}</p>}
+        {cmp?.target && <p className="small">{T.summary.periods(longDate(dateOf(meta, cmp.target.from)), longDate(dateOf(meta, cmp.target.to)),
+          layerMode === 'recent' ? T.summary.mapRecent : T.summary.mapMonth(MONTHS_LONG[+month.slice(5, 7) - 1], month.slice(0, 4)))}</p>}
+      </section>
       <section className="mapside">
         <div className="mapstage">
         <MapBoundary onFail={() => setMapOk(false)}>
@@ -229,7 +250,7 @@ export default function Explore({ meta, theme, params }) {
             onDateLine={() => setError(T.map.dateLine)}
             variable={variable} view={view} basemap={img ? basemap : 'standard'} imageryDay={imageryDay}
             gaps={gaps} showGaps={showGaps} picked={picked} onPick={(c) => { setPlaying(false); setPicked(c); }}
-            resetKey={resetKey} reducedMotion={reducedMotion}
+            resetKey={resetKey} focusKey={focusKey} reducedMotion={reducedMotion}
             onImageryError={() => setMapNote(T.map.imageryOffline)}
             onStatus={(st) => { if (st === 'failed') setMapOk(false); else setMapNote(st === 'lost' ? T.map.contextLost : null); }}
             layerMode={layerMode} recentCells={layerMode === 'recent' ? rCells : null} recentPts={layerMode === 'recent' ? rPts : null}
@@ -238,7 +259,27 @@ export default function Explore({ meta, theme, params }) {
         </MapBoundary>
 
         {mapOk && <>
-        <div className="maptools" role="toolbar" aria-label={T.map.view}>
+        <button type="button" className="maptools-toggle" aria-expanded={toolsOpen} aria-controls="maptools"
+          onClick={() => setToolsOpen((o) => !o)}>
+          <span aria-hidden="true">⚙</span><span>{T.map.settingsButton(T.recent.layers[layerMode], T.map.views[view])}</span>
+        </button>
+
+        {(mapNote || (layerMode === 'recent' && (rUpdating || rNote || rStatus === null))) && <p className="mapnote" role="status">
+          {mapNote || (rUpdating ? T.recent.updating : rNote) || T.recent.unavailable}</p>}
+        {layerMode === 'record' && <CellPanel info={pickInfo} onClose={() => setPicked(null)} />}
+        {layerMode === 'recent' && <RecentPanel info={rInfo} onClose={() => setRPicked(null)}
+          onHistory={() => { pickArea(pointArea(rPicked.lat, rPicked.lon, 50)); setRPicked(null); }} />}
+        <details className="legendbox" open={legendOpen} onToggle={(e) => setLegendOpen(e.currentTarget.open)}>
+          <summary>{T.map.legendToggle}</summary>
+          {layerMode === 'recent'
+            ? <RecentLegend theme={theme} zoomedIn={!!(rView && rView.zoom >= RECENT_POINTS_FROM)} status={rStatus} />
+            : <MapLegend theme={theme} variable={variable} month={month} showGaps={showGaps} imageryLabel={img?.label} />}
+        </details>
+        </>}
+        </div>
+        {mapOk && <>
+        <div id="maptools" className={toolsOpen ? 'maptools open' : 'maptools'} role="toolbar" aria-label={T.map.view}
+>
           <label>{T.recent.layer}
             <select value={layerMode} onChange={(e) => { setPlaying(false); setPicked(null); setRPicked(null); setLayerMode(e.target.value); }}>
               {Object.entries(T.recent.layers).map(([k, l]) => <option key={k} value={k} disabled={k === 'recent' && rStatus === null}>{l}</option>)}
@@ -258,22 +299,11 @@ export default function Explore({ meta, theme, params }) {
               {Array.from({ length: days_in_month(month) }, (_, i) => i + 1).map((d) => <option key={d} value={d}>{month}-{String(d).padStart(2, '0')}</option>)}
             </select>
           </label>}
-          <button type="button" className="action" onClick={() => setResetKey((k) => k + 1)}>{T.map.reset}</button>
+          <button type="button" className="action ghost" onClick={() => setFocusKey((k) => k + 1)}>{T.map.focus}</button>
+          <button type="button" className="action ghost" onClick={() => setResetKey((k) => k + 1)}>{T.map.reset}</button>
+          <button type="button" className="action done" onClick={() => { setToolsOpen(false); document.querySelector('.maptools-toggle')?.focus(); }}>{T.map.done}</button>
         </div>
-
-        {(mapNote || (layerMode === 'recent' && (rUpdating || rNote || rStatus === null))) && <p className="mapnote" role="status">
-          {mapNote || (rUpdating ? T.recent.updating : rNote) || T.recent.unavailable}</p>}
-        {layerMode === 'record' && <CellPanel info={pickInfo} onClose={() => setPicked(null)} />}
-        {layerMode === 'recent' && <RecentPanel info={rInfo} onClose={() => setRPicked(null)}
-          onHistory={() => { pickArea(pointArea(rPicked.lat, rPicked.lon, 50)); setRPicked(null); }} />}
-        <details className="legendbox" open={legendOpen} onToggle={(e) => setLegendOpen(e.currentTarget.open)}>
-          <summary>{T.map.legendToggle}</summary>
-          {layerMode === 'recent'
-            ? <RecentLegend theme={theme} zoomedIn={!!(rView && rView.zoom >= RECENT_POINTS_FROM)} status={rStatus} />
-            : <MapLegend theme={theme} variable={variable} month={month} showGaps={showGaps} imageryLabel={img?.label} />}
-        </details>
         </>}
-        </div>
         <p className="visually-hidden" aria-live="polite">{mapSummary}</p>
 
         {layerMode === 'recent' ? <div className="mapbar">
