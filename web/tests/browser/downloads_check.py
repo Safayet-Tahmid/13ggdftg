@@ -70,8 +70,13 @@ with sync_playwright() as p:
         title = c.locator("h3").inner_text().strip()
         kind = c.evaluate("(el) => (el.querySelector('[data-export]') || {}).tagName || null")
         c.scroll_into_view_if_needed(); pg.wait_for_timeout(300)
-        for btn in ("PNG", "SVG"):
+        buttons = c.locator(".card-tools button").all_inner_texts()
+        res["other"].setdefault("buttons_per_chart", {})[title] = buttons
+        for btn in buttons:
             r = grab(pg, lambda: c.locator(".card-tools button", has_text=btn).click(), f"{title} / {btn} ({kind})")
+            # the file must be the kind the button says
+            if r.get("file") and not r["file"].endswith("." + btn.lower()):
+                r["ok"] = False; r["detail"] += f" (button says {btn}, file is {r['file'].rsplit('.', 1)[-1]})"
     # the CSV buttons
     d = pg.locator(".downloads")
     d.scroll_into_view_if_needed()

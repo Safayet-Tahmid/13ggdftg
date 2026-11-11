@@ -266,6 +266,7 @@ const T = {
     firms: 'Original detections on NASA FIRMS (online)',
     print: 'Print or save a one-page brief',
     png: 'PNG', svg: 'SVG',
+    pngOnly: 'PNG image (this chart is drawn as a picture, so there is no SVG version)',
     note: 'Dates apply to the CSV files and to "Your dates" above. Raw satellite points are not stored here. The FIRMS link opens them. '
       + 'The range_95_pct column is the conversion-error range only, not a guaranteed 95% bound (see Method).',
   },
