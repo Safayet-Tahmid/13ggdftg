@@ -2,7 +2,9 @@
 
 Team Squadron Zero · prepared by Claude, 11 November 2026 · branch `fix/recent-firms-reliability` from `main` 43286b0 (the merge of PR #3). Implementation commit 9950c24.
 
-**Verdict: CONDITIONAL PASS.** The reliability changes work in every local test, in a simulation of the workflow steps on the real 1.5 million-detection snapshot, and in the browser. Three things can only be confirmed on GitHub: the CI run of this branch, the first real `pull` from GitHub Pages, and whether GitHub delivers the 3-hourly schedule (section 9). None of them can change historical data.
+**Verdict (updated 11 Nov 2026, after merge): CONDITIONAL PASS, one condition left, outside the repository.** Two of the three open points are now confirmed (section 14): CI passed on GitHub, and the first real `pull` from GitHub Pages copied and checked the live snapshot (242 files). The last one is GitHub's delivery of the 3-hourly schedule (section 9), which no code in the repository can guarantee. The site now says "not current" when refreshes are missed.
+
+Original verdict (before merge): CONDITIONAL PASS. The reliability changes worked in every local test, in a simulation of the workflow steps on the real 1.5 million-detection snapshot, and in the browser. Three things could only be confirmed on GitHub: the CI run of this branch, the first real `pull` from GitHub Pages, and whether GitHub delivers the 3-hourly schedule. None of them could change historical data.
 
 ## 1. Baseline and scope
 
@@ -189,3 +191,38 @@ On GitHub Actions: not yet run for this branch (it is not pushed). After "push y
 
 - Fast: Actions > Website > "..." > Disable workflow. The live site keeps its last deploy.
 - Full: revert the merge commit on `main` (`git revert -m 1 <merge>`), which redeploys the previous behaviour. Old website code reads the new `status.json` (format 2 only adds a field) and ignores `publication.json`, so a mixed state is harmless.
+
+## 14. After merge (11 November 2026)
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| CI on PR #4 (commit 80cf0a3) | tests (3 Python versions) and Website build check green. New step "Scientific baseline" printed "UNCHANGED: all 41 files match the baseline (829ce01)". CI counts: pipeline 63 passed, 1 skipped, validation 5, recent 48, baseline check 3 | GitHub Actions, PR #4 |
+| Merge | PR #4 merged at 80cf0a3, merge commit 3cb148b, 16:44 Dhaka | GitHub |
+| Website run #12 | build and deploy green | Actions run 43006095322 |
+| First real pull from GitHub Pages | "previous snapshot copied (242 files)", checked | build log, step "previous snapshot from the live site" |
+| New fetch | 1,555,577 detections, 240 tiles, complete. Served: "attempt A (complete); serving new, fetched 2026-11-11T10:44:57Z" | build log and run summary |
+| Key in the log | none (only `***`) | build log |
+| Live checks by Squadron Zero (17:13 Dhaka) | R1 to R3 and L1 to L6 all yes | tutor file Step 6 |
+
+### Downloads, clicked in the browser (not touched by Task 2)
+
+`web/tests/browser/downloads_check.py` clicks every download on Explore (Southeast Australia preset) and checks each file: PNG signature and size, SVG parsed as XML, CSV header and rows. Run on a local build of `main` 3cb148b with the released data. Claude's workspace cannot open github.io, but the code and data are the same as the live site.
+
+| Download | Before the fix (main 3cb148b) | After the fix (branch `fix/chart-image-downloads`) |
+| --- | --- | --- |
+| Daily totals (CSV) | OK, 301 rows | OK |
+| Monthly table with classes (CSV) | OK, 298 rows | OK |
+| Hotspots per 1° cell and day (CSV) | OK, 7,314 rows | OK |
+| Calendar "Every day since 2002": PNG, and SVG (falls back to PNG, the chart is a canvas) | OK, 648 × 255 px | OK |
+| "Now against the past": PNG / SVG | **PNG: nothing downloads. SVG: file does not open (invalid XML)** | OK, 1296 × 448 px / valid |
+| "When the fire season comes": PNG / SVG | **same failure** | OK, 1296 × 348 px / valid |
+| "Each month against its normal": PNG / SVG | **same failure** | OK, 608 × 1140 px / valid |
+| "Monthly totals": PNG / SVG | **same failure** | OK, 1296 × 508 px / valid |
+| Print or save a one-page brief | opens the print dialog | same |
+| FIRMS link, share link | correct | same |
+
+Before the fix: 13 downloads, 5 good, 8 broken. After: 13 of 13 good.
+
+Cause (found 11 Nov, introduced 7 Nov by commit 33d8739, when the site font became "Archivo Variable"): the browser reports the font list with double quotes. The image export writes it into an SVG attribute that is itself in double quotes (`font-family="…"`), which ends the attribute early and makes the SVG invalid. The SVG download is then a broken file. The PNG download draws that same SVG into an image, which fails without a message, so nothing downloads. The calendar is drawn on a canvas, not as an SVG, so it was not affected.
+
+Fix (one line, not in a fingerprinted file): `web/src/theme/useTheme.js` turns the double quotes into single quotes, which name the same fonts. `web/src/lib/downloads.js` (fingerprinted) is not changed, so the scientific baseline stays UNCHANGED. A later clean-up, after judging: escape the font in `downloads.js` and add an error message when an image cannot be made.
