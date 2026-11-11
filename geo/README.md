@@ -4,11 +4,14 @@ Added 12 Nov 2026 (Squadron Zero authorised the feature and its merge). The map 
 
 | Zoom | Shows |
 | --- | --- |
-| up to 3 | continent names (fade out between 2.4 and 3), ocean names (to 5.5), international land borders, coastlines |
-| from 1.6 / 2.6 / 3.6 | country names, by Natural Earth label rank |
+| any | no place names at all while the scale bar reads 3000 km or more (the globe small on screen) |
+| up to 3.4 | continent names (they lead, then fade out between 2.8 and 3.4), ocean names (to 5.5), international land borders, coastlines |
+| from 2.2 / 3 / 3.8 | country names, by Natural Earth label rank |
 | from 4.5 | first-level units (ADM1: states, provinces, divisions): dashed lines, names in small capitals from 5 (large units) and 6 (all) |
 | from 6.5 | second-level units (ADM2: districts, counties, departments): thin lines, names from 7 (units of 1,500 km² or more) and 7.8 (all) |
 | 9 | the maximum zoom |
+
+Coastlines are lines made from the land shapes in the browser (`web/src/geo/coast.js`), and the land fill draws no edge of its own. Drawing the outline of the land polygons had also drawn their tile cuts near the North Pole on the 3D globe as faint rings (fixed 12 Nov 2026).
 
 On narrow screens (under 600 px) the same lines are drawn, and the names start about 0.4 zoom later and are a little smaller.
 

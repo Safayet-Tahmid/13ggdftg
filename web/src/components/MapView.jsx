@@ -9,22 +9,28 @@ import T from '../content/text.js';
 import { land } from '../lib/area.js';
 import { cellSquare, dragBox, imagery, squaresOf, stepExpression, zoneBox } from '../lib/geo.js';
 import { RECENT_COUNT_STEPS, RECENT_FRP_STEPS, recentStep } from '../lib/recent.js';
-import { GeoLoader, MAX_ZOOM, geoLabelLayers, geoLineLayers, glyphsUrl } from '../geo/layers.js';
+import { GEO_LABEL_IDS, GeoLoader, MAX_ZOOM, geoLabelLayers, geoLineLayers, glyphsUrl, labelsAllowed } from '../geo/layers.js';
+import { coastLines, landForMap } from '../geo/coast.js';
+
+const LAND = landForMap(land);      // display copy, rings across 180 degrees joined (see geo/coast.js)
+const COAST = coastLines(LAND);
 
 // A basemap that ships with the site, so the map works with the wifi off. The geography layers
-// (borders, provinces, districts, place names: src/geo/) ship with it too. 'borders' outlines every
-// country, so on its own it shows the coastlines; international land borders are drawn on top.
+// (borders, provinces, districts, place names: src/geo/) ship with it too. 'borders' draws the
+// coastlines as lines made from the land shapes (src/geo/coast.js); land borders are drawn on top.
+// The land fill draws no edge of its own ('fill-antialias' off): on the 3D globe that edge also
+// showed the tile cuts near the pole as faint rings (fixed 12 Nov 2026).
 function style(theme) {
   const empty = { type: 'FeatureCollection', features: [] };
   return {
     version: 8,
     glyphs: glyphsUrl(),
-    sources: { land: { type: 'geojson', data: land }, 'geo-world': { type: 'geojson', data: empty },
+    sources: { land: { type: 'geojson', data: LAND }, coast: { type: 'geojson', data: COAST }, 'geo-world': { type: 'geojson', data: empty },
       'geo-adm1': { type: 'geojson', data: empty }, 'geo-adm2': { type: 'geojson', data: empty } },
     layers: [
       { id: 'sea', type: 'background', paint: { 'background-color': theme.sea } },
-      { id: 'land', type: 'fill', source: 'land', paint: { 'fill-color': theme.land } },
-      { id: 'borders', type: 'line', source: 'land', paint: { 'line-color': theme.border, 'line-width': 0.5 } },
+      { id: 'land', type: 'fill', source: 'land', paint: { 'fill-color': theme.land, 'fill-antialias': false } },
+      { id: 'borders', type: 'line', source: 'coast', paint: { 'line-color': theme.border, 'line-width': 0.5 } },
       ...geoLineLayers(theme),
     ],
   };
@@ -89,6 +95,16 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
     m.touchZoomRotate.disableRotation();
     const geo = new GeoLoader(m);            // provinces and districts, loaded for the view when zoomed in
     m.on('moveend', () => geo.update());
+    // no place names while the scale bar reads 3000 km or more (the whole globe small on screen)
+    let namesShown = null;
+    const applyNames = () => {
+      const show = labelsAllowed(m);
+      if (show === namesShown || !m.getLayer(GEO_LABEL_IDS[0])) return;
+      namesShown = show;
+      for (const id of GEO_LABEL_IDS) m.setLayoutProperty(id, 'visibility', show ? 'visible' : 'none');
+    };
+    m.on('move', applyNames);
+    m.on('resize', applyNames);
     m.addControl(new maplibregl.NavigationControl({ showCompass: true, visualizePitch: true }), 'top-right');
     m.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-right');
     m.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: T.map.attribution }));
@@ -137,6 +153,7 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
       for (const l of geoLabelLayers(theme, (el.current?.clientWidth || 1000) < 600)) m.addLayer(l);
       geo.showWorld();
       geo.update();
+      applyNames();
       ready.current = true;
       m.fire('shift-ready');
     });

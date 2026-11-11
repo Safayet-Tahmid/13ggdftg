@@ -53,6 +53,11 @@ with sync_playwright() as p:
                    fire_layers_visible: ['fires','firecells'].map((l) => m.getLayoutProperty(l, 'visibility') !== 'none'),
                    recent_points_layer_minzoom: m.getLayer('recent-pts').minzoom }; }""")
         pg.screenshot(path=f"{out}/max_{label}.png")
+        # no names while the scale bar reads 3000 km or more: a small globe shows no names at all
+        pg.evaluate("() => { const m = window.__shiftMap; m.setProjection({ type: 'globe' }); m.jumpTo({ center: [60, 20], zoom: 0 }); }")
+        pg.wait_for_timeout(2500)
+        r["small_globe"] = pg.evaluate("""() => ({ scale: document.querySelector('.maplibregl-ctrl-scale')?.textContent,
+             names: window.__shiftMap.queryRenderedFeatures({ layers: ['geo-continents','geo-oceans','geo-countries-1','geo-countries-2','geo-countries-3'] }).length })""")
         # 3D globe: labels on the far side are not drawn
         pg.evaluate("() => { const m = window.__shiftMap; m.setProjection({ type: 'globe' }); m.jumpTo({ center: [90, 20], zoom: 1.7 }); }")
         pg.wait_for_timeout(3000)

@@ -11,13 +11,24 @@ import { decodeTile, decodeWorld, tilesForView } from './decode.js';
 // information: the record is summed on 0.25 and 1 degree cells.
 export const MAX_ZOOM = 9;
 export const ZOOM = {
-  continentsUntil: 3,        // continent names fade out between 2.4 and 3
+  continentsUntil: 3.4,      // continent names lead below a 3000 km scale and fade out between 2.8 and 3.4
   oceansUntil: 5.5,
-  countries: [1.6, 2.6, 3.6], // labelrank 1-2, 3-4, the rest
+  countries: [2.2, 3, 3.8],   // labelrank 1-2, 3-4, the rest
   adm1Lines: 4.5, adm1Labels: [5, 6],     // big units first, all at 6
   adm2Lines: 6.5, adm2Labels: [7, 7.8],   // big units (1,500 km2 and more) first, all at 7.8
 };
 export const ADM1_TILE = 30, ADM2_TILE = 10;
+// No place names at all while the scale bar shows 3000 km or more (Squadron Zero, 12 Nov 2026): at that
+// scale the globe is small and a continent name read like the planet's name. Measured exactly as MapLibre's
+// scale bar measures (ui/control/scale_control.ts): the ground distance across 100 px at the map's centre.
+// The bar shows that distance rounded down, so it reads 3000 km or more exactly when this is 3,000,000 m or more.
+export const NAMES_BELOW_M = 3000e3;
+export function scaleMeters(map, px = 100) {
+  const c = map.getContainer();
+  const x = c.clientWidth / 2, y = c.clientHeight / 2;
+  return map.unproject([x - px / 2, y]).distanceTo(map.unproject([x + px / 2, y]));
+}
+export const labelsAllowed = (map) => { const d = scaleMeters(map); return Number.isFinite(d) && d < NAMES_BELOW_M; };
 const FONTS = { regular: ['Noto Sans Regular'], italic: ['Noto Sans Italic'], bold: ['Noto Sans Bold'] };
 const LINE = ['==', ['geometry-type'], 'LineString'];
 const POINT = ['==', ['geometry-type'], 'Point'];
@@ -66,6 +77,9 @@ export function geoLabelLayers(theme, compact) {
       ...(upper ? { 'text-transform': 'uppercase', 'text-letter-spacing': 0.08 } : {}) },
     paint: { 'text-color': g.label, 'text-opacity': 0.9, ...halo } });
   return [
+    country('geo-countries-1', ['<=', ['get', 'r'], 2], ZOOM.countries[0]),
+    country('geo-countries-2', ['all', ['>', ['get', 'r'], 2], ['<=', ['get', 'r'], 4]], ZOOM.countries[1]),
+    country('geo-countries-3', ['>', ['get', 'r'], 4], ZOOM.countries[2]),
     { id: 'geo-oceans', type: 'symbol', source: 'geo-world', maxzoom: ZOOM.oceansUntil, filter: ['==', ['get', 'k'], 'ocean'],
       layout: { 'text-field': ['get', 'n'], 'text-font': FONTS.italic, 'text-size': 13 * k, 'text-letter-spacing': 0.1,
         'text-max-width': 6 },
@@ -73,17 +87,16 @@ export function geoLabelLayers(theme, compact) {
     { id: 'geo-continents', type: 'symbol', source: 'geo-world', maxzoom: ZOOM.continentsUntil, filter: ['==', ['get', 'k'], 'continent'],
       layout: { 'text-field': ['get', 'n'], 'text-font': FONTS.bold, 'text-size': 14 * k, 'text-transform': 'uppercase',
         'text-letter-spacing': 0.18, 'text-max-width': 9 },
-      paint: { 'text-color': g.label, 'text-opacity': ['interpolate', ['linear'], ['zoom'], 2.4, 0.85, 3, 0], ...halo } },
-    country('geo-countries-1', ['<=', ['get', 'r'], 2], ZOOM.countries[0]),
-    country('geo-countries-2', ['all', ['>', ['get', 'r'], 2], ['<=', ['get', 'r'], 4]], ZOOM.countries[1]),
-    country('geo-countries-3', ['>', ['get', 'r'], 4], ZOOM.countries[2]),
+      paint: { 'text-color': g.label, 'text-opacity': ['interpolate', ['linear'], ['zoom'], 2.8, 0.85, 3.4, 0], ...halo } },
     area('geo-adm1-labels-big', 'geo-adm1', 30000, ZOOM.adm1Labels[0], 10.5, true),
     area('geo-adm1-labels', 'geo-adm1', 0, ZOOM.adm1Labels[1], 10.5, true),
     area('geo-adm2-labels-big', 'geo-adm2', 1500, ZOOM.adm2Labels[0], 10.5),
     area('geo-adm2-labels', 'geo-adm2', 0, ZOOM.adm2Labels[1], 10.5),
   ];
 }
-export const GEO_LABEL_IDS = ['geo-oceans', 'geo-continents', 'geo-countries-1', 'geo-countries-2', 'geo-countries-3',
+// Order matters: a later layer is drawn on top and placed first, so continent and ocean names win
+// against country names while they are shown.
+export const GEO_LABEL_IDS = ['geo-countries-1', 'geo-countries-2', 'geo-countries-3', 'geo-oceans', 'geo-continents',
   'geo-adm1-labels-big', 'geo-adm1-labels', 'geo-adm2-labels-big', 'geo-adm2-labels'];
 
 // Loads the province and district tiles that the view needs, when it needs them, and keeps the

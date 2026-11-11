@@ -176,6 +176,7 @@ def load(p: Path):
 
 
 def main(raw: Path, out: Path) -> int:
+    keep = {n: (out / n).read_bytes() for n in ("adm2/odbl/LICENSE.txt", "fonts/OFL.txt") if (out / n).exists()}
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
@@ -303,6 +304,9 @@ def main(raw: Path, out: Path) -> int:
     # what the website needs to find and cache-bust tiles (index.json is provenance, not loaded by the site)
     index["files"]["tiles.json"] = write(out / "tiles.json", {"tiles": index["tiles"],
                                                              "v": {k: v["sha256"][:10] for k, v in index["files"].items() if k.endswith(".json")}})
+    for n, data in keep.items():                      # licence texts that travel with the files
+        (out / n).parent.mkdir(parents=True, exist_ok=True)
+        (out / n).write_bytes(data)
     total = sum(v["bytes"] for v in index["files"].values())
     index["total_bytes"] = total
     (out / "index.json").write_text(json.dumps(index, indent=1, ensure_ascii=False) + "\n")
