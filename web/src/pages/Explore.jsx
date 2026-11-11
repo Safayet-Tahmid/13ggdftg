@@ -15,6 +15,7 @@ import Calendar, { calendarLegend } from '../components/Calendar.jsx';
 import MonthGrid from '../components/MonthGrid.jsx';
 import Trend from '../components/Trend.jsx';
 import Compare from '../components/Compare.jsx';
+import WeatherContext from '../weather/WeatherContext.jsx';
 import Season from '../components/Season.jsx';
 import Downloads from '../components/Downloads.jsx';
 import { MAX_TILES, areaSeries, dateOf, iso, json, lastDataDay, monthLayer, tilesOfCells, dayIndex, zoneMonth } from '../lib/data.js';
@@ -343,6 +344,7 @@ export default function Explore({ meta, theme, params }) {
 
             <ChartCard title={T.headings.now} file={file('compare')} theme={theme} imageTitle={`${area.name}: ${mLabel.toLowerCase()}, same dates every year`}>
               <Compare meta={meta} cmp={cmp} variable={variable} theme={theme} mode={cmpMode} setMode={setCmpMode} monthShare={monthShare} />
+              <WeatherContext meta={meta} cmp={cmp} area={area} />
             </ChartCard>
 
             <ChartCard title={T.headings.season} file={file('season')} theme={theme} imageTitle={`${area.name}: the usual fire season`}>
@@ -354,7 +356,8 @@ export default function Explore({ meta, theme, params }) {
               <Calendar meta={meta} series={series} variable={variable} theme={theme} />
             </ChartCard>
 
-            <ChartCard title={T.headings.months} file={file('months')} theme={theme} imageTitle={`${area.name}: each month against its normal (${mLabel.toLowerCase()})`}>
+            <ChartCard title={T.headings.months} file={file('months')} theme={theme} imageTitle={`${area.name}: each month against its normal (${mLabel.toLowerCase()})`}
+              note={T.monthGrid.classMeaning}>
               <MonthGrid monthly={mon} variable={variable} theme={theme} falseAlarm={falseAlarm} />
             </ChartCard>
 

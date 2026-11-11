@@ -116,6 +116,16 @@ nav { display: flex; gap: 4px; flex-wrap: wrap; width: 100%; }
 .downloads { display: flex; flex-direction: column; gap: 10px; }
 .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
 
+/* weather at the time (D39): sits under the fire comparison, plain and calm, never louder than the fire */
+.weather { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--rule); }
+.weather h4 { margin: 0 0 6px; font-size: 14px; font-weight: 680; }
+.weather-lead { margin: 0 0 8px; font-size: 14px; max-width: 70ch; }
+.weather-table { font-size: 13px; min-width: 0; width: 100%; }
+.weather-table td:first-child { color: var(--muted); padding-right: 10px; }
+.weather-table td:not(:first-child), .weather-table th:not(:first-child) { white-space: nowrap; padding-right: 0; padding-left: 10px; }
+.weather-note { border-left: 3px solid var(--muted); padding-left: 8px; }
+.weather-off { margin-top: 12px; }
+
 /* ---------- controls */
 label { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: var(--font-size-small); }
 label.check { cursor: pointer; }
@@ -223,6 +233,8 @@ code { font-size: 13px; background: var(--mist); padding: 1px 4px; border-radius
   .story { max-height: none; overflow: visible; }
   .app:has(.explore) { height: auto; }
   .brand h1 { font-size: 28px; }
+  .weather-table { font-size: 12px; }
+  .weather-table td:not(:first-child), .weather-table th:not(:first-child) { padding-left: 6px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 

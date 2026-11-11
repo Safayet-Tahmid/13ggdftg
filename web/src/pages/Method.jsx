@@ -25,6 +25,11 @@ export default function Method({ meta }) {
       <ul>
         <li><b>Now against the past:</b> the chosen dates against the same dates in every year from 2003, with the median of the complete years, the rank and the ratio. Years with a satellite gap in those dates are left out.</li>
         <li><b>When the fire season comes:</b> the average year for the area, smoothed over a month. The season runs from the day 10% of a normal year's fire has burned to the day 90% has, counted from the quietest point of the year.</li>
+        <li><b>Weather at the time</b> (preset areas, D39): NASA POWER daily rain, humidity, daily maximum temperature, wind and
+          root-zone soil wetness over the same dates as "Now against the past", against the same dates in the baseline years
+          (median, difference and rank), plus rain in the 60 days before. UTC days, the mean of nine points spread across the area.
+          The rules were written down before the data were fetched (context/power_rules.json). Weather is context only: it is
+          never used in the harmonised record, the month classes or any score, and it does not show why fires burned.</li>
         <li><b>Each month against its normal:</b> the z score of log(1 + value) against the same month of the baseline years. Below -1 is low, up to 1 normal, up to 2 unusual, 2 and above critical.</li>
       </ul>
       <h3>What to keep in mind</h3>
@@ -52,6 +57,9 @@ export default function Method({ meta }) {
         <li>Three test regions keep a 2012 step near 10% after harmonising, depending on how it is measured: Iberia +9 to +12%
           (flagged, with extra uncertainty), Florida -7 to -9% and Siberia about -9%. Year-to-year wobble in the VIIRS to MODIS
           ratio is about 3 to 10% in single regions, so gaps of this size are at the edge of what can be told apart from noise.</li>
+        <li>Unusual and Critical months are statistically extreme for that place and month. They are not fire danger ratings or emergency warnings.</li>
+        <li>The weather comes from a reanalysis (a weather model guided by observations) on a grid of about 50 to 70 km, not from
+          stations at the fires. The newest weeks are near-real-time values that NASA may revise, and are marked provisional.</li>
         <li>NOAA-21 (VIIRS since 2023) is not used: it was not tested against the others in time (D35).</li>
         <li>From February 2023 Aqua flies past its 13:45 science limit, so it no longer fills Suomi NPP gaps (D29).</li>
       </ul>
@@ -66,6 +74,8 @@ export default function Method({ meta }) {
         <li>MERRA-2 monthly total cloud fraction, M2TMNXRAD (cloud flag only), NASA GMAO via GES DISC.</li>
         <li>Giglio, Schroeder and Justice (2016), The collection 6 MODIS active fire detection algorithm and fire products. Remote Sensing of Environment 178.</li>
         <li>Schroeder, Oliva, Giglio and Csiszar (2014), The new VIIRS 375 m active fire detection data product. Remote Sensing of Environment 143.</li>
+        <li>Weather context only: NASA POWER Daily API (v2.10.3, community AG, UTC), parameters PRECTOTCORR, RH2M, T2M_MAX, WS2M and
+          GWETROOT, from GMAO MERRA-2 and GEOS-IT. Fetched for the preset areas on the date shown in the weather notes. <a href="https://power.larc.nasa.gov">power.larc.nasa.gov</a></li>
         <li>Country borders: Natural Earth, via world-atlas.</li>
         <li>Optional map backdrop (online only): NASA Blue Marble shaded relief and daily MODIS Terra or VIIRS S-NPP true colour
           pictures from NASA GIBS. A picture only, never used in any number.</li>
@@ -73,6 +83,8 @@ export default function Method({ meta }) {
       <p>We acknowledge the use of data and imagery from NASA's Fire Information for Resource Management System (FIRMS),
         part of NASA's Earth Science Data and Information System (ESDIS). We acknowledge the use of imagery provided by
         services from NASA's Global Imagery Browse Services (GIBS), part of NASA's Earth Science Data and Information System (ESDIS).</p>
+      <p>The weather data was obtained from the National Aeronautics and Space Administration (NASA) Langley Research Center's
+        Prediction Of Worldwide Energy Resources (POWER) project funded through the NASA Earth Science Division.</p>
       {meta && <p className="small">This release covers {meta.start} to {meta.end}, generated {meta.generated_utc.slice(0, 10)}.
         Code, every test and every decision: <a href="https://github.com/squadronzero/squadron-zero">github.com/squadronzero/squadron-zero</a>.
         To run offline, serve the site folder with any static server (for example <code>python -m http.server</code>) and open it in a browser.</p>}

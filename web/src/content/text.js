@@ -209,6 +209,46 @@ const T = {
     chartLabel: 'The same dates in every year',
   },
 
+  // ---------------------------------------------------------------- weather context (D39, NASA POWER)
+  // Context, never a cause: keep "notCause" visible wherever the weather is shown.
+  weather: {
+    title: 'Weather at the time',
+    presetsOnly: 'Weather at the time (NASA POWER) is shown for the preset areas.',
+    unavailable: 'The weather for this area could not be loaded.',
+    noData: (end) => `No complete weather data for these dates (weather data runs to ${end}).`,
+    minYearsForSentence: 10,
+    lead: (n, items) => `Of the ${n} years with weather data for these dates, this one had ${
+      items.length === 1 ? items[0] : `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`}.`,
+    firsts: {
+      PRECTOTCORR: 'the least rain', RAIN_BEFORE: 'the least rain in the 60 days before', RH2M: 'the lowest humidity',
+      T2M_MAX: 'the highest daily maximum temperatures', WS2M: 'the strongest wind', GWETROOT: 'the driest soil',
+    },
+    cols: ['', 'These dates', 'Normal', 'Against normal', 'Rank'],
+    rows: {
+      PRECTOTCORR: 'Rain (total)', RAIN_BEFORE: 'Rain in the 60 days before', RH2M: 'Humidity (mean)',
+      T2M_MAX: 'Daily maximum temperature (mean)', WS2M: 'Wind at 2 m (mean)', GWETROOT: 'Root-zone soil wetness (mean, 0 to 1)',
+    },
+    value: (key, v) => {
+      if (key === 'PRECTOTCORR' || key === 'RAIN_BEFORE') return `${v >= 10 ? Math.round(v) : v.toFixed(1)} mm`;
+      if (key === 'RH2M') return `${v.toFixed(0)}%`;
+      if (key === 'T2M_MAX') return `${v.toFixed(1)} °C`;
+      if (key === 'WS2M') return `${v.toFixed(1)} m/s`;
+      return v.toFixed(2);
+    },
+    vsNormal: (key, r) => {
+      if (key === 'RH2M') return Math.abs(r.diff) < 0.5 ? 'About the same' : `${Math.abs(r.diff).toFixed(1)} points ${r.diff < 0 ? 'lower' : 'higher'}`;
+      if (key === 'T2M_MAX') return Math.abs(r.diff) < 0.1 ? 'About the same' : `${Math.abs(r.diff).toFixed(1)} °C ${r.diff < 0 ? 'cooler' : 'warmer'}`;
+      return r.ratio == null ? '–' : `${Math.round(r.ratio * 100)}% of normal`;
+    },
+    noNormal: 'Too few years',
+    rank: (key, r, n) => `${r} of ${n}`,
+    rankNote: 'Rank 1 = the least rain, the lowest humidity, the driest soil, the hottest or the windiest of the years compared.',
+    notCause: 'Context, not cause: this shows the weather while the fire above was recorded. It does not show why fires burned and it is not a fire forecast.',
+    provisional: 'Provisional: these dates include recent near-real-time weather, which NASA may still revise.',
+    source: (n, b0, b1, end) => `NASA POWER daily data (MERRA-2 and GEOS-IT reanalysis on a 0.5° by 0.625° grid), UTC days, the mean of nine points across the area. `
+      + `Normal: median of ${n} years, ${b0} to ${b1}, this year left out. Weather data runs to ${end}.`,
+  },
+
   // ---------------------------------------------------------------- season
   season: {
     none: 'Too little fire here to define a season.',
@@ -247,6 +287,7 @@ const T = {
     falseAlarm: (pct) => `MODIS years: about ${pct}% of such flags are not unusual in VIIRS (measured)`,
     cloudTip: 'Cloudier than 90% of years here: some fire may have been hidden by cloud.',
     cloudUntil: (ym) => `Cloud data reaches ${ym}; later months carry no cloud flag.`,
+    classMeaning: 'Unusual and Critical mean statistically extreme for this place and month, judged against its own normal. They are not fire danger ratings or emergency warnings.',
   },
   trend: {
     label: (m) => `Monthly ${m}, with the 95% range of the MODIS years (conversion error only, not a guaranteed bound)`,

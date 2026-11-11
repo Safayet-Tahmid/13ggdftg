@@ -1,0 +1,202 @@
+{
+  "decision": "D39 Weather context (Squadron Zero, 11 Nov 2026)",
+  "fixed_before_run": "This file is committed before the first data fetch. A change after that needs a new commit and a new run, and both are recorded in the output manifest.",
+  "role": "Context only. Weather is shown beside the fire comparison. It is never used in the harmonised record, the anomaly classes or any score, and it is never presented as the cause of fire.",
+  "source": {
+    "name": "NASA POWER (Prediction Of Worldwide Energy Resources), Daily API",
+    "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
+    "community": "AG",
+    "time_standard": "UTC",
+    "note": "Meteorology from GMAO MERRA-2, extended towards near real time by GEOS-IT (the POWER answer header lists MERRA2, GEOSIT and POWER), on a 0.5 x 0.625 degree grid. No key is needed."
+  },
+  "parameters": {
+    "PRECTOTCORR": {
+      "label": "rain",
+      "unit": "mm/day",
+      "window": "sum",
+      "rank_1": "lowest",
+      "decimals": 2
+    },
+    "RH2M": {
+      "label": "relative humidity at 2 m",
+      "unit": "%",
+      "window": "mean",
+      "rank_1": "lowest",
+      "decimals": 1
+    },
+    "T2M_MAX": {
+      "label": "daily maximum temperature at 2 m",
+      "unit": "C",
+      "window": "mean",
+      "rank_1": "highest",
+      "decimals": 1
+    },
+    "WS2M": {
+      "label": "wind speed at 2 m",
+      "unit": "m/s",
+      "window": "mean",
+      "rank_1": "highest",
+      "decimals": 2
+    },
+    "GWETROOT": {
+      "label": "root-zone soil wetness",
+      "unit": "0 to 1",
+      "window": "mean",
+      "rank_1": "lowest",
+      "decimals": 3
+    }
+  },
+  "period": {
+    "start": "2003-01-01",
+    "end": "the latest UTC day for which every point has a value, and no later than 3 days before the fetch"
+  },
+  "area": {
+    "grid": "3 x 3 points per preset box: the centres of the nine equal parts of the box",
+    "value": "the mean of the nine points for each day and parameter",
+    "missing": "if any of the nine points has no value for a day and parameter, that day is missing for that parameter. Missing stays missing and is never filled",
+    "water_points": "A point over water (POWER gives no root-zone soil wetness there on any day) is left out of the area mean for every parameter, so the area values describe the land part of the box. The points left out are listed in each output file. Added 11 Nov 2026 after the first run stopped on Iberia (one point in the Mediterranean), before any weather value was looked at."
+  },
+  "comparison": {
+    "dates": "the same dates as 'Now against the past': the chosen window, and the same calendar dates in every other year",
+    "window_value": "rain: total over the window in mm (sum of the daily mm/day values). Other parameters: mean of the daily values",
+    "complete": "a year is used only if every day of its window has a value",
+    "rain_before": "rain total over the 60 days that end the day before the window starts, compared the same way",
+    "normal": "median over the same baseline years the fire comparison uses, the chosen year left out, only if at least 10 years are usable",
+    "rank": "rank of the chosen year among all usable years including itself. 1 = the driest (rain, humidity, soil wetness) or the hottest or windiest (maximum temperature, wind)",
+    "shown_as": "rain, rain before, wind and soil wetness as percent of the normal. Humidity as a difference in percentage points. Maximum temperature as a difference in degrees C",
+    "provisional": "a window that includes any day in the 120 days before the fetch is labelled provisional, because near-real-time values can be revised"
+  },
+  "presets_note": "Must match web/src/content/places.js (checked by context/test_fetch_power.py)",
+  "presets": [
+    {
+      "id": "bangladesh",
+      "name": "Bangladesh",
+      "box": [
+        88.0,
+        20.5,
+        92.7,
+        26.7
+      ]
+    },
+    {
+      "id": "africa_savanna",
+      "name": "Central African savanna",
+      "box": [
+        15.0,
+        4.0,
+        30.0,
+        12.0
+      ]
+    },
+    {
+      "id": "australia_savanna",
+      "name": "Northern Australia",
+      "box": [
+        129.0,
+        -17.0,
+        138.0,
+        -11.0
+      ]
+    },
+    {
+      "id": "amazon_arc",
+      "name": "Amazon deforestation arc",
+      "box": [
+        -64.0,
+        -13.0,
+        -52.0,
+        -7.0
+      ]
+    },
+    {
+      "id": "siberia_boreal",
+      "name": "Siberian boreal forest",
+      "box": [
+        100.0,
+        55.0,
+        130.0,
+        65.0
+      ]
+    },
+    {
+      "id": "iberia_med",
+      "name": "Iberian Peninsula",
+      "box": [
+        -9.5,
+        36.0,
+        3.5,
+        44.0
+      ]
+    },
+    {
+      "id": "punjab_crop",
+      "name": "Punjab crop burning",
+      "box": [
+        73.0,
+        27.0,
+        80.0,
+        32.0
+      ]
+    },
+    {
+      "id": "kalimantan_peat",
+      "name": "Kalimantan peatlands",
+      "box": [
+        109.0,
+        -4.0,
+        118.0,
+        2.0
+      ]
+    },
+    {
+      "id": "java_volcanic",
+      "name": "Java",
+      "box": [
+        105.0,
+        -9.0,
+        115.0,
+        -6.0
+      ]
+    },
+    {
+      "id": "florida",
+      "name": "Florida",
+      "box": [
+        -87.6,
+        24.5,
+        -80.0,
+        31.0
+      ]
+    },
+    {
+      "id": "se_australia",
+      "name": "Southeast Australia (Black Summer 2019-20)",
+      "box": [
+        145.0,
+        -38.5,
+        154.0,
+        -28.0
+      ]
+    },
+    {
+      "id": "california",
+      "name": "California",
+      "box": [
+        -124.5,
+        32.5,
+        -114.0,
+        42.0
+      ]
+    },
+    {
+      "id": "chittagong_hills",
+      "name": "Chittagong Hill Tracts",
+      "box": [
+        91.5,
+        21.5,
+        92.7,
+        23.7
+      ]
+    }
+  ]
+}
