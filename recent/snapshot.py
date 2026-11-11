@@ -33,10 +33,13 @@ import argparse
 import gzip
 import hashlib
 import json
+import os
+import re
 import shutil
 import sys
 import urllib.error
 import urllib.request
+import uuid
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -49,6 +52,13 @@ TIME_FMT = "%Y-%m-%dT%H:%M:%SZ"
 KNOWN = dict(F.PRODUCTS)                  # product -> satellite code
 DATA_KEYS = ("la", "lo", "d", "t", "s", "c", "f", "dn", "nf")
 OV_KEYS = ("n24", "n7", "n", "fmax", "nf", "last")
+STATUS_FORMATS = (1, 2, 3)
+TILE_NAME = re.compile(r"^[NS][0-9]{2}[EW][0-9]{3}$")
+MAX_TILES = 18 * 36                       # every 10-degree tile on Earth
+# size limits for what pull() downloads (audit D3). The real snapshot of 11 Nov is about 11 MB:
+# status.json 40 KB, overview 1.5 MB, largest tile about 0.6 MB.
+MAX_BYTES = {"status.json": 2_000_000, "publication.json": 200_000, "overview.json.gz": 20_000_000, "tile": 20_000_000}
+MAX_TOTAL_BYTES = 200_000_000
 
 
 def utc(s: str) -> datetime:
@@ -103,7 +113,7 @@ def _validate(d: Path, probs: list, info: dict) -> None:
     s = json.loads(sp.read_text(encoding="utf-8"))
     if not isinstance(s, dict):
         probs.append("status.json is not an object"); return
-    if s.get("format") not in (1, 2):
+    if s.get("format") not in STATUS_FORMATS:
         probs.append(f"status format {s.get('format')!r} not supported"); return
     for k in ("fetched_utc", "window", "source", "products", "satellites", "complete", "rows", "tiles",
               "overview_cells", "latest_detection_utc"):
@@ -154,13 +164,25 @@ def _validate(d: Path, probs: list, info: dict) -> None:
         if not (datetime(first.year, first.month, first.day, tzinfo=timezone.utc) <= latest
                 < datetime(last.year, last.month, last.day, tzinfo=timezone.utc) + timedelta(days=1)):
             probs.append("latest detection is outside the window")
+    gen = s.get("generation")
+    if s["format"] >= 3:
+        if not isinstance(gen, str) or not re.fullmatch(r"[0-9]{8}T[0-9]{6}Z-[0-9a-f]{12}", gen):
+            probs.append("generation id missing or not valid")
+        if s.get("area") != F.WORLD and not isinstance(s.get("area"), str):
+            probs.append("area missing")
+        for name, p in s["products"].items():
+            sus = p.get("suspect_days")
+            if not isinstance(sus, list) or not set(sus) <= set(p.get("days_without_data") or []):
+                probs.append(f"{name}: suspect days are not days without data")
+            elif p.get("complete") is not (all(r.get("ok") for r in p.get("requests", [])) and not sus):
+                probs.append(f"{name}: complete flag does not match its requests and suspect days")
     tiles = s["tiles"]
     if not isinstance(tiles, dict) or not all(is_int(v, 0) for v in tiles.values()):
         probs.append("tile index is not a list of counts"); return
     if sum(tiles.values()) != s["rows"]:
         probs.append("tile counts do not add up to rows")
     info.update(fetched_utc=s["fetched_utc"], complete=s["complete"], rows=s["rows"], status_format=s["format"],
-                status_sha256=sha256(sp), missing=missing_coverage(s))
+                status_sha256=sha256(sp), missing=missing_coverage(s), generation=gen)
 
     # files on disk against what status describes: nothing missing, nothing extra
     on_disk = {p.relative_to(d).as_posix() for p in d.rglob("*") if p.is_file()}
@@ -171,7 +193,7 @@ def _validate(d: Path, probs: list, info: dict) -> None:
         probs.append(f"files missing: {sorted(missing)[:5]}")
     if extra:
         probs.append(f"unexpected files: {sorted(extra)[:5]}")
-    if s["format"] == 2:
+    if s["format"] >= 2:
         files = s.get("files")
         if not isinstance(files, dict) or set(files) != expected:
             probs.append("status files list does not match the tile index")
@@ -188,6 +210,8 @@ def _validate(d: Path, probs: list, info: dict) -> None:
     n_ids = len(ov.get("id", []))
     if ov.get("format") != F.FORMAT or ov.get("from") != w["from"]:
         probs.append("overview format or start day differs from status")
+    if gen is not None and ov.get("generation") != gen:
+        probs.append("overview belongs to another fetch (generation differs)")
     if n_ids != s["overview_cells"] or any(len(ov.get(k, [])) != n_ids for k in OV_KEYS):
         probs.append("overview arrays have different lengths")
     else:
@@ -208,6 +232,8 @@ def _validate(d: Path, probs: list, info: dict) -> None:
         t = read_gz_json(d / "tiles" / f"{name}.json.gz")
         if t.get("format") != F.FORMAT or t.get("from") != w["from"] or t.get("satellites") != sats:
             probs.append(f"tile {name}: header differs from status"); continue
+        if gen is not None and t.get("generation") != gen:
+            probs.append(f"tile {name}: belongs to another fetch (generation differs)"); continue
         if any(len(t.get(k, [])) != count for k in DATA_KEYS):
             probs.append(f"tile {name}: {count} detections in the index, arrays differ"); continue
         a0, b0 = b
@@ -225,12 +251,25 @@ def _validate(d: Path, probs: list, info: dict) -> None:
 
 
 def missing_coverage(s: dict) -> list[dict]:
-    """The requests that failed, per product: what an incomplete snapshot lacks."""
+    """What an incomplete snapshot lacks, per product: failed requests, and completed days on which a
+    global product had no detection at all (suspect days, grouped into runs of consecutive days)."""
     out = []
     for name, p in s.get("products", {}).items():
         for r in p.get("requests", []):
             if not r.get("ok"):
-                out.append({"product": name, "satellite": p.get("satellite"), "from": r.get("from"), "days": r.get("days")})
+                out.append({"product": name, "satellite": p.get("satellite"), "from": r.get("from"), "days": r.get("days"),
+                            "reason": "request failed"})
+        run = None
+        for d in sorted(p.get("suspect_days") or []):
+            day = date.fromisoformat(d)
+            if run and day == run["_last"] + timedelta(days=1):
+                run["days"] += 1; run["_last"] = day
+            else:
+                run = {"product": name, "satellite": p.get("satellite"), "from": d, "days": 1,
+                       "reason": "no detections on a completed day", "_last": day}
+                out.append(run)
+    for m in out:
+        m.pop("_last", None)
     return out
 
 
@@ -294,6 +333,7 @@ def publish(candidate: Path, fetch_exit: int, previous: Path | None, out: Path, 
         "state": dec["state"],
         "decided_utc": now.strftime(TIME_FMT),
         "snapshot_fetched_utc": info["fetched_utc"],
+        "generation": info.get("generation"),
         "status_sha256": info["status_sha256"],
         "complete": info["complete"],
         "missing": info["missing"],
@@ -324,13 +364,19 @@ def publish(candidate: Path, fetch_exit: int, previous: Path | None, out: Path, 
 
 # ---------------------------------------------------------------------------------------- pull
 
-def _get(url: str, timeout: int = 60, tries: int = 3) -> tuple[int, bytes]:
-    req = urllib.request.Request(url, headers={"User-Agent": "SHIFT-recent-snapshot/1", "Accept-Encoding": "identity"})
+def _get(url: str, limit: int, timeout: int = 60, tries: int = 3) -> tuple[int, bytes]:
+    """GET with revalidation headers, a size limit and retries. Returns (http code, body)."""
+    req = urllib.request.Request(url, headers={"User-Agent": "SHIFT-recent-snapshot/2", "Accept-Encoding": "identity",
+                                               "Cache-Control": "no-cache", "Pragma": "no-cache"})
     code = 0
     for _ in range(tries):
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
-                return r.status, r.read()
+                length = r.headers.get("Content-Length")
+                if length and int(length) > limit:
+                    return -1, b""
+                body = r.read(limit + 1)
+                return (-1, b"") if len(body) > limit else (r.status, body)
         except urllib.error.HTTPError as e:
             if e.code == 404:
                 return 404, b""
@@ -340,42 +386,87 @@ def _get(url: str, timeout: int = 60, tries: int = 3) -> tuple[int, bytes]:
     return code, b""
 
 
-def pull(site: str, to: Path) -> tuple[bool, str]:
-    """Copy the snapshot the live site serves into TO, keep it only if it passes validate()."""
+def _safe_names(s) -> list[str] | None:
+    """The relative paths a snapshot may contain, or None if the status is not safe to follow.
+    Only "overview.json.gz" and "tiles/<N20E090>.json.gz" with a valid 10-degree tile name."""
+    if not isinstance(s, dict) or s.get("format") not in STATUS_FORMATS or not isinstance(s.get("tiles"), dict):
+        return None
+    names = list(s["tiles"])
+    if len(names) > MAX_TILES or not all(isinstance(n, str) and TILE_NAME.fullmatch(n) and tile_bounds(n) for n in names):
+        return None
+    rels = ["overview.json.gz", *(f"tiles/{n}.json.gz" for n in names)]
+    files = s.get("files")
+    if s["format"] >= 2 and (not isinstance(files, dict) or set(files) != set(rels)):
+        return None
+    return rels
+
+
+def pull(site: str, to: Path, request_id: str | None = None) -> tuple[bool, str]:
+    """Copy the snapshot the live site serves into TO, keep it only if it passes validate().
+
+    Audit D3: every name is checked before anything is written, every target must lie inside the
+    download folder, files are created new (never through an existing link), sizes are limited.
+    Audit D5: each request carries "Cache-Control: no-cache" and a query unique to this run, and
+    status.json is read again at the end. If it changed during the copy (a deploy in between, or a
+    cache answering with an older status), the copy is dropped. A cached but complete older snapshot
+    can still pass, so the copy is never treated as new: publish() only serves it as a fallback,
+    with its own fetch time."""
+    rid = request_id or os.environ.get("GITHUB_RUN_ID") or uuid.uuid4().hex
+    q = f"?shift_pull={rid}"
     base = site.rstrip("/") + "/data/recent/"
     tmp = to.parent / f".{to.name}.download"
-    if tmp.exists():
-        shutil.rmtree(tmp)
-    code, body = _get(base + "status.json")
+    for p in (tmp,):
+        if p.is_symlink() or p.is_file():
+            p.unlink()
+        elif p.exists():
+            shutil.rmtree(p)
+    code, status_body = _get(base + "status.json" + q, MAX_BYTES["status.json"])
     if code != 200:
         return False, f"no previous snapshot on the live site (status.json http {code})"
-    tmp.mkdir(parents=True)
-    (tmp / "status.json").write_bytes(body)
     try:
-        s = json.loads(body)
-        names = ["overview.json.gz", *(f"tiles/{n}.json.gz" for n in s.get("tiles", {}))]
-    except (ValueError, AttributeError):
-        shutil.rmtree(tmp)
+        s = json.loads(status_body)
+    except ValueError:
         return False, "previous status.json is not readable"
-    code, body = _get(base + "publication.json")
+    rels = _safe_names(s)
+    if rels is None:
+        return False, "previous status.json rejected before download: unsupported format or unsafe file names"
+    tmp.mkdir(parents=True)
+    root = tmp.resolve()
+    total = len(status_body)
+
+    def write(rel: str, body: bytes) -> bool:
+        target = (tmp / rel)
+        if not target.resolve().is_relative_to(root):
+            return False
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with open(target, "xb") as fh:              # exclusive create: never follows an existing file or link
+            fh.write(body)
+        return True
+
+    write("status.json", status_body)
+    code, body = _get(base + "publication.json" + q, MAX_BYTES["publication.json"])
     if code == 200:
-        (tmp / "publication.json").write_bytes(body)
-    for rel in names:
-        code, body = _get(base + rel)
-        if code != 200:
+        write("publication.json", body)
+    for rel in rels:
+        code, body = _get(base + rel + q, MAX_BYTES["overview.json.gz" if rel == "overview.json.gz" else "tile"])
+        total += len(body)
+        if code != 200 or total > MAX_TOTAL_BYTES or not write(rel, body):
             shutil.rmtree(tmp)
-            return False, f"previous snapshot incomplete on the live site ({rel} http {code})"
-        p = tmp / rel
-        p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_bytes(body)
+            return False, f"previous snapshot incomplete or too large on the live site ({rel} http {code})"
+    code, again = _get(base + "status.json" + q + "-end", MAX_BYTES["status.json"])
+    if code != 200 or again != status_body:
+        shutil.rmtree(tmp)
+        return False, "previous snapshot changed during the copy (a deploy in between or a stale cache), not used"
     ok, probs, _ = validate(tmp)
     if not ok:
         shutil.rmtree(tmp)
         return False, "previous snapshot rejected: " + "; ".join(probs[:3])
-    if to.exists():
+    if to.is_symlink() or to.is_file():
+        to.unlink()
+    elif to.exists():
         shutil.rmtree(to)
     tmp.rename(to)
-    return True, f"previous snapshot copied ({len(names) + 1} files)"
+    return True, f"previous snapshot copied ({len(rels) + 1} files)"
 
 
 # ---------------------------------------------------------------------------------------- cli

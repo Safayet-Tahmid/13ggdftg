@@ -22,10 +22,26 @@ export function recentLegendRows(steps, colours, unit) {
 const BASE = 'data/recent/';
 const cache = new Map();
 
-async function gzJson(path) {
-  if (cache.has(path)) return cache.get(path);
+// One snapshot at a time (audit D1). Every file of one fetch carries the same "generation" id.
+// Data files are requested with that id in the URL, so the browser and the CDN can never answer
+// with a file of an earlier snapshot, and each file is checked to carry the id before it is used.
+// A file of another fetch (a deploy still spreading) is refused: nothing is drawn rather than a mix.
+export class SnapshotMismatch extends Error {}
+export function snapshotId(status) {
+  return status?.generation || status?.files?.['overview.json.gz']?.sha256 || status?.fetched_utc || '';
+}
+function checkGeneration(status, data, what) {
+  if (status?.generation && data?.generation !== status.generation) {
+    throw new SnapshotMismatch(`${what} belongs to another update`);
+  }
+  return data;
+}
+
+async function gzJson(path, version) {
+  const url = BASE + path + (version ? `?v=${encodeURIComponent(version)}` : '');
+  if (cache.has(url)) return cache.get(url);
   const p = (async () => {
-    const res = await fetch(BASE + path);
+    const res = await fetch(url);
     if (!res.ok) throw new Error(`${path}: ${res.status}`);
     const buf = new Uint8Array(await res.arrayBuffer());
     let text;
@@ -37,14 +53,22 @@ async function gzJson(path) {
     }
     return JSON.parse(text);
   })();
-  cache.set(path, p);
-  try { return await p; } catch (e) { cache.delete(path); throw e; }
+  cache.set(url, p);
+  try { return await p; } catch (e) { cache.delete(url); throw e; }
 }
 
 // status.json, or null when there is no recent snapshot in this build. The build's publication
 // record (publication.json, written by recent/snapshot.py) is attached as status.publication:
 // it says whether this snapshot is the new fetch or an earlier one kept after a failed refresh.
-export async function recentStatus() {
+// Read once per page, so the header and the map always describe the same snapshot. If the
+// publication record belongs to another update, status.updating is set and nothing is drawn.
+let statusOnce = null;
+export function recentStatus() {
+  if (!statusOnce) statusOnce = loadStatus();
+  return statusOnce;
+}
+export function resetRecentForTests() { statusOnce = null; cache.clear(); }
+async function loadStatus() {
   try {
     const res = await fetch(BASE + 'status.json', { cache: 'no-cache' });
     if (!res.ok) return null;
@@ -55,7 +79,8 @@ export async function recentStatus() {
       const p = await fetch(BASE + 'publication.json', { cache: 'no-cache' });
       if (p.ok) publication = await p.json();
     } catch { publication = null; }
-    return { ...s, publication };
+    const updating = !!(publication?.generation && s.generation && publication.generation !== s.generation);
+    return { ...s, publication: updating ? null : publication, updating };
   } catch { return null; }
 }
 
@@ -71,12 +96,22 @@ export const STALE_AFTER_HOURS = 6;
 export const FEED_LAG_HOURS = 12;
 const iso = (t) => new Date(t).toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
 
+// What an incomplete snapshot lacks: failed requests, and completed days on which a global product
+// had no detection at all (suspect_days, audit D2), as runs of consecutive days.
 export function missingCoverage(status) {
   const out = [];
   for (const p of Object.values(status?.products || {})) {
     for (const r of p.requests || []) if (!r.ok) out.push({ satellite: p.satellite, from: r.from, days: r.days });
+    let run = null;
+    for (const d of [...(p.suspect_days || [])].sort()) {
+      const t = Date.parse(d + 'T00:00:00Z');
+      if (run && t === run.last + 86400000) { run.days += 1; run.last = t; } else {
+        run = { satellite: p.satellite, from: d, days: 1, last: t };
+        out.push(run);
+      }
+    }
   }
-  return out;
+  return out.map(({ satellite, from, days }) => ({ satellite, from, days }));
 }
 
 export function recentFreshness(status, nowMs = Date.now()) {
@@ -112,8 +147,8 @@ export function minuteToIso(from, minute) {
 
 // Overview: one point per 0.25-degree cell with at least one counted detection in the period.
 // Counted = nominal or high confidence, outside SHIFT's non-fire cells (as the fetch defines).
-export async function recentOverview(period) {
-  const o = await gzJson('overview.json.gz');
+export async function recentOverview(status, period) {
+  const o = checkGeneration(status, await gzJson('overview.json.gz', snapshotId(status)), 'overview');
   const key = period === '24h' ? 'n24' : period === '7d' ? 'n7' : 'n';
   const features = [];
   for (let i = 0; i < o.id.length; i++) {
@@ -143,13 +178,15 @@ export function tilesInView(bounds, index, max = 6) {
   return out.sort((x, y) => x.d - y.d).slice(0, max).map((x) => x.t);
 }
 
-// Every detection of some tiles in the period, as map points with the FIRMS fields.
-export async function recentPoints(tiles, period, latest) {
+// Every detection of some tiles in the period, as map points with the FIRMS fields. A tile that
+// cannot be loaded, or that belongs to another update, is left out and counted in "missing".
+export async function recentPoints(status, tiles, period, latest) {
   const span = PERIODS[period] ?? Infinity;
   const features = [];
+  let missing = 0;
   for (const name of tiles) {
     let t;
-    try { t = await gzJson(`tiles/${name}.json.gz`); } catch { continue; }
+    try { t = checkGeneration(status, await gzJson(`tiles/${name}.json.gz`, snapshotId(status)), `tile ${name}`); } catch { missing += 1; continue; }
     for (let i = 0; i < t.la.length; i++) {
       const minute = t.d[i] * 1440 + Math.floor(t.t[i] / 100) * 60 + (t.t[i] % 100);
       if (latest - minute >= span) continue;
@@ -159,7 +196,7 @@ export async function recentPoints(tiles, period, latest) {
           day: t.dn[i] ? 'day' : 'night', nf: t.nf[i], minute } });
     }
   }
-  return { type: 'FeatureCollection', features };
+  return { type: 'FeatureCollection', features, missing };
 }
 
 // What the detection panel shows: only fields FIRMS provides, plus SHIFT's non-fire flag.

@@ -36,7 +36,8 @@ def fetch(tmp: Path, name: str, lat0: float = 10, failing=(), first="2026-11-01"
             rows = "".join(row(d=start.isoformat(), sat=sat, lat=lat0 + i, t=f"{i:02d}00") for i in range(3))
             (csvdir / f"{product}_{start.isoformat()}_{n}.csv").write_text(HEAD + rows)
     out = tmp / name
-    code = F.main(["--out", str(out), "--from", first, "--to", last, "--from-csv", str(csvdir)])
+    # a small area: these fixtures have detections on some days only (global-scope rules: test_fetch_firms.py)
+    code = F.main(["--out", str(out), "--from", first, "--to", last, "--area", "80,-60,100,60", "--from-csv", str(csvdir)])
     if fetched and (out / "status.json").exists():               # pretend the fetch ran at another time
         st = json.loads((out / "status.json").read_text())
         st["fetched_utc"] = fetched
@@ -64,7 +65,7 @@ def test_a_fresh_fetch_passes_the_checks(tmp_path):
     assert code == 0
     ok, probs, info = S.validate(d)
     assert ok, probs
-    assert info["complete"] is True and info["rows"] == 12 and info["status_format"] == 2
+    assert info["complete"] is True and info["rows"] == 12 and info["status_format"] == 3
 
 
 @pytest.mark.parametrize("damage, expect", [
@@ -160,7 +161,8 @@ def test_B_partial_fetch_is_published_marked_incomplete_when_the_previous_is_old
     assert dec["state"] == "incomplete"
     p = pub(out)
     assert p["complete"] is False
-    assert p["missing"] == [{"product": "VIIRS_NOAA21_NRT", "satellite": "N21", "from": "2026-11-06", "days": 3}]
+    assert p["missing"] == [{"product": "VIIRS_NOAA21_NRT", "satellite": "N21", "from": "2026-11-06", "days": 3,
+                             "reason": "request failed"}]
     st = json.loads((out / "status.json").read_text())
     assert st["products"]["VIIRS_NOAA21_NRT"]["per_day"][5:] == [0, 0, 0]   # missing days, shown as missing (status), not as fire-free
 
@@ -313,3 +315,153 @@ def test_snapshot_code_never_touches_the_key_or_the_record():
     src = (Path(__file__).parent / "snapshot.py").read_text()
     assert "NASA_FIRMS_MAP_KEY" not in src
     assert "import shift" not in src and "from shift" not in src and "pipeline" not in src
+
+
+# ---------------------------------------------------------------- audit hotfix D2, D3, D5, generation
+
+def test_D2_empty_noaa21_feed_is_not_published_as_a_complete_new_snapshot(tmp_path):
+    csvdir = tmp_path / "csv"; csvdir.mkdir()
+    for product, sat in F.PRODUCTS.items():
+        for start, n in F.chunks(date(2026, 11, 1), date(2026, 11, 8)):
+            body = "" if sat == "N21" else "".join(row(d=date.fromordinal(start.toordinal() + k).isoformat(), sat=sat, lat=10 + k)
+                                                   for k in range(n))
+            (csvdir / f"{product}_{start.isoformat()}_{n}.csv").write_text(HEAD + body)     # N21: valid header, no rows
+    code = F.main(["--out", str(tmp_path / "cand"), "--from", "2026-11-01", "--to", "2026-11-08",
+                   "--now", "2026-11-09T12:00:00Z", "--from-csv", str(csvdir)])
+    out = tmp_path / "site"
+    dec = publish(tmp_path / "cand", code, None, out)
+    assert dec["attempt"]["result"] == "B" and dec["state"] == "incomplete"
+    miss = pub(out)["missing"]
+    assert miss == [{"product": "VIIRS_NOAA21_NRT", "satellite": "N21", "from": "2026-11-01", "days": 8,
+                     "reason": "no detections on a completed day"}]
+    # with a fresh complete previous snapshot, the earlier complete one is kept instead
+    prev, _ = fetch(tmp_path, "prev", lat0=30, fetched="2026-11-09T09:00:00Z")
+    assert publish(tmp_path / "cand", code, prev, tmp_path / "site2")["state"] == "fallback"
+
+
+def test_files_of_two_fetches_are_never_accepted_together(tmp_path):
+    a, _ = fetch(tmp_path, "a")
+    b, _ = fetch(tmp_path, "b")                       # same detections, another fetch: another generation id
+    shutil.copy(b / "overview.json.gz", a / "overview.json.gz")
+    st = json.loads((a / "status.json").read_text())  # even with the checksum list made to match
+    st["files"]["overview.json.gz"] = {"bytes": (a / "overview.json.gz").stat().st_size,
+                                       "sha256": hashlib.sha256((a / "overview.json.gz").read_bytes()).hexdigest()}
+    (a / "status.json").write_text(json.dumps(st))
+    ok, probs, _ = S.validate(a)
+    assert not ok and any("generation differs" in p for p in probs)
+
+
+class Routes(http.server.BaseHTTPRequestHandler):
+    """A tiny site: path -> list of bodies, served in turn (the last one repeats). Records every path."""
+    routes: dict = {}
+    seen: list = []
+
+    def do_GET(self):  # noqa: N802
+        Routes.seen.append(self.path)
+        path = self.path.split("?")[0]
+        bodies = Routes.routes.get(path)
+        if not bodies:
+            self.send_response(404); self.end_headers(); return
+        body = bodies.pop(0) if len(bodies) > 1 else bodies[0]
+        self.send_response(200); self.send_header("Content-Length", str(len(body))); self.end_headers(); self.wfile.write(body)
+
+    def log_message(self, *a):
+        pass
+
+
+@pytest.fixture
+def routes():
+    Routes.routes, Routes.seen = {}, []
+    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Routes)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    yield Routes, f"http://127.0.0.1:{httpd.server_address[1]}/"
+    httpd.shutdown()
+
+
+def serve_snapshot(R, d: Path, prefix="/data/recent/"):
+    for p in d.rglob("*"):
+        if p.is_file():
+            R.routes[prefix + p.relative_to(d).as_posix()] = [p.read_bytes()]
+
+
+@pytest.mark.parametrize("bad", ["../../../../escaped", "/etc/passwd", "..%2F..%2Fescaped", "N20E090/../../x", "N95E000",
+                                 "n20e090", "N20E090.json", "", "N20E0900"])
+def test_D3_unsafe_tile_names_are_refused_before_anything_is_written(tmp_path, routes, bad):
+    R, url = routes
+    st = {"format": 3, "tiles": {bad: 1}, "files": {"overview.json.gz": {}, f"tiles/{bad}.json.gz": {}}}
+    R.routes["/data/recent/status.json"] = [json.dumps(st).encode()]
+    R.routes["/data/recent/overview.json.gz"] = [b"x"]
+    R.routes["/escaped.json.gz"] = [b"planted"]
+    work = tmp_path / "work"; work.mkdir()
+    ok, msg = S.pull(url, work / "prev")
+    assert not ok and "unsafe" in msg
+    assert [p for p in tmp_path.rglob("*") if p.is_file()] == []                  # nothing written anywhere
+    assert all("/tiles/" not in s for s in R.seen)                                # no tile was even requested
+
+
+def test_D3_too_many_tiles_or_oversized_files_are_refused(tmp_path, routes, monkeypatch):
+    R, url = routes
+    a, _ = fetch(tmp_path, "a")
+    serve_snapshot(R, a)
+    monkeypatch.setitem(S.MAX_BYTES, "tile", 10)                                  # a tile larger than the limit
+    ok, msg = S.pull(url, tmp_path / "prev")
+    assert not ok and "too large" in msg and not (tmp_path / "prev").exists() and not (tmp_path / ".prev.download").exists()
+
+
+def test_D3_a_link_in_place_of_the_download_folder_is_not_followed(tmp_path, routes):
+    R, url = routes
+    a, _ = fetch(tmp_path, "a")
+    serve_snapshot(R, a)
+    target = tmp_path / "elsewhere"; target.mkdir()
+    (tmp_path / ".prev.download").symlink_to(target)                              # planted link
+    ok, msg = S.pull(url, tmp_path / "prev")
+    assert ok, msg
+    assert list(target.iterdir()) == []                                           # nothing written through the link
+    assert files(tmp_path / "prev") == files(a)
+
+
+def test_D3_an_ordinary_snapshot_still_downloads(tmp_path, routes):
+    R, url = routes
+    a, code = fetch(tmp_path, "a")
+    publish(a, code, None, tmp_path / "live")
+    serve_snapshot(R, tmp_path / "live")
+    ok, msg = S.pull(url, tmp_path / "prev", request_id="run123")
+    assert ok, msg
+    assert files(tmp_path / "prev") == files(tmp_path / "live")
+    assert all("shift_pull=run123" in s for s in R.seen)                          # D5: every request is unique to the run
+
+
+def test_D5_a_stale_cached_status_with_newer_files_is_rejected(tmp_path, routes):
+    R, url = routes
+    old, _ = fetch(tmp_path, "old", lat0=30)
+    new, _ = fetch(tmp_path, "new", lat0=10)
+    serve_snapshot(R, new)
+    R.routes["/data/recent/status.json"] = [(old / "status.json").read_bytes()]   # the cache still answers with the old status
+    for rel in json.loads((old / "status.json").read_text())["tiles"]:
+        R.routes.setdefault(f"/data/recent/tiles/{rel}.json.gz", [(new / "tiles" / f"{rel}.json.gz").read_bytes()
+                                                                  if (new / "tiles" / f"{rel}.json.gz").exists() else b"x"])
+    ok, msg = S.pull(url, tmp_path / "prev")
+    assert not ok and not (tmp_path / "prev").exists()
+
+
+def test_D5_a_deploy_during_the_copy_drops_the_copy(tmp_path, routes):
+    R, url = routes
+    a, _ = fetch(tmp_path, "a")
+    b, _ = fetch(tmp_path, "b")
+    serve_snapshot(R, a)
+    R.routes["/data/recent/status.json"] = [(a / "status.json").read_bytes(), (b / "status.json").read_bytes()]  # changes mid-copy
+    ok, msg = S.pull(url, tmp_path / "prev")
+    assert not ok and "changed during the copy" in msg and not (tmp_path / "prev").exists()
+
+
+def test_D5_an_older_but_whole_cached_snapshot_is_only_ever_a_labelled_fallback(tmp_path, routes):
+    R, url = routes
+    old, _ = fetch(tmp_path, "old", fetched="2026-11-09T00:00:00Z")
+    serve_snapshot(R, old)                                                        # what a stale cache could serve, whole
+    ok, _ = S.pull(url, tmp_path / "prev")
+    assert ok                                                                     # cannot be told apart from the live one
+    dec = publish(tmp_path / "nothing", 1, tmp_path / "prev", tmp_path / "site")
+    p = pub(tmp_path / "site")
+    assert dec["state"] == "fallback" and p["state"] == "fallback"                # never "new"
+    assert p["snapshot_fetched_utc"] == "2026-11-09T00:00:00Z"                    # its own, older time is what the site shows
+    assert p["generation"] == json.loads((old / "status.json").read_text())["generation"]

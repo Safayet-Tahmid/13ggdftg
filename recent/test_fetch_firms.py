@@ -4,7 +4,7 @@ import hashlib
 import json
 import math
 import sys
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -76,7 +76,7 @@ def test_full_run_writes_overview_tiles_and_honest_status(tmp_path):
     make_csvs(csvdir, first, last)
     nf = tmp_path / "notfire.json"                                                # one non-fire cell at 11.025, 90.225
     nf.write_text(json.dumps({"columns": ["lat", "lon"], "cells": [[11.025, 90.225, 2, 9]]}))
-    code = F.main(["--out", str(tmp_path / "out"), "--from", "2026-10-28", "--to", "2026-11-08",
+    code = F.main(["--out", str(tmp_path / "out"), "--from", "2026-10-28", "--to", "2026-11-08", "--area", "80,0,100,40",
                    "--from-csv", str(csvdir), "--notfire", str(nf)])
     assert code == 0
     st = json.loads((tmp_path / "out/status.json").read_text())
@@ -117,7 +117,7 @@ def test_a_failed_chunk_is_reported_not_hidden(tmp_path):
     first, last = date(2026, 10, 28), date(2026, 11, 8)
     csvdir = tmp_path / "csv"; csvdir.mkdir()
     make_csvs(csvdir, first, last, failing={("VIIRS_NOAA21_NRT", date(2026, 11, 2))})
-    code = F.main(["--out", str(tmp_path / "out"), "--from", "2026-10-28", "--to", "2026-11-08", "--from-csv", str(csvdir)])
+    code = F.main(["--out", str(tmp_path / "out"), "--from", "2026-10-28", "--to", "2026-11-08", "--area", "80,0,100,40", "--from-csv", str(csvdir)])
     assert code == 2
     st = json.loads((tmp_path / "out/status.json").read_text())
     assert st["complete"] is False
@@ -177,14 +177,16 @@ def test_one_bad_row_does_not_stop_a_good_reply(tmp_path):
     assert "NaN" not in (tmp_path / "o/status.json").read_text()
 
 
-def test_empty_valid_reply_is_not_a_failure(tmp_path):
+def test_empty_valid_reply_for_a_small_area_is_a_real_zero(tmp_path):
     csvdir = tmp_path / "csv"; csvdir.mkdir()
     for product in F.PRODUCTS:
         (csvdir / f"{product}_2026-11-01_1.csv").write_text(HEAD)              # header only: FIRMS had no detections
-    assert F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-01", "--from-csv", str(csvdir)]) == 0
+    assert F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-01", "--area", "88,20,93,27",
+                   "--from-csv", str(csvdir)]) == 0                             # a small box can truly have no fire
     st = json.loads((tmp_path / "o/status.json").read_text())
     assert st["complete"] is True and st["rows"] == 0 and st["latest_detection_utc"] is None
-    assert st["products"]["VIIRS_NOAA20_NRT"]["days_without_data"] == ["2026-11-01"]   # shown as no data, not no fire
+    assert st["products"]["VIIRS_NOAA20_NRT"]["days_without_data"] == ["2026-11-01"]
+    assert st["products"]["VIIRS_NOAA20_NRT"]["suspect_days"] == []
 
 
 def test_duplicate_policy_merges_only_identical_rows_of_one_product(tmp_path):
@@ -219,9 +221,9 @@ def test_edges_of_the_map_land_in_tiles_the_site_loads(tmp_path):
 def test_status_lists_every_file_with_its_checksum(tmp_path):
     csvdir = tmp_path / "csv"; csvdir.mkdir()
     make_csvs(csvdir, date(2026, 11, 1), date(2026, 11, 2))
-    assert F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-02", "--from-csv", str(csvdir)]) == 0
+    assert F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-02", "--area", "80,0,100,40", "--from-csv", str(csvdir)]) == 0
     st = json.loads((tmp_path / "o/status.json").read_text())
-    assert st["format"] == 2
+    assert st["format"] == 3
     assert set(st["files"]) == {"overview.json.gz", *(f"tiles/{n}.json.gz" for n in st["tiles"])}
     for rel, meta in st["files"].items():
         b = (tmp_path / "o" / rel).read_bytes()
@@ -243,7 +245,7 @@ def test_24_hour_and_7_day_windows_end_at_the_newest_detection(tmp_path):
             body = "".join(row(d=d, t=tm, sat=sat, lat=10 + i) for i, (d, tm) in enumerate(pts)
                            if start <= date.fromisoformat(d) < end)
             (csvdir / f"{product}_{start.isoformat()}_{n}.csv").write_text(HEAD + body)
-    assert F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-08", "--from-csv", str(csvdir)]) == 0
+    assert F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-08", "--area", "80,0,100,40", "--from-csv", str(csvdir)]) == 0
     ov = json.loads(gzip.decompress((tmp_path / "o/overview.json.gz").read_bytes()))
     assert ov["latest_minute"] == 11519
     got = {cid // 1440 // 4 - 90: (ov["n24"][i], ov["n7"][i], ov["n"][i]) for i, cid in enumerate(ov["id"])}
@@ -251,3 +253,82 @@ def test_24_hour_and_7_day_windows_end_at_the_newest_detection(tmp_path):
     assert got == {10: (2, 2, 2), 11: (2, 2, 2), 12: (0, 2, 2), 13: (0, 2, 2), 14: (0, 0, 2)}
     st = json.loads((tmp_path / "o/status.json").read_text())
     assert st["latest_detection_utc"] == "2026-11-08T23:59Z"
+
+
+# ---------------------------------------------------------------- audit hotfix D2 and D4
+
+def dense(csvdir, first, last, empty=(), now_day_rows=True):
+    """Global fixtures: every product has detections on every day, except the (product, day) in empty."""
+    for product, sat in F.PRODUCTS.items():
+        for start, n in F.chunks(first, last):
+            body = ""
+            for k in range(n):
+                d = start + timedelta(days=k)
+                if (product, d) not in empty:
+                    body += row(d=d.isoformat(), sat=sat, lat=10 + k, t="0300")
+            (csvdir / f"{product}_{start.isoformat()}_{n}.csv").write_text(HEAD + body)
+
+
+def test_D2_an_empty_global_product_on_completed_days_is_missing_data_not_zero_fire(tmp_path):
+    first, last = date(2026, 11, 1), date(2026, 11, 8)
+    csvdir = tmp_path / "csv"; csvdir.mkdir()
+    dense(csvdir, first, last, empty={("VIIRS_NOAA21_NRT", first + timedelta(days=k)) for k in range(8)})   # valid CSV, no rows
+    code = F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-08", "--now", "2026-11-09T12:00:00Z",
+                   "--from-csv", str(csvdir)])
+    assert code == 2                                                             # not a complete, healthy snapshot
+    st = json.loads((tmp_path / "o/status.json").read_text())
+    p21 = st["products"]["VIIRS_NOAA21_NRT"]
+    assert all(r["ok"] for r in p21["requests"])                                # every HTTP answer was a success
+    assert p21["suspect_days"] == [f"2026-11-0{k}" for k in range(1, 9)] and p21["complete"] is False
+    assert st["products"]["VIIRS_NOAA20_NRT"]["complete"] is True and st["complete"] is False
+
+
+def test_D2_one_missing_completed_day_is_flagged_but_normal_latency_is_not(tmp_path):
+    first, last = date(2026, 11, 1), date(2026, 11, 8)
+    csvdir = tmp_path / "csv"; csvdir.mkdir()
+    # NOAA-20 has no detection on 4 Nov (a completed day) and none yet on 8 Nov (today, still arriving)
+    dense(csvdir, first, last, empty={("VIIRS_NOAA20_NRT", date(2026, 11, 4)), ("VIIRS_NOAA20_NRT", date(2026, 11, 8)),
+                                      ("VIIRS_NOAA21_NRT", date(2026, 11, 8))})
+    code = F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-08", "--now", "2026-11-08T05:00:00Z",
+                   "--from-csv", str(csvdir)])
+    st = json.loads((tmp_path / "o/status.json").read_text())
+    p20 = st["products"]["VIIRS_NOAA20_NRT"]
+    assert p20["suspect_days"] == ["2026-11-04"]                                # 8 Nov is the current day: not judged
+    assert set(p20["days_without_data"]) == {"2026-11-04", "2026-11-08"}
+    assert st["products"]["VIIRS_NOAA21_NRT"]["suspect_days"] == [] and code == 2
+    # an empty 8 Nov is judged only once it ended 6 h before the fetch (normal near-real-time delay)
+    assert F.suspect_days([5, 0], date(2026, 11, 7), datetime(2026, 11, 9, 5, 59, tzinfo=timezone.utc), "world") == []
+    assert F.suspect_days([5, 0], date(2026, 11, 7), datetime(2026, 11, 9, 6, 0, tzinfo=timezone.utc), "world") == ["2026-11-08"]
+    assert F.suspect_days([0, 0], date(2026, 11, 7), datetime(2026, 11, 20, tzinfo=timezone.utc), "10,10,20,20") == []
+
+
+def test_D4_absurd_frp_is_rejected_without_stopping_the_batch(tmp_path):
+    text = HEAD + row(frp="1e308") + row(frp="1000000.1") + row(frp="5000") + row(frp="150000") + row(frp="0")
+    kept, rej = F.parse_rows(text, "N20", date(2026, 10, 28), date(2026, 11, 11))
+    assert [r[5] for r in kept] == [5000.0, 150000.0, 0.0]                      # high but valid values stay
+    assert rej == {"frp above 1,000,000 MW (not a value one pixel can have)": 2}
+    csvdir = tmp_path / "csv"; csvdir.mkdir()
+    for product, sat in F.PRODUCTS.items():
+        (csvdir / f"{product}_2026-11-01_1.csv").write_text(HEAD + row(d="2026-11-01", sat=sat, frp="1e308")
+                                                            + row(d="2026-11-01", sat=sat, frp="999999.9"))
+    # before the fix this run crashed with OverflowError and wrote nothing
+    assert F.main(["--out", str(tmp_path / "o"), "--from", "2026-11-01", "--to", "2026-11-01", "--area", "80,0,100,40",
+                   "--from-csv", str(csvdir)]) == 0
+    tile = json.loads(gzip.decompress((tmp_path / "o/tiles/N20E090.json.gz").read_bytes()))
+    assert tile["f"] == [9999999, 9999999] and max(tile["f"]) < 2 ** 53
+
+
+def test_every_file_of_a_fetch_carries_one_generation_id(tmp_path):
+    csvdir = tmp_path / "csv"; csvdir.mkdir()
+    dense(csvdir, date(2026, 11, 1), date(2026, 11, 3))
+    F.main(["--out", str(tmp_path / "a"), "--from", "2026-11-01", "--to", "2026-11-03", "--from-csv", str(csvdir)])
+    F.main(["--out", str(tmp_path / "b"), "--from", "2026-11-01", "--to", "2026-11-03", "--from-csv", str(csvdir)])
+    ga = json.loads((tmp_path / "a/status.json").read_text())["generation"]
+    gb = json.loads((tmp_path / "b/status.json").read_text())["generation"]
+    assert ga != gb                                                              # same data, two fetches, two ids
+    for f in [tmp_path / "a/overview.json.gz", *(tmp_path / "a/tiles").glob("*.json.gz")]:
+        assert json.loads(gzip.decompress(f.read_bytes()))["generation"] == ga
+
+
+def test_area_must_be_world_or_a_box(tmp_path):
+    assert F.main(["--out", str(tmp_path / "o"), "--area", "../../etc", "--from-csv", str(tmp_path)]) == 1

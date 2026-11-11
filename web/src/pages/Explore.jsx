@@ -110,13 +110,16 @@ export default function Explore({ meta, theme, params }) {
   }, [playing, speed]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { recentStatus().then(setRStatus); }, []);
+  const [rUpdating, setRUpdating] = useState(false);                // files of two updates: show nothing (audit D1)
   const [nowTick, setNowTick] = useState(() => Date.now());          // re-judge "not current" every 5 minutes
   useEffect(() => { const id = setInterval(() => setNowTick(Date.now()), 300000); return () => clearInterval(id); }, []);
   const rFresh = useMemo(() => recentFreshness(rStatus, nowTick), [rStatus, nowTick]);
   useEffect(() => {
     if (layerMode !== 'recent' || !rStatus) return undefined;
     let live = true;
-    recentOverview(period).then((o) => { if (live) setRCells(o); }).catch(() => { if (live) setRCells(null); });
+    if (rStatus.updating) { setRCells(null); setRUpdating(true); return undefined; }
+    recentOverview(rStatus, period).then((o) => { if (live) { setRCells(o); setRUpdating(false); } })
+      .catch(() => { if (live) { setRCells(null); setRUpdating(true); } });
     return () => { live = false; };
   }, [layerMode, period, rStatus]);
   // single detections only for the tiles in view, and only when zoomed in
@@ -127,8 +130,9 @@ export default function Explore({ meta, theme, params }) {
     if (!rTiles.length || !rCells) { setRPts(null); setRNote(null); return undefined; }
     let live = true;
     setRNote(T.recent.loading);
-    recentPoints(rTiles, period, rCells.latest).then((f) => { if (live) { setRPts(f); setRNote(null); } })
-      .catch(() => { if (live) setRNote(null); });
+    recentPoints(rStatus, rTiles, period, rCells.latest).then((f) => {
+      if (live) { setRPts(f); setRNote(f.missing ? T.recent.tilesMissing : null); }
+    }).catch(() => { if (live) setRNote(T.recent.tilesMissing); });
     return () => { live = false; };
   }, [rTileKey, period, rCells]);  // eslint-disable-line react-hooks/exhaustive-deps
   const recentTip = (layer, p) => (layer === 'recent-cells'
@@ -256,8 +260,8 @@ export default function Explore({ meta, theme, params }) {
           <button type="button" className="action" onClick={() => setResetKey((k) => k + 1)}>{T.map.reset}</button>
         </div>
 
-        {(mapNote || (layerMode === 'recent' && (rNote || rStatus === null))) && <p className="mapnote" role="status">
-          {mapNote || rNote || T.recent.unavailable}</p>}
+        {(mapNote || (layerMode === 'recent' && (rUpdating || rNote || rStatus === null))) && <p className="mapnote" role="status">
+          {mapNote || (rUpdating ? T.recent.updating : rNote) || T.recent.unavailable}</p>}
         {layerMode === 'record' && <CellPanel info={pickInfo} onClose={() => setPicked(null)} />}
         {layerMode === 'recent' && <RecentPanel info={rInfo} onClose={() => setRPicked(null)}
           onHistory={() => { pickArea(pointArea(rPicked.lat, rPicked.lon, 50)); setRPicked(null); }} />}

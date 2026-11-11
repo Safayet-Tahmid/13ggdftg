@@ -17,10 +17,10 @@ on:
   schedule:
     - cron: "17 */3 * * *"   # recent detections refresh (D38). GitHub may start it late
 
+# Least privilege (audit D6): the workflow and the build job can only read. Only the deploy job,
+# which runs no project code and never sees the FIRMS key, may write to Pages.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -29,6 +29,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read          # actions/configure-pages reads the Pages settings [UNCERTAIN: confirm on the first run]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -90,6 +93,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write         # publish the built site
+      id-token: write      # prove the deployment comes from this workflow
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

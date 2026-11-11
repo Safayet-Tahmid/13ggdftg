@@ -4,7 +4,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { gzipSync } from 'node:zlib';
-import { recentFreshness, recentPoints, recentStatus, missingCoverage, STALE_AFTER_HOURS, PERIODS } from '../src/lib/recent.js';
+import { recentFreshness, recentOverview, recentPoints, recentStatus, missingCoverage, resetRecentForTests, snapshotId, SnapshotMismatch,
+  STALE_AFTER_HOURS, PERIODS } from '../src/lib/recent.js';
 import T from '../src/content/text.js';
 
 const H = 3.6e6;
@@ -72,9 +73,13 @@ test('the period labels say where the period ends', () => {
 
 // ---------------------------------------------------------------- data loading with a fake server
 
+const requested = [];
 function serve(files) {
+  resetRecentForTests();
+  requested.length = 0;
   globalThis.fetch = async (url) => {
-    const key = String(url).replace('data/recent/', '');
+    requested.push(String(url));
+    const key = String(url).replace('data/recent/', '').split('?')[0];
     if (!(key in files)) return new Response('', { status: 404 });
     const v = files[key];
     return new Response(typeof v === 'string' ? v : v, { status: 200 });
@@ -91,7 +96,7 @@ test('24-hour and 7-day edges for single detections match the overview (same rul
     t: mins.map((m) => Math.floor((m % 1440) / 60) * 100 + (m % 60)), s: ages.map(() => 0), c: ages.map(() => 1),
     f: ages.map(() => 45), dn: ages.map(() => 1), nf: ages.map(() => 0) };
   serve({ 'tiles/N10E090.json.gz': gzipSync(JSON.stringify(tile)) });
-  const count = async (p) => (await recentPoints(['N10E090'], p, latest)).features.length;
+  const count = async (p) => (await recentPoints({}, ['N10E090'], p, latest)).features.length;
   assert.equal(await count('24h'), 2);     // ages 0 and 1439
   assert.equal(await count('7d'), 4);      // up to age 10079
   assert.equal(await count('all'), 5);
@@ -105,4 +110,54 @@ test('the status loader attaches the publication record, and copes without one',
   assert.equal((await recentStatus()).publication, null);
   serve({});
   assert.equal(await recentStatus(), null);
+});
+
+// ---------------------------------------------------------------- audit hotfix D1 and D2
+
+const G_A = '20261111T084400Z-aaaaaaaaaaaa', G_B = '20261111T114400Z-bbbbbbbbbbbb';
+const ov = (gen, latest) => ({ format: 1, generation: gen, from: '2026-10-28', latest_minute: latest, id: [400 * 1440 + 1080],
+  n24: [3], n7: [3], n: [3], fmax: [50], nf: [0], last: [latest] });
+const tileOf = (gen) => ({ format: 1, generation: gen, from: '2026-10-28', satellites: ['N20', 'N21'], confidence: ['l', 'n', 'h'],
+  la: [100000], lo: [902000], d: [0], t: [100], s: [0], c: [1], f: [45], dn: [1], nf: [0] });
+
+test('D1: data files are requested with the snapshot id, so no cache can answer with another snapshot', async () => {
+  const s = status({ generation: G_B });
+  serve({ 'overview.json.gz': gzipSync(JSON.stringify(ov(G_B, 100))), 'tiles/N10E090.json.gz': gzipSync(JSON.stringify(tileOf(G_B))) });
+  await recentOverview(s, '7d');
+  await recentPoints(s, ['N10E090'], '7d', 100);
+  assert.ok(requested.some((u) => u === `data/recent/overview.json.gz?v=${encodeURIComponent(G_B)}`), requested.join(' '));
+  assert.ok(requested.some((u) => u === `data/recent/tiles/N10E090.json.gz?v=${encodeURIComponent(G_B)}`));
+  // a format 2 snapshot (no generation yet) is still versioned, by its overview checksum
+  assert.equal(snapshotId({ files: { 'overview.json.gz': { sha256: 'abc' } }, fetched_utc: 'x' }), 'abc');
+});
+
+test('D1: an overview of another update is refused, never drawn under this status', async () => {
+  serve({ 'overview.json.gz': gzipSync(JSON.stringify(ov(G_A, 100))) });   // a CDN still serving the earlier file
+  await assert.rejects(recentOverview(status({ generation: G_B }), '7d'), SnapshotMismatch);
+});
+
+test('D1: a tile of another update or a missing tile is left out and counted, never mixed in', async () => {
+  serve({ 'tiles/N10E090.json.gz': gzipSync(JSON.stringify(tileOf(G_A))) });
+  const r = await recentPoints(status({ generation: G_B }), ['N10E090', 'N20E090'], '7d', 100);
+  assert.equal(r.features.length, 0);
+  assert.equal(r.missing, 2);
+});
+
+test('D1: a publication record of another update marks the status as updating', async () => {
+  serve({ 'status.json': JSON.stringify(status({ generation: G_B })), 'publication.json': JSON.stringify({ state: 'new', generation: G_A }) });
+  const s = await recentStatus();
+  assert.equal(s.updating, true);
+  assert.equal(s.publication, null);
+  assert.strictEqual(await recentStatus(), s);                               // read once: header and map share it
+});
+
+test('D2: completed days with no detections are named as missing coverage', () => {
+  const s = status({ complete: false, products: {
+    VIIRS_NOAA20_NRT: { satellite: 'N20', requests: [{ from: '2026-11-01', days: 5, ok: true }], suspect_days: [] },
+    VIIRS_NOAA21_NRT: { satellite: 'N21', requests: [{ from: '2026-11-01', days: 5, ok: true }],
+      suspect_days: ['2026-11-01', '2026-11-02', '2026-11-03', '2026-11-05'] } } });
+  assert.deepEqual(missingCoverage(s), [{ satellite: 'N21', from: '2026-11-01', days: 3 }, { satellite: 'N21', from: '2026-11-05', days: 1 }]);
+  const f = recentFreshness(s, Date.parse('2026-11-11T09:00:00Z'));
+  assert.equal(T.recent.missing(f.missing.map(T.recent.missingItem).join(', ')),
+    'Incomplete: no data was received for NOAA-21 from 2026-11-01 (3 days), NOAA-21 from 2026-11-05 (1 day). Missing data is not "no fire".');
 });

@@ -66,6 +66,9 @@ const T = {
     zoomHint: 'Zoom in to see single detections. Click a cell to zoom to it.',
     tooMany: 'Showing the nearest areas only. Zoom in further to see every detection here.',
     loading: 'Loading detections…',
+    updating: 'Recent detections are being updated, and the files on the server do not all belong to the same update yet. '
+      + 'Nothing is shown rather than a mix. Reload in a few minutes. The harmonised record is not affected.',
+    tilesMissing: 'Some single detections in view could not be loaded (the data may be updating). Reload in a few minutes.',
     cellTip: (n, fmax) => [`${n.toLocaleString()} detection${n === 1 ? '' : 's'}`, `strongest ${fmax.toLocaleString()} MW`, 'Click to zoom in'],
     pointTip: (d) => [`${d.frp.toLocaleString()} MW`, `${d.satellite}, ${d.time}`, `confidence ${d.confidence}`,
       ...(d.nonfire ? ['likely non-fire heat (gas flare, industry or volcano)'] : [])],
