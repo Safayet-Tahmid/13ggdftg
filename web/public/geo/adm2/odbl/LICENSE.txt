@@ -1,0 +1,11 @@
+The boundary files in this folder are derived from geoBoundaries gbOpen datasets released under the
+Open Data Commons Open Database License (ODbL) 1.0 (https://opendatacommons.org/licenses/odbl/1-0/).
+They are simplified, clipped to 10-degree tiles and repacked by geo/prepare_geo.py in the SHIFT
+repository (github.com/squadronzero/squadron-zero). This derived database is offered under ODbL 1.0.
+
+Sources: the original source of each country is listed in web/public/geo/index.json ("countries",
+"adm2", "source" and "licence_source"). geoBoundaries: Runfola, D. et al. (2020) geoBoundaries: A global
+database of political administrative boundaries. PLoS ONE 15(4): e0231866.
+
+The rest of SHIFT is not covered by this licence. Map context only: these lines are never used in
+any fire value.

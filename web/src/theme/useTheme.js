@@ -16,6 +16,8 @@ function read() {
     surface: v('--surface'), ink: v('--ink'), muted: v('--muted'), rule: v('--rule'), accent: v('--accent'),
     sea: v('--map-sea'), land: v('--map-land'), border: v('--map-border'), area: v('--map-area'),
     select: v('--map-select'), gap: v('--map-gap'), space: v('--globe-space'), horizon: v('--globe-horizon'),
+    geo: { intl: v('--map-border-intl'), adm1: v('--map-border-adm1'), adm2: v('--map-border-adm2'),
+      label: v('--map-label'), water: v('--map-label-water'), halo: v('--map-label-halo') },
     recent: [1, 2, 3, 4].map((i) => v(`--recent-${i}`)), recentStroke: v('--recent-stroke'), recentNonfire: v('--recent-nonfire'),
     zero: v('--chart-zero'),
     ramp: [1, 2, 3, 4, 5, 6].map((i) => v(`--ramp-${i}`)),

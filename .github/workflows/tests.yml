@@ -43,5 +43,7 @@ jobs:
         run: python -m pytest -q recent
       - name: Weather context tests (context/, D39, no network)
         run: python -m pytest -q context
+      - name: Map geography preparation tests (geo/, no network)
+        run: python -m pytest -q geo
       - name: Baseline check tests (a changed protected file must fail)
         run: python -m pytest -q docs/preflight
