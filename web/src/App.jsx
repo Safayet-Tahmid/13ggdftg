@@ -9,7 +9,7 @@ import Method from './pages/Method.jsx';
 import { dateOf, json, lastDataDay } from './lib/data.js';
 import { longDate } from './lib/format.js';
 import { readHash, writeHash } from './lib/url.js';
-import { recentStatus } from './lib/recent.js';
+import { recentFreshness, recentStatus } from './lib/recent.js';
 
 const VIEWS = Object.keys(T.views);
 
@@ -34,7 +34,8 @@ export default function App() {
         </div>
         <div className="top-right">
           {meta && <span className="badge">{T.dataTo(longDate(dateOf(meta, lastDataDay(meta))))}</span>}
-          {recent?.latest_detection_utc && <span className="badge">{T.recentTo(recent.latest_detection_utc.replace('T', ' ').replace('Z', ' UTC'))}</span>}
+          {recent?.latest_detection_utc && <span className="badge">{T.recentTo(recent.latest_detection_utc.replace('T', ' ').replace('Z', ' UTC'),
+            recentFreshness(recent)?.stale)}</span>}
           <label className="theme-pick">{T.theme.label}
             <select value={mode} onChange={(e) => setMode(e.target.value)}>
               {['system', 'light', 'dark'].map((m) => <option key={m} value={m}>{T.theme[m]}</option>)}

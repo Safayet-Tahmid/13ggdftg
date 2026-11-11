@@ -87,6 +87,9 @@ nav { display: flex; gap: 4px; flex-wrap: wrap; width: 100%; }
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding: 10px 16px;
   background: var(--surface); border-top: 1px solid var(--rule); font-size: var(--font-size-small);
 }
+/* recent detections: not current, delayed or incomplete (Task 2). Plain and calm, beside the period */
+.recentnotice { flex-basis: 100%; border-left: 3px solid var(--muted); padding-left: 8px; color: var(--ink); }
+.recentnotice p { margin: 2px 0; }
 .kinds { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); flex-wrap: wrap; }
 .story { overflow-y: auto; min-height: 0; padding: 16px 24px 40px; background: var(--surface); }
 .story h2 { font-size: 26px; line-height: 1.15; font-weight: var(--heading-weight); font-stretch: var(--heading-stretch); margin: 18px 0 4px; }

@@ -18,14 +18,18 @@ Outputs in OUT (all small static files, read by web/src/lib/recent.js):
 With --notfire (the site's notfire.json), detections in SHIFT's persistent non-fire cells (gas
 flares, industry, volcanoes) are flagged and kept out of the overview counts.
 
-Exit code: 0 all products fetched, 2 some product or chunk failed, 1 nothing usable.
-Standard library only.
+status.json also lists every file it describes with its size and SHA-256 ("files"), so a later
+build can check a snapshot is whole before it publishes it again (recent/snapshot.py).
+
+Exit code: 0 all products fetched, 2 some product or chunk failed, 1 nothing usable,
+3 no key (nothing fetched). Standard library only.
 """
 from __future__ import annotations
 
 import argparse
 import csv
 import gzip
+import hashlib
 import io
 import json
 import math
@@ -45,7 +49,8 @@ DEFAULT_FROM = "2026-10-28"
 MAX_DAYS_PER_REQUEST = 5          # FIRMS Area API limit (DAY_RANGE 1..5)
 REQUIRED = ("latitude", "longitude", "acq_date", "acq_time", "satellite", "confidence", "frp", "daynight")
 CONF = ("l", "n", "h")            # VIIRS confidence classes, stored as an index into this tuple
-FORMAT = 1
+FORMAT = 1                        # overview and tile files
+STATUS_FORMAT = 2                 # status.json: 2 adds the "files" list (size and SHA-256 per file)
 
 
 def mask(text: str, key: str) -> str:
@@ -97,6 +102,14 @@ def parse_rows(text: str, sat: str, first: date, last: date):
             lat, lon, frp = float(r["latitude"]), float(r["longitude"]), float(r["frp"])
         except (TypeError, ValueError):
             reject("not a number"); continue
+        # float() accepts "nan", "inf" and "-inf", and every comparison with NaN is False, so a range
+        # check alone lets NaN through. Reject anything that is not a finite number first.
+        if not math.isfinite(lat):
+            reject("latitude not finite"); continue
+        if not math.isfinite(lon):
+            reject("longitude not finite"); continue
+        if not math.isfinite(frp):
+            reject("frp not finite"); continue
         if not (-90 <= lat <= 90 and -180 <= lon <= 180):
             reject("coordinates out of range"); continue
         if frp < 0:
@@ -166,7 +179,11 @@ def fetch_product(product: str, sat: str, first: date, last: date, key: str | No
                            dates_seen=[seen[0].isoformat(), seen[-1].isoformat()] if seen else None)
                 log(f"  {product} {start} +{n}d: http 200, {len(k)} rows kept, {sum(rj.values())} rejected, {secs}s")
         requests.append(rec)
-    # the same detection can come back in two overlapping requests: keep it once
+    # Duplicates: rows of one product that are identical after normalisation (day, time to the
+    # minute, latitude and longitude to 4 decimals (about 11 m), confidence class, FRP to 0.1 MW and
+    # day/night) are kept once. FIRMS can repeat a row in its reply. Two real detections are never
+    # merged unless all seven fields agree, which for 375 m pixels means the same pixel and pass.
+    # Rows of different satellites are never compared (each product is deduplicated on its own).
     before = len(rows)
     rows = sorted(set(rows))
     return rows, rejected, requests, before - len(rows)
@@ -176,7 +193,7 @@ def build(first: date, last: date, key: str | None, csv_dir: Path | None, log=pr
     days = (last - first).days + 1
     cols = {k: [] for k in ("s", "d", "t", "la", "lo", "c", "f", "dn")}
     status = {
-        "format": FORMAT,
+        "format": STATUS_FORMAT,
         "fetched_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "window": {"from": first.isoformat(), "to": last.isoformat(), "days": days},
         "source": "NASA FIRMS Area API, near-real-time VIIRS 375 m active fire (raw detections, not harmonised)",
@@ -228,7 +245,11 @@ def cell(lat: float, lon: float, per_deg: int) -> tuple[int, int]:
 
 
 def tile_name(lat: float, lon: float, deg: int = 10) -> str:
-    """Same names as the site's daily tiles (web/src/lib/data.js tileName)."""
+    """Same names as the site's daily tiles (web/src/lib/data.js tileName). The edges belong to the
+    last tile inside the map: latitude 90 to the N80 row, and longitude 180 (the same meridian as
+    -180) to the W180 column, so no detection lands in a tile the website never loads."""
+    lat = min(lat, 90 - 1e-9)
+    lon = -180.0 if lon >= 180 else lon
     a, b = int((lat // deg) * deg), int((lon // deg) * deg)
     return f"{'N' if a >= 0 else 'S'}{abs(a):02d}{'E' if b >= 0 else 'W'}{abs(b):03d}"
 
@@ -273,7 +294,7 @@ def write_web(data: dict, out: Path, nf_cells: set | None) -> dict:
           "id": ids, **{k: [cells[i][j] for i in ids] for j, k in enumerate(("n24", "n7", "n", "fmax", "nf", "last"))}}
     total = 0
     with gzip.open(out / "overview.json.gz", "wb", compresslevel=9) as fh:
-        fh.write(json.dumps(ov, separators=(",", ":")).encode())
+        fh.write(json.dumps(ov, separators=(",", ":"), allow_nan=False).encode())
     total += (out / "overview.json.gz").stat().st_size
     (out / "tiles").mkdir(exist_ok=True)
     for old in (out / "tiles").glob("*.json.gz"):
@@ -284,13 +305,22 @@ def write_web(data: dict, out: Path, nf_cells: set | None) -> dict:
         with gzip.open(p, "wb", compresslevel=9) as fh:
             fh.write(json.dumps({"format": FORMAT, "from": data["from"], "satellites": data["satellites"],
                                  "confidence": data["confidence"], "scale": data["scale"], **t},
-                                separators=(",", ":")).encode())
+                                separators=(",", ":"), allow_nan=False).encode())
         index[name] = len(t["la"])
         total += p.stat().st_size
     latest_utc = (datetime(first.year, first.month, first.day, tzinfo=timezone.utc) + timedelta(minutes=latest)) if n else None
     return {"overview_cells": len(ids), "tiles": index, "nonfire_flagged": nf_total if nf_cells is not None else None,
             "latest_detection_utc": latest_utc.strftime("%Y-%m-%dT%H:%MZ") if latest_utc else None,
             "web_bytes": total}
+
+
+def file_list(out: Path) -> dict:
+    """Size and SHA-256 of every data file of a snapshot (paths relative to OUT, "/" separated)."""
+    files = {}
+    for p in sorted([out / "overview.json.gz", *(out / "tiles").glob("*.json.gz")]):
+        files[p.relative_to(out).as_posix()] = {"bytes": p.stat().st_size,
+                                                 "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
+    return files
 
 
 def main(argv=None) -> int:
@@ -309,7 +339,7 @@ def main(argv=None) -> int:
     if not a.from_csv:
         key = (os.environ.get("NASA_FIRMS_MAP_KEY") or "").strip()
         if not key:
-            print("NASA_FIRMS_MAP_KEY is not set. Nothing fetched."); return 1
+            print("NASA_FIRMS_MAP_KEY is not set. Nothing fetched."); return 3
     data, status = build(first, last, key, Path(a.from_csv) if a.from_csv else None)
     if not any(p["requests_ok"] for p in status["products"].values()):
         # nothing usable: write nothing, so the site says "not available" instead of showing an empty map
@@ -317,7 +347,8 @@ def main(argv=None) -> int:
     nf_cells = load_notfire(Path(a.notfire)) if a.notfire else None
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     status.update(write_web(data, out, nf_cells))
-    (out / "status.json").write_text(json.dumps(status, indent=1))
+    status["files"] = file_list(out)
+    (out / "status.json").write_text(json.dumps(status, indent=1, allow_nan=False))
     print(f"wrote {status['rows']} detections, {status['overview_cells']} overview cells, {len(status['tiles'])} tiles, "
           f"{status['web_bytes'] / 1e6:.2f} MB, complete={status['complete']}")
     return 0 if status["complete"] else 2
