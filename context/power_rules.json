@@ -7,7 +7,7 @@
     "endpoint": "https://power.larc.nasa.gov/api/temporal/daily/point",
     "community": "AG",
     "time_standard": "UTC",
-    "note": "Meteorology from GMAO MERRA-2, extended towards near real time by GEOS FP-IT, on a 0.5 x 0.625 degree grid. No key is needed."
+    "note": "Meteorology from GMAO MERRA-2, extended towards near real time by GEOS-IT (the POWER answer header lists MERRA2, GEOSIT and POWER), on a 0.5 x 0.625 degree grid. No key is needed."
   },
   "parameters": {
     "PRECTOTCORR": {
