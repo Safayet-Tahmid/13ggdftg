@@ -31,7 +31,9 @@ export default function Method({ meta }) {
       <ul>
         {last && <li>The harmonised record runs to {last}. From 28 October 2026 the map also offers <b>recent detections</b> (D38):
           raw NASA FIRMS near-real-time points from VIIRS on NOAA-20 and NOAA-21, fetched every few hours and labelled with the
-          fetch time. They are not on the harmonised scale, are never added to the record's numbers and are never given an
+          fetch time. Their periods (24 hours, 7 days) end at the newest detection, not at the current time. If a
+          refresh fails, the last complete dataset is kept unchanged and marked as not current, and a dataset with
+          missing days says which ones are missing. They are not on the harmonised scale, are never added to the record's numbers and are never given an
           anomaly score. NASA FIRMS stopped producing new data from S-NPP, the record's reference satellite, at 13:00 UTC on 2 November 2026. SHIFT measured
           NOAA-20 against S-NPP (1.00 to 1.05). NOAA-21 has not been tested against S-NPP by SHIFT. Detections in SHIFT's
           persistent non-fire cells are shown in grey, and low-confidence detections are drawn faint and not counted.</li>}

@@ -2,6 +2,8 @@ name: tests
 on:
   push:
   pull_request:
+permissions:
+  contents: read          # tests only read the code. No secrets are used here.
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -21,6 +23,10 @@ jobs:
     name: ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v4
+      - name: Scientific baseline (protected pipeline, settings and engine files unchanged)
+        # Fails if any file in docs/preflight/baseline_manifest.json changed. Never regenerate the
+        # manifest to make this pass: a real method change needs a reviewed new baseline.
+        run: python3 docs/preflight/verify_baseline.py
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
@@ -33,5 +39,7 @@ jobs:
         run: python -m pytest -q
       - name: Audit statistics tests (validation/)
         run: python -m pytest -q validation
-      - name: Recent detections fetch tests (recent/, no network)
+      - name: Recent detections fetch and snapshot tests (recent/, no network)
         run: python -m pytest -q recent
+      - name: Baseline check tests (a changed protected file must fail)
+        run: python -m pytest -q docs/preflight

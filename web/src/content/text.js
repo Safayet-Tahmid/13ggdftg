@@ -11,7 +11,7 @@ const T = {
   brand: 'SHIFT',
   tagline: 'One fire record from two generations of NASA satellites, 2002 to today',
   dataTo: (d) => `Record to ${d}`,
-  recentTo: (t) => `Recent detections to ${t}`,
+  recentTo: (t, stale) => `Recent detections to ${t}${stale ? ' (not current)' : ''}`,
   notOfficial: 'Team Squadron Zero · NASA Space Apps Challenge 2026 · not an official NASA product',
 
   views: { explore: 'Explore', switch: 'The 2012 switch', validation: 'Validation', method: 'Method and data' },
@@ -51,8 +51,15 @@ const T = {
     layer: 'Map layer',
     layers: { record: 'Harmonised record', recent: 'Recent detections' },
     period: 'Period',
-    periods: { '24h': 'Last 24 hours', '7d': 'Last 7 days', all: 'Since 28 Oct' },
-    fetched: (when, from, to) => `Fetched ${when}. Detections from ${from} to ${to}.`,
+    // The periods end at the newest detection in the snapshot, not at the current time (Task 2, WP3).
+    periods: { '24h': '24 h to the newest detection', '7d': '7 days to the newest detection', all: 'Since 28 Oct' },
+    fetched: (when, from, to) => `Retrieved from NASA FIRMS ${when}. Detections from ${from} to ${to} (the newest one). `
+      + 'Periods end at the newest detection, not at the current time.',
+    stale: (when) => `Recent observations are not current. Showing the last successful dataset, retrieved on ${when}.`,
+    fallback: (when) => `The refresh of ${when} did not complete, so this earlier dataset is kept unchanged.`,
+    feedLag: (h) => `The newest detection is ${h} hours older than the retrieval: FIRMS may be delayed.`,
+    missing: (list) => `Incomplete: no data was received for ${list}. Missing data is not "no fire".`,
+    missingItem: (m) => `${m.satellite === 'N21' ? 'NOAA-21' : m.satellite === 'N20' ? 'NOAA-20' : m.satellite} from ${m.from} (${m.days} day${m.days === 1 ? '' : 's'})`,
     unavailable: 'Recent detections are not available in this build (the last fetch failed or has not run). '
       + 'The harmonised record is not affected.',
     incomplete: 'Some recent data could not be fetched, so some days may be missing. Missing days are not "no fire".',

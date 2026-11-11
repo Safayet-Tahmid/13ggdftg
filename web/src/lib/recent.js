@@ -41,14 +41,63 @@ async function gzJson(path) {
   try { return await p; } catch (e) { cache.delete(path); throw e; }
 }
 
-// status.json, or null when the recent layer was not built (fetch failed or no key).
+// status.json, or null when there is no recent snapshot in this build. The build's publication
+// record (publication.json, written by recent/snapshot.py) is attached as status.publication:
+// it says whether this snapshot is the new fetch or an earlier one kept after a failed refresh.
 export async function recentStatus() {
   try {
     const res = await fetch(BASE + 'status.json', { cache: 'no-cache' });
     if (!res.ok) return null;
     const s = await res.json();
-    return s && s.rows != null ? s : null;
+    if (!s || s.rows == null || !s.fetched_utc) return null;
+    let publication = null;
+    try {
+      const p = await fetch(BASE + 'publication.json', { cache: 'no-cache' });
+      if (p.ok) publication = await p.json();
+    } catch { publication = null; }
+    return { ...s, publication };
   } catch { return null; }
+}
+
+// Freshness (Task 2, WP3). Three different times, never confused:
+//   retrieved  when the snapshot was fetched from FIRMS (status.fetched_utc)
+//   newest     the newest detection in it (status.latest_detection_utc). The "24 hours" and
+//              "7 days" periods END HERE, not at the current time (same rule in the overview,
+//              written by fetch_firms.py, and in recentPoints below).
+//   now        the reader's clock, only used to say whether the snapshot is still current.
+// Not current: older than STALE_AFTER_HOURS (the refresh runs every 3 hours, so two missed runs),
+// or kept from an earlier fetch after a failed refresh (publication.state "fallback").
+export const STALE_AFTER_HOURS = 6;
+export const FEED_LAG_HOURS = 12;
+const iso = (t) => new Date(t).toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
+
+export function missingCoverage(status) {
+  const out = [];
+  for (const p of Object.values(status?.products || {})) {
+    for (const r of p.requests || []) if (!r.ok) out.push({ satellite: p.satellite, from: r.from, days: r.days });
+  }
+  return out;
+}
+
+export function recentFreshness(status, nowMs = Date.now()) {
+  if (!status || !status.fetched_utc) return null;
+  const fetched = Date.parse(status.fetched_utc);
+  const newest = status.latest_detection_utc ? Date.parse(status.latest_detection_utc) : null;
+  const pub = status.publication || null;
+  const fallback = pub?.state === 'fallback';
+  const ageHours = (nowMs - fetched) / 3.6e6;
+  const lagHours = newest == null ? null : (fetched - newest) / 3.6e6;
+  return {
+    retrieved: iso(fetched),
+    newest: newest == null ? null : iso(newest),
+    ageHours,
+    stale: fallback || ageHours > STALE_AFTER_HOURS,
+    fallback,
+    attempted: fallback && pub.decided_utc ? iso(Date.parse(pub.decided_utc)) : null,
+    feedLagHours: lagHours != null && lagHours > FEED_LAG_HOURS ? Math.round(lagHours) : null,
+    incomplete: status.complete === false,
+    missing: missingCoverage(status),
+  };
 }
 
 export const PERIODS = { '24h': 1440, '7d': 7 * 1440, all: Infinity };

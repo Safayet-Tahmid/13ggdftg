@@ -3,7 +3,8 @@
 # Runs on every change to web/ or recent/, whenever a release is published or edited (a new
 # site_data.zip), every 3 hours to refresh the recent detections (D38), and by hand
 # (Actions > Website > Run workflow). To freeze the site during judging: Actions > Website >
-# "..." > Disable workflow (and Enable it again afterwards).
+# "..." > Disable workflow (and Enable it again afterwards). A failed recent-detections refresh
+# keeps the last good snapshot (recent/snapshot.py). It never stops the deploy.
 name: Website
 
 on:
@@ -44,11 +45,38 @@ jobs:
           unzip -q "$RUNNER_TEMP/site_data.zip" -d web/public/data
           test -f web/public/data/meta.json
           du -sh web/public/data
-      - name: Recent detections (D38, raw FIRMS NRT). A failure never stops the deploy
-        continue-on-error: true
+      # Recent detections (D38, raw FIRMS NRT), Task 2: a failed refresh keeps the last good snapshot.
+      # 1. copy the snapshot the live site serves now (public files, no key, no write access)
+      # 2. fetch a new one into a separate folder (the only step that gets the key)
+      # 3. publish: the new snapshot if whole and complete, otherwise the previous one marked as
+      #    a fallback (its own fetch time kept), otherwise nothing ("not available").
+      # 4. final check: a snapshot that fails the checks is removed. None of this can stop the
+      #    deploy or touch the historical record.
+      - name: Recent detections, previous snapshot from the live site (read only)
+        run: |
+          site="https://${GITHUB_REPOSITORY_OWNER,,}.github.io/${GITHUB_REPOSITORY#*/}/"
+          python3 recent/snapshot.py pull --site "$site" --to "$RUNNER_TEMP/recent_prev" || true
+      - name: Recent detections, new fetch (the FIRMS key is given to this step only)
+        id: fetch
         env:
           NASA_FIRMS_MAP_KEY: ${{ secrets.NASA_FIRMS_MAP_KEY }}
-        run: python3 recent/fetch_firms.py --out web/public/data/recent --notfire web/public/data/notfire.json
+        run: |
+          set +e
+          python3 recent/fetch_firms.py --out "$RUNNER_TEMP/recent_new" --notfire web/public/data/notfire.json
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Recent detections, publish the new snapshot or keep the last good one
+        continue-on-error: true
+        env:
+          FETCH_EXIT: ${{ steps.fetch.outputs.exit }}
+        run: >-
+          python3 recent/snapshot.py publish --candidate "$RUNNER_TEMP/recent_new"
+          --fetch-exit "${FETCH_EXIT:-1}" --previous "$RUNNER_TEMP/recent_prev"
+          --out web/public/data/recent --summary "$GITHUB_STEP_SUMMARY"
+      - name: Recent detections, final check (a snapshot that fails is removed)
+        run: |
+          rm -rf web/public/data/.recent.staging web/public/data/.recent.old
+          python3 recent/snapshot.py check web/public/data/recent || rm -rf web/public/data/recent
       - name: Build
         working-directory: web
         run: |

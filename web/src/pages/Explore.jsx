@@ -20,7 +20,7 @@ import Downloads from '../components/Downloads.jsx';
 import { MAX_TILES, areaSeries, dateOf, iso, json, lastDataDay, monthLayer, tilesOfCells, dayIndex, zoneMonth } from '../lib/data.js';
 import { IMAGERY_FIRST_DAY, cellInfo, days_in_month, imagery } from '../lib/geo.js';
 import { areaFromSpec, boxArea, pointArea, presetArea } from '../lib/area.js';
-import { detectionInfo, minuteToIso, recentOverview, recentPoints, recentStatus, tilesInView } from '../lib/recent.js';
+import { detectionInfo, minuteToIso, recentFreshness, recentOverview, recentPoints, recentStatus, tilesInView } from '../lib/recent.js';
 import { RECENT_POINTS_FROM } from '../components/MapView.jsx';
 import { areaRange, compareWindow, monthly, normalMonth, season, summary } from '../lib/analysis.js';
 import { slug } from '../lib/downloads.js';
@@ -110,6 +110,9 @@ export default function Explore({ meta, theme, params }) {
   }, [playing, speed]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { recentStatus().then(setRStatus); }, []);
+  const [nowTick, setNowTick] = useState(() => Date.now());          // re-judge "not current" every 5 minutes
+  useEffect(() => { const id = setInterval(() => setNowTick(Date.now()), 300000); return () => clearInterval(id); }, []);
+  const rFresh = useMemo(() => recentFreshness(rStatus, nowTick), [rStatus, nowTick]);
   useEffect(() => {
     if (layerMode !== 'recent' || !rStatus) return undefined;
     let live = true;
@@ -276,6 +279,11 @@ export default function Explore({ meta, theme, params }) {
           </label>
           {rStatus && rCells && <span className="small">{T.recent.fetched(rStatus.fetched_utc.replace('T', ' ').replace('Z', ' UTC'),
             rStatus.window.from, minuteToIso(rCells.from, rCells.latest))}</span>}
+          {rFresh && (rFresh.stale || rFresh.feedLagHours || rFresh.incomplete) && <div className="recentnotice" role="status">
+            {rFresh.stale && <p>{T.recent.stale(rFresh.retrieved)}{rFresh.attempted ? ` ${T.recent.fallback(rFresh.attempted)}` : ''}</p>}
+            {rFresh.feedLagHours && <p>{T.recent.feedLag(rFresh.feedLagHours)}</p>}
+            {rFresh.incomplete && <p>{T.recent.missing(rFresh.missing.map(T.recent.missingItem).join(', ') || 'an unknown part')}</p>}
+          </div>}
           {rStatus && rView && rView.zoom < RECENT_POINTS_FROM && <span className="small muted">{T.recent.zoomHint}</span>}
           <label className="check"><input type="checkbox" checked={showNotFire} onChange={(e) => setShowNotFire(e.target.checked)} />
             {T.map.notFire}</label>

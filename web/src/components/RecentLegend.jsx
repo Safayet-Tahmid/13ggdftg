@@ -15,7 +15,7 @@ export default function RecentLegend({ theme, zoomedIn, status }) {
       {zoomedIn && <p><span className="swatch round" style={{ background: theme.recentNonfire }} /> {R.legendLow}</p>}
       <p>{R.legendRaw}</p>
       <p>{R.legendOverlap}</p>
-      {status && !status.complete && <p><b>{R.incomplete}</b></p>}
+      {status && status.complete === false && <p><b>{R.incomplete}</b></p>}
     </div>
   );
 }
