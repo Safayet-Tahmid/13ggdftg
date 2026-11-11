@@ -9,7 +9,7 @@ export const rangeShort = (p) => `95% range ±${p}% (conversion error only, not 
 
 const T = {
   brand: 'SHIFT',
-  tagline: 'One fire record from two generations of NASA satellites, 2002 to today',
+  tagline: 'One fire record from two generations of NASA satellites, from 2002 to the latest data',
   dataTo: (d) => `Record to ${d}`,
   recentTo: (t, stale) => `Recent detections to ${t}${stale ? ' (not current)' : ''}`,
   notOfficial: 'Team Squadron Zero · NASA Space Apps Challenge 2026 · not an official NASA product',
@@ -102,7 +102,7 @@ const T = {
 
   // ---------------------------------------------------------------- the map
   map: {
-    month: 'Map month',
+    month: 'Map month (whole month)',
     notFire: 'Show heat that isn\'t fire',
     kinds: { industry: 'gas flares, industry', volcano: 'volcanoes', offshore: 'offshore' },
     fireTip: (frp, cells) => `<b>${frp} MW</b> fire power<br>${cells} hotspots (S-NPP scale)`,
@@ -118,7 +118,10 @@ const T = {
     basemap: 'Backdrop',
     basemaps: { standard: 'Plain', satellite: 'Satellite (Blue Marble)', daily: 'Satellite picture of one day' },
     imageryDay: 'Picture date',
-    reset: 'Reset view',
+    reset: 'Whole world',
+    focus: 'Focus on area',
+    done: 'Done',
+    settingsButton: (layer, view) => `Map settings: ${layer}, ${view}`,
     gaps: 'Show satellite gaps',
     play: 'Play months', pause: 'Pause', speed: 'Speed',
     speeds: { 2000: 'Slow', 1000: 'Normal', 500: 'Fast' },
@@ -201,12 +204,24 @@ const T = {
     vsMedian: (ratio) => ratio == null ? 'No normal to compare with'
       : ratio >= 1.15 ? `${ratio.toFixed(1)}× the normal` : ratio <= 0.87 ? `${Math.round(ratio * 100)}% of the normal` : 'About normal',
     rank: (r, n) => `Rank ${r} of ${n} years (1 = most fire)`,
-    median: (v, b0, b1, n) => `Normal (median of ${n} years, ${b0} to ${b1}): ${v}`,
+    median: (v, b0, b1, n) => `Normal for the same dates (median of ${n} years, ${b0} to ${b1}): ${v}`,
     monthShare: (pct, month) => `So far this month (to the last day with data) has had ${pct}% of the fire a normal ${month} brings in the whole month.`,
     left: (n) => `${n} year${n > 1 ? 's' : ''} left out because a satellite gap fell in these dates.`,
     targetGaps: (n) => `${n} day${n > 1 ? 's' : ''} in these dates had no satellite data, so this year may be undercounted.`,
     modisNote: 'Bars before 2012 are MODIS put on the VIIRS scale. The whisker is their calibrated 95% range. ' + RANGE_CAVEAT,
     chartLabel: 'The same dates in every year',
+    clippedSvg: '▲ range continues above',
+    clipped: '▲ Some whiskers continue above the top of the chart. Point at or tap a bar to read its full range.',
+  },
+
+  // ---------------------------------------------------------------- phone summary above the map (same numbers as Now against the past)
+  summary: {
+    label: 'Summary of the selected area',
+    sameDates: 'against the same dates in past years',
+    rankOf: (n) => `of ${n} years (1 = most fire)`,
+    periods: (a, b, map) => `Compared: ${a} to ${b}. The map shows ${map}.`,
+    mapMonth: (name, y) => `${name} ${y} (the whole month)`,
+    mapRecent: 'recent detections (raw FIRMS, not harmonised)',
   },
 
   // ---------------------------------------------------------------- weather context (D39, NASA POWER)
@@ -245,12 +260,16 @@ const T = {
     rankNote: 'Rank 1 = the least rain, the lowest humidity, the driest soil, the hottest or the windiest of the years compared.',
     notCause: 'Context, not cause: this shows the weather while the fire above was recorded. It does not show why fires burned and it is not a fire forecast.',
     provisional: 'Provisional: these dates include recent near-real-time weather, which NASA may still revise.',
-    source: (n, b0, b1, end) => `NASA POWER daily data (MERRA-2 and GEOS-IT reanalysis on a 0.5° by 0.625° grid), UTC days, the mean of nine points across the area. `
+    source: (n, b0, b1, end, pts) => `NASA POWER daily data (MERRA-2 and GEOS-IT reanalysis on a 0.5° by 0.625° grid), UTC days, the mean of `
+      + `${pts === 9 ? 'nine land points spread' : `${pts} land points (of nine, points over water left out) spread`} across the area. `
       + `Normal: median of ${n} years, ${b0} to ${b1}, this year left out. Weather data runs to ${end}.`,
+    normalShort: 'normal',
+    rankShort: 'rank',
   },
 
   // ---------------------------------------------------------------- season
   season: {
+    marker: 'latest data',
     none: 'Too little fire here to define a season.',
     runs: (a, b, len) => `The fire season usually runs from ${a} to ${b} (${len} days hold 80% of a year's fire).`,
     peak: (d) => `It usually peaks around ${d}.`,

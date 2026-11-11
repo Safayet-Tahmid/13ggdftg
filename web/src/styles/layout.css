@@ -58,6 +58,8 @@ nav { display: flex; gap: 4px; flex-wrap: wrap; width: 100%; }
 }
 .maptools label { display: inline-flex; align-items: center; gap: 6px; }
 .maptools select { max-width: 200px; }
+.maptools .done { display: none; }
+@media (max-width: 900px) { .maptools .done { display: inline-flex; } }
 .mapnote {
   position: absolute; top: 60px; left: 10px; z-index: 2; max-width: 46ch; margin: 0; padding: 6px 10px;
   background: var(--surface); border-left: 3px solid var(--accent); font-size: var(--font-size-small);
@@ -125,6 +127,13 @@ nav { display: flex; gap: 4px; flex-wrap: wrap; width: 100%; }
 .weather-table td:not(:first-child), .weather-table th:not(:first-child) { white-space: nowrap; padding-right: 0; padding-left: 10px; }
 .weather-note { border-left: 3px solid var(--muted); padding-left: 8px; }
 .weather-off { margin-top: 12px; }
+.weather-cards { display: none; list-style: none; margin: 4px 0 8px; padding: 0; }
+.weather-cards li { display: flex; flex-direction: column; gap: 1px; padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
+.weather-cards .weather-name { color: var(--muted); font-size: 13px; }
+@media (max-width: 600px) {
+  .weather-cards { display: block; }
+  .weather-tablewrap { display: none; }
+}
 
 /* ---------- controls */
 label { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: var(--font-size-small); }
@@ -211,6 +220,10 @@ td:not(:first-child), th:not(:first-child) { text-align: right; }
 .refs li { font-size: 14px; }
 code { font-size: 13px; background: var(--mist); padding: 1px 4px; border-radius: 4px; }
 
+/* the map credit line follows the theme (it was a bright white box in dark mode) */
+.mapstage .maplibregl-ctrl.maplibregl-ctrl-attrib, .mapstage .maplibregl-ctrl-attrib.maplibregl-compact-show { background: var(--surface); color: var(--muted); }
+.mapstage .maplibregl-ctrl-attrib a { color: inherit; }
+
 /* MapLibre popups use the same tooltip look */
 .tip .maplibregl-popup-content {
   background: var(--surface); color: var(--ink); border: 1px solid var(--rule); border-radius: var(--radius);
@@ -220,16 +233,54 @@ code { font-size: 13px; background: var(--mist); padding: 1px 4px; border-radius
 
 .print-only { display: none; }
 
+/* mobile-only pieces (12 Nov): hidden on desktop, shown under 900px */
+.mobile-summary, .maptools-toggle { display: none; }
+
 @media (max-width: 900px) {
   .explore { grid-template-columns: minmax(0, 1fr); }
-  nav { flex-wrap: nowrap; overflow-x: auto; }
-  .tab { white-space: nowrap; }
+  /* header: the badges and the theme menu wrap inside the screen. Before 12 Nov this row was 579px wide
+     on every phone, the page became wider than the screen and Android zoomed out (the blank strip). */
+  .top-right { flex-wrap: wrap; gap: 6px 8px; margin-left: 0; width: 100%; padding-bottom: 8px; }
+  .badge { white-space: normal; font-size: 12px; padding: 2px 8px; }
+  .brand { padding-bottom: 6px; gap: 4px 12px; }
+  .brand p { font-size: 13px; }
+  .theme-pick { font-size: 12px; }
+  .theme-pick select { min-height: 36px; }
+  /* all four tabs stay visible: they wrap onto a second row instead of scrolling out of sight */
+  nav { flex-wrap: wrap; gap: 0 2px; }
+  .tab { white-space: nowrap; min-height: 44px; padding: 10px 10px 8px; }
   .top { padding: 12px 16px 0; }
+  /* comfortable touch targets */
+  .seg button, .action, select, input:not([type=checkbox]) { min-height: 44px; }
+  label { flex-wrap: wrap; max-width: 100%; }
+  select { max-width: min(260px, 100%); }
+  .mini { min-height: 36px; min-width: 44px; font-size: 12.5px; }
+  label.check { min-height: 44px; }
+  .legendbox summary { min-height: 32px; display: flex; align-items: center; }
+  .maplibregl-ctrl-group button { width: 40px; height: 40px; }
+  /* the result first: area, period and the comparison above the map */
+  .mobile-summary { display: block; padding: 12px 16px; background: var(--surface); border-bottom: 1px solid var(--rule); }
+  .mobile-summary h2 { margin: 0; font-size: 22px; line-height: 1.15; font-weight: var(--heading-weight); font-stretch: var(--heading-stretch); }
+  .mobile-summary .facts.compact { margin: 10px 0 4px; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .mobile-summary .facts.compact b { font-size: 20px; }
+  .mobile-summary .small { margin: 4px 0 0; }
+  /* map settings: closed by default behind one button, opened below the map, so the map stays clear */
+  .maptools-toggle { display: inline-flex; position: absolute; top: 10px; left: 10px; z-index: 2; align-items: center; gap: 6px;
+    max-width: calc(100% - 70px); min-height: 40px; padding: 6px 10px; font: inherit; font-size: 13px; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12); cursor: pointer; }
+  .maptools-toggle span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .maptools { position: static; max-width: none; border-radius: 0; border-width: 1px 0 0; box-shadow: none; padding: 10px 16px; gap: 10px 12px; }
+  .maptools:not(.open) { display: none; }
+  .maptools .done { margin-left: auto; }
+  .mapnote { top: 58px; }
   .story, .page { padding-left: 16px; padding-right: 16px; }
   .mapside { border-right: 0; border-bottom: 1px solid var(--rule); min-height: 380px; }
-  .mapstage { min-height: 460px; }
+  .mapstage { min-height: 0; }
+  .map { min-height: max(320px, 52vh); flex: none; }
   .legendbox { max-width: calc(100% - 20px); bottom: 34px; }
+  .mapstage .maplibregl-ctrl-attrib.maplibregl-compact-show { max-width: calc(100% - 120px); font-size: 11px; }
   .cellpanel { top: auto; bottom: 10px; max-height: 70%; }
+  .mapbar { padding: 8px 16px; gap: 6px 14px; }
   .story { max-height: none; overflow: visible; }
   .app:has(.explore) { height: auto; }
   .brand h1 { font-size: 28px; }
@@ -240,7 +291,7 @@ code { font-size: 13px; background: var(--mist); padding: 1px 4px; border-radius
 
 /* ---------- the printable brief: the story column only, on white */
 @media print {
-  .top nav, .top-right, .mapside, .controls, .card-tools, .no-print, .mapbar { display: none !important; }
+  .top nav, .top-right, .mapside, .controls, .card-tools, .no-print, .mapbar, .mobile-summary { display: none !important; }
   .print-only { display: block; }
   .print-head { font-size: 11px; color: #444; margin-bottom: 6px; word-break: break-all; }
   .app, .app:has(.explore) { height: auto; }

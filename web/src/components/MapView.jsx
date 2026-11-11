@@ -56,7 +56,7 @@ function hatch(colour) {
 
 export default function MapView({ theme, fires, notFire, showNotFire, area, drawing, onBox, onDrawEnd, onDateLine,
   variable = 'frp', view = '2d', basemap = 'standard', imageryDay = null, gaps = null, showGaps = false,
-  picked = null, onPick, resetKey = 0, reducedMotion = false, onImageryError, onStatus,
+  picked = null, onPick, resetKey = 0, focusKey = 0, reducedMotion = false, onImageryError, onStatus,
   layerMode = 'record', recentCells = null, recentPts = null, recentTip, onRecentPick, onViewChange }) {
   const el = useRef(null);
   const map = useRef(null);
@@ -298,6 +298,12 @@ export default function MapView({ theme, fires, notFire, showNotFire, area, draw
     if (!resetKey) return;
     whenReady((m) => m.flyTo({ ...HOME[view], pitch: 0, bearing: 0, duration: motion(900), essential: false }));
   }, [resetKey]);  // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ---- focus on the selected area (same framing as when an area is chosen)
+  useEffect(() => {
+    if (!focusKey || !area?.box) return;
+    whenReady((m) => m.fitBounds([[area.box.w, area.box.s], [area.box.e, area.box.n]], { padding: 40, maxZoom: 7, duration: motion(600) }));
+  }, [focusKey]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { if (map.current) map.current.getCanvas().style.cursor = drawing ? 'crosshair' : ''; }, [drawing]);
 

@@ -40,7 +40,18 @@ export default function WeatherContext({ meta, cmp, area }) {
       <h4>{W.title}</h4>
       {firsts.length > 0 && <p className="weather-lead">{W.lead(of, firsts)}</p>}
       {rows.length === 0 ? <p className="small">{W.noData(longDate(new Date(Date.parse(res.end + 'T00:00:00Z'))))}</p> : (
-        <div className="tablewrap">
+        <>
+        {/* phones: one block per measure, so nothing scrolls sideways (the table is hidden below 600px) */}
+        <ul className="weather-cards">
+          {rows.map((r) => (
+            <li key={r.key}>
+              <span className="weather-name">{W.rows[r.key]}</span>
+              <span>{W.value(r.key, r.value)}{r.normal == null ? '' : ` · ${W.normalShort} ${W.value(r.key, r.normal)}`}</span>
+              <span>{r.normal == null ? W.noNormal : W.vsNormal(r.key, r)}{r.rank ? ` · ${W.rankShort} ${W.rank(r.key, r.rank, r.of)}` : ''}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="tablewrap weather-tablewrap">
           <table className="weather-table">
             <thead><tr>{W.cols.map((c) => <th key={c}>{c}</th>)}</tr></thead>
             <tbody>
@@ -56,11 +67,12 @@ export default function WeatherContext({ meta, cmp, area }) {
             </tbody>
           </table>
         </div>
+        </>
       )}
       {rows.length > 0 && <p className="small">{W.rankNote}</p>}
       {res.provisional && <p className="small weather-note">{W.provisional}</p>}
       <p className="small weather-note">{W.notCause}</p>
-      <p className="small">{W.source(base?.baseCount ?? 0, cmp.baseline[0], cmp.baseline[1], longDate(new Date(Date.parse(res.end + 'T00:00:00Z'))))}</p>
+      <p className="small">{W.source(base?.baseCount ?? 0, cmp.baseline[0], cmp.baseline[1], longDate(new Date(Date.parse(res.end + 'T00:00:00Z'))), w.points?.length ?? 9)}</p>
     </div>
   );
 }
